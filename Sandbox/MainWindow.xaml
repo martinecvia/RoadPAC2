@@ -5,8 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sandbox"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False" 
+        WindowStartupLocation="CenterScreen"
+        Title="RoadPAC Sandbox" Height="550" Width="250">
+    <Grid Background="#525252">
+        <TabControl TabStripPlacement="Left"
+                    Margin="50,0,0,0"
+                    BorderThickness="0">
+            <TabItem Header="Záložka 1">
+                
+            </TabItem>
+        </TabControl>
     </Grid>
 </Window>
