@@ -3,7 +3,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Windows.Media;
 
 
@@ -27,7 +29,8 @@ namespace RoadPAC
 {
     public static class RibbonController
     {
-        private static readonly Dictionary<string, Func<SelectionSet, bool>> _contextualTabConditions = new Dictionary<string, Func<SelectionSet, bool>>();
+        [RPInternalUseOnly]
+        public static readonly string HasAnyContextualTabPropertyName = "HasAnyContextualTab";
 
         private const string RibbonTab__Prefix = "CTX_";
         private const string RibbonGroupPrefix = "GRP_";
@@ -38,30 +41,56 @@ namespace RoadPAC
         private static RibbonControl Ribbon => ComponentManager.Ribbon;
 #endif
 
-        [RoadPACUseOnly] // We don't want to allow fuzzing with memory, this is just a nice case how to avoid retarded cases
+        [DefaultValue(false)]
+        public static bool HasAnyContextualTab { get; private set; } = false;
+
+        /// <summary>
+        /// Ensures that the ribbon system has been properly initialized before use.
+        /// This method is intended to prevent loading via reflection or in unsupported contexts.
+        /// </summary>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown when the ribbon has not been initialized, which may indicate
+        /// improper access such as reflection-based loading or an invalid initialization sequence.
+        /// </exception>
+        [RPPrivateUseOnly]
         private static void AssertInitialized()
         {
-            // Actively disabling reflection use cases
-            if (Ribbon != null)
+            // Prevent usage in cases where the ribbon is not properly initialized,
+            // such as when loaded via reflection or outside the intended application lifecycle.
+            if (Ribbon == null)
                 throw new InvalidOperationException("Ribbon can't be loaded using reflection.");
         }
 
-        public static RibbonTab CreateTab(string tabId, string tabName,
-                                    string groupId, string groupName, Color? groupColor)
+        public static RibbonTab CreateTab(string tabId, string tabName)
         {
             AssertInitialized();
+            if (string.IsNullOrWhiteSpace(tabId))
+                throw new ArgumentNullException(nameof(tabId), "tabId is required.");
+            if (string.IsNullOrWhiteSpace(tabName))
+                throw new ArgumentNullException(nameof(tabName), "tabName is required.");
             RibbonTab tab = new RibbonTab();
+            // Assesses whether the tab is regular tab or contextual tab.  If it is true the tab is contextual tab, and false if it is regular tab.
             tab.IsContextualTab = false;
+            tab.Id = RibbonTab__Prefix + tabId; // We want to add mark those tabs as RoadPAC ones, for further compatibility
             return tab;
         }
 
-        public static RibbonTab CreateContextualTab(string tabId, string tabName,
-                                               string groupId, string groupName, Color? groupColor,
-                                               Func<SelectionSet, bool> onSelectionMatch)
+        [RPPrivateUseOnly]
+        public static readonly Dictionary<string, Func<SelectionSet, bool>> _contextualTabConditions = new Dictionary<string, Func<SelectionSet, bool>>();
+
+        public static RibbonTab CreateContextualTab(string tabId, string tabName, 
+                                                    Func<SelectionSet, bool> onSelectionMatch, // Selector switch when this tab should be opened
+                                                    string tabDescription = null)
         {
             AssertInitialized();
+            if (string.IsNullOrWhiteSpace(tabId))
+                throw new ArgumentNullException(nameof(tabId), "tabId is required.");
+            if (string.IsNullOrWhiteSpace(tabName)) 
+                throw new ArgumentNullException(nameof(tabName), "tabName is required.");
             RibbonTab tab = new RibbonTab();
-            tab.IsContextualTab = true; // Hard-marking that this tab is contextual-only
+            // Assesses whether the tab is regular tab or contextual tab.  If it is true the tab is contextual tab, and false if it is regular tab.
+            tab.IsContextualTab = true; // Hard setting that this tab is contextual
+            tab.Id = RibbonTab__Prefix + tabId; // We want to add mark those tabs as RoadPAC ones, for further compatibility
             return tab;
         }
 
@@ -73,7 +102,8 @@ namespace RoadPAC
             if (result.Status != PromptStatus.OK || result.Value.Count == 0)
             {
                 foreach (RibbonTab tab in Ribbon.Tabs.Where(t => t.IsContextualTab 
-                    && t.Id.StartsWith(RibbonTab__Prefix)))
+                    && t.Id.StartsWith(RibbonTab__Prefix) 
+                    && (t.IsVisible || t.IsActive))) // We want to ignore disabled ones
                 {
                     tab.IsVisible = false;
                     tab.IsActive = false;
@@ -90,11 +120,13 @@ namespace RoadPAC
                     {
                         tab.IsVisible = true;
                         tab.IsActive = true;
+                        return;
                     }
                 }
             }
             foreach(RibbonTab tab in Ribbon.Tabs.Where(t => t.IsContextualTab
-                    && t.Id.StartsWith(RibbonTab__Prefix)))
+                    && t.Id.StartsWith(RibbonTab__Prefix) 
+                    && (t.IsVisible || t.IsActive)))
             {
                 tab.IsVisible = false;
                 tab.IsActive = false;
