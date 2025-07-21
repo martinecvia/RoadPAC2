@@ -22,7 +22,7 @@ jobs:
       uses: NuGet/setup-nuget@v1
       
     - name: Restore Packages
-      run: nuget restore CadStreetViewPointer2D.sln
+      run: nuget restore RoadPAC2.sln
 
     - name: Build .NET 4.6 (AutoCAD) (Test 46)
       run: msbuild Tests/NET_46_TEST/NET_46_TEST.csproj /p:Configuration=Release
