@@ -40,6 +40,9 @@
     <Reference Include="acmgd">
       <HintPath>..\..\Libraries\AutoCAD\2017\acmgd.dll</HintPath>
     </Reference>
+    <Reference Include="AdWindows">
+      <HintPath>..\..\Libraries\AutoCAD\2017\AdWindows.dll</HintPath>
+    </Reference>
     <Reference Include="Autodesk.AutoCAD.Interop">
       <HintPath>..\..\Libraries\AutoCAD\2017\Autodesk.AutoCAD.Interop.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -48,6 +51,8 @@
       <HintPath>..\..\Libraries\AutoCAD\2017\Autodesk.AutoCAD.Interop.Common.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -56,10 +61,12 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="TestEx.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <Import Project="..\..\Shared\Shared.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -38,17 +38,31 @@ namespace RoadPAC
         private static RibbonControl Ribbon => ComponentManager.Ribbon;
 #endif
 
+        [RoadPACUseOnly] // We don't want to allow fuzzing with memory, this is just a nice case how to avoid retarded cases
         private static void AssertInitialized()
         {
+            // Actively disabling reflection use cases
             if (Ribbon != null)
-                throw new InvalidOperationException("Ribbon is not ready.");
+                throw new InvalidOperationException("Ribbon can't be loaded using reflection.");
         }
 
-        public static void CreateContextualTab(string tabId, string tabName,
+        public static RibbonTab CreateTab(string tabId, string tabName,
+                                    string groupId, string groupName, Color? groupColor)
+        {
+            AssertInitialized();
+            RibbonTab tab = new RibbonTab();
+            tab.IsContextualTab = false;
+            return tab;
+        }
+
+        public static RibbonTab CreateContextualTab(string tabId, string tabName,
                                                string groupId, string groupName, Color? groupColor,
                                                Func<SelectionSet, bool> onSelectionMatch)
         {
             AssertInitialized();
+            RibbonTab tab = new RibbonTab();
+            tab.IsContextualTab = true; // Hard-marking that this tab is contextual-only
+            return tab;
         }
 
         private static void OnSelectionChanged(object sender, SelectionAddedEventArgs eventArgs)
@@ -82,25 +96,47 @@ namespace RoadPAC
             foreach(RibbonTab tab in Ribbon.Tabs.Where(t => t.IsContextualTab
                     && t.Id.StartsWith(RibbonTab__Prefix)))
             {
-            tab.IsVisible = false;
-            tab.IsActive = false;
+                tab.IsVisible = false;
+                tab.IsActive = false;
             }
         }
 
-        private class CommandHandler : System.Windows.Input.ICommand
+        /// <summary>
+        /// A simple implementation of the <see cref="System.Windows.Input.ICommand"/> interface
+        /// that executes a given AutoCAD command string when invoked.
+        /// </summary>
+        internal sealed class CommandHandler : System.Windows.Input.ICommand
         {
             private readonly string _command;
+
+            /// <summary>
+            /// Initializes a new instance of the <see cref="CommandHandler"/> class with the specified command string.
+            /// </summary>
+            /// <param name="command">The AutoCAD command string to be executed.</param>
             public CommandHandler(string command) => _command = command;
 
+            /// <inheritdoc/>
             public event EventHandler CanExecuteChanged;
+
+            /// <summary>
+            /// Determines whether the command can execute in its current state.
+            /// Always returns <c>true</c> in this implementation.
+            /// </summary>
+            /// <param name="parameter">Unused parameter.</param>
+            /// <returns><c>true</c> to indicate the command can always execute.</returns>
             public bool CanExecute(object parameter) => true;
 
+            /// <summary>
+            /// Executes the stored AutoCAD command by sending it to the active document.
+            /// </summary>
+            /// <param name="parameter">Unused parameter.</param>
             public void Execute(object parameter)
             {
                 Document document = Application.DocumentManager.MdiActiveDocument;
                 if (document != null)
                 {
-                    document.SendStringToExecute(_command + " ", true, false, false); 
+                    // Sends the command to AutoCAD for execution in the command line
+                    document.SendStringToExecute(_command + " ", true, false, false);
                 }
             }
         }

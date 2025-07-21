@@ -9,6 +9,11 @@
     <Import_RootNamespace>Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="$(MSBuildThisFileDirectory)RibbonController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)RoadPACUseOnlyAttribute.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\RibbonController.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Controllers\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Documentation.CHM\" />
   </ItemGroup>
 </Project>
