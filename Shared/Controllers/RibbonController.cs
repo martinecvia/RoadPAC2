@@ -61,7 +61,8 @@ namespace RoadPAC
                 throw new InvalidOperationException("Ribbon can't be loaded using reflection.");
         }
 
-        public static RibbonTab CreateTab(string tabId, string tabName)
+        public static RibbonTab CreateTab(string tabId, string tabName,
+                                          string tabTitle = null, string tabDescription = null)
         {
             AssertInitialized();
             if (string.IsNullOrWhiteSpace(tabId))
@@ -72,6 +73,8 @@ namespace RoadPAC
             // Assesses whether the tab is regular tab or contextual tab.  If it is true the tab is contextual tab, and false if it is regular tab.
             tab.IsContextualTab = false;
             tab.Id = RibbonTab__Prefix + tabId; // We want to add mark those tabs as RoadPAC ones, for further compatibility
+            tab.Name = tabName; tab.Title = tabTitle ?? tabName;
+            tab.Description = tabDescription;
             return tab;
         }
 
@@ -80,7 +83,7 @@ namespace RoadPAC
 
         public static RibbonTab CreateContextualTab(string tabId, string tabName, 
                                                     Func<SelectionSet, bool> onSelectionMatch, // Selector switch when this tab should be opened
-                                                    string tabDescription = null)
+                                                    string tabTitle = null, string tabDescription = null)
         {
             AssertInitialized();
             if (string.IsNullOrWhiteSpace(tabId))
@@ -91,6 +94,9 @@ namespace RoadPAC
             // Assesses whether the tab is regular tab or contextual tab.  If it is true the tab is contextual tab, and false if it is regular tab.
             tab.IsContextualTab = true; // Hard setting that this tab is contextual
             tab.Id = RibbonTab__Prefix + tabId; // We want to add mark those tabs as RoadPAC ones, for further compatibility
+            tab.Name = tabName; tab.Title = tabTitle ?? tabName;
+            tab.Description = tabDescription;
+            _contextualTabConditions.Add(tab.Id, onSelectionMatch);
             return tab;
         }
 
