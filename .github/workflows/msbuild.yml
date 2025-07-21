@@ -1,0 +1,28 @@
+name: MSBuild
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build-net4:
+    runs-on: windows-2022
+    steps:
+    - uses: actions/checkout@v4
+    - name: Install .NET Framework 4.6.2 Developer Pack
+      run: |
+        choco install netfx-4.6.2-devpack -y --no-progress
+        
+    - name: Setup MSBuild
+      uses: microsoft/setup-msbuild@v1
+      
+    - name: Setup NuGet
+      uses: NuGet/setup-nuget@v1
+      
+    - name: Restore Packages
+      run: nuget restore CadStreetViewPointer2D.sln
+
+    - name: Build .NET 4.6 (AutoCAD) (Test 46)
+      run: msbuild Tests/NET_46_TEST/NET_46_TEST.csproj /p:Configuration=Release
