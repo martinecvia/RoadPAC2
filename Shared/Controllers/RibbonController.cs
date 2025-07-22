@@ -5,41 +5,76 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Security.Cryptography;
-using System.Windows.Media;
+using System.Windows.Media.Animation;
 
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
 using ZwSoft.ZwCAD.ApplicationServices;
-using ZwSoft.ZwCAD.DatabaseServices;
 using ZwSoft.ZwCAD.EditorInput;
-using ZwSoft.ZwCAD.Runtime;
 using ZwSoft.ZwCAD.Windows;
 #else
 using Autodesk.AutoCAD.ApplicationServices;
-using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.EditorInput;
-using Autodesk.AutoCAD.Runtime;
 using Autodesk.Windows;
 #endif
 #endregion
 
-namespace RoadPAC
+// [RibbonTab]
+// - Description:
+// Gets or sets a description text for the tab.
+// The description text is not currently used by the framework. Applications can use this to store a description if it is required in other UI customization dialogs. The default value is null.
+
+// - Highlight:
+// Sets and gets the current highlight mode that indicates the display status of the New Badge on the upper-right corner of the ribbon tab.
+
+// - Id:
+// The framework does not use or validate this id. It is left to the applications to set this id and use it.
+// The default value is null.
+
+// - IsActive:
+// Gets or sets the value that indicates whether this tab is the active tab.
+// Hidden tabs and merged contextual tabs cannot be the active tab. Setting this property to true for such tabs will fail, and no exception will be thrown.     
+
+// - IsContextualTab:
+// Assesses whether the tab is regular tab or contextual tab. If it is true the tab is contextual tab, and false if it is regular tab. This is a dependency property registered with WPF. Please see the Microsoft API for more information.
+// The default value is false.
+
+// - IsVisible:
+// Gets or sets the value that indicates whether the tab is visible in the ribbon.
+// If the value is true, the tab is visible in the ribbon. If the value is false, it is hidden in ribbon. Both visible and hidden tabs are available in the ribbon by right-clicking the menu under the Tabs menu option, which allows the user to show or hide the tabs.
+// If the tab's IsAnonymous property is set to false, it is not included in the right-click menu, and the user cannot control its visibility. If an active tab is hidden, the next or previous visible tab is set as the active tab.
+// The default value is true.
+
+// - IsVisited:
+// Gets or sets whether the panel tab is visited.
+
+// - KeyTip:
+// Gets or sets the keytip for the tab.
+// Keytips are displayed in the ribbon when navigating the ribbon with the keyboard. If this property is null or empty, the keytip will not appear for this tab, and the tab will not support activation through the keyboard. 
+// The default value is null.
+
+// - Name:
+// Gets or sets the name of the ribbon tab.
+
+// - Tag:
+// Gets or sets custom data object in the tab.
+
+// - Title:
+// Gets or sets the tab title. The title set with this property is displayed in the tab button for this tab in the ribbon.
+// The default value is null.
+
+namespace Shared.Controllers
 {
     public static class RibbonController
     {
         [RPInternalUseOnly]
         public static readonly string HasAnyContextualTabPropertyName = "HasAnyContextualTab";
 
-        private const string RibbonTab__Prefix = "CTX_";
-        private const string RibbonGroupPrefix = "GRP_";
+        private const string RibbonTab__Prefix = "RP_TAB_";
+        private const string RibbonGroupPrefix = "RP_GRP_";
 
-#if ZWCAD
-        private static RibbonControl Ribbon => ComponentManager.Ribbon;
-#else
-        private static RibbonControl Ribbon => ComponentManager.Ribbon;
-#endif
+        private static RibbonControl Ribbon => ComponentManager.Ribbon; // Should be same with ZWCAD
 
         [DefaultValue(false)]
         public static bool HasAnyContextualTab { get; private set; } = false;
@@ -64,7 +99,9 @@ namespace RoadPAC
         public static RibbonTab CreateTab(string tabId, string tabName,
                                           string tabTitle = null, string tabDescription = null)
         {
+#if NON_VOLATILE_MEMORY
             AssertInitialized();
+#endif
             if (string.IsNullOrWhiteSpace(tabId))
                 throw new ArgumentNullException(nameof(tabId), "tabId is required.");
             if (string.IsNullOrWhiteSpace(tabName))
@@ -75,48 +112,56 @@ namespace RoadPAC
             tab.Id = RibbonTab__Prefix + tabId; // We want to add mark those tabs as RoadPAC ones, for further compatibility
             tab.Name = tabName; tab.Title = tabTitle ?? tabName;
             tab.Description = tabDescription;
+            tab.IsEnabled = true;
+            // Theme handling logic
+            tab.Theme = null;
+
             return tab;
         }
 
         [RPPrivateUseOnly]
-        public static readonly Dictionary<string, Func<SelectionSet, bool>> _contextualTabConditions = new Dictionary<string, Func<SelectionSet, bool>>();
+        private static readonly Dictionary<string, Func<SelectionSet, bool>> _contextualTabConditions = new Dictionary<string, Func<SelectionSet, bool>>();
 
-        public static RibbonTab CreateContextualTab(string tabId, string tabName, 
-                                                    Func<SelectionSet, bool> onSelectionMatch, // Selector switch when this tab should be opened
-                                                    string tabTitle = null, string tabDescription = null)
+        public static ContextualRibbonTab CreateContextualTab(string tabId, string tabName, 
+            Func<SelectionSet, bool> onSelectionMatch, // Selector switch when this tab should be opened
+            string tabTitle = null, string tabDescription = null)
         {
-            AssertInitialized();
+#if NON_VOLATILE_MEMORY
+           AssertInitialized();
+#endif
             if (string.IsNullOrWhiteSpace(tabId))
                 throw new ArgumentNullException(nameof(tabId), "tabId is required.");
             if (string.IsNullOrWhiteSpace(tabName)) 
                 throw new ArgumentNullException(nameof(tabName), "tabName is required.");
-            RibbonTab tab = new RibbonTab();
+            ContextualRibbonTab tab = new ContextualRibbonTab();
             // Assesses whether the tab is regular tab or contextual tab.  If it is true the tab is contextual tab, and false if it is regular tab.
             tab.IsContextualTab = true; // Hard setting that this tab is contextual
+            tab.IsActive = false; tab.IsVisible = false; // We dont want to show it at first
             tab.Id = RibbonTab__Prefix + tabId; // We want to add mark those tabs as RoadPAC ones, for further compatibility
             tab.Name = tabName; tab.Title = tabTitle ?? tabName;
             tab.Description = tabDescription;
             _contextualTabConditions.Add(tab.Id, onSelectionMatch);
+            if (!HasAnyContextualTab)
+            {
+                Document document = Application.DocumentManager.MdiActiveDocument;
+                document.Editor.SelectionAdded += OnAdd; document.Editor.SelectionRemoved += OnRem;
+                HasAnyContextualTab = true;
+            }
             return tab;
         }
 
-        private static void OnSelectionChanged(object sender, SelectionAddedEventArgs eventArgs)
+        [RPPrivateUseOnly]
+        private static void OnAdd(object sender, 
+            SelectionAddedEventArgs eventArgs) => OnSelectionEvent(sender, eventArgs.Selection);
+        [RPPrivateUseOnly]
+        private static void OnRem(object sender, 
+            SelectionRemovedEventArgs eventArgs) => OnSelectionEvent(sender, eventArgs.Selection);
+
+        [RPPrivateUseOnly]
+        private static void OnSelectionEvent(object sender, SelectionSet selection)
         {
-            Document document = Application.DocumentManager.MdiActiveDocument;
-            Editor editor = document.Editor;
-            PromptSelectionResult result = editor.SelectImplied();
-            if (result.Status != PromptStatus.OK || result.Value.Count == 0)
-            {
-                foreach (RibbonTab tab in Ribbon.Tabs.Where(t => t.IsContextualTab 
-                    && t.Id.StartsWith(RibbonTab__Prefix) 
-                    && (t.IsVisible || t.IsActive))) // We want to ignore disabled ones
-                {
-                    tab.IsVisible = false;
-                    tab.IsActive = false;
-                }
+            if (selection == null)
                 return;
-            }
-            SelectionSet selection = result.Value;
             foreach (KeyValuePair<string, Func<SelectionSet, bool>> pair in _contextualTabConditions)
             {
                 if (pair.Value(selection))
@@ -124,64 +169,18 @@ namespace RoadPAC
                     RibbonTab tab = Ribbon.Tabs.FirstOrDefault(t => t.Id == pair.Key);
                     if (tab != null && tab.IsContextualTab)
                     {
-                        tab.IsVisible = true;
-                        tab.IsActive = true;
-                        return;
+                        Ribbon.ShowContextualTab(tab, false, // We do not currently supprot mergedTab (Maybe in future?)
+                            true); // With this we are ensuring tab is activated
                     }
+                    return;
                 }
             }
             foreach(RibbonTab tab in Ribbon.Tabs.Where(t => t.IsContextualTab
                     && t.Id.StartsWith(RibbonTab__Prefix) 
                     && (t.IsVisible || t.IsActive)))
             {
-                tab.IsVisible = false;
-                tab.IsActive = false;
+                Ribbon.HideContextualTab(tab);
             }
-        }
-
-        /// <summary>
-        /// A simple implementation of the <see cref="System.Windows.Input.ICommand"/> interface
-        /// that executes a given AutoCAD command string when invoked.
-        /// </summary>
-        internal sealed class CommandHandler : System.Windows.Input.ICommand
-        {
-            private readonly string _command;
-
-            /// <summary>
-            /// Initializes a new instance of the <see cref="CommandHandler"/> class with the specified command string.
-            /// </summary>
-            /// <param name="command">The AutoCAD command string to be executed.</param>
-            public CommandHandler(string command) => _command = command;
-
-            /// <inheritdoc/>
-            public event EventHandler CanExecuteChanged;
-
-            /// <summary>
-            /// Determines whether the command can execute in its current state.
-            /// Always returns <c>true</c> in this implementation.
-            /// </summary>
-            /// <param name="parameter">Unused parameter.</param>
-            /// <returns><c>true</c> to indicate the command can always execute.</returns>
-            public bool CanExecute(object parameter) => true;
-
-            /// <summary>
-            /// Executes the stored AutoCAD command by sending it to the active document.
-            /// </summary>
-            /// <param name="parameter">Unused parameter.</param>
-            public void Execute(object parameter)
-            {
-                Document document = Application.DocumentManager.MdiActiveDocument;
-                if (document != null)
-                {
-                    // Sends the command to AutoCAD for execution in the command line
-                    document.SendStringToExecute(_command + " ", true, false, false);
-                }
-            }
-        }
-
-        internal class ContextualRibbonTab : RibbonTab
-        {
-            
         }
     }
 }

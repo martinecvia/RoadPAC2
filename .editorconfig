@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# IDE0002: Zjednodušit přístup ke členům
+dotnet_diagnostic.IDE0002.severity = none
