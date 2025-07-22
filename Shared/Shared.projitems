@@ -18,4 +18,10 @@
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Controllers\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\img_btn_default_64.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\img_btn_default_16.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\img_btn_default_32.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\img_btn_default_512.png" />
+  </ItemGroup>
 </Project>

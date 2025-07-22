@@ -74,11 +74,12 @@ namespace Shared.Controllers
     public static class RibbonController
     {
         [RPInternalUseOnly]
-        public static readonly string HasAnyContextualTabPropertyName = "HasAnyContextualTab";
+        internal static readonly string HasAnyContextualTabPropertyName = "HasAnyContextualTab";
         [RPInternalUseOnly]
-        public static readonly string IsSelectionHandledPropertyName = "IsSelectionHandled";
+        internal static readonly string IsSelectionHandledPropertyName = "IsSelectionHandled";
 
         private const string RibbonTab__Prefix = "RP_TAB_";
+        private const string RibbonGroupPrefix = "RP_GRP_";
 
         private static RibbonControl Ribbon => ComponentManager.Ribbon; // Should be same with ZWCAD
 

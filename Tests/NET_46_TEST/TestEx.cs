@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Runtime;
@@ -45,7 +46,9 @@ namespace NET_46_TEST
             
             Ribbon.Tabs.Add(rpTab);
             Ribbon.Tabs.Add(ctxTab);
-            var a = 1;
+
+            var a = Ribbon.Tabs.Where(t => t.Name == "Parametric");
+            var b = Ribbon.Tabs.Where(t => t.Name == "Output");
             ;
 
         }
