@@ -110,7 +110,7 @@ namespace Shared.Controllers
 #endif
             Assert.IsNotNull(tabId, nameof(tabId));
             Assert.IsNotNull(tabName, nameof(tabName));
-            RibbonTab tab = new RibbonTab
+            var tab = new RibbonTab
             {
                 Id = RibbonTab__Prefix + tabId, // We want to add mark those tabs as RoadPAC ones, for further compatibility
                 Name = tabName,
@@ -133,7 +133,7 @@ namespace Shared.Controllers
 #endif
             Assert.IsNotNull(tabId, nameof(tabId));
             Assert.IsNotNull(tabName, nameof(tabName));
-            ContextualRibbonTab tab = new ContextualRibbonTab
+            var tab = new ContextualRibbonTab
             {
                 Id = RibbonTab__Prefix + tabId, // We want to add mark those tabs as RoadPAC ones, for further compatibility
                 Name = tabName,
@@ -165,10 +165,10 @@ namespace Shared.Controllers
                 return;
             IsSelectionHandled = true;
             Document document = Application.DocumentManager.MdiActiveDocument;
-            PromptSelectionResult result = document.Editor.SelectImplied();
+            var result = document.Editor.SelectImplied();
             if (result.Status != PromptStatus.OK || result.Value == null || result.Value.Count == 0)
             {
-                foreach (RibbonTab tab in Ribbon.Tabs.Where(t => t is ContextualRibbonTab
+                foreach (var tab in Ribbon.Tabs.Where(t => t is ContextualRibbonTab
                         && t.Id.StartsWith(RibbonTab__Prefix) && t.IsVisible))
                 {
                     ((ContextualRibbonTab) tab).Hide();
@@ -177,14 +177,14 @@ namespace Shared.Controllers
                     return;
                 }
             }
-            SelectionSet selection = result.Value;
+            var selection = result.Value;
             foreach (KeyValuePair<string, Func<SelectionSet, bool>> pair in _contextualTabConditions)
             {
                 if (pair.Value == null)
                     continue; // For some reason Func<SelectionSet, bool>> was null during tab creation, so we will ignore this tab
                 if (pair.Value.Invoke(selection))
                 {
-                    RibbonTab tab = Ribbon.Tabs.FirstOrDefault(t => t.Id == pair.Key);
+                    var tab = Ribbon.Tabs.FirstOrDefault(t => t.Id == pair.Key);
                     if (tab != null && tab is ContextualRibbonTab selected)
                     {
                         selected.Show();

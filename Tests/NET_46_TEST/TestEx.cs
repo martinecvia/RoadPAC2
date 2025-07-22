@@ -21,8 +21,14 @@ namespace NET_46_TEST
         public void Initialize()
         {
             Document document = Application.DocumentManager.MdiActiveDocument;
-            RibbonTab tab = RibbonController.CreateTab("RP_MAIN", "RoadPAC");
-            ContextualRibbonTab ctxTab = RibbonController.CreateContextualTab("RP_CONTEXT1_TRASA", "Trasa", selection => {
+            RibbonTab rpTab = RibbonController.CreateTab("MAIN", "{{ RP_TAB_MAIN.NAME }}");
+            RibbonPanelSource rpTabPanel = new RibbonPanelSource
+            {
+                Title = "{{ RP_TAB_MAIN.PROJECT_MANAGER.NAME }}",
+                Name = "RP_TAB_MAIN.PROJECT_MANAGER"
+            };
+            rpTab.Panels.Add(new RibbonPanel { Source = rpTabPanel }); // Adding RibbonPanelSource early
+            var ctxTab = RibbonController.CreateContextualTab("RP_CONTEXT1_TRASA", "Trasa", selection => {
                 if (selection == null || selection.Count == 0)
                     return false;
                 using (var transaction = document.TransactionManager.StartTransaction())
@@ -30,34 +36,18 @@ namespace NET_46_TEST
                     foreach (var Id in selection.GetObjectIds())
                     {
                         var lookup = transaction.GetObject(Id, OpenMode.ForRead, false);
-                        if (lookup is Line)
+                        if (lookup is Line || lookup is Polyline)
                             return true;
                     }
                 }
                 return false;
             });
-
-            // Create a ribbon tab panel
-            RibbonPanelSource panelSource = new RibbonPanelSource
-            {
-                Title = "My Panel",
-                Name = "MyPanel"
-            };
-
-            // Add a button to the panel
-            RibbonButton button = new RibbonButton
-            {
-                Text = "Do Something",
-                Name = "MyActionButton",
-                ShowText = true,
-                Size = RibbonItemSize.Large,
-                Orientation = System.Windows.Controls.Orientation.Vertical
-            };
-            panelSource.Items.Add(button);
-            tab.Panels.Add(new RibbonPanel { Source = panelSource });
-
-            Ribbon.Tabs.Add(tab);
+            
+            Ribbon.Tabs.Add(rpTab);
             Ribbon.Tabs.Add(ctxTab);
+            var a = 1;
+            ;
+
         }
 
         public void Terminate()
