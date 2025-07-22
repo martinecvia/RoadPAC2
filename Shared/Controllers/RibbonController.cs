@@ -1,12 +1,12 @@
 #define DEBUG
 #define NON_VOLATILE_MEMORY
 
+#define INTERNALS
+
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Windows.Media.Animation;
-
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -16,6 +16,10 @@ using ZwSoft.ZwCAD.Windows;
 #else
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.EditorInput;
+
+#if INTERNALS
+using Autodesk.Internal.Windows;
+#endif
 using Autodesk.Windows;
 #endif
 #endregion
@@ -43,7 +47,8 @@ using Autodesk.Windows;
 // - IsVisible:
 // Gets or sets the value that indicates whether the tab is visible in the ribbon.
 // If the value is true, the tab is visible in the ribbon. If the value is false, it is hidden in ribbon. Both visible and hidden tabs are available in the ribbon by right-clicking the menu under the Tabs menu option, which allows the user to show or hide the tabs.
-// If the tab's IsAnonymous property is set to false, it is not included in the right-click menu, and the user cannot control its visibility. If an active tab is hidden, the next or previous visible tab is set as the active tab.
+// If the tab's IsAnonymous property is set to false, it is not included in the right-click menu, and the user cannot control its visibility.
+// If an active tab is hidden, the next or previous visible tab is set as the active tab.
 // The default value is true.
 
 // - IsVisited:
@@ -70,9 +75,10 @@ namespace Shared.Controllers
     {
         [RPInternalUseOnly]
         public static readonly string HasAnyContextualTabPropertyName = "HasAnyContextualTab";
+        [RPInternalUseOnly]
+        public static readonly string IsSelectionHandledPropertyName = "IsSelectionHandled";
 
         private const string RibbonTab__Prefix = "RP_TAB_";
-        private const string RibbonGroupPrefix = "RP_GRP_";
 
         private static RibbonControl Ribbon => ComponentManager.Ribbon; // Should be same with ZWCAD
 
@@ -96,26 +102,22 @@ namespace Shared.Controllers
                 throw new InvalidOperationException("Ribbon can't be loaded using reflection.");
         }
 
-        public static RibbonTab CreateTab(string tabId, string tabName,
-                                          string tabTitle = null, string tabDescription = null)
+        public static RibbonTab CreateTab(string tabId, string tabName, 
+                                          string tabDescription = null)
         {
 #if NON_VOLATILE_MEMORY
             AssertInitialized();
 #endif
-            if (string.IsNullOrWhiteSpace(tabId))
-                throw new ArgumentNullException(nameof(tabId), "tabId is required.");
-            if (string.IsNullOrWhiteSpace(tabName))
-                throw new ArgumentNullException(nameof(tabName), "tabName is required.");
-            RibbonTab tab = new RibbonTab();
-            // Assesses whether the tab is regular tab or contextual tab.  If it is true the tab is contextual tab, and false if it is regular tab.
-            tab.IsContextualTab = false;
-            tab.Id = RibbonTab__Prefix + tabId; // We want to add mark those tabs as RoadPAC ones, for further compatibility
-            tab.Name = tabName; tab.Title = tabTitle ?? tabName;
-            tab.Description = tabDescription;
-            tab.IsEnabled = true;
-            // Theme handling logic
-            tab.Theme = null;
-
+            Assert.IsNotNull(tabId, nameof(tabId));
+            Assert.IsNotNull(tabName, nameof(tabName));
+            RibbonTab tab = new RibbonTab
+            {
+                Id = RibbonTab__Prefix + tabId, // We want to add mark those tabs as RoadPAC ones, for further compatibility
+                Name = tabName,
+                Title = tabName,
+                Description = tabDescription,
+                IsEnabled = true
+            };
             return tab;
         }
 
@@ -124,63 +126,75 @@ namespace Shared.Controllers
 
         public static ContextualRibbonTab CreateContextualTab(string tabId, string tabName, 
             Func<SelectionSet, bool> onSelectionMatch, // Selector switch when this tab should be opened
-            string tabTitle = null, string tabDescription = null)
+            string tabDescription = null)
         {
 #if NON_VOLATILE_MEMORY
            AssertInitialized();
 #endif
-            if (string.IsNullOrWhiteSpace(tabId))
-                throw new ArgumentNullException(nameof(tabId), "tabId is required.");
-            if (string.IsNullOrWhiteSpace(tabName)) 
-                throw new ArgumentNullException(nameof(tabName), "tabName is required.");
-            ContextualRibbonTab tab = new ContextualRibbonTab();
-            // Assesses whether the tab is regular tab or contextual tab.  If it is true the tab is contextual tab, and false if it is regular tab.
-            tab.IsContextualTab = true; // Hard setting that this tab is contextual
-            tab.IsActive = false; tab.IsVisible = false; // We dont want to show it at first
-            tab.Id = RibbonTab__Prefix + tabId; // We want to add mark those tabs as RoadPAC ones, for further compatibility
-            tab.Name = tabName; tab.Title = tabTitle ?? tabName;
-            tab.Description = tabDescription;
+            Assert.IsNotNull(tabId, nameof(tabId));
+            Assert.IsNotNull(tabName, nameof(tabName));
+            ContextualRibbonTab tab = new ContextualRibbonTab
+            {
+                Id = RibbonTab__Prefix + tabId, // We want to add mark those tabs as RoadPAC ones, for further compatibility
+                Name = tabName,
+                Title = tabName,
+                Description = tabDescription,
+                IsEnabled = true,
+                IsAnonymous = true,
+                IsVisible = false
+            };
             _contextualTabConditions.Add(tab.Id, onSelectionMatch);
             if (!HasAnyContextualTab)
             {
                 Document document = Application.DocumentManager.MdiActiveDocument;
-                document.Editor.SelectionAdded += OnAdd; document.Editor.SelectionRemoved += OnRem;
+                document.ImpliedSelectionChanged += OnSelectionChanged;
                 HasAnyContextualTab = true;
             }
             return tab;
         }
 
-        [RPPrivateUseOnly]
-        private static void OnAdd(object sender, 
-            SelectionAddedEventArgs eventArgs) => OnSelectionEvent(sender, eventArgs.Selection);
-        [RPPrivateUseOnly]
-        private static void OnRem(object sender, 
-            SelectionRemovedEventArgs eventArgs) => OnSelectionEvent(sender, eventArgs.Selection);
+        [DefaultValue(false)]
+        public static bool IsSelectionHandled { get; private set; } = false;
 
         [RPPrivateUseOnly]
-        private static void OnSelectionEvent(object sender, SelectionSet selection)
+        private static void OnSelectionChanged(object sender, EventArgs eventArgs)
         {
-            if (selection == null)
+            if (IsSelectionHandled)
                 return;
-            foreach (KeyValuePair<string, Func<SelectionSet, bool>> pair in _contextualTabConditions)
+            if (eventArgs == null)
+                return;
+            IsSelectionHandled = true;
+            Document document = Application.DocumentManager.MdiActiveDocument;
+            PromptSelectionResult result = document.Editor.SelectImplied();
+            if (result.Status != PromptStatus.OK || result.Value == null || result.Value.Count == 0)
             {
-                if (pair.Value(selection))
+                foreach (RibbonTab tab in Ribbon.Tabs.Where(t => t is ContextualRibbonTab
+                        && t.Id.StartsWith(RibbonTab__Prefix) && t.IsVisible))
                 {
-                    RibbonTab tab = Ribbon.Tabs.FirstOrDefault(t => t.Id == pair.Key);
-                    if (tab != null && tab.IsContextualTab)
-                    {
-                        Ribbon.ShowContextualTab(tab, false, // We do not currently supprot mergedTab (Maybe in future?)
-                            true); // With this we are ensuring tab is activated
-                    }
+                    ((ContextualRibbonTab) tab).Hide();
+                    Ribbon.UpdateLayout();
+                    IsSelectionHandled = false;
                     return;
                 }
             }
-            foreach(RibbonTab tab in Ribbon.Tabs.Where(t => t.IsContextualTab
-                    && t.Id.StartsWith(RibbonTab__Prefix) 
-                    && (t.IsVisible || t.IsActive)))
+            SelectionSet selection = result.Value;
+            foreach (KeyValuePair<string, Func<SelectionSet, bool>> pair in _contextualTabConditions)
             {
-                Ribbon.HideContextualTab(tab);
+                if (pair.Value == null)
+                    continue; // For some reason Func<SelectionSet, bool>> was null during tab creation, so we will ignore this tab
+                if (pair.Value.Invoke(selection))
+                {
+                    RibbonTab tab = Ribbon.Tabs.FirstOrDefault(t => t.Id == pair.Key);
+                    if (tab != null && tab is ContextualRibbonTab selected)
+                    {
+                        selected.Show();
+                        Ribbon.UpdateLayout();
+                        IsSelectionHandled = false;
+                        return;
+                    }
+                }
             }
+            IsSelectionHandled = false;
         }
     }
 }

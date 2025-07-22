@@ -9,6 +9,7 @@
     <Import_RootNamespace>Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Assert.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)CommandHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)controllers\ContextualRibbonTab.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RPUseOnlyAttribute.cs" />

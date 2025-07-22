@@ -13,14 +13,8 @@ namespace Shared.Controllers
 {
     public class ContextualRibbonTab : RibbonTab
     {
-        public bool Show()
-        {
-            return true;
-        }
+        public void Show() => IsVisible = true;
 
-        public bool Hide()
-        {
-            return true;
-        }
+        public void Hide() => IsVisible = false;
     }
 }

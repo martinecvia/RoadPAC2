@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Reflection;
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
-using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Runtime;
+using Autodesk.Internal.Windows;
 using Autodesk.Windows;
-using Microsoft.Win32;
+using Shared.Controllers;
 
 // https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-4E1AAFA9-740E-4097-800C-CAED09CDFF12
 // https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-C3F3C736-40CF-44A0-9210-55F6A939B6F2
@@ -22,14 +21,43 @@ namespace NET_46_TEST
         public void Initialize()
         {
             Document document = Application.DocumentManager.MdiActiveDocument;
-            foreach (RibbonTab item in Ribbon.Tabs)
-            {
-                if (item.Name == "Home")
+            RibbonTab tab = RibbonController.CreateTab("RP_MAIN", "RoadPAC");
+            ContextualRibbonTab ctxTab = RibbonController.CreateContextualTab("RP_CONTEXT1_TRASA", "Trasa", selection => {
+                if (selection == null || selection.Count == 0)
+                    return false;
+                using (var transaction = document.TransactionManager.StartTransaction())
                 {
-                    RibbonPanelCollection collection = item.Panels;
-                    document.Editor.WriteMessage("Test");
+                    foreach (var Id in selection.GetObjectIds())
+                    {
+                        var lookup = transaction.GetObject(Id, OpenMode.ForRead, false);
+                        if (lookup is Line)
+                            return true;
+                    }
                 }
-            }
+                return false;
+            });
+
+            // Create a ribbon tab panel
+            RibbonPanelSource panelSource = new RibbonPanelSource
+            {
+                Title = "My Panel",
+                Name = "MyPanel"
+            };
+
+            // Add a button to the panel
+            RibbonButton button = new RibbonButton
+            {
+                Text = "Do Something",
+                Name = "MyActionButton",
+                ShowText = true,
+                Size = RibbonItemSize.Large,
+                Orientation = System.Windows.Controls.Orientation.Vertical
+            };
+            panelSource.Items.Add(button);
+            tab.Panels.Add(new RibbonPanel { Source = panelSource });
+
+            Ribbon.Tabs.Add(tab);
+            Ribbon.Tabs.Add(ctxTab);
         }
 
         public void Terminate()
