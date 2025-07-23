@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Diagnostics;
 
 namespace Shared
 {
@@ -18,7 +19,12 @@ namespace Shared
         public static void IsNotNull<T>(T obj, string paramName) where T : class
         {
             if (obj == null)
+            {
+                #if DEBUG
+                Debug.WriteLine(obj, paramName);
+                #endif
                 throw new ArgumentNullException(paramName);
+            }
         }
 
         /// <summary>
@@ -31,7 +37,12 @@ namespace Shared
         public static void IsNotEmpty<T>(T obj, string paramName) where T : IEnumerable
         {
             if (!((IEnumerable)obj).GetEnumerator().MoveNext())
+            {
+                #if DEBUG
+                Debug.WriteLine(obj, paramName);
+                #endif
                 throw new ArgumentException("Empty sequence", paramName);
+            }
         }
     }
 }

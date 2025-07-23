@@ -67,9 +67,6 @@ namespace NET_46_TEST
             Ribbon.Tabs.Add(ctxTab);
 
             var b = Ribbon.Tabs.Where(t => t.Name == "Output"); // To see whats happening there
-            RibbonTabDef xmlTab = ResourceController.LoadResourceRibbon<RibbonTabDef>("rp_RoadPAC");
-            foreach (RibbonTextBoxDef textBox in xmlTab.Items)
-                Debug.WriteLine($"{textBox.Orientation}");
         }
 
         public void Terminate()

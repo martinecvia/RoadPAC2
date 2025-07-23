@@ -85,7 +85,7 @@ namespace Shared.Controllers
             Assembly assembly = Assembly.GetExecutingAssembly();
             using (Stream stream = assembly.GetManifestResourceStream(resourceName)
                 ?? assembly.GetManifestResourceStream(assembly.GetManifestResourceNames()
-                    .FirstOrDefault(resource => resource.EndsWith("rp_img_default_32.ico", StringComparison.OrdinalIgnoreCase))))
+                    .FirstOrDefault(resource => resource.EndsWith("Icons.rp_img_default_32.ico", StringComparison.OrdinalIgnoreCase))))
             {
                 Assert.IsNotNull(stream, nameof(stream));      // This is a no-no, if default file was not found
                                                                // then something must happend during build process
@@ -117,7 +117,9 @@ namespace Shared.Controllers
             Assembly assembly = Assembly.GetExecutingAssembly();
             string manifestResource = assembly.GetManifestResourceNames()
                 .FirstOrDefault(resource => resource.EndsWith($"Ribbons.{resourceName}.xml", StringComparison.OrdinalIgnoreCase));
+            #if DEBUG
             Debug.WriteLine($"LoadResourceRibbon: {manifestResource}");
+            #endif
             using (Stream stream = assembly.GetManifestResourceStream(manifestResource))
             {
                 Assert.IsNotNull(stream, nameof(stream));      // This is a no-no, if default file was not found
