@@ -22,6 +22,7 @@ using Autodesk.Internal.Windows;
 #endif
 using Autodesk.Windows;
 #endif
+using Shared.Controllers.Models;
 #endregion
 
 // [RibbonTab]

@@ -9,7 +9,7 @@ using Autodesk.Windows;
 #endif
 #endregion
 
-namespace Shared.Controllers
+namespace Shared.Controllers.Models
 {
     public class ContextualRibbonTab : RibbonTab
     {
