@@ -184,7 +184,8 @@ namespace Shared.Controllers
                 // Logic should be further refined in future to keep tab open
                 // if we want to, for now - all tabs will be closed after de-selection
                 foreach (var tab in Ribbon.Tabs.Where(t => t is ContextualRibbonTab
-                        && t.Id.StartsWith(RibbonTab__Prefix) && t.IsVisible))
+                        && t.Id.StartsWith(RibbonTab__Prefix) 
+                        && t.IsVisible))
                 {
                     ((ContextualRibbonTab) tab).Hide();
                     Ribbon.UpdateLayout();
