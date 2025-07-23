@@ -1,11 +1,13 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Runtime;
 using Autodesk.Windows;
-
+using Shared;
 using Shared.Controllers;
+using Shared.Controllers.Models.RibbonXml;
 
 // https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-4E1AAFA9-740E-4097-800C-CAED09CDFF12
 // https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-C3F3C736-40CF-44A0-9210-55F6A939B6F2
@@ -22,12 +24,28 @@ namespace NET_46_TEST
         public void Initialize()
         {
             Document document = Application.DocumentManager.MdiActiveDocument;
-            RibbonTab rpTab = RibbonController.CreateTab("MAIN", "{{ RP_TAB_MAIN.NAME }}");
+            ResourceController.LoadEmbeddedResources(); // To load icons, configuration files etc.
+
+            RibbonTab rpTab = RibbonController.CreateTab("MAIN", "RoadPAC");
+            RibbonButton button = new RibbonButton
+            {
+                Text = "RoadPAC", // Untranslatable entity
+                Name = "RP_TAB_MAIN.PROJECT_MANAGER.RUN_ROADPAC",
+                ShowText = true,
+                Size = RibbonItemSize.Large,
+                Image = ResourceController.GetImageSource("rp_img_roadpac_16"),
+                LargeImage = ResourceController.GetImageSource("rp_img_roadpac_32"),
+                Orientation = System.Windows.Controls.Orientation.Vertical,
+                ShowImage = true,
+                CommandHandler = new CommandHandler("RP_RUN_ROADPAC")
+            };
             RibbonPanelSource rpTabPanel = new RibbonPanelSource
             {
                 Title = "{{ RP_TAB_MAIN.PROJECT_MANAGER.NAME }}",
-                Name = "RP_TAB_MAIN.PROJECT_MANAGER"
+                Name = "RP_TAB_MAIN.PROJECT_MANAGER",
             };
+            rpTabPanel.Items.Add(button);
+            rpTabPanel.Items.Add(new RibbonSeparator { SeparatorStyle = RibbonSeparatorStyle.Spacer }); // Vertical line
             rpTab.Panels.Add(new RibbonPanel { Source = rpTabPanel }); // Adding RibbonPanelSource early
             var ctxTab = RibbonController.CreateContextualTab("RP_CONTEXT1_TRASA", "Trasa", selection => {
                 if (selection == null || selection.Count == 0)
@@ -47,10 +65,10 @@ namespace NET_46_TEST
             Ribbon.Tabs.Add(rpTab);
             Ribbon.Tabs.Add(ctxTab);
 
-            var a = Ribbon.Tabs.Where(t => t.Name == "Parametric");
-            var b = Ribbon.Tabs.Where(t => t.Name == "Output");
-            ;
-
+            var b = Ribbon.Tabs.Where(t => t.Name == "Output"); // To see whats happening there
+            RibbonTabDef xmlTab = ResourceController.LoadResourceRibbon<RibbonTabDef>("rp_RoadPAC");
+            foreach (RibbonTextBoxDef textBox in xmlTab.Items)
+                Debug.WriteLine(textBox.Orientation);
         }
 
         public void Terminate()

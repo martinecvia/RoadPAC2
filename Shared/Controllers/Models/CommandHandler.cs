@@ -14,7 +14,7 @@ namespace Shared
     /// A simple implementation of the <see cref="System.Windows.Input.ICommand"/> interface
     /// that executes a given AutoCAD command string when invoked.
     /// </summary>
-    internal sealed class CommandHandler : System.Windows.Input.ICommand
+    public sealed class CommandHandler : System.Windows.Input.ICommand
     {
         private readonly string _command;
 
@@ -23,6 +23,8 @@ namespace Shared
         /// </summary>
         /// <param name="command">The AutoCAD command string to be executed.</param>
         public CommandHandler(string command) => _command = command;
+
+        public string Command => _command;
 
         /// <inheritdoc/>
         public event EventHandler CanExecuteChanged;

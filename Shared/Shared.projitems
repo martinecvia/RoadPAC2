@@ -10,25 +10,34 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Assert.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonTab.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\CommandHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\ContextualRibbonTab.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonItem\RibbonTextBox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)controllers\ResourceController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RPApp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RPUseOnlyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\RibbonController.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Controllers\Models\" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_default_16.ico" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_default_32.ico" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_btn_folder_16.ico" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_btn_folder_32.ico" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_btn_manual_16.ico" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_btn_manual_32.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_btn_folder_32.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_btn_folder_64.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_btn_folder_16.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_btn_default_64.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_btn_default_16.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_btn_default_32.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_btn_manual_32.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_btn_manual_64.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_btn_manual_16.png" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_roadpac_32.ico" />
+    <None Include="$(MSBuildThisFileDirectory)Resources\Icons\ignore_roadpac_900x900.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_roadpac_16.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_RoadPAC.xml" />
   </ItemGroup>
 </Project>
