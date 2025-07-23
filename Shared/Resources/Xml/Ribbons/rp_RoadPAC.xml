@@ -2,5 +2,14 @@
 <RibbonTab>
 	<RibbonTextBox />
 	<RibbonTextBox Orientation="Horizontal" />
-	<RibbonTextBox Orientation="Vertical" />
+	<RibbonTextBox Orientation="Vertical"
+                   AcceptTextOnLostFocus="True"
+                   CommandHandler="RP_TEST"
+                   ImageLocation="Left"
+                   InvokesCommand="True"
+                   IsEmptyTextValid="True"
+                   Prompt="Test"
+                   SelectTextOnFocus="True"
+                   ShowImageAsButton="True"
+                   Value="Test" />
 </RibbonTab>

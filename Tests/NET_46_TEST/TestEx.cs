@@ -8,6 +8,7 @@ using Autodesk.Windows;
 using Shared;
 using Shared.Controllers;
 using Shared.Controllers.Models.RibbonXml;
+using Shared.Controllers.Models.RibbonXml.RibbonItem;
 
 // https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-4E1AAFA9-740E-4097-800C-CAED09CDFF12
 // https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-C3F3C736-40CF-44A0-9210-55F6A939B6F2
@@ -33,8 +34,8 @@ namespace NET_46_TEST
                 Name = "RP_TAB_MAIN.PROJECT_MANAGER.RUN_ROADPAC",
                 ShowText = true,
                 Size = RibbonItemSize.Large,
-                Image = ResourceController.GetImageSource("rp_img_roadpac_16"),
-                LargeImage = ResourceController.GetImageSource("rp_img_roadpac_32"),
+                Image = ResourceController.GetImageSource("rp_img_btn_manual_16"),
+                LargeImage = ResourceController.GetImageSource("rp_img_btn_manual_32"),
                 Orientation = System.Windows.Controls.Orientation.Vertical,
                 ShowImage = true,
                 CommandHandler = new CommandHandler("RP_RUN_ROADPAC")
@@ -68,7 +69,7 @@ namespace NET_46_TEST
             var b = Ribbon.Tabs.Where(t => t.Name == "Output"); // To see whats happening there
             RibbonTabDef xmlTab = ResourceController.LoadResourceRibbon<RibbonTabDef>("rp_RoadPAC");
             foreach (RibbonTextBoxDef textBox in xmlTab.Items)
-                Debug.WriteLine(textBox.Orientation);
+                Debug.WriteLine($"{textBox.Orientation}");
         }
 
         public void Terminate()
