@@ -78,7 +78,9 @@ namespace Shared.Controllers
         [RPInternalUseOnly]
         internal static readonly string IsSelectionHandledPropertyName = "IsSelectionHandled";
 
-        private const string RibbonTab__Prefix = "RP_TAB_";
+        private const string RibbonTab__Prefix = "RP_TAB_"; // RoadPAC prefix for tabs. so we can distinguish
+                                                            // other tab's from AutoCAD.
+                                                            // This also prevents using the same name from different applications.
         private const string RibbonGroupPrefix = "RP_GRP_";
 
         private static RibbonControl Ribbon => ComponentManager.Ribbon; // Should be same with ZWCAD
@@ -103,7 +105,7 @@ namespace Shared.Controllers
                 throw new InvalidOperationException("Ribbon can't be loaded using reflection.");
         }
 
-        public static RibbonTab CreateTab(string tabId, string tabName, 
+        public static RibbonTab CreateTab(string tabId, string tabName,
                                           string tabDescription = null)
         {
 #if NON_VOLATILE_MEMORY
@@ -113,7 +115,8 @@ namespace Shared.Controllers
             Assert.IsNotNull(tabName, nameof(tabName));
             var tab = new RibbonTab
             {
-                Id = RibbonTab__Prefix + tabId, // We want to add mark those tabs as RoadPAC ones, for further compatibility
+                Id = RibbonTab__Prefix + tabId, // We want to add mark those tabs as RoadPAC ones´.
+                                                // For further compatibility and to prevent being overriden.
                 Name = tabName,
                 Title = tabName,
                 Description = tabDescription,
@@ -136,12 +139,15 @@ namespace Shared.Controllers
             Assert.IsNotNull(tabName, nameof(tabName));
             var tab = new ContextualRibbonTab
             {
-                Id = RibbonTab__Prefix + tabId, // We want to add mark those tabs as RoadPAC ones, for further compatibility
+                Id = RibbonTab__Prefix + tabId, // We want to add mark those tabs as RoadPAC ones´.
+                                                // For further compatibility and to prevent being overriden.
                 Name = tabName,
                 Title = tabName,
                 Description = tabDescription,
                 IsEnabled = true,
-                IsAnonymous = true,
+                IsAnonymous = true,             // This is crucial, since Ribbon#ShowContextualTab() is broken
+                                                // because it disallows user to "intentionaly" show this tab, thus
+                                                // RibbonTab#IsVisible property will be use to show or hide contextual tab
                 IsVisible = false
             };
             _contextualTabConditions.Add(tab.Id, onSelectionMatch);
@@ -156,19 +162,27 @@ namespace Shared.Controllers
 
         [DefaultValue(false)]
         public static bool IsSelectionHandled { get; private set; } = false;
+        // public - to allow program to wait for property change, so user will see Contextual tab first
 
         [RPPrivateUseOnly]
         private static void OnSelectionChanged(object sender, EventArgs eventArgs)
         {
-            if (IsSelectionHandled)
+            if (IsSelectionHandled) // Sometimes events are fired multiple times per-say
+                                    // so this should prevent any "unwanted" events after the first one.
+                                    // Effectively for performance reasons and stutters
                 return;
-            if (eventArgs == null)
+            if (eventArgs == null)  // Case that happens when AutoCAD's main thread is occupied
+                                    // and event was fired in the middle of cleaning up databases
+                                    // [bug at: Autodesk AutoCAD 2017 #11387]
                 return;
             IsSelectionHandled = true;
             Document document = Application.DocumentManager.MdiActiveDocument;
             var result = document.Editor.SelectImplied();
             if (result.Status != PromptStatus.OK || result.Value == null || result.Value.Count == 0)
             {
+                // Hide all contextual tabs
+                // Logic should be further refined in future to keep tab open
+                // if we want to, for now - all tabs will be closed after de-selection
                 foreach (var tab in Ribbon.Tabs.Where(t => t is ContextualRibbonTab
                         && t.Id.StartsWith(RibbonTab__Prefix) && t.IsVisible))
                 {
@@ -182,7 +196,8 @@ namespace Shared.Controllers
             foreach (KeyValuePair<string, Func<SelectionSet, bool>> pair in _contextualTabConditions)
             {
                 if (pair.Value == null)
-                    continue; // For some reason Func<SelectionSet, bool>> was null during tab creation, so we will ignore this tab
+                    continue; // If for some reason Func<SelectionSet, bool>> will be null during tab creation
+                              // we will just skip handling this tab and treat it as normal one
                 if (pair.Value.Invoke(selection))
                 {
                     var tab = Ribbon.Tabs.FirstOrDefault(t => t.Id == pair.Key);
@@ -195,6 +210,7 @@ namespace Shared.Controllers
                     }
                 }
             }
+            // Release the lock
             IsSelectionHandled = false;
         }
     }

@@ -42,11 +42,8 @@ namespace Shared
         public void Execute(object parameter)
         {
             Document document = Application.DocumentManager.MdiActiveDocument;
-            if (document != null)
-            {
-                // Sends the command to AutoCAD for execution in the command line
-                document.SendStringToExecute(_command + " ", true, false, false);
-            }
+            // Sends the command to AutoCAD for execution in the command line
+            document?.SendStringToExecute(_command + " ", true, false, false);
         }
     }
 }

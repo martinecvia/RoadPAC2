@@ -14,7 +14,7 @@ namespace Shared
         /// <typeparam name="T">Type of the object.</typeparam>
         /// <param name="obj">The instance to which the assertion applies.</param>
         /// <param name="paramName">Name of the parameter.</param>
-        /// <exception cref="System.ArgumentNullException">Throws ArgumentNullException if <paramref name="obj"/> is null.</exception>
+        /// <exception cref="ArgumentNullException">Throws ArgumentNullException if <paramref name="obj"/> is null.</exception>
         public static void IsNotNull<T>(T obj, string paramName) where T : class
         {
             if (obj == null)
@@ -27,11 +27,11 @@ namespace Shared
         /// <typeparam name="T">Type of the object.</typeparam>
         /// <param name="obj">The instance to which the assertion applies.</param>
         /// <param name="paramName">Name of the parameter.</param>
-        /// <exception cref="System.ArgumentException">Throws ArgumentException if <paramref name="obj"/> is an empty sequence.</exception>
+        /// <exception cref="ArgumentException">Throws ArgumentException if <paramref name="obj"/> is an empty sequence.</exception>
         public static void IsNotEmpty<T>(T obj, string paramName) where T : IEnumerable
         {
             if (!((IEnumerable)obj).GetEnumerator().MoveNext())
-                throw new System.ArgumentException("Empty sequence", paramName);
+                throw new ArgumentException("Empty sequence", paramName);
         }
     }
 }
