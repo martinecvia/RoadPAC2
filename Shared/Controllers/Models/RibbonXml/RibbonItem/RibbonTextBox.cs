@@ -2,6 +2,14 @@
 using System.ComponentModel;
 using System.Xml.Serialization;
 
+#region O_PROGRAM_DETERMINE_CAD_PLATFORM 
+#if ZWCAD
+using ZwSoft.ZwCAD.Windows;
+#else
+using Autodesk.Windows;
+#endif
+#endregion
+
 namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox
