@@ -1,11 +1,49 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
-<RibbonTab>
-	<RibbonTextBox />
-	<RibbonTextBox Orientation="Horizontal" />
-	<RibbonTextBox Orientation="Vertical" AcceptTextOnLostFocus="True" CommandHandler="RP_TEST" ImageLocation="Left" InvokesCommand="True"
-                   IsEmptyTextValid="True"
-                   Prompt="Test"
-                   SelectTextOnFocus="True"
-                   ShowImageAsButton="True"
-                   Value="Test" />
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<RibbonTab Id="RP_TAB_RoadPAC"
+		   Name="RoadPAC"
+		   Title="RoadPAC"
+		   Description="{{ RP_TAB.RoadPAC.Description }}"
+		   IsEnabled="True">
+	<!-- RibbonPanelCollection -->
+	<![CDATA[
+		{{ PLATFORM }}.Windows
+	]]>
+	<RibbonPanel Id="RP_TAB_RoadPAC.Panels.ProjectManager"
+				 IsEnabled="True"
+				 HighlightPanelTitleBar="True"
+				 IsVisible="True">
+		<!-- RibbonPanelSource -->
+		<RibbonPanelSource Id="RP_TAB_RoadPAC.Panels.ProjectManager.Id"
+						   Name="{{ RP_TAB.RoadPAC.Panels.ProjectManager.Name }}"
+						   Title="{{ RP_TAB.RoadPAC.Panels.ProjectManager.Title }}"
+						   KeyTip="{{ RP_TAB.RoadPAC.Panels.ProjectManager.KeyTip }}"
+						   Description="{{ RP_TAB.RoadPAC.Panels.ProjectManager.Description }}">
+			<!-- RibbonTabDef(
+					Description={{ RP_TAB.RoadPAC.Description }}, 
+					Highlight=None, Id=RP_TAB_RoadPAC, 
+					IsActive=, 
+					IsContextualTab=False, 
+					IsVisible=True, 
+					IsVisited=, 
+					KeyTip=, 
+					Name=RoadPAC, 
+					Tag=, 
+					Title=RoadPAC, 
+					Panels=[
+						RibbonPanelDef(
+							FloatingOrientation=Horizontal, 
+							HighlightPanelTitleBar=True, 
+							HighlightWhenCollapsed=, 
+							Id=RP_TAB_RoadPAC.Panels.ProjectManager, 
+							IsEnabled=True, 
+							IsVisible=True, 
+							Source=RibbonPanelSourceDef(
+								
+							)
+						)
+					], 
+					IsEnabled=True)
+				) -->
+		</RibbonPanelSource>
+	</RibbonPanel>
 </RibbonTab>

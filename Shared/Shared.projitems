@@ -10,6 +10,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Assert.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\BaseRibbonXml.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonPanel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonItem\RibbonLabel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonPanelSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonItem\RibbonSeparator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)controllers\models\ribbonxml\ribbonitem\RibbonSpinner.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonTab.cs" />

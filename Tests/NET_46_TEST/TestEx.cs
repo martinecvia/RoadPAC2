@@ -8,7 +8,6 @@ using Autodesk.Windows;
 using Shared;
 using Shared.Controllers;
 using Shared.Controllers.Models.RibbonXml;
-using Shared.Controllers.Models.RibbonXml.RibbonItem;
 
 // https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-4E1AAFA9-740E-4097-800C-CAED09CDFF12
 // https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-C3F3C736-40CF-44A0-9210-55F6A939B6F2
@@ -47,7 +46,7 @@ namespace NET_46_TEST
             };
             rpTabPanel.Items.Add(button);
             rpTabPanel.Items.Add(new RibbonSeparator { SeparatorStyle = RibbonSeparatorStyle.Spacer }); // Vertical line
-            rpTab.Panels.Add(new RibbonPanel { Source = rpTabPanel }); // Adding RibbonPanelSource early
+            rpTab.Panels.Add(new Autodesk.Windows.RibbonPanel { Source = rpTabPanel }); // Adding RibbonPanelSource early
             var ctxTab = RibbonController.CreateContextualTab("RP_CONTEXT1_TRASA", "Trasa", selection => {
                 if (selection == null || selection.Count == 0)
                     return false;
@@ -67,6 +66,8 @@ namespace NET_46_TEST
             Ribbon.Tabs.Add(ctxTab);
 
             var b = Ribbon.Tabs.Where(t => t.Name == "Output"); // To see whats happening there
+            var x = ResourceController.LoadResourceRibbon<RibbonTabDef>("rp_RoadPAC");
+            Debug.WriteLine(x);
         }
 
         public void Terminate()

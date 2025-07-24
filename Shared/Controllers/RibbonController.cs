@@ -109,9 +109,9 @@ namespace Shared.Controllers
         public static RibbonTab CreateTab(string tabId, string tabName,
                                           string tabDescription = null)
         {
-#if NON_VOLATILE_MEMORY
+            #if NON_VOLATILE_MEMORY
             AssertInitialized();
-#endif
+            #endif
             Assert.IsNotNull(tabId, nameof(tabId));
             Assert.IsNotNull(tabName, nameof(tabName));
             var tab = new RibbonTab
@@ -133,9 +133,9 @@ namespace Shared.Controllers
             Func<SelectionSet, bool> onSelectionMatch, // Selector switch when this tab should be opened
             string tabDescription = null)
         {
-#if NON_VOLATILE_MEMORY
-           AssertInitialized();
-#endif
+            #if NON_VOLATILE_MEMORY
+            AssertInitialized();
+            #endif
             Assert.IsNotNull(tabId, nameof(tabId));
             Assert.IsNotNull(tabName, nameof(tabName));
             var tab = new ContextualRibbonTab

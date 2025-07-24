@@ -1,4 +1,4 @@
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Xml.Serialization;
 using System;
 
@@ -13,9 +13,9 @@ using Autodesk.Windows;
 namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSeparator
-    public class RibbonSeparatorDef
+    public class RibbonSeparatorDef : BaseRibbonXml
     {
-        [RPInternalUseOnly]
+        [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(RibbonSeparatorStyle.Line)]
         [Description("Gets or sets the value specifying the separator style. " +

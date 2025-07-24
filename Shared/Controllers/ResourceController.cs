@@ -124,8 +124,17 @@ namespace Shared.Controllers
             {
                 Assert.IsNotNull(stream, nameof(stream));      // This is a no-no, if default file was not found
                                                                // then something must happend during build process
-                XmlSerializer serializer = new XmlSerializer(typeof(T));
-                return (T) serializer.Deserialize(stream);
+                try
+                {
+                    XmlSerializer serializer = new XmlSerializer(typeof(T));
+                    return (T)serializer.Deserialize(stream);
+                } catch (InvalidOperationException exception)
+                {
+                    #if DEBUG
+                    Debug.WriteLine(exception.Message);
+                    #endif
+                    return default;
+                }
             }
         }
 

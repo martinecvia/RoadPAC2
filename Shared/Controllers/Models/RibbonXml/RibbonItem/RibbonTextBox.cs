@@ -13,9 +13,9 @@ using Autodesk.Windows;
 namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox
-    public class RibbonTextBoxDef
+    public class RibbonTextBoxDef : BaseRibbonXml
     {
-        [RPInternalUseOnly]
+        [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(System.Windows.Controls.Orientation.Horizontal)]
         [Description("This is Orientation, a member of class RibbonTextBox.")]
@@ -36,7 +36,7 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
             }
         }
 
-        [RPInternalUseOnly]
+        [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(true)]
         [Description("Gets or sets the value that indicates whether edited text should be accepted when the text box loses focus before enter is pressed or the text box button is clicked. " +
@@ -67,7 +67,7 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
             }
         }
 
-        [RPInternalUseOnly]
+        [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(null)]
         [Description("Gets or sets the command handler to be called when the text is changed." +
@@ -91,7 +91,7 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
             }
         }
 
-        [RPInternalUseOnly]
+        [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(RibbonTextBoxImageLocation.Left)]
         [Description("Gets or sets the location for the image that is displayed in the text box. " +
@@ -115,7 +115,7 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
             }
         }
 
-        [RPInternalUseOnly]
+        [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(false)]
         [Description("Gets or sets the value that indicates whether the command handler needs to be invoked whenever text is changed. " +
@@ -142,7 +142,7 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
             }
         }
 
-        [RPInternalUseOnly]
+        [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(true)] // Even tho this property does not directly have default value
                              // for better results this property will be true by default
@@ -169,7 +169,7 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
             }
         }
 
-        [RPInternalUseOnly]
+        [RPInfoOut]
         [XmlAttribute("Prompt")]
         [DefaultValue(null)]
         [Description("Gets or sets the prompt text for the text box. " +
@@ -178,7 +178,7 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox_Prompt
         public string Prompt { get; set; } = null;
 
-        [RPInternalUseOnly]
+        [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(false)]
         [Description("Gets or sets the value that indicates whether the text is selected when the text box gains focus. " +
@@ -206,7 +206,7 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
             }
         }
 
-        [RPInternalUseOnly]
+        [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(false)]
         [Description("Gets or sets the value that indicates whether the Image set in the text box should be displayed as a clickable button. " +
@@ -236,7 +236,7 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
             }
         }
 
-        [RPInternalUseOnly]
+        [RPInfoOut]
         [XmlAttribute("Value")]
         [DefaultValue(null)]
         [Description("Gets or sets the Value property. " +

@@ -33,4 +33,8 @@ namespace Shared
     {
         // Marker attribute used to designate code for internal use by the RoadPAC system.
     }
+
+    [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = true)]
+    internal sealed class RPInfoOutAttribute : Attribute
+    { }
 }
