@@ -13,7 +13,7 @@ using Autodesk.Windows;
 namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox
-    public class RibbonTextBoxDef : BaseRibbonXml
+    public class RibbonTextBoxDef : RibbonItemDef
     {
         [RPInfoOut]
         [XmlIgnore]

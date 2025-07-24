@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSpinner
-    public class RibbonSpinnerDef : BaseRibbonXml
+    public class RibbonSpinnerDef : RibbonItemDef
     {
         // Value must be as first field because later on we will use his datatype as global datatype
         [RPInfoOut]
@@ -27,7 +27,7 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
             {
                 if (string.IsNullOrEmpty(value)) return;
                 if (double.TryParse(value, out var x)) Value = x;
-                else if (int.TryParse(value, out var y)) Value = y;
+                else if (int.TryParse(value, out var y)) Value  = y;
                 else
                 {
                     #if DEBUG

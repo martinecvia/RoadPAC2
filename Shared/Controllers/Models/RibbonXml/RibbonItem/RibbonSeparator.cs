@@ -13,7 +13,7 @@ using Autodesk.Windows;
 namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSeparator
-    public class RibbonSeparatorDef : BaseRibbonXml
+    public class RibbonSeparatorDef : RibbonItemDef
     {
         [RPInfoOut]
         [XmlIgnore]

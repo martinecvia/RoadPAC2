@@ -5,7 +5,7 @@ using System.Xml.Serialization;
 namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonLabel
-    public class RibbonLabelDef : BaseRibbonXml
+    public class RibbonLabelDef : RibbonItemDef
     {
         [RPInfoOut]
         [XmlIgnore]

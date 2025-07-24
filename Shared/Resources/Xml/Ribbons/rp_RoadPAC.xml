@@ -18,32 +18,7 @@
 						   Title="{{ RP_TAB.RoadPAC.Panels.ProjectManager.Title }}"
 						   KeyTip="{{ RP_TAB.RoadPAC.Panels.ProjectManager.KeyTip }}"
 						   Description="{{ RP_TAB.RoadPAC.Panels.ProjectManager.Description }}">
-			<!-- RibbonTabDef(
-					Description={{ RP_TAB.RoadPAC.Description }}, 
-					Highlight=None, Id=RP_TAB_RoadPAC, 
-					IsActive=, 
-					IsContextualTab=False, 
-					IsVisible=True, 
-					IsVisited=, 
-					KeyTip=, 
-					Name=RoadPAC, 
-					Tag=, 
-					Title=RoadPAC, 
-					Panels=[
-						RibbonPanelDef(
-							FloatingOrientation=Horizontal, 
-							HighlightPanelTitleBar=True, 
-							HighlightWhenCollapsed=, 
-							Id=RP_TAB_RoadPAC.Panels.ProjectManager, 
-							IsEnabled=True, 
-							IsVisible=True, 
-							Source=RibbonPanelSourceDef(
-								
-							)
-						)
-					], 
-					IsEnabled=True)
-				) -->
+			<!-- RibbonItem -->
 		</RibbonPanelSource>
 	</RibbonPanel>
 </RibbonTab>
