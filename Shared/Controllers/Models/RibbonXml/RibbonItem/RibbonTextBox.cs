@@ -24,7 +24,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("Orientation")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string OrientationDef
         {
             get => Orientation.ToString();
@@ -51,7 +50,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("AcceptTextOnLostFocus")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string AcceptTextOnLostFocusDef
         {
             get => AcceptTextOnLostFocus.ToString();
@@ -80,7 +78,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("CommandHandler")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string CommandHandlerDef
         {
             get => CommandHandler?.Command;
@@ -103,7 +100,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("ImageLocation")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string ImageLocationDef
         {
             get => ImageLocation.ToString();
@@ -126,7 +122,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("InvokesCommand")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string InvokesCommandDef
         {
             get => InvokesCommand.ToString();
@@ -153,7 +148,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("IsEmptyTextValid")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string IsEmptyTextValidDef
         {
             get => IsEmptyTextValid.ToString();
@@ -190,7 +184,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("SelectTextOnFocus")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string SelectTextOnFocusDef
         {
             get => SelectTextOnFocus.ToString();
@@ -220,7 +213,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("ShowImageAsButton")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string ShowImageAsButtonDef
         {
             get => ShowImageAsButton.ToString();

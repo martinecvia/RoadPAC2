@@ -28,7 +28,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("FloatingOrientation")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string FloatingOrientationDef
         {
             get => FloatingOrientation.ToString();
@@ -49,7 +48,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("HighlightPanelTitleBar")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string HighlightPanelTitleBarDef
         {
             get => HighlightPanelTitleBar?.ToString();
@@ -74,7 +72,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("HighlightWhenCollapsed")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string HighlightWhenCollapsedDef
         {
             get => HighlightWhenCollapsed?.ToString();
@@ -111,7 +108,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("IsEnabled")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string IsEnabledDef
         {
             get => IsEnabled.ToString();
@@ -145,7 +141,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("IsVisible")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string IsVisibleDef
         {
             get => IsVisible.ToString();

@@ -38,7 +38,6 @@ namespace Shared.Controllers.Models.RibbonXml
 
         [RPInternalUseOnly]
         [XmlAttribute("Highlight")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string HighlightDef
         {
             get => Highlight.ToString();
@@ -71,7 +70,6 @@ namespace Shared.Controllers.Models.RibbonXml
 
         [RPInternalUseOnly]
         [XmlAttribute("IsActive")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string IsActiveDef
         {
             get => IsActive?.ToString();
@@ -99,7 +97,6 @@ namespace Shared.Controllers.Models.RibbonXml
 
         [RPInternalUseOnly]
         [XmlAttribute("IsContextualTab")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string IsContextualTabDef
         {
             get => IsContextualTab.ToString();
@@ -129,7 +126,6 @@ namespace Shared.Controllers.Models.RibbonXml
 
         [RPInternalUseOnly]
         [XmlAttribute("IsVisible")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string IsVisibleDef
         {
             get => IsVisible.ToString();
@@ -159,7 +155,6 @@ namespace Shared.Controllers.Models.RibbonXml
 
         [RPInternalUseOnly]
         [XmlAttribute("IsVisited")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string IsVisitedDef
         {
             get => IsVisited.ToString();
@@ -232,7 +227,6 @@ namespace Shared.Controllers.Models.RibbonXml
 
         [RPInternalUseOnly]
         [XmlAttribute("IsEnabled")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string IsEnabledDef
         {
             get => IsEnabled.ToString();

@@ -25,7 +25,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("SeparatorStyle")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string SeparatorStyleDef
         {
             get => SeparatorStyle.ToString();

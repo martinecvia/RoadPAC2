@@ -16,7 +16,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("Orientation")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string OrientationDef
         {
             get => Orientation.ToString();

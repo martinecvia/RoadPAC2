@@ -20,7 +20,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("Value")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string ValueDef
         {
             get => Value?.ToString();
@@ -52,7 +51,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("Change")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string ChangeDef
         {
             get => Change?.ToString();
@@ -97,7 +95,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("Maximum")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string MaximumDef
         {
             get => Maximum?.ToString();
@@ -143,7 +140,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("Minimum")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string MinimumDef
         {
             get => Minimum?.ToString();
@@ -187,7 +183,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInternalUseOnly]
         [XmlAttribute("IsEditable")]
-        [EditorBrowsable(EditorBrowsableState.Never)]
         public string IsEditableDef
         {
             get => IsEditable.ToString();
