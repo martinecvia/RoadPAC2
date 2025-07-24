@@ -53,20 +53,8 @@ namespace Shared.Controllers.Models.RibbonXml
 
     }
 
-    // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSeparator
-    public class RibbonSeparatorDef
-    {
-
-    }
-
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSlider
     public class RibbonSliderDef
-    {
-
-    }
-
-    // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSpinner
-    public class RibbonSpinnerDef
     {
 
     }

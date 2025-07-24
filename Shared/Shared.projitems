@@ -10,7 +10,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Assert.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)controllers\models\ribbonxml\ribbonitem\RibbonSeparator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonItem\RibbonSeparator.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)controllers\models\ribbonxml\ribbonitem\RibbonSpinner.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonTab.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\CommandHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\ContextualRibbonTab.cs" />
