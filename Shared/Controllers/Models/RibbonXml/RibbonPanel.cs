@@ -155,7 +155,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
             }
         }
 
-
         [RPInfoOut]
         [XmlElement("RibbonPanelSource")]
         [DefaultValue(null)]

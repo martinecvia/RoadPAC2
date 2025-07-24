@@ -1,5 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.Windows.Controls;
 using System.Xml.Serialization;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
@@ -214,29 +216,187 @@ namespace Shared.Controllers.Models.RibbonXml
         /// </example>
         public string LargeImage { get; set; } = null;
 
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(100d)]
+        [Description("Gets or sets the minimum width of the item. " +
+            "This property is used only by resizeable items. " +
+            "Resizeable items are items whose width is resized to fit in the space available. " +
+            "For example, RibbonCombo and RibbonGallery are resizeable items, and RibbonButton is not a resizeable item. " +
+            "If there is enough space, resizeable items are displayed in full width, which is set with the Width property. " +
+            "When there is not enough space, the item will be resized to fit in the available space. " +
+            "The width of the item will not go below MinWidth. " +
+            "The value for this property must be zero or positive and cannot be Infinity. " +
+            "The value must be in device-independent units. " +
+            "The default value is 100.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem_MinWidth
-        public double MinWidth { get; set; } = 100;
+        public double MinWidth { get; set; } = 100d;
 
+        [XmlAttribute("MinWidth")]
+        [RPInternalUseOnly]
+        public string MinWidthDef
+        {
+            get => MinWidth.ToString();
+            set
+            {
+                if (string.IsNullOrEmpty(value)) return;
+                if (double.TryParse(value, out var result))
+                {
+                    MinWidth = result;
+                    return;
+                }
+                MinWidth = 100d;
+            }
+        }
+
+        [RPInfoOut]
+        [XmlAttribute("Name")]
+        [DefaultValue(null)]
+        [Description("Gets or sets the name of a ribbon item. " +
+            "There are two properties that support text content in ribbon items: Text and Name. " +
+            "The Text property is meant for short text and is used wherever space is premium (for example, text that appears directly in ribbon face). " +
+            "The Name property is meant for longer text and is used wherever space is not an issue (for example, text that appears in a drop-down list, tooltip, etc.). " +
+            "Both properties can be set for a ribbon item. " +
+            "The visibility of text in the ribbon is controlled by the ShowText property, which must be true to make the text visible. " +
+            "Text may also be suppressed in one or more panels in a horizontal ribbon when there is not enough space to display all the panels. " +
+            "The default value is null.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem_Name
         public string Name { get; set; } = null;
 
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(true)]
+        [Description("Gets or sets the value indicating whether the item image is visible. " +
+            "If the value is true, the image is visible in the ribbon, provided that a valid image has been set with the Image property. " +
+            "If the value is false, the image is not visible. " +
+            "The default value is true. " +
+            "Derived classes may override this default.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem_ShowImage
         public bool ShowImage { get; set; } = true;
 
+        [XmlAttribute("ShowImage")]
+        [RPInternalUseOnly]
+        public string ShowImageDef
+        {
+            get => ShowImage.ToString();
+            set
+            {
+                if (value == null)
+                {
+                    ShowImage = true;
+                    return;
+                }
+                ShowImage = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+            }
+        }
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(false)]
+        [Description("Gets or sets the value indicating whether the item text is visible. " +
+            "If the value is true, the text for the item is visible in the ribbon, provided that a valid text has been set for this item with the Text property. " +
+            "If the value is false, the text is not visible in the ribbon. " +
+            "The default value is false. " +
+            "Derived classes may override this default.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem_ShowText
         public bool ShowText { get; set; } = false;
 
+        [XmlAttribute("ShowText")]
+        [RPInternalUseOnly]
+        public string ShowTextDef
+        {
+            get => ShowText.ToString();
+            set
+            {
+                if (value == null)
+                {
+                    ShowText = false;
+                    return;
+                }
+                ShowText = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+            }
+        }
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(RibbonItemSize.Standard)]
+        [Description("Gets or sets the size with which the item is displayed. " +
+            "This property is supported only by RibbonButton and RibbonLabel as well as classes derived from them. " +
+            "Other ribbon items will ignore this property. " +
+            "The default value is Standard.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem_Size
         public RibbonItemSize Size { get; set; } = RibbonItemSize.Standard;
 
+        [XmlAttribute("Size")]
+        [RPInternalUseOnly]
+        public string SizeDef
+        {
+            get => Size.ToString();
+            set
+            {
+                if (!Enum.TryParse(value, true, out RibbonItemSize result))
+                    result = RibbonItemSize.Standard;
+                Size = result;
+            }
+        }
+
+        [RPInfoOut]
+        [XmlAttribute("Text")]
+        [DefaultValue(null)]
+        [Description("Gets or sets the text of a ribbon item. There are two properties that support text content in ribbon items: Text and Name. " +
+            "The Text property is meant for short text and is used wherever space is premium (for example, text that appears directly in ribbon face). " +
+            "The Name property is meant for longer text and is used wherever space is not an issue (for example, text that appears in a drop-down list, tooltip, etc.). " +
+            "Both properties can be set for a ribbon item. " +
+            "The visibility of text in the ribbon is controlled by the ShowText property, which must be true to make the text visible. " +
+            "Text may also be suppressed in one or more panels in a horizontal ribbon when there is not enough space to display all the panels. " +
+            "The default value is null.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem_Text
         public string Text { get; set; } = null;
 
+        [RPInfoOut]
+        [XmlAttribute("ToolTip")]
+        [DefaultValue(null)]
+        [Description("Gets or sets an object to be used as the tooltip for the item. " +
+            "If the object is a string, it displays the string as a tooltip without any formatting. " +
+            "If the object is of any other type, and the object has a data template, the tooltip will use the data template to display the object. " +
+            "If this property is null, a default tooltip of type RibbonToolTip is created at runtime using the Name, Text, and Description properties of the item. " +
+            "If this property is set to an empty string, the tooltip will be suppressed, and the item will not show any tooltip. " +
+            "ToolTip can also be suppressed by setting the IsToolTipEnabled property to false. " +
+            "The default value is null.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem_ToolTip
         public string ToolTip { get; set; } = null;
 
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(200d)]
+        [Description("Gets or sets the width of the item. " +
+            "This property is used only by resizeable items. " +
+            "Resizeable items are items whose width is resized to fit in the space available. " +
+            "For example, RibbonCombo and RibbonGallery are resizeable items, and RibbonButton is not a resizeable item. " +
+            "If there is enough space, resizeable items are displayed in full width. " +
+            "When there is not enough space, the item will be resized to fit in the available space. " +
+            "The width of the item will not go below MinWidth. " +
+            "The value for this property must be zero or positive and cannot be Infinity. " +
+            "The value must be in device-independent units. " +
+            "The default value is 200.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem_Width
-        public double Width { get; set; } = 200;
+        public double Width { get; set; } = 200d;
 
+        [XmlAttribute("Width")]
+        [RPInternalUseOnly]
+        public string WidthDef
+        {
+            get => MinWidth.ToString();
+            set
+            {
+                if (string.IsNullOrEmpty(value)) return;
+                if (double.TryParse(value, out var result))
+                {
+                    Width = result;
+                    return;
+                }
+                Width = 200d;
+            }
+        }
     }
 }

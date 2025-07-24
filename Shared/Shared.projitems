@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Assert.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\BaseRibbonXml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)controllers\models\ribbonxml\ribbonitem\RibbonPanelBreak.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonPanel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonItem\RibbonLabel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonPanelSource.cs" />
@@ -42,7 +43,6 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_roadpac_16.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonItem\RibbonCommandItem\" />
     <Folder Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\" />
   </ItemGroup>
   <ItemGroup>
