@@ -6,7 +6,10 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
+using System.Reflection;
+
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -14,15 +17,15 @@ using ZwSoft.ZwCAD.ApplicationServices;
 using ZwSoft.ZwCAD.EditorInput;
 using ZwSoft.ZwCAD.Windows;
 #else
-using Autodesk.AutoCAD.ApplicationServices;
-using Autodesk.AutoCAD.EditorInput;
-
 #if INTERNALS
 using Autodesk.Internal.Windows;
 #endif
+using Autodesk.AutoCAD.ApplicationServices;
+using Autodesk.AutoCAD.EditorInput;
 using Autodesk.Windows;
 #endif
 using Shared.Controllers.Models;
+using Shared.Controllers.Models.RibbonXml;
 #endregion
 
 // [RibbonTab]
@@ -106,51 +109,106 @@ namespace Shared.Controllers
                 throw new InvalidOperationException("Ribbon can't be loaded using reflection.");
         }
 
-        public static RibbonTab CreateTab(string tabId, string tabName,
-                                          string tabDescription = null)
+        [RPPrivateUseOnly]
+        private static T CreateTab<T>(string tabId, 
+                                          string tabName = null,
+                                          string tabDescription = null) where T: RibbonTab, new()
         {
             #if NON_VOLATILE_MEMORY
             AssertInitialized();
             #endif
             Assert.IsNotNull(tabId, nameof(tabId));
-            Assert.IsNotNull(tabName, nameof(tabName));
-            var tab = new RibbonTab
+            RibbonTabDef xml = ResourceController.LoadResourceRibbon<RibbonTabDef>(tabId);
+            T tab = new T
             {
-                Id = RibbonTab__Prefix + tabId, // We want to add mark those tabs as RoadPAC ones´.
+                Id = RibbonTab__Prefix + tabId, // We want to add mark those tabs as RoadPAC ones.
                                                 // For further compatibility and to prevent being overriden.
-                Name = tabName,
-                Title = tabName,
-                Description = tabDescription,
-                IsEnabled = true
             };
+            if (xml != null)
+            {
+                // All properties from xml definition
+                PropertyInfo[] applyableProperties = typeof(RibbonTabDef)
+                    .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                    .Where(property => property.GetCustomAttribute<RPInfoOutAttribute>() != null)
+                    .ToArray();
+                foreach (PropertyInfo property in applyableProperties)
+                {
+                    if (!property.CanRead)
+                        continue; // Very weird? Must be manipulated in memory
+                    try
+                    {
+                        // Since we are supporting multiple versions of CAD
+                        // we have to first check if property exists in current running version
+                        // if not we will just print information into a debug console and call it a day
+                        PropertyInfo target = typeof(RibbonTab)
+                            .GetProperty(property.Name, BindingFlags.Instance | BindingFlags.Public);
+                        if (target?.CanWrite == true 
+                            && target.PropertyType.IsAssignableFrom(property.PropertyType)) 
+                            target.SetValue(tab, property.GetValue(xml), null);
+                        else
+                        {
+                            #if DEBUG
+                            Debug.WriteLine($"{property.Name}: " +
+                                $"Has different type target:{target.PropertyType} from source:{property.PropertyType}");
+                            #endif
+                        }
+                    }
+                    catch (System.Exception exception) // Collision with *CAD.Runtime.Exception & System.Exception
+                    {
+                        #if DEBUG
+                        Debug.WriteLine($"{property.Name}: {exception.Message}");
+                        #endif
+                    }
+                }
+            };
+            tab.IsEnabled = true;
+            if (!string.IsNullOrEmpty(tabName) || string.IsNullOrEmpty(tab.Name))
+                tab.Name = tabName ?? tabId;
+            if (!string.IsNullOrEmpty(tabDescription))
+                tab.Description = tabDescription;
             return tab;
         }
 
         [RPPrivateUseOnly]
         private static readonly Dictionary<string, Func<SelectionSet, bool>> _contextualTabConditions = new Dictionary<string, Func<SelectionSet, bool>>();
 
-        public static ContextualRibbonTab CreateContextualTab(string tabId, string tabName, 
+        /// <summary>
+        /// Creates a standard ribbon tab using the specified resource identifier and optional name/description.
+        /// </summary>
+        /// <param name="tabId">The identifier of the ribbon tab resource.</param>
+        /// <param name="tabName">Optional override for the tab display name. If not set, <paramref name="tabId"/> is used.</param>
+        /// <param name="tabDescription">Optional description to show in UI tooltips or documentation.</param>
+        /// <returns>A fully initialized <see cref="RibbonTab"/> instance.</returns>
+        public static RibbonTab CreateTab(string tabId, string tabName = null, string tabDescription = null) 
+            => CreateTab<RibbonTab>(tabId, tabName, tabDescription);
+
+        /// <summary>
+        /// Creates a contextual ribbon tab that is shown conditionally based on the current selection in the drawing.
+        /// </summary>
+        /// <param name="tabId">The identifier of the ribbon tab resource (used to load its definition).</param>
+        /// <param name="onSelectionMatch">
+        /// A delegate that determines whether this contextual tab should be shown based on the current <see cref="SelectionSet"/>.
+        /// </param>
+        /// <param name="tabName">Optional override for the tab's display name.</param>
+        /// <param name="tabDescription">Optional description shown in tooltips or documentation.</param>
+        /// <returns>
+        /// A <see cref="ContextualRibbonTab"/> instance configured to show conditionally during selection changes.
+        /// </returns>
+        /// <remarks>
+        /// This method ensures contextual behavior is registered only once by attaching to <see cref="Document.ImpliedSelectionChanged"/>.
+        /// The created tab is hidden by default and marked as anonymous to allow manual visibility control via <see cref="RibbonTab.IsVisible"/>.
+        /// </remarks>
+        public static ContextualRibbonTab CreateContextualTab(string tabId, 
             Func<SelectionSet, bool> onSelectionMatch, // Selector switch when this tab should be opened
+            string tabName = null,
             string tabDescription = null)
         {
             #if NON_VOLATILE_MEMORY
             AssertInitialized();
             #endif
             Assert.IsNotNull(tabId, nameof(tabId));
-            Assert.IsNotNull(tabName, nameof(tabName));
-            var tab = new ContextualRibbonTab
-            {
-                Id = RibbonTab__Prefix + tabId, // We want to add mark those tabs as RoadPAC ones´.
-                                                // For further compatibility and to prevent being overriden.
-                Name = tabName,
-                Title = tabName,
-                Description = tabDescription,
-                IsEnabled = true,
-                IsAnonymous = true,             // This is crucial, since Ribbon#ShowContextualTab() is broken
-                                                // because it disallows user to "intentionaly" show this tab, thus
-                                                // RibbonTab#IsVisible property will be use to show or hide contextual tab
-                IsVisible = false
-            };
+            RibbonTabDef xml = ResourceController.LoadResourceRibbon<RibbonTabDef>(tabId);
+            ContextualRibbonTab tab = CreateTab<ContextualRibbonTab>(tabId, tabName, tabDescription);
             _contextualTabConditions.Add(tab.Id, onSelectionMatch);
             if (!HasAnyContextualTab)
             {
@@ -158,9 +216,22 @@ namespace Shared.Controllers
                 document.ImpliedSelectionChanged += OnSelectionChanged;
                 HasAnyContextualTab = true;
             }
+            tab.IsVisible = false;
+            tab.IsAnonymous = true;             // This is crucial, since Ribbon#ShowContextualTab() is broken
+                                                // because it disallows user to "intentionaly" show this tab, thus
+                                                // RibbonTab#IsVisible property will be use to show or hide contextual tab
             return tab;
         }
 
+        /// <summary>
+        /// Gets a value indicating whether the current selection event has already been processed.
+        /// </summary>
+        /// <remarks>
+        /// This flag is used internally to prevent redundant handling of selection changes
+        /// and to allow external code to wait until the contextual ribbon tab becomes visible.
+        ///
+        /// This property is public to allow UI workflows that delay actions until the contextual tab is activated.
+        /// </remarks>
         [DefaultValue(false)]
         public static bool IsSelectionHandled { get; private set; } = false;
         // public - to allow program to wait for property change, so user will see Contextual tab first

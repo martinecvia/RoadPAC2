@@ -8,6 +8,8 @@ using System.Xml.Serialization;
 using ZwSoft.ZwCAD.Internal.Windows;
 #else
 using Autodesk.Internal.Windows;
+using Autodesk.Windows;
+
 #endif
 #endregion
 
@@ -210,11 +212,26 @@ namespace Shared.Controllers.Models.RibbonXml
         public string Title { get; set; } = null;
 
         [RPInfoOut]
-        [XmlElement("RibbonPanel")]
+        [XmlIgnore]
         [Description("Gets the collection used to store the panels in the tab. " +
             "The default is an empty collection.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTab_Panels
-        public List<RibbonPanelDef> Panels { get; set; } = new List<RibbonPanelDef>();
+        public List<RibbonPanel> Panels
+        {
+            get
+            {
+                List<RibbonPanel> panels = new List<RibbonPanel>();
+                if (PanelsDef == null)
+                    return panels;
+                foreach (RibbonPanelDef element in PanelsDef)
+                    panels.Add(Transform(new RibbonPanel(), element));
+                return panels;
+            }
+        }
+
+        [RPInternalUseOnly]
+        [XmlElement("RibbonPanel")]
+        public List<RibbonPanelDef> PanelsDef { get; set; } = new List<RibbonPanelDef>();
 
         // Optional: IsAnonymous is used to handle contextual tabs
         //           but we want to do programatically

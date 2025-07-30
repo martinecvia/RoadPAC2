@@ -9,6 +9,8 @@ using System.Windows.Media.Imaging;
 using System.Xml;
 using System.Xml.Serialization;
 
+using Shared.Controllers.Models.RibbonXml;
+
 namespace Shared.Controllers
 {
     public static class ResourceController
@@ -110,7 +112,7 @@ namespace Shared.Controllers
         /// <typeparam name="T">The type to deserialize the XML into.</typeparam>
         /// <param name="resourceName">The logical name (without extension) of the embedded XML resource.</param>
         /// <returns>Deserialized object of type T, or default(T) if the resource is not cached or fails to load.</returns>
-        public static T LoadResourceRibbon<T>(string resourceName)
+        public static T LoadResourceRibbon<T>(string resourceName) where T : BaseRibbonXml
         {
             if (!_cachedXml.Contains(resourceName))
                 return default;
@@ -126,8 +128,10 @@ namespace Shared.Controllers
                                                                // then something must happend during build process
                 try
                 {
-                    XmlSerializer serializer = new XmlSerializer(typeof(T));
-                    return (T)serializer.Deserialize(stream);
+                    Type type = typeof(T);
+                    Assert.IsNotNull(type, nameof(type));
+                    XmlSerializer serializer = new XmlSerializer(type);
+                    return (T) serializer.Deserialize(stream);
                 } catch (InvalidOperationException exception)
                 {
                     #if DEBUG

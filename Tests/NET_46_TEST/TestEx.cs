@@ -46,8 +46,8 @@ namespace NET_46_TEST
             };
             rpTabPanel.Items.Add(button);
             rpTabPanel.Items.Add(new RibbonSeparator { SeparatorStyle = RibbonSeparatorStyle.Spacer }); // Vertical line
-            rpTab.Panels.Add(new Autodesk.Windows.RibbonPanel { Source = rpTabPanel }); // Adding RibbonPanelSource early
-            var ctxTab = RibbonController.CreateContextualTab("RP_CONTEXT1_TRASA", "Trasa", selection => {
+            rpTab.Panels.Add(new RibbonPanel { Source = rpTabPanel }); // Adding RibbonPanelSource early
+            var ctxTab = RibbonController.CreateContextualTab("RP_CONTEXT1_TRASA", selection => {
                 if (selection == null || selection.Count == 0)
                     return false;
                 using (var transaction = document.TransactionManager.StartTransaction())
@@ -60,7 +60,7 @@ namespace NET_46_TEST
                     }
                 }
                 return false;
-            });
+            }, "Trasa");
             
             Ribbon.Tabs.Add(rpTab);
             Ribbon.Tabs.Add(ctxTab);

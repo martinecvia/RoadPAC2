@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -36,6 +37,46 @@ namespace Shared.Controllers.Models.RibbonXml
                     return $"{property.Name}={value}";
                 });
             return $"{GetType().Name}({string.Join(", ", values)})";
+        }
+
+        internal Target Transform<Target, Source>(Target target, Source source) where Source : BaseRibbonXml
+        {
+            if (target == null || source == null)
+                return default;
+            PropertyInfo[] applyableProperties = typeof(Source)
+                    .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                    .Where(property => property.GetCustomAttribute<RPInfoOutAttribute>() != null)
+                    .ToArray();
+            foreach (PropertyInfo property in applyableProperties)
+            {
+                if (!property.CanRead)
+                    continue; // Very weird? Must be manipulated in memory
+                try
+                {
+                    // Since we are supporting multiple versions of CAD
+                    // we have to first check if property exists in current running version
+                    // if not we will just print information into a debug console and call it a day
+                    PropertyInfo targetProperty = typeof(Target)
+                        .GetProperty(property.Name, BindingFlags.Instance | BindingFlags.Public);
+                    if (targetProperty?.CanWrite == true
+                        && targetProperty.PropertyType.IsAssignableFrom(property.PropertyType))
+                        targetProperty.SetValue(target, property.GetValue(source), null);
+                    else
+                    {
+#if DEBUG
+                        Debug.WriteLine($"{property.Name}: " +
+                            $"Has different type target:{targetProperty.PropertyType} from source:{property.PropertyType}");
+#endif
+                    }
+                }
+                catch (System.Exception exception) // Collision with *CAD.Runtime.Exception & System.Exception
+                {
+#if DEBUG
+                    Debug.WriteLine($"{property.Name}: {exception.Message}");
+#endif
+                }
+            }
+            return target;
         }
     }
 }
