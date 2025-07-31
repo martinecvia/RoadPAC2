@@ -1,3 +1,8 @@
+#pragma warning disable CS8600
+#pragma warning disable CS8603
+#pragma warning disable CS8604
+#pragma warning disable CS8634
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

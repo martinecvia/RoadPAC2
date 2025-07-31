@@ -1,4 +1,7 @@
-﻿using System;
+﻿#pragma warning disable CS8600
+#pragma warning disable CS8625
+
+using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Windows.Controls;
@@ -17,17 +20,17 @@ namespace Shared.Controllers.Models.RibbonXml
 {
     // Autodesk.Windows.RibbonItem
     //    Autodesk.Windows.RibbonCommandItem
-    //    Autodesk.Windows.RibbonForm
-    //    Autodesk.Windows.RibbonHwnd
-    //    Autodesk.Windows.RibbonLabel
+    //    Autodesk.Windows.RibbonForm           [Internal]
+    //    Autodesk.Windows.RibbonHwnd           [Internal]
+    //    Autodesk.Windows.RibbonLabel          [RibbonItem.RibbonLabelDef]
     //    Autodesk.Windows.RibbonList
-    //    Autodesk.Windows.RibbonPanelBreak
+    //    Autodesk.Windows.RibbonPanelBreak     [RibbonItem.RibbonPanelBreakDef]
     //    Autodesk.Windows.RibbonRowBreak
     //    Autodesk.Windows.RibbonRowPanel
-    //    Autodesk.Windows.RibbonSeparator
-    //    Autodesk.Windows.RibbonSlider
-    //    Autodesk.Windows.RibbonSpinner
-    //    Autodesk.Windows.RibbonTextBox
+    //    Autodesk.Windows.RibbonSeparator      [RibbonItem.RibbonSeparatorDef]
+    //    Autodesk.Windows.RibbonSlider         
+    //    Autodesk.Windows.RibbonSpinner        [RibbonItem.RibbonSpinnerDef]
+    //    Autodesk.Windows.RibbonTextBox        [RibbonItem.RibbonTextBoxDef]
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem
     public class RibbonItemDef : BaseRibbonXml
     {

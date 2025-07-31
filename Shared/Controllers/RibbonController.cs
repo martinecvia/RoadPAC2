@@ -1,3 +1,5 @@
+#pragma warning disable
+
 #define DEBUG
 #define NON_VOLATILE_MEMORY
 

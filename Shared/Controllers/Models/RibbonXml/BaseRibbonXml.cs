@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿#pragma warning disable CS8600
+#pragma warning disable CS8602
+#pragma warning disable CS8603
+
+using System.Collections;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;

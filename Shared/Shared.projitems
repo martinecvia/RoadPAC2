@@ -12,12 +12,14 @@
     <Compile Include="$(MSBuildThisFileDirectory)Assert.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\BaseRibbonXml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonItem.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)controllers\models\ribbonxml\ribbonitem\RibbonPanelBreak.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonItem\RibbonPanelBreak.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)controllers\models\ribbonxml\ribbonitem\RibbonSlider.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)controllers\models\ribbonxml\RibbonList.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonPanel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonItem\RibbonLabel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonPanelSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonItem\RibbonSeparator.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)controllers\models\ribbonxml\ribbonitem\RibbonSpinner.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonItem\RibbonSpinner.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonTab.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\CommandHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\ContextualRibbonTab.cs" />

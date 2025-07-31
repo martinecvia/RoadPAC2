@@ -1,4 +1,8 @@
-﻿using System.ComponentModel;
+﻿#pragma warning disable CS8601
+#pragma warning disable CS8603
+#pragma warning disable CS8625
+
+using System.ComponentModel;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Xml.Serialization;

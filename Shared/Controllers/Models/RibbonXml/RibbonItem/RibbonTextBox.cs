@@ -1,4 +1,7 @@
-﻿using System;
+﻿#pragma warning disable CS8603
+#pragma warning disable CS8625
+
+using System;
 using System.ComponentModel;
 using System.Xml.Serialization;
 

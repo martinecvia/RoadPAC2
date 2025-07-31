@@ -1,3 +1,6 @@
+#pragma warning disable CS8603
+#pragma warning disable CS8625
+
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Xml.Serialization;
