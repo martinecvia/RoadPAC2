@@ -1,7 +1,9 @@
-﻿using System.ComponentModel;
+﻿#if NET8_0_OR_GREATER
+using System.ComponentModel;
 using System.Xml.Serialization;
+#endif
 
-namespace Shared.Controllers.Models.RibbonXml.RibbonItem
+namespace Shared.Controllers.Models.RibbonXml.Items
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonLabel
     public class RibbonLabelDef : RibbonItemDef

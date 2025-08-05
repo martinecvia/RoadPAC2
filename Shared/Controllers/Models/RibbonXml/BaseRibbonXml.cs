@@ -52,7 +52,6 @@ namespace Shared.Controllers.Models.RibbonXml
                     .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
                     .Where(property => property.GetCustomAttribute<RPInfoOutAttribute>() != null)
                     .ToArray();
-            Debug.WriteLine(string.Join(",", applyableProperties.Select(property => property.Name).ToArray()));
             foreach (PropertyInfo sourceProperty in applyableProperties)
             {
                 if (!sourceProperty.CanRead)
@@ -72,11 +71,7 @@ namespace Shared.Controllers.Models.RibbonXml
                     }
                     if (targetProperty.CanWrite == true
                         && targetProperty.PropertyType.IsAssignableFrom(sourceProperty.PropertyType))
-                    {
                         targetProperty.SetValue(target, sourceProperty.GetValue(source), null);
-                        Debug.WriteLine($"Transform: {target.GetType().Name}:{sourceProperty.Name} " +
-                            $"-> {sourceProperty.GetValue(source)}/{targetProperty.GetValue(target)}");
-                    }
                     else
                     {
                         // Type? -> Type conversion

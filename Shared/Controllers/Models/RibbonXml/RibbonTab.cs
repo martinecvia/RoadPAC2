@@ -13,8 +13,6 @@ using Autodesk.Windows;
 #endif
 #endregion
 
-using Shared.Controllers.Models.RibbonXml.RibbonItem;
-
 // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem
 namespace Shared.Controllers.Models.RibbonXml
 {
@@ -30,6 +28,7 @@ namespace Shared.Controllers.Models.RibbonXml
             "The default value is null.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTab_Description
         public string Description { get; set; } = null;
+        /*
 #if NET8_0_OR_GREATER
         [RPInfoOut]
         [XmlIgnore]
@@ -51,6 +50,7 @@ namespace Shared.Controllers.Models.RibbonXml
             }
         }
 #endif
+        */
         [RPInfoOut]
         [XmlAttribute("Id")]
         [DefaultValue(null)]

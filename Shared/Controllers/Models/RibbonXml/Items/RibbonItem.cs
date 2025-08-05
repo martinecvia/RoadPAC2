@@ -4,6 +4,7 @@
 #define INTERNALS
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Media;
 using System.Xml.Serialization;
@@ -19,22 +20,22 @@ using Autodesk.Windows;
 #endif
 #endregion
 
-namespace Shared.Controllers.Models.RibbonXml
+namespace Shared.Controllers.Models.RibbonXml.Items
 {
-    // Autodesk.Windows.RibbonItem
-    //    Autodesk.Windows.RibbonCommandItem
-    //    Autodesk.Windows.RibbonForm           [Internal]
-    //    Autodesk.Windows.RibbonHwnd           [Internal]
-    //    Autodesk.Windows.RibbonLabel          [RibbonItem.RibbonLabelDef]
-    //    Autodesk.Windows.RibbonList
-    //    Autodesk.Windows.RibbonPanelBreak     [RibbonItem.RibbonPanelBreakDef]
-    //    Autodesk.Windows.RibbonRowBreak
-    //    Autodesk.Windows.RibbonRowPanel
-    //    Autodesk.Windows.RibbonSeparator      [RibbonItem.RibbonSeparatorDef]
-    //    Autodesk.Windows.RibbonSlider         
-    //    Autodesk.Windows.RibbonSpinner        [RibbonItem.RibbonSpinnerDef]
-    //    Autodesk.Windows.RibbonTextBox        [RibbonItem.RibbonTextBoxDef]
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem
+    [XmlInclude(typeof(RibbonItemDef))]
+    [XmlInclude(typeof(RibbonLabelDef))]
+    [XmlInclude(typeof(RibbonListDef.RibbonComboDef))]
+    [XmlInclude(typeof(RibbonListDef.RibbonComboDef.RibbonGalleryDef))]
+    [XmlInclude(typeof(RibbonPanelBreakDef))]
+    [XmlInclude(typeof(RibbonRowBreakDef))]
+    [XmlInclude(typeof(RibbonRowPanelDef))]
+    [XmlInclude(typeof(RibbonRowPanelDef.RibbonFlowPanelDef))]
+    [XmlInclude(typeof(RibbonRowPanelDef.RibbonFoldPanelDef))]
+    [XmlInclude(typeof(RibbonSeparatorDef))]
+    [XmlInclude(typeof(RibbonSliderDef))]
+    [XmlInclude(typeof(RibbonSpinnerDef))]
+    [XmlInclude(typeof(RibbonTextBoxDef))]
     public class RibbonItemDef : BaseRibbonXml
     {
         [RPInfoOut]
@@ -429,5 +430,24 @@ namespace Shared.Controllers.Models.RibbonXml
                 Width = 200d;
             }
         }
+
+        [XmlIgnore]
+        [RPPrivateUseOnly]
+        public static readonly Dictionary<Type, Func<RibbonItem>> ItemsFactory = new Dictionary<Type, Func<RibbonItem>>()
+        {
+            { typeof(RibbonItemDef), () => new RibbonItem() },
+            { typeof(RibbonLabelDef), () => new RibbonLabel() },
+            { typeof(RibbonListDef.RibbonComboDef), () => new RibbonCombo() },
+            { typeof(RibbonListDef.RibbonComboDef.RibbonGalleryDef), () => new RibbonGallery() },
+            { typeof(RibbonPanelBreakDef), () => new RibbonPanelBreak() },
+            { typeof(RibbonRowBreakDef), () => new RibbonRowBreak() },
+            { typeof(RibbonRowPanelDef), () => new RibbonRowPanel() },
+            { typeof(RibbonRowPanelDef.RibbonFlowPanelDef), () => new RibbonFlowPanel() },
+            { typeof(RibbonRowPanelDef.RibbonFoldPanelDef), () => new RibbonFoldPanel() },
+            { typeof(RibbonSeparatorDef), () => new RibbonSeparator() },
+            { typeof(RibbonSliderDef), () => new RibbonSlider() },
+            { typeof(RibbonSpinnerDef), () => new RibbonSpinner() },
+            { typeof(RibbonTextBoxDef), () => new RibbonTextBox() },
+        };
     }
 }

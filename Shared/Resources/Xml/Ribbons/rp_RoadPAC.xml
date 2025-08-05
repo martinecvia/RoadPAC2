@@ -11,6 +11,9 @@
 		<RibbonPanelSource Id="RP_TAB_RoadPAC.Panels.ProjectManager.Id"
 						   Title="Projekt manažér">
 			<!-- RibbonItem[] -->
+			<RibbonTextBox Id="Test"
+						   Value="TestVal"
+						   ShowText="True" />
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<RibbonPanel Id="RP_TAB_RoadPAC.Panels(1).Spacer(0)"

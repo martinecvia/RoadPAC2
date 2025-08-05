@@ -10,9 +10,10 @@ using Autodesk.Windows;
 #endif
 #endregion
 
-namespace Shared.Controllers.Models.RibbonXml.RibbonItem
+namespace Shared.Controllers.Models.RibbonXml.Items
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSeparator
+    [Description("This class is used to support separators in a ribbon. Separators can be used to add space or divider lines between ribbon items.")]
     public class RibbonSeparatorDef : RibbonItemDef
     {
         [RPInfoOut]

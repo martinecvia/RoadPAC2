@@ -14,7 +14,7 @@ using Autodesk.Windows;
 #endif
 #endregion
 
-namespace Shared.Controllers.Models.RibbonXml.RibbonItem
+namespace Shared.Controllers.Models.RibbonXml
 {
     public class RibbonPanelDef : BaseRibbonXml
     {

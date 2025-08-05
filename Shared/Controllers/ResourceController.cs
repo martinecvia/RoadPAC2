@@ -146,7 +146,15 @@ namespace Shared.Controllers
                 }
                 catch (InvalidOperationException exception)
                 {
-                    Debug.WriteLine($"LoadResourceRibbon: InvalidOperationException: {exception.InnerException?.Message}");
+                    // Log all nested exceptions
+                    int currentNest = 1;
+                    Exception currentException = exception;
+                    while (currentException != null)
+                    {
+                        Debug.WriteLine($"{currentNest}:LoadResourceRibbon({resourceName}(InvalidOperationException)): {currentException.Message}");
+                        currentException = currentException.InnerException;
+                        currentNest++;
+                    }
                     return null;
                 }
                 catch (Exception exception)

@@ -1,0 +1,39 @@
+﻿using System;
+using System.ComponentModel;
+using System.Xml.Serialization;
+
+#region O_PROGRAM_DETERMINE_CAD_PLATFORM 
+#if ZWCAD
+using ZwSoft.ZwCAD.Windows;
+#else
+using Autodesk.Windows;
+#endif
+#endregion
+
+namespace Shared.Controllers.Models.RibbonXml.Items
+{
+    // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonRowBreak
+    [Description("This class is used to organize the ribbon items in a panel into multiple rows. " +
+        "Add an object of this class to any position in a RibbonPanelSource.Items or RibbonRowPanel.Items collection to move subsequent items to the next row.")]
+    public class RibbonRowBreakDef : RibbonItemDef
+    {
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(RibbonSupportedSubPanelStyle.RibbonRowPanel)]
+        [Description("This is SupportedSubPanel, a member of class RibbonRowBreak.")]
+        public RibbonSupportedSubPanelStyle SupportedSubPanel { get; set; } = RibbonSupportedSubPanelStyle.RibbonRowPanel;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("SupportedSubPanel")]
+        public string SupportedSubPanelDef
+        {
+            get => SupportedSubPanel.ToString();
+            set
+            {
+                if (!Enum.TryParse(value, true, out RibbonSupportedSubPanelStyle result))
+                    result = RibbonSupportedSubPanelStyle.RibbonRowPanel;
+                SupportedSubPanel = result;
+            }
+        }
+    }
+}

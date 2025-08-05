@@ -2,7 +2,10 @@
 #pragma warning disable CS8603
 #pragma warning disable CS8625
 
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Xml;
@@ -16,13 +19,61 @@ using Autodesk.Windows;
 #endif
 #endregion
 
-namespace Shared.Controllers.Models.RibbonXml.RibbonItem
+using Shared.Controllers.Models.RibbonXml.Items;
+using static Shared.Controllers.Models.RibbonXml.Items.RibbonItemDef;
+
+namespace Shared.Controllers.Models.RibbonXml
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource
     [XmlInclude(typeof(RibbonPanelSourceDef))]
     [XmlInclude(typeof(RibbonPanelSpacerDef))]
+    [Description("The RibbonPanelSource class is used to store and manage the content of a panel in a ribbon. " +
+        "RibbonPanel references an object of this class in its Source property and displays the content from this class. " +
+        "The content is a collection of RibbonItem objects stored in an Items collection. " +
+        "The items can be organized into multiple rows by adding a RibbonRowBreak item at the index at where a new row is to start. " +
+        "The items can also be organized into two panels - main panel and slide-out panel - by adding a RibbonPanelBreak item at the index where the slide-out panel is to start.")]
     public class RibbonPanelSourceDef : BaseRibbonXml
     {
+        [XmlIgnore]
+        public List<RibbonItem> Items
+        {
+            get
+            {
+                List<RibbonItem> items = new List<RibbonItem>();
+                if (ItemsDef == null)
+                    return items;
+                foreach (RibbonItemDef element in ItemsDef)
+                {
+                    try
+                    {
+                        items.Add(Transform(ItemsFactory[ItemsFactory.GetType()](), element));
+                    }
+                    catch (InvalidOperationException exception)
+                    {
+                        var underlayingException = exception.InnerException == null ? 
+                            exception.Message : exception.InnerException.Message;
+                        Debug.WriteLine($"RibbonPanelSourceDef({element.GetType().Name}): Failed to load: {underlayingException}");
+                    }
+                }
+                return items;
+            }
+        }
+
+        [RPInternalUseOnly]
+        [XmlElement("RibbonLabel", typeof(RibbonLabelDef))]
+        [XmlElement("RibbonCombo", typeof(RibbonListDef.RibbonComboDef))]
+        [XmlElement("RibbonGallery", typeof(RibbonListDef.RibbonComboDef.RibbonGalleryDef))]
+        [XmlElement("RibbonPanelBreak", typeof(RibbonPanelBreakDef))]
+        [XmlElement("RibbonRowBreak", typeof(RibbonRowBreakDef))]
+        [XmlElement("RibbonRowPanel", typeof(RibbonRowPanelDef))]
+        [XmlElement("RibbonFlowPanel", typeof(RibbonRowPanelDef.RibbonFlowPanelDef))]
+        [XmlElement("RibbonFoldPanel", typeof(RibbonRowPanelDef.RibbonFoldPanelDef))]
+        [XmlElement("RibbonSeparator", typeof(RibbonSeparatorDef))]
+        [XmlElement("RibbonSlider", typeof(RibbonSliderDef))]
+        [XmlElement("RibbonSpinner", typeof(RibbonSpinnerDef))]
+        [XmlElement("RibbonTextBox", typeof(RibbonTextBoxDef))]
+        public List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
+
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Description
         [RPInfoOut]
         [XmlAttribute("Description")]
@@ -32,7 +83,8 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
             "Applications can use this to store a description if it is required in other UI customization dialogs. " +
             "The default value is null.")]
         public string Description { get; set; } = null;
-        /*
+
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_DialogLauncher
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(null)]
@@ -41,12 +93,12 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
             "Clicking the button raises a command that follows the standard ribbon command routing. " +
             "If this property is null the panel does not have a dialog launcher button. " +
             "The default value is null.")]
-        public RibbonCommandItem DialogLauncher => Transform(new RibbonCommandItem(), DialogLauncherDef);
+        public RibbonCommandItem DialogLauncher { get; set; } = null;
 
         [RPInternalUseOnly]
         [XmlElement("DialogLauncher")]
         public RibbonCommandItemDef DialogLauncherDef { get; set; }
-        */
+
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Id
         [RPInfoOut]
         [XmlAttribute("Id")]
@@ -112,7 +164,7 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
               </RightBorderBrush>
             </RibbonPanelSpacerDef>
              */
-            [RPInfoOut]
+        [RPInfoOut]
             [XmlIgnore]
             [DefaultValue("Transparent")]
             [Description("This is LeftBorderBrush, a member of class RibbonPanelSpacer.")]

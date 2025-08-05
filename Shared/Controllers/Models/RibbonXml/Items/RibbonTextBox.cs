@@ -13,9 +13,12 @@ using Autodesk.Windows;
 #endif
 #endregion
 
-namespace Shared.Controllers.Models.RibbonXml.RibbonItem
+namespace Shared.Controllers.Models.RibbonXml.Items
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox
+    [Description("This class is used to create text box in ribbon. " +
+        "RibbonTextBox supports editing values of any data type. " +
+        "If any data type other than string is required you need to derive from this class and implement the virtual methods for converting the value from and to string.")]
     public class RibbonTextBoxDef : RibbonItemDef
     {
         [RPInfoOut]
