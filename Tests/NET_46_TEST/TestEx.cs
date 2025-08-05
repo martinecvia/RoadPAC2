@@ -69,9 +69,8 @@ namespace NET_46_TEST
             var tab = resource?.Transform(new RibbonTab(), resource);
             if (resource != null)
             {
-                foreach (var panel in resource?.Panels)
-                    tab?.Panels.Add(panel);
-                Ribbon.Tabs.Add(tab);
+                foreach (var panel in resource.Panels)
+                    tab.Panels.Add(panel);
 
                 Debug.WriteLine(resource);
                 foreach (var panel in resource?.PanelsDef)
@@ -79,6 +78,7 @@ namespace NET_46_TEST
                     Debug.WriteLine(panel);
                     Debug.WriteLine(panel.SourceDef);
                 }
+                Ribbon.Tabs.Add(tab);
             }
         }
 

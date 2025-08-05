@@ -133,7 +133,6 @@ namespace Shared.Controllers
             Assembly assembly = Assembly.GetExecutingAssembly();
             string manifestResource = assembly.GetManifestResourceNames()
                 .FirstOrDefault(resource => resource.EndsWith($"Ribbons.{resourceName}.xml", StringComparison.OrdinalIgnoreCase));
-            Debug.WriteLine($"LoadResourceRibbon: {manifestResource}");
             using (Stream stream = assembly.GetManifestResourceStream(manifestResource))
             {
                 Assert.IsNotNull(stream, nameof(stream));      // This is a no-no, if default file was not found

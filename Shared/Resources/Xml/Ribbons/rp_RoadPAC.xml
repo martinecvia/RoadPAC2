@@ -1,27 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <RibbonTab Id="RP_TAB_RoadPAC"
-		   Title="{{ RP_TAB_RoadPAC.RibbonTab.Title }}"
-		   Description="{{ RP_TAB_RoadPAC.RibbonTab.Description }}"
+		   Title="RoadPAC"
 		   IsEnabled="True">
-	<!-- RibbonPanelCollection -->
-	<RibbonPanel Id="RP_TAB_RoadPAC.Panels.ProjectManager"
+	<!-- RibbonPanel[] -->
+	<RibbonPanel Id="RP_TAB_RoadPAC.Panels(0).ProjectManager"
 				 IsEnabled="True"
 				 HighlightPanelTitleBar="True"
 				 IsVisible="True">
 		<!-- RibbonPanelSource -->
-		<RibbonPanelSpacer Id="RP_TAB_RoadPAC.Panels.ProjectManager.Id"
-						   Name="{{ RP_TAB.RoadPAC.Panels.ProjectManager.Name }}"
-						   Title="{{ RP_TAB.RoadPAC.Panels.ProjectManager.Title }}"
-						   KeyTip="{{ RP_TAB.RoadPAC.Panels.ProjectManager.KeyTip }}"
-						   Description="{{ RP_TAB.RoadPAC.Panels.ProjectManager.Description }}"
-						   
-						   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-						   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-			<!-- RibbonItem -->
+		<RibbonPanelSource Id="RP_TAB_RoadPAC.Panels.ProjectManager.Id"
+						   Title="Projekt manažér">
+			<!-- RibbonItem[] -->
+		</RibbonPanelSource>
+	</RibbonPanel>
+	<RibbonPanel Id="RP_TAB_RoadPAC.Panels(1).Spacer(0)"
+			 IsEnabled="True"
+			 HighlightPanelTitleBar="True"
+			 IsVisible="True">
+		<RibbonPanelSpacer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 			<LeftBorderBrush>
+				<!-- https://learn.microsoft.com/en-us/dotnet/media/art-color-table.png?view=windowsdesktop-9.0 !-->
 				<SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-								 Color="#00FFFFFF" />
+								 Color="#FF98FB98" />
 			</LeftBorderBrush>
+			<RightBorderBrush>
+				<!-- https://learn.microsoft.com/en-us/dotnet/media/art-color-table.png?view=windowsdesktop-9.0 !-->
+				<SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+								 Color="#FF98FB98" />
+			</RightBorderBrush>
 		</RibbonPanelSpacer>
 	</RibbonPanel>
 </RibbonTab>

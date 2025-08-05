@@ -136,7 +136,7 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
                     if (value != null)
                     {
                         string xaml = value.OuterXml;
-                        LeftBorderBrush = (Brush)XamlReader.Parse(xaml);
+                        LeftBorderBrush = (Brush) XamlReader.Parse(xaml);
                     }
                     else
                     {
@@ -169,7 +169,7 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
                     if (value != null)
                     {
                         string xaml = value.OuterXml;
-                        RightBorderBrush = (Brush)XamlReader.Parse(xaml);
+                        RightBorderBrush = (Brush) XamlReader.Parse(xaml);
                     }
                     else
                     {
