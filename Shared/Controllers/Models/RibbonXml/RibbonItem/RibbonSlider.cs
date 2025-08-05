@@ -6,12 +6,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSlider
     public class RibbonSliderDef : RibbonItemDef
     {
-
-        private void test_RibbonSliderDef()
-        {
-            var a = new Autodesk.Windows.RibbonSlider();
-        }
-
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(true)]
@@ -36,6 +30,5 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
                 IsSnapToTickEnabled = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
             }
         }
-
     }
 }

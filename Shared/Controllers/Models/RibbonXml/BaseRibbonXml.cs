@@ -2,6 +2,7 @@
 #pragma warning disable CS8602
 #pragma warning disable CS8603
 
+using System;
 using System.Collections;
 using System.Diagnostics;
 using System.Linq;
@@ -51,9 +52,10 @@ namespace Shared.Controllers.Models.RibbonXml
                     .GetProperties(BindingFlags.Instance | BindingFlags.Public)
                     .Where(property => property.GetCustomAttribute<RPInfoOutAttribute>() != null)
                     .ToArray();
-            foreach (PropertyInfo property in applyableProperties)
+            Debug.WriteLine(string.Join(",", applyableProperties.Select(property => property.Name).ToArray()));
+            foreach (PropertyInfo sourceProperty in applyableProperties)
             {
-                if (!property.CanRead)
+                if (!sourceProperty.CanRead)
                     continue; // Very weird? Must be manipulated in memory
                 try
                 {
@@ -61,23 +63,43 @@ namespace Shared.Controllers.Models.RibbonXml
                     // we have to first check if property exists in current running version
                     // if not we will just print information into a debug console and call it a day
                     PropertyInfo targetProperty = typeof(Target)
-                        .GetProperty(property.Name, BindingFlags.Instance | BindingFlags.Public);
-                    if (targetProperty?.CanWrite == true
-                        && targetProperty.PropertyType.IsAssignableFrom(property.PropertyType))
-                        targetProperty.SetValue(target, property.GetValue(source), null);
+                        .GetProperty(sourceProperty.Name, BindingFlags.Instance | BindingFlags.Public);
+                    // Property not found in API
+                    if (targetProperty == null)
+                    {
+                        Debug.WriteLine($"Transform: {target.GetType().Name}:{sourceProperty.Name} was not found");
+                        continue;
+                    }
+                    if (targetProperty.CanWrite == true
+                        && targetProperty.PropertyType.IsAssignableFrom(sourceProperty.PropertyType))
+                    {
+                        targetProperty.SetValue(target, sourceProperty.GetValue(source), null);
+                        Debug.WriteLine($"Transform: {target.GetType().Name}:{sourceProperty.Name} " +
+                            $"-> {sourceProperty.GetValue(source)}/{targetProperty.GetValue(target)}");
+                    }
                     else
                     {
-#if DEBUG
-                        Debug.WriteLine($"{property.Name}: " +
-                            $"Has different type target:{targetProperty.PropertyType} from source:{property.PropertyType}");
-#endif
+                        // Type? -> Type conversion
+                        if (Nullable.GetUnderlyingType(sourceProperty.PropertyType) == targetProperty.PropertyType
+                            && sourceProperty.GetValue(source) != null)
+                        {
+                            try
+                            {
+                                // Unwrap Nullable<T> to T
+                                targetProperty.SetValue(target, Convert.ChangeType(sourceProperty.GetValue(source), targetProperty.PropertyType), null);
+                            } catch { } // Silent catch, its a dirty way to convert bool? to bool if not null
+                                        // however it saves a lot of time and provides "user friendly" approach
+                        }
+                        else
+                        {
+                            Debug.WriteLine($"{sourceProperty.Name}: " +
+                                $"Has different type target:{targetProperty.PropertyType} from source:{sourceProperty.PropertyType}");
+                        }
                     }
                 }
                 catch (System.Exception exception) // Collision with *CAD.Runtime.Exception & System.Exception
                 {
-#if DEBUG
-                    Debug.WriteLine($"{property.Name}: {exception.Message}");
-#endif
+                    Debug.WriteLine($"{sourceProperty.Name}: {exception.Message}");
                 }
             }
             return target;

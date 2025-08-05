@@ -1,7 +1,6 @@
 ﻿#pragma warning disable CS8603
 #pragma warning disable CS8625
 
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
@@ -10,9 +9,7 @@ using System.Xml.Serialization;
 #if ZWCAD
 using ZwSoft.ZwCAD.Internal.Windows;
 #else
-using Autodesk.Internal.Windows;
 using Autodesk.Windows;
-
 #endif
 #endregion
 
@@ -33,7 +30,7 @@ namespace Shared.Controllers.Models.RibbonXml
             "The default value is null.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTab_Description
         public string Description { get; set; } = null;
-
+#if NET8_0_OR_GREATER
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(HighlightMode.None)]
@@ -53,7 +50,7 @@ namespace Shared.Controllers.Models.RibbonXml
                 Highlight = result;
             }
         }
-
+#endif
         [RPInfoOut]
         [XmlAttribute("Id")]
         [DefaultValue(null)]
@@ -66,23 +63,23 @@ namespace Shared.Controllers.Models.RibbonXml
 
         [RPInfoOut]
         [XmlIgnore]
-        [DefaultValue(null)]
+        [DefaultValue(false)]
         [Description("Gets or sets the value that indicates whether this tab is the active tab. " +
             "Hidden tabs and merged contextual tabs cannot be the active tab. " +
             "Setting this property to true for such tabs will fail, and no exception will be thrown.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTab_IsActive
-        public bool? IsActive { get; set; } = null;
+        public bool IsActive { get; set; } = false;
 
         [RPInternalUseOnly]
         [XmlAttribute("IsActive")]
         public string IsActiveDef
         {
-            get => IsActive?.ToString();
+            get => IsActive.ToString();
             set
             {
                 if (value == null)
                 {
-                    IsActive = null;
+                    IsActive = false;
                     return;
                 }
                 IsActive = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
@@ -147,7 +144,7 @@ namespace Shared.Controllers.Models.RibbonXml
 
         [RPInfoOut]
         [XmlIgnore]
-        [DefaultValue(null)]
+        [DefaultValue(false)]
         [Description("Gets or sets the value that indicates whether the tab is visible in the ribbon. " +
             "If the value is true, the tab is visible in the ribbon. " +
             "If the value is false, it is hidden in ribbon. " +
@@ -156,7 +153,7 @@ namespace Shared.Controllers.Models.RibbonXml
             "If an active tab is hidden, the next or previous visible tab is set as the active tab. " +
             "The default value is true.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTab_IsVisited
-        public bool? IsVisited { get; set; } = null;
+        public bool IsVisited { get; set; } = false;
 
         [RPInternalUseOnly]
         [XmlAttribute("IsVisited")]
@@ -167,7 +164,7 @@ namespace Shared.Controllers.Models.RibbonXml
             {
                 if (value == null)
                 {
-                    IsVisited = null;
+                    IsVisited = false;
                     return;
                 }
                 IsVisited = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
@@ -214,7 +211,6 @@ namespace Shared.Controllers.Models.RibbonXml
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTab_Title
         public string Title { get; set; } = null;
 
-        [RPInfoOut]
         [XmlIgnore]
         [Description("Gets the collection used to store the panels in the tab. " +
             "The default is an empty collection.")]

@@ -3,8 +3,7 @@
 
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Windows.Controls;
+using System.Windows.Media;
 using System.Xml.Serialization;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
@@ -72,17 +71,17 @@ namespace Shared.Controllers.Models.RibbonXml
 
         [RPInfoOut]
         [XmlAttribute("Id")]
-        [DefaultValue(null)]
+        [DefaultValue("")]
         [Description("Gets or sets the item id. " +
             "This id is used as the automation id for the corresponding control in the UI. " +
             "The framework does not otherwise use or validate it. " +
             "It is up to the application to set and use this id. " +
             "The default value is null.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem_Id
-        public string Id { get; set; } = null;
+        public string Id { get; set; } = "";
 
         [RPInfoOut]
-        [XmlAttribute("Image")]
+        [XmlIgnore]
         [DefaultValue(null)]
         [Description("Gets or sets the image to be used when the item is displayed in standard size. " +
             "Many ribbon items can appear in two sizes: Standard and Large. " +
@@ -104,7 +103,19 @@ namespace Shared.Controllers.Models.RibbonXml
         /// <example>
         /// Example: <c>Image="icon_button_save"</c> (resolved as icon_button_save.png or .ico from resources)
         /// </example>
-        public string Image { get; set; } = null;
+        public ImageSource Image { get; set; } = null;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("Image")]
+        public string ImageDef
+        {
+            get => null;
+            set
+            {
+                if (value != null)
+                    Image = ResourceController.GetImageSource(value);
+            }
+        }
 
         [RPInfoOut]
         [XmlIgnore]
@@ -195,7 +206,7 @@ namespace Shared.Controllers.Models.RibbonXml
         public string KeyTip { get; set; } = null;
 
         [RPInfoOut]
-        [XmlAttribute("LargeImage")]
+        [XmlIgnore]
         [DefaultValue(null)]
         [Description("Gets or sets the image to be used when the item is displayed in large size." +
             "Many ribbon items can appear in two sizes: Standard and Large. " +
@@ -217,7 +228,20 @@ namespace Shared.Controllers.Models.RibbonXml
         /// <example>
         /// Example: <c>Image="icon_button_save"</c> (resolved as icon_button_save.png or .ico from resources)
         /// </example>
-        public string LargeImage { get; set; } = null;
+        public ImageSource LargeImage { get; set; } = null;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("LargeImage")]
+        public string LargeImageDef
+        {
+            get => null;
+            set
+            {
+                if (value != null)
+                    Image = ResourceController.GetImageSource(value);
+
+            }
+        }
 
         [RPInfoOut]
         [XmlIgnore]

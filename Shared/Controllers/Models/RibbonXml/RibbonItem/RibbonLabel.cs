@@ -1,5 +1,4 @@
-﻿using System;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace Shared.Controllers.Models.RibbonXml.RibbonItem
@@ -7,6 +6,11 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonLabel
     public class RibbonLabelDef : RibbonItemDef
     {
+#if NET8_0_OR_GREATER
+        /// <summary>
+        /// Value has only getter, cannot be changed to a different type other than Horizontal
+        /// </summary>
+        /// 
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(System.Windows.Controls.Orientation.Horizontal)]
@@ -26,5 +30,6 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
                 Orientation = result;
             }
         }
+#endif
     }
 }

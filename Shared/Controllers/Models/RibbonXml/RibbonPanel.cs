@@ -2,6 +2,7 @@
 #pragma warning disable CS8625
 
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
 
@@ -44,21 +45,21 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInfoOut]
         [XmlIgnore]
-        [DefaultValue(null)]
+        [DefaultValue(false)]
         [Description("Accesses the highlight state for the ribbon panel's title bar.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_HighlightPanelTitleBar
-        public bool? HighlightPanelTitleBar { get; set; } = null;
+        public bool HighlightPanelTitleBar { get; set; } = false;
 
         [RPInternalUseOnly]
         [XmlAttribute("HighlightPanelTitleBar")]
         public string HighlightPanelTitleBarDef
         {
-            get => HighlightPanelTitleBar?.ToString();
+            get => HighlightPanelTitleBar.ToString();
             set
             {
                 if (value == null)
                 {
-                    HighlightPanelTitleBar = null;
+                    HighlightPanelTitleBar = false;
                     return;
                 }
                 HighlightPanelTitleBar
@@ -68,35 +69,35 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
 
         [RPInfoOut]
         [XmlIgnore]
-        [DefaultValue(null)]
+        [DefaultValue(false)]
         [Description("Accesses the highlight state for the ribbon panel's title bar.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_HighlightWhenCollapsed
-        public bool? HighlightWhenCollapsed { get; set; } = null;
+        public bool HighlightWhenCollapsed { get; set; } = false;
 
         [RPInternalUseOnly]
         [XmlAttribute("HighlightWhenCollapsed")]
         public string HighlightWhenCollapsedDef
         {
-            get => HighlightWhenCollapsed?.ToString();
+            get => HighlightWhenCollapsed.ToString();
             set
             {
                 if (value == null)
                 {
-                    HighlightWhenCollapsed = null;
+                    HighlightWhenCollapsed = false;
                     return;
                 }
                 HighlightWhenCollapsed
                     = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
             }
         }
-
+#if NET8_0_OR_GREATER
         [RPInfoOut]
         [XmlAttribute("Id")]
-        [DefaultValue(null)]
+        [DefaultValue("")]
         [Description("Accesses the Id for the ribbon panel.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_Id
-        public string Id { get; set; } = null;
-
+        public string Id { get; set; } = "";
+#endif
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(true)]
@@ -163,11 +164,19 @@ namespace Shared.Controllers.Models.RibbonXml.RibbonItem
         [Description("Gets or sets the source that contains the ribbon items to be displayed by this panel. " +
             "The default value is null.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_Source
-        public RibbonPanelSource Source => Transform(new RibbonPanelSource(), SourceDef);
+        public RibbonPanelSource Source => SourceDef != null ? Transform(SourceFactory[SourceDef.GetType()](), SourceDef) : null;
 
         [RPInternalUseOnly]
-        [XmlElement("RibbonPanelSource")]
+        [XmlElement("RibbonPanelSource", typeof(RibbonPanelSourceDef))]
+        [XmlElement("RibbonPanelSpacer", typeof(RibbonPanelSourceDef.RibbonPanelSpacerDef))]
         public RibbonPanelSourceDef SourceDef { get; set; } = null;
 
+        [XmlIgnore]
+        [RPPrivateUseOnly]
+        private static readonly Dictionary<Type, Func<RibbonPanelSource>> SourceFactory = new Dictionary<Type, Func<RibbonPanelSource>>()
+        {
+            { typeof(RibbonPanelSourceDef), () => new RibbonPanelSource() },
+            { typeof(RibbonPanelSourceDef.RibbonPanelSpacerDef), () => new RibbonPanelSpacer() }
+        };
     }
 }

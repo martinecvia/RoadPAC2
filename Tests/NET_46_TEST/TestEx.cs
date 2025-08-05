@@ -25,8 +25,8 @@ namespace NET_46_TEST
         {
             Document document = Application.DocumentManager.MdiActiveDocument;
             ResourceController.LoadEmbeddedResources(); // To load icons, configuration files etc.
-
-            RibbonTab rpTab = RibbonController.CreateTab("MAIN", "RoadPAC");
+            /*
+            RibbonTab rpTab = RibbonController.CreateTab("MAIN", "RoadPAC_Test");
             RibbonButton button = new RibbonButton
             {
                 Text = "RoadPAC", // Untranslatable entity
@@ -61,13 +61,25 @@ namespace NET_46_TEST
                 }
                 return false;
             }, "Trasa");
-            
+
             Ribbon.Tabs.Add(rpTab);
             Ribbon.Tabs.Add(ctxTab);
+            */
+            var resource = ResourceController.LoadResourceRibbon<RibbonTabDef>("rp_RoadPAC");
+            var tab = resource?.Transform(new RibbonTab(), resource);
+            if (resource != null)
+            {
+                foreach (var panel in resource?.Panels)
+                    tab?.Panels.Add(panel);
+                Ribbon.Tabs.Add(tab);
 
-            var b = Ribbon.Tabs.Where(t => t.Name == "Output"); // To see whats happening there
-            var x = ResourceController.LoadResourceRibbon<RibbonTabDef>("rp_RoadPAC");
-            Debug.WriteLine(x);
+                Debug.WriteLine(resource);
+                foreach (var panel in resource?.PanelsDef)
+                {
+                    Debug.WriteLine(panel);
+                    Debug.WriteLine(panel.SourceDef);
+                }
+            }
         }
 
         public void Terminate()

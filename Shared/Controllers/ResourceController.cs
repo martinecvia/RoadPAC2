@@ -38,6 +38,7 @@ namespace Shared.Controllers
             // First we have to filter out files that does not start with prefix rp_
             string[] manifestResources = assembly.GetManifestResourceNames()
                 .Where(resource => resource.Contains("rp_")).ToArray();
+            Debug.WriteLine($"LoadEmbeddedResources: {manifestResources}");
             foreach (string resourceName in manifestResources
                 .Where(IsImage).ToArray())
             {
@@ -89,23 +90,31 @@ namespace Shared.Controllers
         [RPPrivateUseOnly]
         private static BitmapImage LoadResourceImage(string resourceName)
         {
-            Assembly assembly = Assembly.GetExecutingAssembly();
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName)
-                ?? assembly.GetManifestResourceStream(assembly.GetManifestResourceNames()
-                    .FirstOrDefault(resource => resource.EndsWith("Icons.rp_img_default_32.ico", StringComparison.OrdinalIgnoreCase))))
+            try
             {
-                Assert.IsNotNull(stream, nameof(stream));      // This is a no-no, if default file was not found
-                                                               // then something must happend during build process
-                BitmapImage bitMap = new BitmapImage();
-                bitMap.BeginInit();
-                // InOpt::CS7096: Stream is not usable as viable ImageSource stream
-                bitMap.StreamSource = stream;
-                bitMap.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
-                bitMap.CacheOption = BitmapCacheOption.OnLoad; // Load fully and then detach stream
-                bitMap.EndInit();
-                // To make it thread safe and immutable
-                bitMap.Freeze();
-                return bitMap;
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream(resourceName)
+                    ?? assembly.GetManifestResourceStream(assembly.GetManifestResourceNames()
+                        .FirstOrDefault(resource => resource.EndsWith("Icons.rp_img_default_32.ico", StringComparison.OrdinalIgnoreCase))))
+                {
+                    Assert.IsNotNull(stream, nameof(stream));      // This is a no-no, if default file was not found
+                                                                   // then something must happend during build process
+                    BitmapImage bitMap = new BitmapImage();
+                    bitMap.BeginInit();
+                    // InOpt::CS7096: Stream is not usable as viable ImageSource stream
+                    bitMap.StreamSource = stream;
+                    bitMap.CreateOptions = BitmapCreateOptions.PreservePixelFormat;
+                    bitMap.CacheOption = BitmapCacheOption.OnLoad; // Load fully and then detach stream
+                    bitMap.EndInit();
+                    // To make it thread safe and immutable
+                    bitMap.Freeze();
+                    return bitMap;
+                }
+            }
+            catch (Exception exception) {
+                Debug.WriteLine($"LoadResourceImage: Something went horribly wrong ! " +
+                    $"{resourceName}: {exception.GetType().Name}/{exception.Message}");
+                throw exception; // pass
             }
         }
 
@@ -124,9 +133,7 @@ namespace Shared.Controllers
             Assembly assembly = Assembly.GetExecutingAssembly();
             string manifestResource = assembly.GetManifestResourceNames()
                 .FirstOrDefault(resource => resource.EndsWith($"Ribbons.{resourceName}.xml", StringComparison.OrdinalIgnoreCase));
-            #if DEBUG
             Debug.WriteLine($"LoadResourceRibbon: {manifestResource}");
-            #endif
             using (Stream stream = assembly.GetManifestResourceStream(manifestResource))
             {
                 Assert.IsNotNull(stream, nameof(stream));      // This is a no-no, if default file was not found
@@ -137,11 +144,15 @@ namespace Shared.Controllers
                     Assert.IsNotNull(type, nameof(type));
                     XmlSerializer serializer = new XmlSerializer(type);
                     return (T) serializer.Deserialize(stream);
-                } catch (InvalidOperationException exception)
+                }
+                catch (InvalidOperationException exception)
                 {
-                    #if DEBUG
-                    Debug.WriteLine(exception.Message);
-                    #endif
+                    Debug.WriteLine($"LoadResourceRibbon: InvalidOperationException: {exception.InnerException?.Message}");
+                    return null;
+                }
+                catch (Exception exception)
+                {
+                    Debug.WriteLine($"LoadResourceRibbon: {exception.Message}");
                     return default;
                 }
             }
@@ -157,9 +168,7 @@ namespace Shared.Controllers
                 using (XmlReader xmlReader = XmlReader.Create(stream, new XmlReaderSettings 
                     { IgnoreComments = true, IgnoreWhitespace = true, CloseInput = true }))
                     return true;
-            }
-            catch
-            {
+            } catch {
                 return false;
             }
         }

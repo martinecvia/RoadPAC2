@@ -1,24 +1,27 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <RibbonTab Id="RP_TAB_RoadPAC"
-		   Name="RoadPAC"
-		   Title="RoadPAC"
-		   Description="{{ RP_TAB.RoadPAC.Description }}"
+		   Title="{{ RP_TAB_RoadPAC.RibbonTab.Title }}"
+		   Description="{{ RP_TAB_RoadPAC.RibbonTab.Description }}"
 		   IsEnabled="True">
 	<!-- RibbonPanelCollection -->
-	<![CDATA[
-		{{ PLATFORM }}.Windows
-	]]>
 	<RibbonPanel Id="RP_TAB_RoadPAC.Panels.ProjectManager"
 				 IsEnabled="True"
 				 HighlightPanelTitleBar="True"
 				 IsVisible="True">
 		<!-- RibbonPanelSource -->
-		<RibbonPanelSource Id="RP_TAB_RoadPAC.Panels.ProjectManager.Id"
+		<RibbonPanelSpacer Id="RP_TAB_RoadPAC.Panels.ProjectManager.Id"
 						   Name="{{ RP_TAB.RoadPAC.Panels.ProjectManager.Name }}"
 						   Title="{{ RP_TAB.RoadPAC.Panels.ProjectManager.Title }}"
 						   KeyTip="{{ RP_TAB.RoadPAC.Panels.ProjectManager.KeyTip }}"
-						   Description="{{ RP_TAB.RoadPAC.Panels.ProjectManager.Description }}">
+						   Description="{{ RP_TAB.RoadPAC.Panels.ProjectManager.Description }}"
+						   
+						   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+						   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 			<!-- RibbonItem -->
-		</RibbonPanelSource>
+			<LeftBorderBrush>
+				<SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+								 Color="#00FFFFFF" />
+			</LeftBorderBrush>
+		</RibbonPanelSpacer>
 	</RibbonPanel>
 </RibbonTab>
