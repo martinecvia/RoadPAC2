@@ -49,7 +49,7 @@ namespace Shared.Controllers.Models.RibbonXml
             if (target == null || source == null)
                 return default;
             PropertyInfo[] applyableProperties = source.GetType()
-                    .GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                    .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
                     .Where(property => property.GetCustomAttribute<RPInfoOutAttribute>() != null)
                     .ToArray();
             Debug.WriteLine(string.Join(",", applyableProperties.Select(property => property.Name).ToArray()));
@@ -63,7 +63,7 @@ namespace Shared.Controllers.Models.RibbonXml
                     // we have to first check if property exists in current running version
                     // if not we will just print information into a debug console and call it a day
                     PropertyInfo targetProperty = target.GetType()
-                        .GetProperty(sourceProperty.Name, BindingFlags.Instance | BindingFlags.Public);
+                        .GetProperty(sourceProperty.Name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
                     // Property not found in API
                     if (targetProperty == null)
                     {
