@@ -48,7 +48,7 @@ namespace Shared.Controllers.Models.RibbonXml
         {
             if (target == null || source == null)
                 return default;
-            PropertyInfo[] applyableProperties = typeof(Source)
+            PropertyInfo[] applyableProperties = source.GetType()
                     .GetProperties(BindingFlags.Instance | BindingFlags.Public)
                     .Where(property => property.GetCustomAttribute<RPInfoOutAttribute>() != null)
                     .ToArray();
@@ -62,7 +62,7 @@ namespace Shared.Controllers.Models.RibbonXml
                     // Since we are supporting multiple versions of CAD
                     // we have to first check if property exists in current running version
                     // if not we will just print information into a debug console and call it a day
-                    PropertyInfo targetProperty = typeof(Target)
+                    PropertyInfo targetProperty = target.GetType()
                         .GetProperty(sourceProperty.Name, BindingFlags.Instance | BindingFlags.Public);
                     // Property not found in API
                     if (targetProperty == null)
