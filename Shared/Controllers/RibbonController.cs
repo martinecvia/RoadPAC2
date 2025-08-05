@@ -12,7 +12,6 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
-
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
 using ZwSoft.ZwCAD.ApplicationServices;
@@ -29,51 +28,6 @@ using Autodesk.Windows;
 using Shared.Controllers.Models;
 using Shared.Controllers.Models.RibbonXml;
 #endregion
-
-// [RibbonTab]
-// - Description:
-// Gets or sets a description text for the tab.
-// The description text is not currently used by the framework. Applications can use this to store a description if it is required in other UI customization dialogs. The default value is null.
-
-// - Highlight:
-// Sets and gets the current highlight mode that indicates the display status of the New Badge on the upper-right corner of the ribbon tab.
-
-// - Id:
-// The framework does not use or validate this id. It is left to the applications to set this id and use it.
-// The default value is null.
-
-// - IsActive:
-// Gets or sets the value that indicates whether this tab is the active tab.
-// Hidden tabs and merged contextual tabs cannot be the active tab. Setting this property to true for such tabs will fail, and no exception will be thrown.     
-
-// - IsContextualTab:
-// Assesses whether the tab is regular tab or contextual tab. If it is true the tab is contextual tab, and false if it is regular tab. This is a dependency property registered with WPF. Please see the Microsoft API for more information.
-// The default value is false.
-
-// - IsVisible:
-// Gets or sets the value that indicates whether the tab is visible in the ribbon.
-// If the value is true, the tab is visible in the ribbon. If the value is false, it is hidden in ribbon. Both visible and hidden tabs are available in the ribbon by right-clicking the menu under the Tabs menu option, which allows the user to show or hide the tabs.
-// If the tab's IsAnonymous property is set to false, it is not included in the right-click menu, and the user cannot control its visibility.
-// If an active tab is hidden, the next or previous visible tab is set as the active tab.
-// The default value is true.
-
-// - IsVisited:
-// Gets or sets whether the panel tab is visited.
-
-// - KeyTip:
-// Gets or sets the keytip for the tab.
-// Keytips are displayed in the ribbon when navigating the ribbon with the keyboard. If this property is null or empty, the keytip will not appear for this tab, and the tab will not support activation through the keyboard. 
-// The default value is null.
-
-// - Name:
-// Gets or sets the name of the ribbon tab.
-
-// - Tag:
-// Gets or sets custom data object in the tab.
-
-// - Title:
-// Gets or sets the tab title. The title set with this property is displayed in the tab button for this tab in the ribbon.
-// The default value is null.
 
 namespace Shared.Controllers
 {

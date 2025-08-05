@@ -1,6 +1,8 @@
 ﻿#pragma warning disable CS8600
 #pragma warning disable CS8625
 
+#define INTERNALS
+
 using System;
 using System.ComponentModel;
 using System.Windows.Media;
@@ -10,7 +12,9 @@ using System.Xml.Serialization;
 #if ZWCAD
 using ZwSoft.ZwCAD.Internal.Windows;
 #else
+#if INTERNALS
 using Autodesk.Internal.Windows;
+#endif
 using Autodesk.Windows;
 #endif
 #endregion
