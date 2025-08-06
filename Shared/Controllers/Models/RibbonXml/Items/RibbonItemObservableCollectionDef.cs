@@ -1,20 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Xml.Serialization;
 
-#region O_PROGRAM_DETERMINE_CAD_PLATFORM 
-#if ZWCAD
-using ZwSoft.ZwCAD.Windows;
-#else
-using Autodesk.Windows;
 using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
-#endif
-#endregion
 
 namespace Shared.Controllers.Models.RibbonXml.Items
 {
+    [RPPrivateUseOnly]
     public class RibbonItemObservableCollectionDef : RibbonItemDef
     {
         [RPInternalUseOnly]
+        [RPValidation]
         [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
         [XmlElement("RibbonLabel", typeof(RibbonLabelDef))]
         [XmlElement("RibbonCombo", typeof(RibbonListDef.RibbonComboDef))]
@@ -30,4 +26,9 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [XmlElement("RibbonTextBox", typeof(RibbonTextBoxDef))]
         public List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
     }
+
+    // Validation attribute used to
+    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
+    internal sealed class RPValidationAttribute : Attribute
+    { }
 }

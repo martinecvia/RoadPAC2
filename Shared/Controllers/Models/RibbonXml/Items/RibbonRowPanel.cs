@@ -13,6 +13,7 @@ using Autodesk.Windows;
 namespace Shared.Controllers.Models.RibbonXml.Items
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonRowPanel
+    [RPPrivateUseOnly]
     [XmlInclude(typeof(RibbonRowPanelDef))]
     [XmlInclude(typeof(RibbonFlowPanelDef))]
     [XmlInclude(typeof(RibbonFoldPanelDef))]
@@ -25,6 +26,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
     public class RibbonRowPanelDef : RibbonItemObservableCollectionDef
     {
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonFlowPanel
+        [RPPrivateUseOnly]
         public class RibbonFlowPanelDef : RibbonRowPanelDef
         {
             [RPInfoOut]
@@ -91,6 +93,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         }
 
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonFoldPanel
+        [RPPrivateUseOnly]
         public class RibbonFoldPanelDef : RibbonRowPanelDef
         {
             [RPInfoOut]

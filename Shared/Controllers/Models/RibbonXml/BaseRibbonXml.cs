@@ -10,6 +10,7 @@ using System.Reflection;
 
 namespace Shared.Controllers.Models.RibbonXml
 {
+    [RPPrivateUseOnly]
     public abstract class BaseRibbonXml
     {
         /// <summary>

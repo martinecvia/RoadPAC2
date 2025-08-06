@@ -25,6 +25,7 @@ using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
 namespace Shared.Controllers.Models.RibbonXml.Items
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem
+    [RPPrivateUseOnly]
     [XmlInclude(typeof(RibbonButtonDef))]
     [XmlInclude(typeof(RibbonItemDef))]
     [XmlInclude(typeof(RibbonLabelDef))]
@@ -433,6 +434,31 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 Width = 200d;
             }
         }
+
+        [RPInfoOut]
+        [RPInternalUseOnly]
+        [XmlIgnore]
+        [DefaultValue(RibbonItemResizeStyles.ResizeWidth)]
+        public RibbonItemResizeStyles ResizeStyle { get; set; } = RibbonItemResizeStyles.ResizeWidth;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("ResizeStyle")]
+        public string ResizeStyleDef
+        {
+            get => ResizeStyle.ToString();
+            set
+            {
+                if (!Enum.TryParse(value, true, out RibbonItemResizeStyles result))
+                    result = RibbonItemResizeStyles.ResizeWidth;
+                ResizeStyle = result;
+            }
+        }
+
+        [RPInfoOut]
+        [RPInternalUseOnly]
+        [XmlAttribute("HelpTopic")]
+        [DefaultValue(null)]
+        public string HelpTopic { get; set; } = null;
 
         [XmlIgnore]
         [RPPrivateUseOnly]

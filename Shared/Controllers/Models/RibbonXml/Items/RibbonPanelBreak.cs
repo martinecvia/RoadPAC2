@@ -13,6 +13,7 @@ using Autodesk.Windows;
 namespace Shared.Controllers.Models.RibbonXml.Items
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelBreak
+    [RPPrivateUseOnly]
     [Description("This class is used to organize a ribbon panel into main and slide-out panels. " +
         "Add an object of this type to RibbonPanelSource.Items to move all the items after this item into the slide-out panel. " +
         "There can be only one object of this type in RibbonPanelSource. " +
@@ -22,7 +23,6 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(RibbonSupportedSubPanelStyle.None)]
-        [Description("This is SupportedSubPanel, a member of class RibbonPanelBreak.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelBreak_SupportedSubPanel
         public RibbonSupportedSubPanelStyle SupportedSubPanel { get; set; } = RibbonSupportedSubPanelStyle.None;
 

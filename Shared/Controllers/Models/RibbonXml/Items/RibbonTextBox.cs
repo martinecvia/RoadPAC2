@@ -16,6 +16,7 @@ using Autodesk.Windows;
 namespace Shared.Controllers.Models.RibbonXml.Items
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox
+    [RPPrivateUseOnly]
     [Description("This class is used to create text box in ribbon. " +
         "RibbonTextBox supports editing values of any data type. " +
         "If any data type other than string is required you need to derive from this class and implement the virtual methods for converting the value from and to string.")]
@@ -80,13 +81,14 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             "Also, the command will not be invoked by the text box if the text is not accepted (i.e., validation has failed). " +
             "The default value is null.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox_CommandHandler
-        public CommandHandler CommandHandler { get; set; } = null;
+        public System.Windows.Input.ICommand CommandHandler { get; set; } = null;
 
         [RPInternalUseOnly]
         [XmlAttribute("CommandHandler")]
         public string CommandHandlerDef
         {
-            get => CommandHandler?.Command;
+            get => CommandHandler != null && CommandHandler is CommandHandler handler
+                ? handler.Command : string.Empty;
             set
             {
                 if (!string.IsNullOrEmpty(value))
@@ -150,7 +152,8 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [Description("Gets or sets the value that indicates whether empty text should be considered a valid value. " +
             "If IsEmptyTextValid is true, empty text is considered valid text, and the command is invoked even if the text is empty; if it is false, when the text is empty, the command is not invoked, and the text box button is disabled.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox_IsEmptyTextValid
-        public bool IsEmptyTextValid { get; set; }
+        public bool IsEmptyTextValid { get; set; } = true; // Added missing true value to the statement,
+                                                           // as some compilers ignores DefaultValueAttribute
 
         [RPInternalUseOnly]
         [XmlAttribute("IsEmptyTextValid")]
@@ -243,6 +246,29 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             "The default value is null.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox_Value
         public string Value { get; set; } = null;
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [RPInternalUseOnly]
+        [DefaultValue(double.NaN)]
+        public double ResizableBoxWidth { get; set; } = double.NaN;
+
+        [XmlAttribute("ResizableBoxWidth")]
+        [RPInternalUseOnly]
+        public string ResizableBoxWidthDef
+        {
+            get => ResizableBoxWidth.ToString();
+            set
+            {
+                if (string.IsNullOrEmpty(value)) return;
+                if (double.TryParse(value, out var result))
+                {
+                    ResizableBoxWidth = result;
+                    return;
+                }
+                ResizableBoxWidth = double.NaN;
+            }
+        }
 
     }
 }

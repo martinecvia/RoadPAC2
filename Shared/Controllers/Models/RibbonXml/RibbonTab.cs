@@ -1,6 +1,8 @@
 ﻿#pragma warning disable CS8603
 #pragma warning disable CS8625
 
+#define INTERNALS
+
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
@@ -9,14 +11,20 @@ using System.Xml.Serialization;
 #if ZWCAD
 using ZwSoft.ZwCAD.Internal.Windows;
 #else
+#if INTERNALS
+using Autodesk.Internal.Windows;
+#endif
 using Autodesk.Windows;
+using Shared.Controllers.Models.RibbonXml.Items;
 #endif
 #endregion
 
 // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem
 namespace Shared.Controllers.Models.RibbonXml
 {
+    [RPPrivateUseOnly]
     [XmlRoot("RibbonTab")]
+    [Description("The class RibbonTab is used to store and manage the contents of a ribbon tab.")]
     public class RibbonTabDef : BaseRibbonXml
     {
         [RPInfoOut]
@@ -28,7 +36,6 @@ namespace Shared.Controllers.Models.RibbonXml
             "The default value is null.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTab_Description
         public string Description { get; set; } = null;
-        /*
 #if NET8_0_OR_GREATER
         [RPInfoOut]
         [XmlIgnore]
@@ -50,7 +57,6 @@ namespace Shared.Controllers.Models.RibbonXml
             }
         }
 #endif
-        */
         [RPInfoOut]
         [XmlAttribute("Id")]
         [DefaultValue(null)]
@@ -229,6 +235,7 @@ namespace Shared.Controllers.Models.RibbonXml
         }
 
         [RPInternalUseOnly]
+        [RPValidation]
         [XmlElement("RibbonPanel")]
         public List<RibbonPanelDef> PanelsDef { get; set; } = new List<RibbonPanelDef>();
 
@@ -254,6 +261,70 @@ namespace Shared.Controllers.Models.RibbonXml
                     return;
                 }
                 IsEnabled = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+            }
+        }
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(true)]
+        public bool IsPanelEnabled { get; set; } = true;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("IsPanelEnabled")]
+        public string IsPanelEnabledDef
+        {
+            get => IsPanelEnabled.ToString();
+            set
+            {
+                if (value == null)
+                {
+                    IsPanelEnabled = true;
+                    return;
+                }
+                IsPanelEnabled = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+            }
+        }
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(false)]
+        public bool IsMergedContextualTab { get; set; } = false;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("IsMergedContextualTab")]
+        public string IsMergedContextualTabDef
+        {
+            get => IsMergedContextualTab.ToString();
+            set
+            {
+                if (value == null)
+                {
+                    IsMergedContextualTab = false;
+                    return;
+                }
+                IsMergedContextualTab = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+            }
+        }
+
+        [RPInfoOut]
+        [RPInternalUseOnly]
+        [XmlIgnore]
+        [DefaultValue(false)]
+        public bool AllowTearOffContextualPanels { get; set; } = false;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("AllowTearOffContextualPanels")]
+        public string AllowTearOffContextualPanelsDef
+        {
+            get => AllowTearOffContextualPanels.ToString();
+            set
+            {
+                if (value == null)
+                {
+                    AllowTearOffContextualPanels = false;
+                    return;
+                }
+                AllowTearOffContextualPanels = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
             }
         }
     }

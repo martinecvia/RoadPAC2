@@ -2,9 +2,12 @@
 #pragma warning disable CS8625
 
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
+using System.Xml;
+using System.Windows.Markup;
 using System.Xml.Serialization;
+using Shared.Controllers.Models.RibbonXml.Items;
+
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -16,19 +19,23 @@ using Autodesk.Windows;
 
 namespace Shared.Controllers.Models.RibbonXml
 {
+    // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel
+    [RPPrivateUseOnly]
+    [Description("The class RibbonPanel is used to store and manage the panel in a ribbon. " +
+        "RibbonPanel displays the content of the RibbonPanelSource set in the Source property.")]
     public class RibbonPanelDef : BaseRibbonXml
     {
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-__MEMBERTYPE_Properties_Autodesk_Windows_RibbonPanel
         [RPInfoOut]
         [XmlIgnore]
-        [DefaultValue(System.Windows.Controls.Orientation.Horizontal)]
+        [DefaultValue(System.Windows.Controls.Orientation.Vertical)]
         [Description("Gets or sets the orientation to be used when the panel is floating. " +
             "This property is applicable only when the panel is floating. " +
             "The orientation of a floating panel can be horizontal or vertical. " +
             "The orientation can be switched by the user with the Orientation button in the panel frame. " +
             "Set the CanToggleOrientation property to false to hide the Orientation button and hinder the user from changing the orientation.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_FloatingOrientation
-        public System.Windows.Controls.Orientation FloatingOrientation { get; set; } = System.Windows.Controls.Orientation.Horizontal;
+        public System.Windows.Controls.Orientation FloatingOrientation { get; set; } = System.Windows.Controls.Orientation.Vertical;
 
         [RPInternalUseOnly]
         [XmlAttribute("FloatingOrientation")]
@@ -40,6 +47,29 @@ namespace Shared.Controllers.Models.RibbonXml
                 if (!Enum.TryParse(value, true, out System.Windows.Controls.Orientation result))
                     result = System.Windows.Controls.Orientation.Horizontal;
                 FloatingOrientation = result;
+            }
+        }
+
+        [RPInfoOut]
+        [RPInternalUseOnly]
+        [XmlIgnore]
+        [DefaultValue(true)]
+        public bool CanToggleOrientation { get; set; } = true;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("CanToggleOrientation")]
+        public string CanToggleOrientationDef
+        {
+            get => CanToggleOrientation.ToString();
+            set
+            {
+                if (value == null)
+                {
+                    CanToggleOrientation = true;
+                    return;
+                }
+                CanToggleOrientation
+                    = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
             }
         }
 
@@ -167,9 +197,128 @@ namespace Shared.Controllers.Models.RibbonXml
         public RibbonPanelSource Source => SourceDef != null ? SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[SourceDef.GetType()]()) : null;
 
         [RPInternalUseOnly]
+        [RPValidation]
         [XmlElement("RibbonPanelSource", typeof(RibbonPanelSourceDef))]
         [XmlElement("RibbonPanelSpacer", typeof(RibbonPanelSourceDef.RibbonPanelSpacerDef))]
         public RibbonPanelSourceDef SourceDef { get; set; } = null;
 
+        [RPInfoOut]
+        [RPInternalUseOnly]
+        [XmlIgnore]
+        [DefaultValue(null)]
+        public System.Windows.Media.Brush CustomPanelBackground { get; set; } = null;
+
+        [RPInternalUseOnly]
+        [XmlElement("CustomPanelBackground")]
+        public XmlElement CustomPanelBackgroundDef
+        {
+            get
+            {
+                if (CustomPanelBackground == null)
+                    return null;
+                XmlDocument document = new XmlDocument();
+                document.LoadXml(XamlWriter.Save(CustomPanelBackground));
+                return document.DocumentElement;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    string xaml = value.OuterXml;
+                    CustomPanelBackground = (System.Windows.Media.Brush) XamlReader.Parse(xaml);
+                }
+                else
+                {
+                    CustomPanelBackground = null;
+                }
+            }
+        }
+
+        [RPInfoOut]
+        [RPInternalUseOnly]
+        [XmlIgnore]
+        [DefaultValue(null)]
+        public System.Windows.Media.Brush CustomSlideOutPanelBackground { get; set; } = null;
+
+        [RPInternalUseOnly]
+        [XmlElement("CustomSlideOutPanelBackground")]
+        public XmlElement CustomSlideOutPanelBackgroundDef
+        {
+            get
+            {
+                if (CustomSlideOutPanelBackground == null)
+                    return null;
+                XmlDocument document = new XmlDocument();
+                document.LoadXml(XamlWriter.Save(CustomSlideOutPanelBackground));
+                return document.DocumentElement;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    string xaml = value.OuterXml;
+                    CustomSlideOutPanelBackground = (System.Windows.Media.Brush)XamlReader.Parse(xaml);
+                }
+                else
+                {
+                    CustomSlideOutPanelBackground = null;
+                }
+            }
+        }
+
+        [RPInfoOut]
+        [RPInternalUseOnly]
+        [XmlIgnore]
+        [DefaultValue(null)]
+        public System.Windows.Media.Brush CustomPanelTitleBarBackground { get; set; } = null;
+
+        [RPInternalUseOnly]
+        [XmlElement("CustomPanelTitleBarBackground")]
+        public XmlElement CustomPanelTitleBarBackgroundDef
+        {
+            get
+            {
+                if (CustomPanelTitleBarBackground == null)
+                    return null;
+                XmlDocument document = new XmlDocument();
+                document.LoadXml(XamlWriter.Save(CustomPanelTitleBarBackground));
+                return document.DocumentElement;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    string xaml = value.OuterXml;
+                    CustomPanelTitleBarBackground = (System.Windows.Media.Brush)XamlReader.Parse(xaml);
+                }
+                else
+                {
+                    CustomPanelTitleBarBackground = null;
+                }
+            }
+        }
+
+        [RPInfoOut]
+        [RPInternalUseOnly]
+        [XmlIgnore]
+        [DefaultValue(false)]
+        public bool IsContextualTabThemeIgnored { get; set; } = false;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("IsContextualTabThemeIgnored")]
+        public string IsContextualTabThemeIgnoredDef
+        {
+            get => IsContextualTabThemeIgnored.ToString();
+            set
+            {
+                if (value == null)
+                {
+                    IsContextualTabThemeIgnored = true;
+                    return;
+                }
+                IsContextualTabThemeIgnored
+                    = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+            }
+        }
     }
 }

@@ -8,6 +8,7 @@ using System.Xml.Serialization;
 namespace Shared.Controllers.Models.RibbonXml.Items
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSpinner
+    [RPPrivateUseOnly]
     [Description("This class is used to create a spinner in a ribbon. " +
         "RibbonSpinner supports int and double data types by default. " +
         "The implementation is kept generic so that other data types can be easily supported by deriving from this class and overriding the virtual methods.")]
@@ -69,9 +70,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                     else if (int.TryParse(value, out var b)) Change = b;
                     else
                     {
-#if DEBUG
                         Debug.WriteLine($"{nameof(value)}: No valid value is set. Supported values are: [double, int]");
-#endif
                         Change = null;
                     }
                     return;
@@ -80,9 +79,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 else if (int.TryParse(value, out var d)) Change = d;
                 else
                 {
-#if DEBUG
                     Debug.WriteLine($"{nameof(value)}: No valid value is set. Supported values are: [double, int]");
-#endif
                     Change = null;
                 }
             }
@@ -113,9 +110,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                     else if (int.TryParse(value, out var b)) Maximum = b;
                     else
                     {
-#if DEBUG
                         Debug.WriteLine($"{nameof(value)}: No valid value is set. Supported values are: [double, int]");
-#endif
                         Maximum = null;
                     }
                     return;
@@ -124,9 +119,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 else if (int.TryParse(value, out var d)) Maximum = d;
                 else
                 {
-#if DEBUG
                     Debug.WriteLine($"{nameof(value)}: No valid value is set. Supported values are: [double, int]");
-#endif
                     Maximum = null;
                 }
             }
@@ -158,9 +151,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                     else if (int.TryParse(value, out var b)) Minimum = b;
                     else
                     {
-#if DEBUG
                         Debug.WriteLine($"{nameof(value)}: No valid value is set. Supported values are: [double, int]");
-#endif
                         Minimum = null;
                     }
                     return;
@@ -169,9 +160,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 else if (int.TryParse(value, out var d)) Minimum = d;
                 else
                 {
-#if DEBUG
                     Debug.WriteLine($"{nameof(value)}: No valid value is set. Supported values are: [double, int]");
-#endif
                     Minimum = null;
                 }
             }
@@ -200,6 +189,29 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                     return;
                 }
                 IsEditable = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+            }
+        }
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [RPInternalUseOnly]
+        [DefaultValue(double.NaN)]
+        public double ResizableBoxWidth { get; set; } = double.NaN;
+
+        [XmlAttribute("ResizableBoxWidth")]
+        [RPInternalUseOnly]
+        public string ResizableBoxWidthDef
+        {
+            get => ResizableBoxWidth.ToString();
+            set
+            {
+                if (string.IsNullOrEmpty(value)) return;
+                if (double.TryParse(value, out var result))
+                {
+                    ResizableBoxWidth = result;
+                    return;
+                }
+                ResizableBoxWidth = double.NaN;
             }
         }
     }

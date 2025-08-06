@@ -93,8 +93,8 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 ? handler.Command : string.Empty;
             set
             {
-                if (value != null)
-                    CommandHandler = new CommandHandler(value.Trim());
+                if (!string.IsNullOrEmpty(value))
+                    CommandHandler = new CommandHandler(value);
             }
         }
     }

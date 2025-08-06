@@ -6,7 +6,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows.Markup;
-using System.Windows.Media;
 using System.Xml;
 using System.Xml.Serialization;
 
@@ -24,6 +23,7 @@ using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
 namespace Shared.Controllers.Models.RibbonXml
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource
+    [RPPrivateUseOnly]
     [XmlInclude(typeof(RibbonPanelSourceDef))]
     [XmlInclude(typeof(RibbonPanelSpacerDef))]
     [Description("The RibbonPanelSource class is used to store and manage the content of a panel in a ribbon. " +
@@ -35,6 +35,7 @@ namespace Shared.Controllers.Models.RibbonXml
     {
 
         [RPInternalUseOnly]
+        [RPValidation]
         [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
         [XmlElement("RibbonLabel", typeof(RibbonLabelDef))]
         [XmlElement("RibbonCombo", typeof(RibbonListDef.RibbonComboDef))]
@@ -145,7 +146,7 @@ namespace Shared.Controllers.Models.RibbonXml
             [XmlIgnore]
             [DefaultValue("Transparent")]
             // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSpacer_LeftBorderBrush
-            public Brush LeftBorderBrush { get; set; } = Brushes.Transparent;
+            public System.Windows.Media.Brush LeftBorderBrush { get; set; } = System.Windows.Media.Brushes.Transparent;
 
             [RPInternalUseOnly]
             [XmlElement("LeftBorderBrush")]
@@ -164,11 +165,11 @@ namespace Shared.Controllers.Models.RibbonXml
                     if (value != null)
                     {
                         string xaml = value.OuterXml;
-                        LeftBorderBrush = (Brush) XamlReader.Parse(xaml);
+                        LeftBorderBrush = (System.Windows.Media.Brush) XamlReader.Parse(xaml);
                     }
                     else
                     {
-                        LeftBorderBrush = Brushes.Transparent;
+                        LeftBorderBrush = System.Windows.Media.Brushes.Transparent;
                     }
                 }
             }
@@ -177,7 +178,7 @@ namespace Shared.Controllers.Models.RibbonXml
             [XmlIgnore]
             [DefaultValue("Transparent")]
             // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSpacer_RightBorderBrush
-            public Brush RightBorderBrush { get; set; } = Brushes.Transparent;
+            public System.Windows.Media.Brush RightBorderBrush { get; set; } = System.Windows.Media.Brushes.Transparent;
 
             [RPInternalUseOnly]
             [XmlElement("RightBorderBrush")]
@@ -196,11 +197,11 @@ namespace Shared.Controllers.Models.RibbonXml
                     if (value != null)
                     {
                         string xaml = value.OuterXml;
-                        RightBorderBrush = (Brush) XamlReader.Parse(xaml);
+                        RightBorderBrush = (System.Windows.Media.Brush) XamlReader.Parse(xaml);
                     }
                     else
                     {
-                        RightBorderBrush = Brushes.Transparent;
+                        RightBorderBrush = System.Windows.Media.Brushes.Transparent;
                     }
                 }
             }
