@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<RibbonTab Id="RP_TAB_RoadPAC"
+<RibbonTab xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   Id="RP_TAB_RoadPAC"
 		   Title="RoadPAC"
 		   IsEnabled="True">
 	<!-- RibbonPanel[] -->
@@ -10,6 +11,11 @@
 		<!-- RibbonPanelSource -->
 		<RibbonPanelSource Id="RP_TAB_RoadPAC.Panels.ProjectManager.Id"
 						   Title="Projekt manažér">
+			<DialogLauncher Text="Spusti nastavení" 
+							ShowText="True"
+							Image="rp_img_btn_manual_16"
+							ShowImage="True"
+							CommandHandler="RP_RUN_ROADPAC.SETTINGS" />
 			<!-- RibbonItem[] -->
 			<RibbonButton Text="Spusti RoadPAC"
 						  Name="RP_TAB_MAIN.PROJECT_MANAGER.RUN_ROADPAC"

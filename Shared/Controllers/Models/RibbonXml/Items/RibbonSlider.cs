@@ -4,6 +4,7 @@ using System.Xml.Serialization;
 namespace Shared.Controllers.Models.RibbonXml.Items
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSlider
+    [RPPrivateUseOnly]
     public class RibbonSliderDef : RibbonItemDef
     {
         [RPInfoOut]

@@ -120,14 +120,14 @@ namespace Shared.Controllers.Models.RibbonXml
                     = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
             }
         }
-#if NET8_0_OR_GREATER
+
         [RPInfoOut]
         [XmlAttribute("Id")]
         [DefaultValue("")]
         [Description("Accesses the Id for the ribbon panel.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_Id
         public string Id { get; set; } = "";
-#endif
+
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(true)]

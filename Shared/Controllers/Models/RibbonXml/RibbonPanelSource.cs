@@ -70,11 +70,11 @@ namespace Shared.Controllers.Models.RibbonXml
             "Clicking the button raises a command that follows the standard ribbon command routing. " +
             "If this property is null the panel does not have a dialog launcher button. " +
             "The default value is null.")]
-        public RibbonCommandItem DialogLauncher { get; set; } = null;
+        public RibbonCommandItem DialogLauncher => DialogLauncherDef?.Transform(new RibbonCommandItem());
 
         [RPInternalUseOnly]
         [XmlElement("DialogLauncher")]
-        public RibbonCommandItemDef DialogLauncherDef { get; set; }
+        public RibbonCommandItemDef DialogLauncherDef { get; set; } = null;
 
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Id
         [RPInfoOut]
