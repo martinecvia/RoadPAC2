@@ -5,6 +5,7 @@ using System.Xml.Serialization;
 namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonButton
+    [RPPrivateUseOnly]
     public class RibbonButtonDef : RibbonCommandItemDef
     {
         [RPInfoOut]

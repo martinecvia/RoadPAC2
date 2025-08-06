@@ -47,7 +47,8 @@ namespace Shared.Controllers.Models.RibbonXml
                 {
                     try
                     {
-                        items.Add(Transform(ItemsFactory[ItemsFactory.GetType()](), element));
+                        items.Add(Transform(ItemsFactory[element.GetType()](), element)); // For some reason I've set ItemsFactory.GetType(),
+                                                                                          // instead of element.GetType() which resulted in System.Collections.Generic.KeyNotFoundException
                     }
                     catch (InvalidOperationException exception)
                     {
@@ -152,6 +153,7 @@ namespace Shared.Controllers.Models.RibbonXml
         public string Title { get; set; } = null;
 
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSpacer
+        [RPPrivateUseOnly]
         public class RibbonPanelSpacerDef : RibbonPanelSourceDef
         {
             /*
@@ -166,10 +168,9 @@ namespace Shared.Controllers.Models.RibbonXml
               </RightBorderBrush>
             </RibbonPanelSpacerDef>
              */
-        [RPInfoOut]
+            [RPInfoOut]
             [XmlIgnore]
             [DefaultValue("Transparent")]
-            [Description("This is LeftBorderBrush, a member of class RibbonPanelSpacer.")]
             // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSpacer_LeftBorderBrush
             public Brush LeftBorderBrush { get; set; } = Brushes.Transparent;
 
@@ -202,7 +203,6 @@ namespace Shared.Controllers.Models.RibbonXml
             [RPInfoOut]
             [XmlIgnore]
             [DefaultValue("Transparent")]
-            [Description("This is RightBorderBrush, a member of class RibbonPanelSpacer.")]
             // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSpacer_RightBorderBrush
             public Brush RightBorderBrush { get; set; } = Brushes.Transparent;
 

@@ -246,7 +246,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             set
             {
                 if (value != null)
-                    Image = ResourceController.GetImageSource(value);
+                    LargeImage = ResourceController.GetImageSource(value);
 
             }
         }
@@ -438,6 +438,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [RPPrivateUseOnly]
         public static readonly Dictionary<Type, Func<RibbonItem>> ItemsFactory = new Dictionary<Type, Func<RibbonItem>>()
         {
+            { typeof(RibbonButtonDef), () => new RibbonButton() },
             { typeof(RibbonItemDef), () => new RibbonItem() },
             { typeof(RibbonLabelDef), () => new RibbonLabel() },
             { typeof(RibbonListDef.RibbonComboDef), () => new RibbonCombo() },

@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Linq;
 using Autodesk.AutoCAD.ApplicationServices;
-using Autodesk.AutoCAD.DatabaseServices;
 using Autodesk.AutoCAD.Runtime;
 using Autodesk.Windows;
-using Shared;
 using Shared.Controllers;
 using Shared.Controllers.Models.RibbonXml;
+using Shared.Controllers.Models.RibbonXml.Items;
+using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
 
 // https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-4E1AAFA9-740E-4097-800C-CAED09CDFF12
 // https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-C3F3C736-40CF-44A0-9210-55F6A939B6F2
@@ -71,8 +70,8 @@ namespace NET_46_TEST
             {
                 foreach (var panel in resource.PanelsDef)
                 {
-                    foreach (var item in panel.SourceDef.ItemsDef)
-                        Debug.WriteLine(item);
+                    foreach (var item in panel.SourceDef.Items) 
+                        panel.Source.Items.Add(item);
                     tab.Panels.Add(panel.Transform(new RibbonPanel(), panel));
                 }
                 Ribbon.Tabs.Add(tab);

@@ -24,7 +24,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 if (ItemsDef == null)
                     return items;
                 foreach (RibbonItemDef element in ItemsDef)
-                    items.Add(Transform(ItemsFactory[ItemsFactory.GetType()](), element));
+                    items.Add(Transform(ItemsFactory[element.GetType()](), element));
                 return items;
             }
         }

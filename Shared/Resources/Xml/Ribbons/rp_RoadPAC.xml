@@ -15,13 +15,13 @@
 					Image=System.Windows.Media.Imaging.BitmapImage, IsEnabled=True, IsToolTipEnabled=True, IsVisible=True, 
 					MinWidth=100, Name=RP_TAB_MAIN.PROJECT_MANAGER.RUN_ROADPAC, ShowImage=True, 
 					ShowText=True, Size=Large, Text=RoadPAC, Width=200) -->
-			<RibbonButton Text="RoadPAC"
+			<RibbonButton Text="Spusti RoadPAC"
 						  Name="RP_TAB_MAIN.PROJECT_MANAGER.RUN_ROADPAC"
 						  ShowText="True"
 						  Size="Large"
-						  Image="rp_img_btn_manual_16" 
-						  LargeImage="rp_img_btn_manual_32" 
-						  Orientation="Vertical" 
+						  Image="rp_img_btn_manual_16"
+						  LargeImage="rp_img_btn_manual_32"
+						  Orientation="Vertical"
 						  ShowImage="True"
 						  CommandHandler="RP_RUN_ROADPAC" />
 		</RibbonPanelSource>

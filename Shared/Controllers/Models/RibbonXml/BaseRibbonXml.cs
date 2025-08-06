@@ -27,7 +27,7 @@ namespace Shared.Controllers.Models.RibbonXml
         /// </returns>
         public override string ToString()
         {
-            PropertyInfo[] properties = GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public);
+            PropertyInfo[] properties = GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
             var values = properties.Where(property => property.GetCustomAttribute<RPInfoOutAttribute>() != null)
                 .Where(property => property.GetValue(this) != null)
                 .Select(property =>
