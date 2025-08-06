@@ -14,9 +14,7 @@ namespace Shared
     /// </remarks>
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = true)]
     internal sealed class RPPrivateUseOnlyAttribute : Attribute
-    {
-        // Marker attribute used to designate code for private use by the RoadPAC system.
-    }
+    { }
 
     /// <summary>
     /// Indicates that the associated code element is intended exclusively for internal use
@@ -30,9 +28,7 @@ namespace Shared
     /// </remarks>
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = true)]
     internal sealed class RPInternalUseOnlyAttribute : Attribute
-    {
-        // Marker attribute used to designate code for internal use by the RoadPAC system.
-    }
+    { }
 
     [AttributeUsage(AttributeTargets.All, AllowMultiple = true, Inherited = true)]
     internal sealed class RPInfoOutAttribute : Attribute
