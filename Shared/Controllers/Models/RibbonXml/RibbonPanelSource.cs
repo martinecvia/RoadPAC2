@@ -20,6 +20,7 @@ using Autodesk.Windows;
 #endregion
 
 using Shared.Controllers.Models.RibbonXml.Items;
+using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
 using static Shared.Controllers.Models.RibbonXml.Items.RibbonItemDef;
 
 namespace Shared.Controllers.Models.RibbonXml
@@ -60,6 +61,7 @@ namespace Shared.Controllers.Models.RibbonXml
         }
 
         [RPInternalUseOnly]
+        [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
         [XmlElement("RibbonLabel", typeof(RibbonLabelDef))]
         [XmlElement("RibbonCombo", typeof(RibbonListDef.RibbonComboDef))]
         [XmlElement("RibbonGallery", typeof(RibbonListDef.RibbonComboDef.RibbonGalleryDef))]

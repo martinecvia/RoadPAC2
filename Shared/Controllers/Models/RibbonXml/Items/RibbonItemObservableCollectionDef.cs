@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 using ZwSoft.ZwCAD.Windows;
 #else
 using Autodesk.Windows;
+using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
 #endif
 #endregion
 
@@ -29,6 +30,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         }
 
         [RPInternalUseOnly]
+        [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
         [XmlElement("RibbonLabel", typeof(RibbonLabelDef))]
         [XmlElement("RibbonCombo", typeof(RibbonListDef.RibbonComboDef))]
         [XmlElement("RibbonGallery", typeof(RibbonListDef.RibbonComboDef.RibbonGalleryDef))]

@@ -65,6 +65,7 @@ namespace NET_46_TEST
             Ribbon.Tabs.Add(rpTab);
             Ribbon.Tabs.Add(ctxTab);
             */
+            var run = new ClassWalker();
             var resource = ResourceController.LoadResourceRibbon<RibbonTabDef>("rp_RoadPAC");
             var tab = resource?.Transform(new RibbonTab(), resource);
             if (resource != null)

@@ -38,7 +38,6 @@ namespace Shared.Controllers
             // First we have to filter out files that does not start with prefix rp_
             string[] manifestResources = assembly.GetManifestResourceNames()
                 .Where(resource => resource.Contains("rp_")).ToArray();
-            Debug.WriteLine($"LoadEmbeddedResources: {manifestResources}");
             foreach (string resourceName in manifestResources
                 .Where(IsImage).ToArray())
             {
@@ -59,8 +58,7 @@ namespace Shared.Controllers
                 {
                     _cachedXml.Add(resourceName.Split('.').Reverse().Skip(1).First());
                 }
-                catch (Exception)
-                {
+                catch (Exception) {
                     continue; // Seems like file was not loaded correctly, thus must be skipped
                 }
             }
