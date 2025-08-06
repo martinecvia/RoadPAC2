@@ -119,7 +119,7 @@ namespace Shared.Controllers
             };
             tab.IsEnabled = true;
             if (!string.IsNullOrEmpty(tabName) || string.IsNullOrEmpty(tab.Name))
-                tab.Name = tabName ?? tabId;
+                tab.Name = tabName ?? tabId; tab.Title = tabName ?? tab.Name;
             if (!string.IsNullOrEmpty(tabDescription))
                 tab.Description = tabDescription;
             return tab;

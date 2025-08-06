@@ -6,6 +6,7 @@ using Autodesk.Windows;
 using Shared;
 using Shared.Controllers;
 using Shared.Controllers.Models.RibbonXml;
+using Shared.Controllers.Models.RibbonXml.Items;
 
 [assembly: CommandClass(typeof(NET_80_TEST.TestEx))]
 namespace NET_80_TEST
@@ -19,28 +20,7 @@ namespace NET_80_TEST
         {
             Document document = Application.DocumentManager.MdiActiveDocument;
             ResourceController.LoadEmbeddedResources(); // To load icons, configuration files etc.
-
-            RibbonTab rpTab = RibbonController.CreateTab("MAIN", "RoadPAC");
-            RibbonButton button = new RibbonButton
-            {
-                Text = "RoadPAC", // Untranslatable entity
-                Name = "RP_TAB_MAIN.PROJECT_MANAGER.RUN_ROADPAC",
-                ShowText = true,
-                Size = RibbonItemSize.Large,
-                Image = ResourceController.GetImageSource("rp_img_btn_manual_16"),
-                LargeImage = ResourceController.GetImageSource("rp_img_btn_manual_32"),
-                Orientation = System.Windows.Controls.Orientation.Vertical,
-                ShowImage = true,
-                CommandHandler = new CommandHandler("RP_RUN_ROADPAC")
-            };
-            RibbonPanelSource rpTabPanel = new RibbonPanelSource
-            {
-                Title = "{{ RP_TAB_MAIN.PROJECT_MANAGER.NAME }}",
-                Name = "RP_TAB_MAIN.PROJECT_MANAGER",
-            };
-            rpTabPanel.Items.Add(button);
-            rpTabPanel.Items.Add(new RibbonSeparator { SeparatorStyle = RibbonSeparatorStyle.Spacer }); // Vertical line
-            rpTab.Panels.Add(new RibbonPanel { Source = rpTabPanel }); // Adding RibbonPanelSource early
+            /*
             var ctxTab = RibbonController.CreateContextualTab("RP_CONTEXT1_TRASA", selection => {
                 if (selection == null || selection.Count == 0)
                     return false;
@@ -55,13 +35,24 @@ namespace NET_80_TEST
                 }
                 return false;
             }, "Trasa");
-
-            Ribbon.Tabs.Add(rpTab);
-            Ribbon.Tabs.Add(ctxTab);
-
-            var b = Ribbon.Tabs.Where(t => t.Name == "Output"); // To see whats happening there
-            var x = ResourceController.LoadResourceRibbon<RibbonTabDef>("rp_RoadPAC");
-            Debug.WriteLine(x);
+            */
+            var resource = ResourceController.LoadResourceRibbon<RibbonTabDef>("rp_RoadPAC");
+            var tab = resource?.Transform(new RibbonTab());
+            if (resource != null)
+            {
+                foreach (var panel in resource.PanelsDef)
+                {
+                    var panelRef = panel.Transform(new RibbonPanel());
+                    panelRef.Source = panel.SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[panel.SourceDef.GetType()]());
+                    foreach (var item in panel.SourceDef.ItemsDef)
+                    {
+                        var itemRef = item.Transform(RibbonItemDef.ItemsFactory[item.GetType()]());
+                        panelRef.Source.Items.Add(itemRef);
+                    }
+                    tab?.Panels.Add(panelRef);
+                }
+                Ribbon.Tabs.Add(tab);
+            }
         }
 
         public void Terminate()

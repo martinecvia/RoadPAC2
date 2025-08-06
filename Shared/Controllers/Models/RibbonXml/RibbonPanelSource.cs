@@ -5,7 +5,6 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Xml;
@@ -21,7 +20,6 @@ using Autodesk.Windows;
 
 using Shared.Controllers.Models.RibbonXml.Items;
 using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
-using static Shared.Controllers.Models.RibbonXml.Items.RibbonItemDef;
 
 namespace Shared.Controllers.Models.RibbonXml
 {
@@ -35,31 +33,6 @@ namespace Shared.Controllers.Models.RibbonXml
         "The items can also be organized into two panels - main panel and slide-out panel - by adding a RibbonPanelBreak item at the index where the slide-out panel is to start.")]
     public class RibbonPanelSourceDef : BaseRibbonXml
     {
-        [XmlIgnore]
-        public List<RibbonItem> Items
-        {
-            get
-            {
-                List<RibbonItem> items = new List<RibbonItem>();
-                if (ItemsDef == null)
-                    return items;
-                foreach (RibbonItemDef element in ItemsDef)
-                {
-                    try
-                    {
-                        items.Add(Transform(ItemsFactory[element.GetType()](), element)); // For some reason I've set ItemsFactory.GetType(),
-                                                                                          // instead of element.GetType() which resulted in System.Collections.Generic.KeyNotFoundException
-                    }
-                    catch (InvalidOperationException exception)
-                    {
-                        var underlayingException = exception.InnerException == null ? 
-                            exception.Message : exception.InnerException.Message;
-                        Debug.WriteLine($"RibbonPanelSourceDef({element.GetType().Name}): Failed to load: {underlayingException}");
-                    }
-                }
-                return items;
-            }
-        }
 
         [RPInternalUseOnly]
         [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
@@ -232,5 +205,13 @@ namespace Shared.Controllers.Models.RibbonXml
                 }
             }
         }
+
+        [XmlIgnore]
+        [RPPrivateUseOnly]
+        public static readonly Dictionary<Type, Func<RibbonPanelSource>> SourceFactory = new Dictionary<Type, Func<RibbonPanelSource>>()
+        {
+            { typeof(RibbonPanelSourceDef), () => new RibbonPanelSource() },
+            { typeof(RibbonPanelSourceDef.RibbonPanelSpacerDef), () => new RibbonPanelSpacer() }
+        };
     }
 }

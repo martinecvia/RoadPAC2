@@ -223,7 +223,7 @@ namespace Shared.Controllers.Models.RibbonXml
                 if (PanelsDef == null)
                     return panels;
                 foreach (RibbonPanelDef element in PanelsDef)
-                    panels.Add(Transform(new RibbonPanel(), element));
+                    panels.Add(element.Transform(new RibbonPanel()));
                 return panels;
             }
         }

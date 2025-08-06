@@ -11,10 +11,6 @@
 		<RibbonPanelSource Id="RP_TAB_RoadPAC.Panels.ProjectManager.Id"
 						   Title="Projekt manažér">
 			<!-- RibbonItem[] -->
-			<!-- RibbonButtonDef(Orientation=Vertical, IsCheckable=False, Highlight=None, Id=,
-					Image=System.Windows.Media.Imaging.BitmapImage, IsEnabled=True, IsToolTipEnabled=True, IsVisible=True, 
-					MinWidth=100, Name=RP_TAB_MAIN.PROJECT_MANAGER.RUN_ROADPAC, ShowImage=True, 
-					ShowText=True, Size=Large, Text=RoadPAC, Width=200) -->
 			<RibbonButton Text="Spusti RoadPAC"
 						  Name="RP_TAB_MAIN.PROJECT_MANAGER.RUN_ROADPAC"
 						  ShowText="True"
@@ -26,21 +22,23 @@
 						  CommandHandler="RP_RUN_ROADPAC" />
 		</RibbonPanelSource>
 	</RibbonPanel>
+	<!-- https://learn.microsoft.com/en-us/dotnet/media/art-color-table.png?view=windowsdesktop-9.0 !-->
+	<!--
 	<RibbonPanel Id="RP_TAB_RoadPAC.Panels(1).Spacer(0)"
 			 IsEnabled="True"
 			 HighlightPanelTitleBar="True"
 			 IsVisible="True">
 		<RibbonPanelSpacer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 			<LeftBorderBrush>
-				<!-- https://learn.microsoft.com/en-us/dotnet/media/art-color-table.png?view=windowsdesktop-9.0 !-->
+				
 				<SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 								 Color="#FF98FB98" />
 			</LeftBorderBrush>
 			<RightBorderBrush>
-				<!-- https://learn.microsoft.com/en-us/dotnet/media/art-color-table.png?view=windowsdesktop-9.0 !-->
 				<SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 								 Color="#FF98FB98" />
 			</RightBorderBrush>
 		</RibbonPanelSpacer>
 	</RibbonPanel>
+	-->
 </RibbonTab>

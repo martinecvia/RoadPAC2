@@ -44,6 +44,8 @@ namespace Shared.Controllers.Models.RibbonXml
             return $"{GetType().Name}({string.Join(", ", values)})";
         }
 
+        internal Target Transform<Target>(Target target) => Transform(target, this);
+
         internal Target Transform<Target, Source>(Target target, Source source) where Source : BaseRibbonXml
         {
             if (target == null || source == null)

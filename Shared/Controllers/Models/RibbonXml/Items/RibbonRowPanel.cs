@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
 
@@ -25,10 +24,6 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         "The items can be organized into multiple rows by adding a RibbonRowBreak item at the index where the new row is to start.")]
     public class RibbonRowPanelDef : RibbonItemObservableCollectionDef
     {
-
-        [XmlIgnore]
-        public override List<RibbonItem> Items => Items; // virtual can cause problems
-
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonFlowPanel
         public class RibbonFlowPanelDef : RibbonRowPanelDef
         {

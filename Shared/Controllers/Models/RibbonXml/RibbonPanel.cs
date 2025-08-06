@@ -164,19 +164,12 @@ namespace Shared.Controllers.Models.RibbonXml
         [Description("Gets or sets the source that contains the ribbon items to be displayed by this panel. " +
             "The default value is null.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_Source
-        public RibbonPanelSource Source => SourceDef != null ? Transform(SourceFactory[SourceDef.GetType()](), SourceDef) : null;
+        public RibbonPanelSource Source => SourceDef != null ? SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[SourceDef.GetType()]()) : null;
 
         [RPInternalUseOnly]
         [XmlElement("RibbonPanelSource", typeof(RibbonPanelSourceDef))]
         [XmlElement("RibbonPanelSpacer", typeof(RibbonPanelSourceDef.RibbonPanelSpacerDef))]
         public RibbonPanelSourceDef SourceDef { get; set; } = null;
 
-        [XmlIgnore]
-        [RPPrivateUseOnly]
-        private static readonly Dictionary<Type, Func<RibbonPanelSource>> SourceFactory = new Dictionary<Type, Func<RibbonPanelSource>>()
-        {
-            { typeof(RibbonPanelSourceDef), () => new RibbonPanelSource() },
-            { typeof(RibbonPanelSourceDef.RibbonPanelSpacerDef), () => new RibbonPanelSpacer() }
-        };
     }
 }
