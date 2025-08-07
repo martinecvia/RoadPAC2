@@ -121,11 +121,15 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [XmlAttribute("Image")]
         public string ImageDef
         {
-            get => null;
+            get => Image?.ToString() ?? "";
             set
             {
-                if (value != null)
-                    Image = ResourceController.GetImageSource(value);
+                if (string.IsNullOrEmpty(value))
+                {
+                    Image = null;
+                    return;
+                }
+                Image = ResourceController.GetImageSource(value);
             }
         }
 
@@ -246,12 +250,15 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [XmlAttribute("LargeImage")]
         public string LargeImageDef
         {
-            get => null;
+            get => LargeImage?.ToString() ?? "";
             set
             {
-                if (value != null)
-                    LargeImage = ResourceController.GetImageSource(value);
-
+                if (string.IsNullOrEmpty(value))
+                {
+                    LargeImage = null;
+                    return;
+                }
+                LargeImage = ResourceController.GetImageSource(value);
             }
         }
 

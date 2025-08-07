@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Xml.Serialization;
 
 using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
@@ -10,7 +11,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
     public class RibbonItemObservableCollectionDef : RibbonItemDef
     {
         [RPInternalUseOnly]
-        [RPValidation]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
         [XmlElement("RibbonLabel", typeof(RibbonLabelDef))]
         [XmlElement("RibbonCombo", typeof(RibbonListDef.RibbonComboDef))]
@@ -26,9 +27,4 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [XmlElement("RibbonTextBox", typeof(RibbonTextBoxDef))]
         public List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
     }
-
-    // Validation attribute used to
-    [AttributeUsage(AttributeTargets.Property, AllowMultiple = true, Inherited = true)]
-    internal sealed class RPValidationAttribute : Attribute
-    { }
 }

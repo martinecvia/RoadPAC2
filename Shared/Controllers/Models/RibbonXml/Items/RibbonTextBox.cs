@@ -22,6 +22,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         "If any data type other than string is required you need to derive from this class and implement the virtual methods for converting the value from and to string.")]
     public class RibbonTextBoxDef : RibbonItemDef
     {
+#if NET8_0_OR_GREATER
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(System.Windows.Controls.Orientation.Horizontal)]
@@ -41,7 +42,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 Orientation = result;
             }
         }
-
+#endif
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(true)]
@@ -269,6 +270,5 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 ResizableBoxWidth = double.NaN;
             }
         }
-
     }
 }

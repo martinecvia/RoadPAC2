@@ -234,7 +234,7 @@ namespace Shared.Controllers.Models.RibbonXml
         }
 
         [RPInternalUseOnly]
-        [RPValidation]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [XmlElement("RibbonPanel")]
         public List<RibbonPanelDef> PanelsDef { get; set; } = new List<RibbonPanelDef>();
 

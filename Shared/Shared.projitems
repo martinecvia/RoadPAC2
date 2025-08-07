@@ -12,7 +12,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)Assert.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\BaseRibbonXml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\Items\CommandItems\RibbonButton.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\Items\RibbonItemObservableCollectionDef.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\Items\CommandItems\RibbonCommandItemObservableCollection.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\Items\RibbonItemObservableCollection.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\Items\RibbonRowBreak.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\Items\RibbonRowPanel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\Items\RibbonItem.cs" />

@@ -83,7 +83,11 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(null)]
+#if NET8_0_OR_GREATER
+        public System.Windows.Input.ICommand? CommandHandler { get; set; } = null;
+#else
         public System.Windows.Input.ICommand CommandHandler { get; set; } = null;
+#endif
 
         [RPInternalUseOnly]
         [XmlAttribute("CommandHandler")]

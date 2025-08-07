@@ -31,7 +31,11 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 "4. the global command handler set in ComponentManager.CommandHandler. " +
                 "The default value is null.")]
             // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonCombo_CommandHandler
-            public System.Windows.Input.ICommand CommandHandler { get; set; } = null;
+#if NET8_0_OR_GREATER
+            public System.Windows.Input.ICommand? CommandHandler { get; set; } = null;
+#else
+        public System.Windows.Input.ICommand CommandHandler { get; set; } = null;
+#endif
 
             [RPInternalUseOnly]
             [XmlAttribute("CommandHandler")]
@@ -51,7 +55,11 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonCombo_EditableText
             [Description("Gets or sets the editable text in the combo box. This property is applicable only if IsEditable is true. " +
                 "The default value is null.")]
+#if NET8_0_OR_GREATER
+            public string? EditableText { get; set; } = null;
+#else
             public string EditableText { get; set; } = null;
+#endif
 
             [RPInfoOut]
             [XmlIgnore]
@@ -107,6 +115,57 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                         return;
                     }
                     IsVirtualizing = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+                }
+            }
+
+            [RPInfoOut]
+            [RPInternalUseOnly]
+            [XmlIgnore]
+            [DefaultValue(double.NaN)]
+            public double ResizableBoxWidth { get; set; } = double.NaN;
+
+            [XmlAttribute("ResizableBoxWidth")]
+            [RPInternalUseOnly]
+            public string ResizableBoxWidthDef
+            {
+                get => ResizableBoxWidth.ToString();
+                set
+                {
+                    if (string.IsNullOrEmpty(value)) return;
+                    if (double.TryParse(value, out var result))
+                    {
+                        ResizableBoxWidth = result;
+                        return;
+                    }
+                    ResizableBoxWidth = double.NaN;
+                }
+            }
+
+            [RPInfoOut]
+            [RPInternalUseOnly]
+            [XmlAttribute("TextPath")]
+            [DefaultValue("Text")]
+            public string TextPath { get; set; } = "Text";
+
+            [RPInfoOut]
+            [RPInternalUseOnly]
+            [XmlIgnore]
+            [DefaultValue(true)]
+            public bool IsTextSearchEnabled { get; set; } = true;
+
+            [RPInternalUseOnly]
+            [XmlAttribute("IsTextSearchEnabled")]
+            public string IsTextSearchEnabledDef
+            {
+                get => IsTextSearchEnabled.ToString();
+                set
+                {
+                    if (value == null)
+                    {
+                        IsTextSearchEnabled = true;
+                        return;
+                    }
+                    IsTextSearchEnabled = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
                 }
             }
 

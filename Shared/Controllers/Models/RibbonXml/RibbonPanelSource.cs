@@ -35,7 +35,7 @@ namespace Shared.Controllers.Models.RibbonXml
     {
 
         [RPInternalUseOnly]
-        [RPValidation]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
         [XmlElement("RibbonLabel", typeof(RibbonLabelDef))]
         [XmlElement("RibbonCombo", typeof(RibbonListDef.RibbonComboDef))]

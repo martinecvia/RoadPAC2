@@ -197,7 +197,7 @@ namespace Shared.Controllers.Models.RibbonXml
         public RibbonPanelSource Source => SourceDef != null ? SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[SourceDef.GetType()]()) : null;
 
         [RPInternalUseOnly]
-        [RPValidation]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [XmlElement("RibbonPanelSource", typeof(RibbonPanelSourceDef))]
         [XmlElement("RibbonPanelSpacer", typeof(RibbonPanelSourceDef.RibbonPanelSpacerDef))]
         public RibbonPanelSourceDef SourceDef { get; set; } = null;
