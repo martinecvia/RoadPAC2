@@ -1,38 +1,26 @@
-﻿using Autodesk.AutoCAD.ApplicationServices;
-using Autodesk.AutoCAD.Runtime;
-using Autodesk.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Shared.Controllers;
 using Shared.Controllers.Models.RibbonXml;
 using Shared.Controllers.Models.RibbonXml.Items;
+using ZwSoft.Windows;
+using ZwSoft.ZwCAD.ApplicationServices;
+using ZwSoft.ZwCAD.Runtime;
 
-[assembly: CommandClass(typeof(NET_80_TEST.TestEx))]
-namespace NET_80_TEST
-{
+[assembly: CommandClass(typeof(ZWC_47_TEST.TestEx))]
+namespace ZWC_47_TEST
+{ 
     public class TestEx : IExtensionApplication
     {
-
         private static RibbonControl Ribbon => ComponentManager.Ribbon;
 
         public void Initialize()
         {
             Document document = Application.DocumentManager.MdiActiveDocument;
             ResourceController.LoadEmbeddedResources(); // To load icons, configuration files etc.
-            /*
-            var ctxTab = RibbonController.CreateContextualTab("RP_CONTEXT1_TRASA", selection => {
-                if (selection == null || selection.Count == 0)
-                    return false;
-                using (var transaction = document.TransactionManager.StartTransaction())
-                {
-                    foreach (var Id in selection.GetObjectIds())
-                    {
-                        var lookup = transaction.GetObject(Id, OpenMode.ForRead, false);
-                        if (lookup is Line || lookup is Polyline)
-                            return true;
-                    }
-                }
-                return false;
-            }, "Trasa");
-            */
             var resource = ResourceController.LoadResourceRibbon<RibbonTabDef>("rp_RoadPAC");
             var tab = resource?.Transform(new RibbonTab());
             if (resource != null)

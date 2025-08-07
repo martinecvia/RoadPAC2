@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
-using ZwSoft.ZwCAD.Windows;
+using ZwSoft.Windows;
 #else
 using Autodesk.Windows;
 #endif

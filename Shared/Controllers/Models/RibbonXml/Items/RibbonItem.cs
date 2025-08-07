@@ -11,7 +11,10 @@ using System.Xml.Serialization;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
-using ZwSoft.ZwCAD.Internal.Windows;
+using ZwSoft.Windows;
+#if INTERNALS
+using ZwSoft.Internal.Windows;
+#endif
 #else
 #if INTERNALS
 using Autodesk.Internal.Windows;

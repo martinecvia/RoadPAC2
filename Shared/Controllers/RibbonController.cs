@@ -16,7 +16,7 @@ using System.Reflection;
 #if ZWCAD
 using ZwSoft.ZwCAD.ApplicationServices;
 using ZwSoft.ZwCAD.EditorInput;
-using ZwSoft.ZwCAD.Windows;
+using ZwSoft.Windows;
 #else
 #if INTERNALS
 using Autodesk.Internal.Windows;
@@ -25,9 +25,10 @@ using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.EditorInput;
 using Autodesk.Windows;
 #endif
+#endregion
+
 using Shared.Controllers.Models;
 using Shared.Controllers.Models.RibbonXml;
-#endregion
 
 namespace Shared.Controllers
 {
