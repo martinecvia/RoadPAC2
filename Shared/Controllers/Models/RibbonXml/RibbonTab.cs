@@ -15,9 +15,10 @@ using ZwSoft.ZwCAD.Internal.Windows;
 using Autodesk.Internal.Windows;
 #endif
 using Autodesk.Windows;
-using Shared.Controllers.Models.RibbonXml.Items;
 #endif
 #endregion
+
+using Shared.Controllers.Models.RibbonXml.Items;
 
 // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem
 namespace Shared.Controllers.Models.RibbonXml

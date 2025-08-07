@@ -422,7 +422,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [RPInternalUseOnly]
         public string WidthDef
         {
-            get => MinWidth.ToString();
+            get => Width.ToString();
             set
             {
                 if (string.IsNullOrEmpty(value)) return;

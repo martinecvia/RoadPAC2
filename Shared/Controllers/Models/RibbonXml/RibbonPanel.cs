@@ -6,8 +6,6 @@ using System.ComponentModel;
 using System.Xml;
 using System.Windows.Markup;
 using System.Xml.Serialization;
-using Shared.Controllers.Models.RibbonXml.Items;
-
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -16,6 +14,8 @@ using ZwSoft.ZwCAD.Windows;
 using Autodesk.Windows;
 #endif
 #endregion
+
+using Shared.Controllers.Models.RibbonXml.Items;
 
 namespace Shared.Controllers.Models.RibbonXml
 {
