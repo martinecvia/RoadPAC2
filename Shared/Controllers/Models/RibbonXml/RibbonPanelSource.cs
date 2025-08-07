@@ -70,11 +70,24 @@ namespace Shared.Controllers.Models.RibbonXml
             "Clicking the button raises a command that follows the standard ribbon command routing. " +
             "If this property is null the panel does not have a dialog launcher button. " +
             "The default value is null.")]
-        public RibbonCommandItem DialogLauncher => DialogLauncherDef?.Transform(new RibbonCommandItem());
+        public RibbonCommandItem DialogLauncher
+        {
+            get
+            {
+                RibbonButton button = DialogLauncherDef?.Transform(new RibbonButton());
+                if (button != null)
+                {
+                    // DialogLauncher depends on this, thus must be changed
+                    button.MinWidth = 0;
+                    button.Width = double.NaN;
+                }
+                return button;
+            }
+        }   
 
         [RPInternalUseOnly]
         [XmlElement("DialogLauncher")]
-        public RibbonCommandItemDef DialogLauncherDef { get; set; } = null;
+        public RibbonButtonDef DialogLauncherDef { get; set; } = null;
 
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Id
         [RPInfoOut]
@@ -212,7 +225,7 @@ namespace Shared.Controllers.Models.RibbonXml
         public static readonly Dictionary<Type, Func<RibbonPanelSource>> SourceFactory = new Dictionary<Type, Func<RibbonPanelSource>>()
         {
             { typeof(RibbonPanelSourceDef), () => new RibbonPanelSource() },
-            { typeof(RibbonPanelSourceDef.RibbonPanelSpacerDef), () => new RibbonPanelSpacer() }
+            { typeof(RibbonPanelSpacerDef), () => new RibbonPanelSpacer() }
         };
     }
 }

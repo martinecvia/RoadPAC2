@@ -1,21 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<RibbonTab xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		   Id="RP_TAB_RoadPAC"
-		   Title="RoadPAC"
-		   IsEnabled="True">
-	<!-- RibbonPanel[] -->
-	<RibbonPanel Id="RP_TAB_RoadPAC.Panels(0).ProjectManager"
-				 IsEnabled="True"
-				 HighlightPanelTitleBar="True"
-				 IsVisible="True">
-		<!-- RibbonPanelSource -->
-		<RibbonPanelSource Id="RP_TAB_RoadPAC.Panels.ProjectManager.Id"
-						   Title="Projekt manažér">
-			<DialogLauncher Text="Spusti nastavení" 
-							ShowText="True"
-							Image="rp_img_btn_manual_16"
-							ShowImage="True"
-							CommandHandler="RP_RUN_ROADPAC.SETTINGS" />
+<RibbonTab xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="RP_ACAD.ID_TabRoadPAC" IsContextualTab="False" IsVisible="True" 
+		   KeyTip="RP" Name="RoadPAC" Title="RoadPAC" IsEnabled="True" IsPanelEnabled="True" IsMergedContextualTab="False" AllowTearOffContextualPanels="False"
+		   UID="ID_WSR_001_62AEA">
+	<RibbonPanel Id="RP_RBN_0001" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
+				 IsEnabled="True" IsVisible="True" IsContextualTabThemeIgnored="False"
+				 UID="ID_WSR_0001_2303A">
+		<RibbonPanelSource Id="RP_RBN_0001_2303A" Title="Projekt manažér">
+			<DialogLauncher Orientation="Horizontal" IsCheckable="False" IsChecked="False" ShowImage="True" IsVisible="True" IsEnabled="True" Size="Standard" GroupLocation="Middle"
+							AllowInToolBar="True" AllowInStatusBar="True" ResizeStyle="HideText"
+							Text="Otevři složku aktuálního projektu" ShowText="False" CommandHandler="RP_COMMAND(OPEN_ACTIVE_DIRECTORY)" />
 			<!-- RibbonItem[] -->
 			<RibbonButton Text="Spusti RoadPAC"
 						  Name="RP_TAB_MAIN.PROJECT_MANAGER.RUN_ROADPAC"

@@ -55,10 +55,6 @@
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Interop.ZWCAD">
-      <HintPath>..\..\Libraries\ZWCAD\2025\Interop.ZWCAD.dll</HintPath>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -72,14 +68,32 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
-    <Reference Include="ZdWindows">
-      <HintPath>..\..\Libraries\ZWCAD\2025\ZdWindows.dll</HintPath>
+    <Reference Include="ZcWindows">
+      <HintPath>..\..\Libraries\ZWCAD\2026\ZcWindows.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="ZwDatabaseMgd">
-      <HintPath>..\..\Libraries\ZWCAD\2025\ZwDatabaseMgd.dll</HintPath>
+    <Reference Include="ZdWindows, Version=4.0.0.6, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\ZWCAD\2026\ZdWindows.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="ZwManaged">
-      <HintPath>..\..\Libraries\ZWCAD\2025\ZwManaged.dll</HintPath>
+    <Reference Include="ZwDatabaseMgd, Version=25.0.25.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\ZWCAD\2026\ZwDatabaseMgd.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ZwManaged, Version=25.0.25.0, Culture=neutral, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libraries\ZWCAD\2026\ZwManaged.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="ZwSoft.ZwCAD.Interop">
+      <HintPath>..\..\Libraries\ZWCAD\2026\ZwSoft.ZwCAD.Interop.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="ZwSoft.ZwCAD.Interop.Common">
+      <HintPath>..\..\Libraries\ZWCAD\2026\ZwSoft.ZwCAD.Interop.Common.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
   </ItemGroup>
   <ItemGroup>

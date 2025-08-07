@@ -14,6 +14,9 @@ using Autodesk.Windows;
 namespace Shared.Controllers.Models.RibbonXml.Items
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonList
+    [RPPrivateUseOnly]
+    [XmlInclude(typeof(RibbonComboDef))]
+    [XmlInclude(typeof(RibbonComboDef.RibbonGalleryDef))]
     public abstract class RibbonListDef : RibbonItemObservableCollectionDef
     {
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonCombo
@@ -173,6 +176,10 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             [RPPrivateUseOnly]
             public class RibbonGalleryDef : RibbonComboDef
             {
+                public RibbonGalleryDef()
+                {
+                    base.ResizeStyle = RibbonItemResizeStyles.ResizeWidth | RibbonItemResizeStyles.Collapse;
+                }
                 [RPInfoOut]
                 [XmlIgnore]
                 [Description("Gets or sets the display mode of the gallery. " +

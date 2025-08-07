@@ -22,6 +22,10 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         "If any data type other than string is required you need to derive from this class and implement the virtual methods for converting the value from and to string.")]
     public class RibbonTextBoxDef : RibbonItemDef
     {
+        public RibbonTextBoxDef()
+        {
+            base.ShowImage = false;
+        }
 #if NET8_0_OR_GREATER
         [RPInfoOut]
         [XmlIgnore]

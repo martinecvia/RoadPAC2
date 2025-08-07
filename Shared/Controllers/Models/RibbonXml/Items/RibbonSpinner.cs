@@ -14,6 +14,10 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         "The implementation is kept generic so that other data types can be easily supported by deriving from this class and overriding the virtual methods.")]
     public class RibbonSpinnerDef : RibbonItemDef
     {
+        public RibbonSpinnerDef()
+        {
+            base.ShowImage = false;
+        }
         // Value must be as first field because later on we will use his datatype as global datatype
         [RPInfoOut]
         [XmlIgnore]

@@ -17,6 +17,12 @@ namespace Shared.Controllers.Models.RibbonXml.Items
     [Description("This class is used to support separators in a ribbon. Separators can be used to add space or divider lines between ribbon items.")]
     public class RibbonSeparatorDef : RibbonItemDef
     {
+        public RibbonSeparatorDef()
+        {
+            base.ResizeStyle = RibbonItemResizeStyles.NoResize;
+            base.MinWidth = 0.0;
+            base.Width = double.NaN;
+        }
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(RibbonSeparatorStyle.Line)]

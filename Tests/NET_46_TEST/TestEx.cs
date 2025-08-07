@@ -53,6 +53,8 @@ namespace NET_46_TEST
                 {
                     var panelRef = panel.Transform(new RibbonPanel());
                     panelRef.Source = panel.SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[panel.SourceDef.GetType()]());
+                    RibbonButton testCommand = new RibbonButton { Text = "Text" };    
+                    Compare(panelRef.Source.DialogLauncher, testCommand);
                     foreach (var item in panel.SourceDef.ItemsDef)
                     {
                         var itemRef = item.Transform(RibbonItemDef.ItemsFactory[item.GetType()]());
@@ -141,6 +143,15 @@ namespace NET_46_TEST
                     $"IsEnabled: {panel.IsEnabled} {TryGetDefault(panel, "IsEnabled")}\n" +
                     $"IsVisible: {panel.IsVisible} {TryGetDefault(panel, "IsVisible")}\n" +
                     $"Source: {panel.Source} {TryGetDefault(panel, "Source")}\n" +
+                    $"  - Items: {panel.Source.Items} [default: []]\n" +
+                    $"  - Description: {panel.Source.Description} {TryGetDefault(panel.Source, "Description")}\n" +
+                    $"  - DialogLauncher: {panel.Source.DialogLauncher} {TryGetDefault(panel.Source, "DialogLauncher")}\n" +
+                    $"{TryVisit(panel.Source.DialogLauncher)}" +
+                    $"  - Id: {panel.Source.Id} {TryGetDefault(panel.Source, "Id")}\n" +
+                    $"  - Name: {panel.Source.Name} {TryGetDefault(panel.Source, "Name")}\n" +
+                    $"  - KeyTip: {panel.Source.KeyTip} {TryGetDefault(panel.Source, "KeyTip")}\n" +
+                    $"  - Tag: {panel.Source.Tag} {TryGetDefault(panel.Source, "Tag")}\n" +
+                    $"  - Title: {panel.Source.Title} {TryGetDefault(panel.Source, "Title")}\n" +
                     $"CustomPanelBackground: {panel.CustomPanelBackground} {TryGetDefault(panel, "CustomPanelBackground")}\n" +
                     $"CustomSlideOutPanelBackground: {panel.CustomSlideOutPanelBackground} {TryGetDefault(panel, "CustomSlideOutPanelBackground")}\n" +
                     $"CustomPanelTitleBarBackground: {panel.CustomPanelTitleBarBackground} {TryGetDefault(panel, "CustomPanelTitleBarBackground")}\n" +
@@ -217,9 +228,58 @@ namespace NET_46_TEST
                 if (defaultAttribute.Value is string def && string.IsNullOrEmpty(def) && propertyInfo.PropertyType.Name is "String")
                     return $"[default: '']";
                 return $"[default: {defaultAttribute.Value ?? "null"}]";
-            } catch
+            }
+            catch
             {
                 return "[default: Error]";
+            }
+        }
+
+        private object TryVisit(object source)
+        {
+            try
+            {
+                PropertyInfo[] properties = source.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                    .Where(property => property.SetMethod != null && property.SetMethod.IsPublic && !property.SetMethod.IsStatic).ToArray();
+                string result = "";
+                foreach (var property in properties)
+                    result = result + $"    - {property.Name}: {property.GetValue(source)}\n";
+                return result;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private void Compare(object ob1, object ob2)
+        {
+            if (ob1 == null || ob2 == null)
+                return;
+            PropertyInfo[] prop1 = ob1.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                   .Where(property => property.SetMethod != null && property.SetMethod.IsPublic && !property.SetMethod.IsStatic).ToArray();
+            PropertyInfo[] prop2 = ob2.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                   .Where(property => property.SetMethod != null && property.SetMethod.IsPublic && !property.SetMethod.IsStatic).ToArray();
+            Dictionary<string, PropertyInfo> dict1 = new Dictionary<string, PropertyInfo>();
+            foreach (var p1 in prop1) { dict1[p1.Name] = p1; }
+            Dictionary<string, PropertyInfo> dict2 = new Dictionary<string, PropertyInfo>();
+            foreach (var p2 in prop2) { dict2[p2.Name] = p2; }
+            Debug.WriteLine($"--- Compare: {ob1}/{ob2}");
+            Debug.WriteLine($"Number of properties: {dict1.Count}/{dict2.Count}");
+            foreach (var item in dict2) { if (!dict1.ContainsKey(item.Key)) Debug.WriteLine($"1: Is missing {item.Key} property"); }
+            foreach (var item in dict1)
+            {
+                // Check what properties are missing
+                if (!dict2.ContainsKey(item.Key))
+                    Debug.WriteLine($"2: Is missing {item.Key} property");
+                else
+                {
+                    // Check their values
+                    object val1 = item.Value.GetValue(ob1);
+                    object val2 = dict2[item.Key].GetValue(ob2);
+                    if (val1?.ToString() != val2?.ToString())
+                        Debug.WriteLine($"{item.Key}: {val1}/{val2}");
+                }
             }
         }
     }

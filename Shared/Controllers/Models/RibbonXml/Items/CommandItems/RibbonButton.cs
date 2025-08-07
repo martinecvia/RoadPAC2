@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Windows.Controls;
 using System.Xml.Serialization;
 
 namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
@@ -8,6 +9,12 @@ namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
     [RPPrivateUseOnly]
     public class RibbonButtonDef : RibbonCommandItemDef
     {
+        public RibbonButtonDef()
+        {
+            base.MinWidth = 0;
+            base.Width = double.NaN;
+        }
+
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(System.Windows.Controls.Orientation.Horizontal)]
