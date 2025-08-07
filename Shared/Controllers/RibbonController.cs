@@ -3,8 +3,6 @@
 #define DEBUG
 #define NON_VOLATILE_MEMORY
 
-#define INTERNALS
-
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -18,9 +16,6 @@ using ZwSoft.ZwCAD.ApplicationServices;
 using ZwSoft.ZwCAD.EditorInput;
 using ZwSoft.Windows;
 #else
-#if INTERNALS
-using Autodesk.Internal.Windows;
-#endif
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.EditorInput;
 using Autodesk.Windows;
