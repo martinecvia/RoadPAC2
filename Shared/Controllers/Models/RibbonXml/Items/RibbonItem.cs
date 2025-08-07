@@ -60,7 +60,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
     "The description text is used in the application menu, tooltips, and drop-down lists in a RibbonListButton when the list style is set to Descriptive.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem_GroupName
         public string GroupName { get; set; } = null;
-
+#if INTERNALS
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(HighlightMode.None)]
@@ -80,7 +80,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 Highlight = result;
             }
         }
-
+#endif
         [RPInfoOut]
         [XmlAttribute("Id")]
         [DefaultValue("")]

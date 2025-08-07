@@ -1,8 +1,9 @@
 ﻿#pragma warning disable CS8603
 #pragma warning disable CS8625
 
-#define INTERNALS
-
+#if NET8_0_OR_GREATER
+using System; // RibbonTabDef#Highlight requires this for Enum.TryParse method
+#endif
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
@@ -11,9 +12,6 @@ using System.Xml.Serialization;
 #if ZWCAD
 using ZwSoft.Windows;
 #else
-#if INTERNALS
-using Autodesk.Internal.Windows;
-#endif
 using Autodesk.Windows;
 #endif
 #endregion
