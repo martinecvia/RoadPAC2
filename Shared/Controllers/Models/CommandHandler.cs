@@ -1,3 +1,4 @@
+#pragma warning disable CS0067
 #pragma warning disable CS8600
 #pragma warning disable CS8612
 #pragma warning disable CS8618

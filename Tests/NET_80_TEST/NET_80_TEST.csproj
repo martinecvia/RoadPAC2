@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
 	<UseWPF>true</UseWPF>
+	<Platforms>AnyCPU;x64</Platforms>
   </PropertyGroup>
 
   <Import Project="..\..\Shared\Shared.projitems" Label="Shared" />
