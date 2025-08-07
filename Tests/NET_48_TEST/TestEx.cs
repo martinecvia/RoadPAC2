@@ -13,12 +13,9 @@ using Shared.Controllers;
 using Shared.Controllers.Models.RibbonXml;
 using Shared.Controllers.Models.RibbonXml.Items;
 
-// https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-4E1AAFA9-740E-4097-800C-CAED09CDFF12
-// https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-C3F3C736-40CF-44A0-9210-55F6A939B6F2
-// Developer site for 2017
-// https://aps.autodesk.com/developer/overview/autocad
-[assembly: CommandClass(typeof(NET_46_TEST.TestEx))]
-namespace NET_46_TEST
+
+[assembly: CommandClass(typeof(NET_48_TEST.TestEx))]
+namespace NET_48_TEST
 {
     public class TestEx : IExtensionApplication
     {
@@ -248,37 +245,6 @@ namespace NET_46_TEST
             catch
             {
                 return null;
-            }
-        }
-
-        private void Compare(object ob1, object ob2)
-        {
-            if (ob1 == null || ob2 == null)
-                return;
-            PropertyInfo[] prop1 = ob1.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                   .Where(property => property.SetMethod != null && property.SetMethod.IsPublic && !property.SetMethod.IsStatic).ToArray();
-            PropertyInfo[] prop2 = ob2.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                   .Where(property => property.SetMethod != null && property.SetMethod.IsPublic && !property.SetMethod.IsStatic).ToArray();
-            Dictionary<string, PropertyInfo> dict1 = new Dictionary<string, PropertyInfo>();
-            foreach (var p1 in prop1) { dict1[p1.Name] = p1; }
-            Dictionary<string, PropertyInfo> dict2 = new Dictionary<string, PropertyInfo>();
-            foreach (var p2 in prop2) { dict2[p2.Name] = p2; }
-            Debug.WriteLine($"--- Compare: {ob1}/{ob2}");
-            Debug.WriteLine($"Number of properties: {dict1.Count}/{dict2.Count}");
-            foreach (var item in dict2) { if (!dict1.ContainsKey(item.Key)) Debug.WriteLine($"1: Is missing {item.Key} property"); }
-            foreach (var item in dict1)
-            {
-                // Check what properties are missing
-                if (!dict2.ContainsKey(item.Key))
-                    Debug.WriteLine($"2: Is missing {item.Key} property");
-                else
-                {
-                    // Check their values
-                    object val1 = item.Value.GetValue(ob1);
-                    object val2 = dict2[item.Key].GetValue(ob2);
-                    if (val1?.ToString() != val2?.ToString())
-                        Debug.WriteLine($"{item.Key}: {val1}/{val2}");
-                }
             }
         }
     }

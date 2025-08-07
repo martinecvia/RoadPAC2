@@ -16,6 +16,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET_80_TEST", "Tests\NET_80
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZWC_47_TEST", "Tests\ZWC_47_TEST\ZWC_47_TEST.csproj", "{4FC697A8-7201-4D01-9EC5-347D3EB9FA1F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NET_48_TEST", "Tests\NET_48_TEST\NET_48_TEST.csproj", "{627CD078-C4FC-4CD4-B5EC-44A40803DBBD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,6 +46,14 @@ Global
 		{4FC697A8-7201-4D01-9EC5-347D3EB9FA1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FC697A8-7201-4D01-9EC5-347D3EB9FA1F}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4FC697A8-7201-4D01-9EC5-347D3EB9FA1F}.Release|x64.ActiveCfg = Release|x64
+		{627CD078-C4FC-4CD4-B5EC-44A40803DBBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{627CD078-C4FC-4CD4-B5EC-44A40803DBBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{627CD078-C4FC-4CD4-B5EC-44A40803DBBD}.Debug|x64.ActiveCfg = Debug|x64
+		{627CD078-C4FC-4CD4-B5EC-44A40803DBBD}.Debug|x64.Build.0 = Debug|x64
+		{627CD078-C4FC-4CD4-B5EC-44A40803DBBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{627CD078-C4FC-4CD4-B5EC-44A40803DBBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{627CD078-C4FC-4CD4-B5EC-44A40803DBBD}.Release|x64.ActiveCfg = Release|x64
+		{627CD078-C4FC-4CD4-B5EC-44A40803DBBD}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,7 +62,7 @@ Global
 		SolutionGuid = {6BCA957C-6516-4179-B0AB-E3EA7C5DE504}
 	EndGlobalSection
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		Shared\Shared.projitems*{627cd078-c4fc-4cd4-b5ec-44a40803dbbd}*SharedItemsImports = 4
 		Shared\Shared.projitems*{800249df-7f91-4871-81ad-cc1d914073c7}*SharedItemsImports = 13
-		Shared\Shared.projitems*{da6d985e-7ae1-4c45-a05d-480e26107d22}*SharedItemsImports = 4
 	EndGlobalSection
 EndGlobal

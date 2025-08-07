@@ -9,6 +9,12 @@ namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
     {
         [RPInternalUseOnly]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        // RibbonCommandItem
+        [XmlElement("DocumentItem", typeof(DocumentItemDef))]
+        [XmlElement("ProgressBarSource", typeof(ProgressBarSourceDef))]
+        [XmlElement("RibbonCheckBox", typeof(RibbonCheckBoxDef))]
+        [XmlElement("RibbonMenuItem", typeof(RibbonMenuItemDef))]
+        // RibbonButton
         [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
         public List<RibbonCommandItemDef> ItemsDef { get; set; } = new List<RibbonCommandItemDef>();
     }

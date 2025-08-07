@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <RibbonTab xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="RP_ACAD.ID_TabRoadPAC" IsContextualTab="False" IsVisible="True" 
-		   KeyTip="RP" Name="RoadPAC" Title="RoadPAC" IsEnabled="True" IsPanelEnabled="True" IsMergedContextualTab="False" AllowTearOffContextualPanels="False"
+		   KeyTip="RP" Name="RoadPAC2" Title="RoadPAC2" IsEnabled="True" IsPanelEnabled="True" IsMergedContextualTab="False" AllowTearOffContextualPanels="False"
 		   UID="ID_WSR_001_62AEA">
 	<RibbonPanel Id="RP_RBN_0001" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
 				 IsEnabled="True" IsVisible="True" IsContextualTabThemeIgnored="False"
 				 UID="ID_WSR_0001_2303A">
 		<RibbonPanelSource Id="RP_RBN_0001_2303A" Title="Projekt manažér">
-			<DialogLauncher Orientation="Horizontal" IsCheckable="False" IsChecked="False" ShowImage="True" IsVisible="True" IsEnabled="True" Size="Standard" GroupLocation="Middle"
+			<DialogLauncher Orientation="Horizontal" IsCheckable="False" ShowImage="True" IsVisible="True" IsEnabled="True" Size="Standard" GroupLocation="Middle"
 							AllowInToolBar="True" AllowInStatusBar="True" ResizeStyle="HideText"
 							Text="Otevři složku aktuálního projektu" ShowText="False" CommandHandler="RP_COMMAND(OPEN_ACTIVE_DIRECTORY)" />
 			<!-- RibbonItem[] -->
@@ -19,6 +19,22 @@
 						  Orientation="Vertical"
 						  ShowImage="True"
 						  CommandHandler="RP_RUN_ROADPAC" />
+			<DocumentItem />
+			<ProgressBarSource />
+			<RibbonCheckBox />
+			<RibbonMenuItem />
+			<RibbonCombo />
+			<RibbonGallery />
+			<RibbonLabel />
+			<RibbonPanelBreak />
+			<RibbonRowBreak />
+			<RibbonRowPanel />
+			<RibbonFlowPanel />
+			<RibbonFoldPanel />
+			<RibbonSeparator />
+			<RibbonSlider />
+			<RibbonSpinner />
+			<RibbonTextBox />
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- https://learn.microsoft.com/en-us/dotnet/media/art-color-table.png?view=windowsdesktop-9.0 !-->

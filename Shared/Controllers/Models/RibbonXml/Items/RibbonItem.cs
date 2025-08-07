@@ -29,6 +29,12 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem
     [RPPrivateUseOnly]
+    [XmlInclude(typeof(DocumentItemDef))]
+    [XmlInclude(typeof(ProgressBarSourceDef))]
+    [XmlInclude(typeof(RibbonButtonDef))]
+    [XmlInclude(typeof(RibbonCheckBoxDef))]
+    [XmlInclude(typeof(RibbonMenuItemDef))]
+    [XmlInclude(typeof(RibbonToggleButtonDef))]
     [XmlInclude(typeof(RibbonButtonDef))]
     [XmlInclude(typeof(RibbonItemDef))]
     [XmlInclude(typeof(RibbonLabelDef))]
@@ -474,11 +480,11 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [RPPrivateUseOnly]
         public static readonly Dictionary<Type, Func<RibbonItem>> ItemsFactory = new Dictionary<Type, Func<RibbonItem>>()
         {
-            { typeof(RibbonButtonDef), () => new RibbonButton() },
-            { typeof(RibbonItemDef), () => new RibbonItem() },
-            { typeof(RibbonLabelDef), () => new RibbonLabel() },
+            // RibbonItem
             { typeof(RibbonListDef.RibbonComboDef), () => new RibbonCombo() },
             { typeof(RibbonListDef.RibbonComboDef.RibbonGalleryDef), () => new RibbonGallery() },
+//            { typeof(RibbonItemDef), () => new RibbonItem() },
+            { typeof(RibbonLabelDef), () => new RibbonLabel() },
             { typeof(RibbonPanelBreakDef), () => new RibbonPanelBreak() },
             { typeof(RibbonRowBreakDef), () => new RibbonRowBreak() },
             { typeof(RibbonRowPanelDef), () => new RibbonRowPanel() },
@@ -488,6 +494,13 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             { typeof(RibbonSliderDef), () => new RibbonSlider() },
             { typeof(RibbonSpinnerDef), () => new RibbonSpinner() },
             { typeof(RibbonTextBoxDef), () => new RibbonTextBox() },
+            // RibbonCommandItem
+            { typeof(DocumentItemDef), () => new DocumentItem() },
+            { typeof(ProgressBarSourceDef), () => new ProgressBarSource() },
+            { typeof(RibbonCheckBoxDef), () => new RibbonCheckBox() },
+            { typeof(RibbonMenuItemDef), () => new RibbonMenuItem() },
+            // RibbonButton
+            { typeof(RibbonButtonDef), () => new RibbonButton() },
         };
     }
 }

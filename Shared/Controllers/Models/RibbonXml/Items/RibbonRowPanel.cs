@@ -29,6 +29,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [RPPrivateUseOnly]
         public class RibbonFlowPanelDef : RibbonRowPanelDef
         {
+            /*
             [RPInfoOut]
             [XmlIgnore]
             [DefaultValue(RibbonSupportedSubPanelStyle.None)]
@@ -47,6 +48,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                     SupportedSubPanel = result;
                 }
             }
+            */
 
             [RPInfoOut]
             [XmlIgnore]
@@ -96,6 +98,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [RPPrivateUseOnly]
         public class RibbonFoldPanelDef : RibbonRowPanelDef
         {
+            /*
             [RPInfoOut]
             [XmlIgnore]
             [DefaultValue(RibbonSupportedSubPanelStyle.None)]
@@ -114,6 +117,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                     SupportedSubPanel = result;
                 }
             }
+            */
 
             // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonFoldPanel_DefaultSize
             [RPInfoOut]
@@ -171,7 +175,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                     MinSize = result;
                 }
             }
-
+            /*
             // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonFoldPanel_SubPanelResizeStyle
             [RPInfoOut]
             [XmlIgnore]
@@ -190,6 +194,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                     SubPanelResizeStyle = result;
                 }
             }
+            */
         }
     }
 }

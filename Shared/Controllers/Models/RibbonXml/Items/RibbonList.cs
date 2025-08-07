@@ -19,6 +19,96 @@ namespace Shared.Controllers.Models.RibbonXml.Items
     [XmlInclude(typeof(RibbonComboDef.RibbonGalleryDef))]
     public abstract class RibbonListDef : RibbonItemObservableCollectionDef
     {
+        public RibbonListDef()
+        {
+            base.ShowImage = false;
+        }
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(false)]
+        [Description("Gets or sets the value that indicates whether the drop-down list should support the grouping of items. " +
+            "Only RibbonCombo supports grouping. " +
+            "RibbonGallery does not support grouping. " +
+            "Grouping is done using the property RibbonItem.GroupName in the drop-down items. " +
+            "If this property is true, grouping is enabled in the drop-down list. " +
+            "If it is false, grouping is not enabled. " +
+            "The default value is false.")]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonCombo_IsVirtualizing
+        public bool IsGrouping { get; set; } = false;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("IsGrouping")]
+        public string IsGroupingDef
+        {
+            get => IsGrouping.ToString();
+            set
+            {
+                // RibbonGallery does not support grouping
+                if (value == null || this is RibbonComboDef.RibbonGalleryDef)
+                {
+                    IsGrouping = false;
+                    return;
+                }
+                IsGrouping = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+            }
+        }
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(double.NaN)]
+        [Description("Gets or sets the maximum height of the drop-down window that is displayed when a drop-down item is opened. " +
+            "The height must be in device independent units. " +
+            "The actual drop-down height depends on the number of items in the list and will not exceed the value set in this property. " +
+            "The default value is a calculated value that is based on system max screen height parameters.")]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonList_MaxDropDownHeight
+        public double MaxDropDownHeight { get; set; } = double.NaN;
+
+        [XmlAttribute("MaxDropDownHeight")]
+        [RPInternalUseOnly]
+        public string MaxDropDownHeightDef
+        {
+            get => MaxDropDownHeight.ToString();
+            set
+            {
+                if (string.IsNullOrEmpty(value)) return;
+                if (double.TryParse(value, out var result))
+                {
+                    MaxDropDownHeight = result;
+                    return;
+                }
+                MaxDropDownHeight = double.NaN;
+            }
+        }
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(double.NaN)]
+        [Description("Gets or sets the width of the drop-down window that is displayed when a drop-down item is opened. " +
+            "The width must be in device independent units. " +
+            "The default value is NaN. " +
+            "The minimum drop-down width is equal to the control width. " +
+            "Thus, if the value set in this property is less than the control width, the value is ignored.")]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonList_DropDownWidth
+        public double DropDownWidth { get; set; } = double.NaN;
+
+        [XmlAttribute("DropDownWidth")]
+        [RPInternalUseOnly]
+        public string DropDownWidthDef
+        {
+            get => DropDownWidth.ToString();
+            set
+            {
+                if (string.IsNullOrEmpty(value)) return;
+                if (double.TryParse(value, out var result))
+                {
+                    DropDownWidth = result;
+                    return;
+                }
+                DropDownWidth = double.NaN;
+            }
+        }
+
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonCombo
         [RPPrivateUseOnly]
         public class RibbonComboDef : RibbonListDef
@@ -90,7 +180,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                     IsEditable = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
                 }
             }
-
+#if NET8_0_OR_GREATER
             [RPInfoOut]
             [XmlIgnore]
             [DefaultValue(true)]
@@ -120,7 +210,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                     IsVirtualizing = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
                 }
             }
-
+#endif
             [RPInfoOut]
             [RPInternalUseOnly]
             [XmlIgnore]

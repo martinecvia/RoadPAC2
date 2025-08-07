@@ -36,10 +36,10 @@ namespace Shared.Controllers.Models.RibbonXml
 
         [RPInternalUseOnly]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
-        [XmlElement("RibbonLabel", typeof(RibbonLabelDef))]
+        // RibbonItem
         [XmlElement("RibbonCombo", typeof(RibbonListDef.RibbonComboDef))]
         [XmlElement("RibbonGallery", typeof(RibbonListDef.RibbonComboDef.RibbonGalleryDef))]
+        [XmlElement("RibbonLabel", typeof(RibbonLabelDef))]
         [XmlElement("RibbonPanelBreak", typeof(RibbonPanelBreakDef))]
         [XmlElement("RibbonRowBreak", typeof(RibbonRowBreakDef))]
         [XmlElement("RibbonRowPanel", typeof(RibbonRowPanelDef))]
@@ -49,6 +49,13 @@ namespace Shared.Controllers.Models.RibbonXml
         [XmlElement("RibbonSlider", typeof(RibbonSliderDef))]
         [XmlElement("RibbonSpinner", typeof(RibbonSpinnerDef))]
         [XmlElement("RibbonTextBox", typeof(RibbonTextBoxDef))]
+        // RibbonCommandItem
+        [XmlElement("DocumentItem", typeof(DocumentItemDef))]
+        [XmlElement("ProgressBarSource", typeof(ProgressBarSourceDef))]
+        [XmlElement("RibbonCheckBox", typeof(RibbonCheckBoxDef))]
+        [XmlElement("RibbonMenuItem", typeof(RibbonMenuItemDef))]
+        // RibbonButton
+        [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
         public List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
 
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Description

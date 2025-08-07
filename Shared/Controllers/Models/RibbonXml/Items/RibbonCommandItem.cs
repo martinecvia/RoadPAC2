@@ -1,10 +1,17 @@
 ﻿using System.ComponentModel;
 using System.Xml.Serialization;
+using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
 
 namespace Shared.Controllers.Models.RibbonXml.Items
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonCommandItem
     [RPPrivateUseOnly]
+    [XmlInclude(typeof(DocumentItemDef))]
+    [XmlInclude(typeof(ProgressBarSourceDef))]
+    [XmlInclude(typeof(RibbonButtonDef))]
+    [XmlInclude(typeof(RibbonCheckBoxDef))]
+    [XmlInclude(typeof(RibbonMenuItemDef))]
+    [XmlInclude(typeof(RibbonToggleButtonDef))]
     public class RibbonCommandItemDef : RibbonItemDef
     {
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonCommandItem_IsCheckable
@@ -32,7 +39,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 IsCheckable = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
             }
         }
-
+/*
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonCommandItem_IsChecked
         [RPInfoOut]
         [XmlIgnore]
@@ -58,7 +65,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 IsChecked = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
             }
         }
-
+*/
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(false)]

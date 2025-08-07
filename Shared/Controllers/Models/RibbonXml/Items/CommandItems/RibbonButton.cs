@@ -1,6 +1,5 @@
 ﻿using System;
 using System.ComponentModel;
-using System.Windows.Controls;
 using System.Xml.Serialization;
 
 namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
