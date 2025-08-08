@@ -338,7 +338,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             get => ShowText.ToString();
             set
             {
-                if string.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
                     ShowText = false;
                     return;

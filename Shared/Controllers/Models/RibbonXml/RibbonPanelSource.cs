@@ -61,6 +61,25 @@ namespace Shared.Controllers.Models.RibbonXml
         [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
         public virtual List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
 
+
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Id
+        [RPInfoOut]
+        [XmlAttribute("Id")]
+        [DefaultValue(null)]
+        [Description("Gets or sets the id for the panel source. " +
+            "The framework does not use or validate this id. " +
+            "It is left to an application to set and use this id. " +
+            "The default value is null.")]
+        public string Id { get; set; } = null;
+
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Title
+        [RPInfoOut]
+        [XmlAttribute("Title")]
+        [DefaultValue(null)]
+        [Description("The panel title set with this property is displayed in the panel's title bar in the ribbon. " +
+            "The default value is null.")]
+        public string Title { get; set; } = null;
+
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Description
         [RPInfoOut]
         [XmlAttribute("Description")]
@@ -99,16 +118,6 @@ namespace Shared.Controllers.Models.RibbonXml
         [XmlElement("DialogLauncher")]
         public RibbonButtonDef DialogLauncherDef { get; set; } = null;
 
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Id
-        [RPInfoOut]
-        [XmlAttribute("Id")]
-        [DefaultValue(null)]
-        [Description("Gets or sets the id for the panel source. " +
-            "The framework does not use or validate this id. " +
-            "It is left to an application to set and use this id. " +
-            "The default value is null.")]
-        public string Id { get; set; } = null;
-
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Name
         [RPInfoOut]
         [XmlAttribute("Name")]
@@ -140,14 +149,6 @@ namespace Shared.Controllers.Models.RibbonXml
             "This data is not used by the framework. " +
             "The default value is null.")]
         public string Tag { get; set; } = null;
-
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Title
-        [RPInfoOut]
-        [XmlAttribute("Title")]
-        [DefaultValue(null)]
-        [Description("The panel title set with this property is displayed in the panel's title bar in the ribbon. " +
-            "The default value is null.")]
-        public string Title { get; set; } = null;
 
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSpacer
         [RPPrivateUseOnly]
