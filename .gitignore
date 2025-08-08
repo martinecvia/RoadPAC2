@@ -361,3 +361,5 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Tests/NET_46_TEST/Walker.cs
+/Tests/ZWC_47_TEST/Walker.cs
