@@ -59,7 +59,7 @@ namespace Shared.Controllers.Models.RibbonXml
         [XmlElement("RibbonMenuItem", typeof(RibbonMenuItemDef))]
         // RibbonButton
         [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
-        public virtual List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
+        public List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
 
 
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Id
@@ -80,6 +80,17 @@ namespace Shared.Controllers.Models.RibbonXml
             "The default value is null.")]
         public string Title { get; set; } = null;
 
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Name
+        [RPInfoOut]
+        [XmlAttribute("Name")]
+        [DefaultValue(null)]
+        [Description("Gets or sets the name of the ribbon panel. " +
+            "The framework uses the Title property of the panel to display the panel title in the ribbon. " +
+            "The name property is not currently used by the framework. " +
+            "Applications can use this property to store a longer name for a panel if this is required in other UI customization dialogs. " +
+            "The default value is null.")]
+        public string Name { get; set; } = null;
+
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Description
         [RPInfoOut]
         [XmlAttribute("Description")]
@@ -89,6 +100,16 @@ namespace Shared.Controllers.Models.RibbonXml
             "Applications can use this to store a description if it is required in other UI customization dialogs. " +
             "The default value is null.")]
         public string Description { get; set; } = null;
+
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Tag
+        [RPInfoOut]
+        [XmlAttribute("Tag")]
+        [DefaultValue(null)]
+        [Description("Gets or sets the custom data object in the panel source. " +
+            "This property can be used to store any object a as custom data object in a panel source. " +
+            "This data is not used by the framework. " +
+            "The default value is null.")]
+        public string Tag { get; set; } = null;
 
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_DialogLauncher
         [RPInfoOut]
@@ -103,6 +124,7 @@ namespace Shared.Controllers.Models.RibbonXml
         {
             get
             {
+                // It must be RibbonButton if you want it to work
                 RibbonButton button = DialogLauncherDef?.Transform(new RibbonButton());
                 if (button != null)
                 {
@@ -118,17 +140,6 @@ namespace Shared.Controllers.Models.RibbonXml
         [XmlElement("DialogLauncher")]
         public RibbonButtonDef DialogLauncherDef { get; set; } = null;
 
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Name
-        [RPInfoOut]
-        [XmlAttribute("Name")]
-        [DefaultValue(null)]
-        [Description("Gets or sets the name of the ribbon panel. " +
-            "The framework uses the Title property of the panel to display the panel title in the ribbon. " +
-            "The name property is not currently used by the framework. " +
-            "Applications can use this property to store a longer name for a panel if this is required in other UI customization dialogs. " +
-            "The default value is null.")]
-        public string Name { get; set; } = null;
-
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_KeyTip
         [RPInfoOut]
         [XmlAttribute("KeyTip")]
@@ -140,15 +151,28 @@ namespace Shared.Controllers.Models.RibbonXml
             "The default value is null.")]
         public string KeyTip { get; set; } = null;
 
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Tag
         [RPInfoOut]
-        [XmlAttribute("Tag")]
-        [DefaultValue(null)]
-        [Description("Gets or sets the custom data object in the panel source. " +
-            "This property can be used to store any object a as custom data object in a panel source. " +
-            "This data is not used by the framework. " +
-            "The default value is null.")]
-        public string Tag { get; set; } = null;
+        [RPInternalUseOnly]
+        [XmlIgnore]
+        [DefaultValue(true)]
+        public bool IsSlideOutPanelVisible { get; set; } = true;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("IsSlideOutPanelVisible")]
+        public string IsSlideOutPanelVisibleDef
+        {
+            get => IsSlideOutPanelVisible.ToString();
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    IsSlideOutPanelVisible = true;
+                    return;
+                }
+                IsSlideOutPanelVisible
+                    = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+            }
+        }
 
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSpacer
         [RPPrivateUseOnly]
