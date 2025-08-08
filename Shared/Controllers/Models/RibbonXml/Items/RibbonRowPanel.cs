@@ -84,7 +84,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 get => AreColumnsStatic.ToString();
                 set
                 {
-                    if (value == null)
+                    if (string.IsNullOrEmpty(value))
                     {
                         AreColumnsStatic = false;
                         return;

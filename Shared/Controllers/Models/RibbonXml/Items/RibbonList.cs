@@ -45,7 +45,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             set
             {
                 // RibbonGallery does not support grouping
-                if (value == null || this is RibbonComboDef.RibbonGalleryDef)
+                if (string.IsNullOrEmpty(value) || this is RibbonComboDef.RibbonGalleryDef)
                 {
                     IsGrouping = false;
                     return;
@@ -172,7 +172,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 get => IsEditable.ToString();
                 set
                 {
-                    if (value == null)
+                    if (string.IsNullOrEmpty(value))
                     {
                         IsEditable = false;
                         return;
@@ -202,7 +202,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 get => IsVirtualizing.ToString();
                 set
                 {
-                    if (value == null)
+                    if (string.IsNullOrEmpty(value))
                     {
                         IsVirtualizing = true;
                         return;
@@ -253,7 +253,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 get => IsTextSearchEnabled.ToString();
                 set
                 {
-                    if (value == null)
+                    if (string.IsNullOrEmpty(value))
                     {
                         IsTextSearchEnabled = true;
                         return;

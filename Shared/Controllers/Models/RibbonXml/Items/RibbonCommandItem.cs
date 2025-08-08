@@ -7,7 +7,11 @@ namespace Shared.Controllers.Models.RibbonXml.Items
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonCommandItem
     [RPPrivateUseOnly]
     [XmlInclude(typeof(DocumentItemDef))]
+#if ZWCAD
+    // ZWCAD Does not support this
+#else
     [XmlInclude(typeof(ProgressBarSourceDef))]
+#endif
     [XmlInclude(typeof(RibbonButtonDef))]
     [XmlInclude(typeof(RibbonCheckBoxDef))]
     [XmlInclude(typeof(RibbonMenuItemDef))]
@@ -31,7 +35,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             get => IsCheckable.ToString();
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                 {
                     IsCheckable = false;
                     return;
@@ -39,7 +43,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 IsCheckable = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
             }
         }
-/*
+        /*
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonCommandItem_IsChecked
         [RPInfoOut]
         [XmlIgnore]
@@ -57,7 +61,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             get => IsChecked.ToString();
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                 {
                     IsChecked = false;
                     return;
@@ -65,7 +69,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 IsChecked = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
             }
         }
-*/
+        */
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(false)]
@@ -78,7 +82,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             get => IsActive.ToString();
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                 {
                     IsActive = false;
                     return;

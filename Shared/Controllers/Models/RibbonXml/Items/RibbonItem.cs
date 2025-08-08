@@ -12,13 +12,7 @@ using System.Xml.Serialization;
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
 using ZwSoft.Windows;
-#if INTERNALS
-using ZwSoft.Internal.Windows;
-#endif
 #else
-#if INTERNALS
-using Autodesk.Internal.Windows;
-#endif
 using Autodesk.Windows;
 #endif
 #endregion
@@ -30,7 +24,11 @@ namespace Shared.Controllers.Models.RibbonXml.Items
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem
     [RPPrivateUseOnly]
     [XmlInclude(typeof(DocumentItemDef))]
+#if ZWCAD
+    // ZWCAD Does not support this
+#else
     [XmlInclude(typeof(ProgressBarSourceDef))]
+#endif
     [XmlInclude(typeof(RibbonButtonDef))]
     [XmlInclude(typeof(RibbonCheckBoxDef))]
     [XmlInclude(typeof(RibbonMenuItemDef))]
@@ -66,27 +64,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
     "The description text is used in the application menu, tooltips, and drop-down lists in a RibbonListButton when the list style is set to Descriptive.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem_GroupName
         public string GroupName { get; set; } = null;
-#if INTERNALS
-        [RPInfoOut]
-        [XmlIgnore]
-        [DefaultValue(HighlightMode.None)]
-        [Description("Gets or sets the highlight state for the ribbon item.")]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem_Highlight
-        public HighlightMode Highlight { get; set; } = HighlightMode.None;
 
-        [RPInternalUseOnly]
-        [XmlAttribute("Highlight")]
-        public string HighlightDef
-        {
-            get => Highlight.ToString();
-            set
-            {
-                if (!Enum.TryParse(value, true, out HighlightMode result))
-                    result = HighlightMode.None;
-                Highlight = result;
-            }
-        }
-#endif
         [RPInfoOut]
         [XmlAttribute("Id")]
         [DefaultValue("")]
@@ -156,7 +134,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             get => IsEnabled.ToString();
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                 {
                     IsEnabled = true;
                     return;
@@ -181,7 +159,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             get => IsToolTipEnabled.ToString();
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                 {
                     IsToolTipEnabled = true;
                     return;
@@ -207,7 +185,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             get => IsVisible.ToString();
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                 {
                     IsVisible = true;
                     return;
@@ -333,7 +311,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             get => ShowImage.ToString();
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                 {
                     ShowImage = true;
                     return;
@@ -360,7 +338,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             get => ShowText.ToString();
             set
             {
-                if (value == null)
+                if string.IsNullOrEmpty(value))
                 {
                     ShowText = false;
                     return;
@@ -496,7 +474,11 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             { typeof(RibbonTextBoxDef), () => new RibbonTextBox() },
             // RibbonCommandItem
             { typeof(DocumentItemDef), () => new DocumentItem() },
+#if ZWCAD
+    // ZWCAD Does not support this
+#else
             { typeof(ProgressBarSourceDef), () => new ProgressBarSource() },
+#endif
             { typeof(RibbonCheckBoxDef), () => new RibbonCheckBox() },
             { typeof(RibbonMenuItemDef), () => new RibbonMenuItem() },
             // RibbonButton

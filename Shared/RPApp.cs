@@ -7,7 +7,7 @@ namespace Shared
     [RPInternalUseOnly]
     internal sealed class RPApp
     {
-        internal bool IsAcad
+        internal static bool IsAcad
         {
             get
             {

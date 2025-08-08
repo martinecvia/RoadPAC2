@@ -23,7 +23,280 @@ namespace Shared.Controllers.Models.RibbonXml
         "RibbonPanel displays the content of the RibbonPanelSource set in the Source property.")]
     public class RibbonPanelDef : BaseRibbonXml
     {
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-__MEMBERTYPE_Properties_Autodesk_Windows_RibbonPanel
+        [RPInfoOut]
+        [DefaultValue(null)]
+        [Description("Gets or sets the source that contains the ribbon items to be displayed by this panel. " +
+            "The default value is null.")]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_Source
+        public RibbonPanelSource Source => SourceDef != null 
+            ? SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[SourceDef.GetType()]()) : null;
+
+        [RPInternalUseOnly]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        [XmlElement("RibbonPanelSource", typeof(RibbonPanelSourceDef))]
+        [XmlElement("RibbonPanelSpacer", typeof(RibbonPanelSourceDef.RibbonPanelSpacerDef))]
+        public RibbonPanelSourceDef SourceDef { get; set; } = null;
+
+        /* 
+         * Creation:
+            <RibbonPanelSpacerDef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                <LeftBorderBrush>
+                &lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Color="#FFFF0000" /&gt;
+                </LeftBorderBrush>
+                <RightBorderBrush>
+                &lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Color="#FF0000FF" /&gt;
+                </RightBorderBrush>
+            </RibbonPanelSpacerDef>
+        */
+        [RPInfoOut]
+        [RPInternalUseOnly]
+        [XmlIgnore]
+        [DefaultValue(null)]
+        public System.Windows.Media.Brush CustomPanelBackground { get; set; } = null;
+
+        [RPInternalUseOnly]
+        [XmlElement("CustomPanelBackground")]
+        public XmlElement CustomPanelBackgroundDef
+        {
+            get
+            {
+                if (CustomPanelBackground == null)
+                    return null;
+                XmlDocument document = new XmlDocument();
+                document.LoadXml(XamlWriter.Save(CustomPanelBackground));
+                return document.DocumentElement;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    string xaml = value.OuterXml;
+                    CustomPanelBackground = (System.Windows.Media.Brush)XamlReader.Parse(xaml);
+                }
+                else
+                {
+                    CustomPanelBackground = null;
+                }
+            }
+        }
+
+        /* 
+         * Creation:
+            <RibbonPanelSpacerDef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                <LeftBorderBrush>
+                &lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Color="#FFFF0000" /&gt;
+                </LeftBorderBrush>
+                <RightBorderBrush>
+                &lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Color="#FF0000FF" /&gt;
+                </RightBorderBrush>
+            </RibbonPanelSpacerDef>
+        */
+        [RPInfoOut]
+        [RPInternalUseOnly]
+        [XmlIgnore]
+        [DefaultValue(null)]
+        public System.Windows.Media.Brush CustomSlideOutPanelBackground { get; set; } = null;
+
+        [RPInternalUseOnly]
+        [XmlElement("CustomSlideOutPanelBackground")]
+        public XmlElement CustomSlideOutPanelBackgroundDef
+        {
+            get
+            {
+                if (CustomSlideOutPanelBackground == null)
+                    return null;
+                XmlDocument document = new XmlDocument();
+                document.LoadXml(XamlWriter.Save(CustomSlideOutPanelBackground));
+                return document.DocumentElement;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    string xaml = value.OuterXml;
+                    CustomSlideOutPanelBackground = (System.Windows.Media.Brush)XamlReader.Parse(xaml);
+                }
+                else
+                {
+                    CustomSlideOutPanelBackground = null;
+                }
+            }
+        }
+
+        /* 
+         * Creation:
+            <RibbonPanelSpacerDef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                    xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                <LeftBorderBrush>
+                &lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Color="#FFFF0000" /&gt;
+                </LeftBorderBrush>
+                <RightBorderBrush>
+                &lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Color="#FF0000FF" /&gt;
+                </RightBorderBrush>
+            </RibbonPanelSpacerDef>
+        */
+        [RPInfoOut]
+        [RPInternalUseOnly]
+        [XmlIgnore]
+        [DefaultValue(null)]
+        public System.Windows.Media.Brush CustomPanelTitleBarBackground { get; set; } = null;
+
+        [RPInternalUseOnly]
+        [XmlElement("CustomPanelTitleBarBackground")]
+        public XmlElement CustomPanelTitleBarBackgroundDef
+        {
+            get
+            {
+                if (CustomPanelTitleBarBackground == null)
+                    return null;
+                XmlDocument document = new XmlDocument();
+                document.LoadXml(XamlWriter.Save(CustomPanelTitleBarBackground));
+                return document.DocumentElement;
+            }
+            set
+            {
+                if (value != null)
+                {
+                    string xaml = value.OuterXml;
+                    CustomPanelTitleBarBackground = (System.Windows.Media.Brush)XamlReader.Parse(xaml);
+                }
+                else
+                {
+                    CustomPanelTitleBarBackground = null;
+                }
+            }
+        }
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(false)]
+        [Description("Accesses the highlight state for the ribbon panel's title bar.")]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_HighlightPanelTitleBar
+        public bool HighlightPanelTitleBar { get; set; } = false;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("HighlightPanelTitleBar")]
+        public string HighlightPanelTitleBarDef
+        {
+            get => HighlightPanelTitleBar.ToString();
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    HighlightPanelTitleBar = false;
+                    return;
+                }
+                HighlightPanelTitleBar
+                    = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+            }
+        }
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(false)]
+        [Description("Accesses the highlight state for the ribbon panel's title bar.")]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_HighlightWhenCollapsed
+        public bool HighlightWhenCollapsed { get; set; } = false;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("HighlightWhenCollapsed")]
+        public string HighlightWhenCollapsedDef
+        {
+            get => HighlightWhenCollapsed.ToString();
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    HighlightWhenCollapsed = false;
+                    return;
+                }
+                HighlightWhenCollapsed
+                    = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+            }
+        }
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(true)]
+        [Description("If the value is true, the panel is enabled. " +
+            "If the value is false, the panel is disabled. " +
+            "When a panel is disabled all the items in the panel are disabled. " +
+            "The default value is true. " +
+            "To disable all panels in a tab use RibbonTab.IsPanelEnabled. " +
+            "" +
+            "If the value is true, the panel is visible in the ribbon. " +
+            "If the value is false, it is hidden in the ribbon. " +
+            "Both visible and hidden panels of a tab are available in the ribbon's right-click menu under the Panels menu option, which allows the user to show or hide the panels. " +
+            "If the panel's IsAnonymous property is set to false, it is not included in the right-click menu and the user cannot control its visibility. " +
+            "The default value is true.")]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_IsVisible
+        public bool IsVisible { get; set; } = true;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("IsVisible")]
+        public string IsVisibleDef
+        {
+            get => IsVisible.ToString();
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    IsVisible = true;
+                    return;
+                }
+                IsVisible = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+            }
+        }
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(true)]
+        [Description("Gets or sets the value that indicates whether this panel is enabled. " +
+            "If the value is true, the panel is enabled. " +
+            "If the value is false, the panel is disabled. " +
+            "When a panel is disabled all the items in the panel are disabled. " +
+            "The default value is true. " +
+            "To disable all panels in a tab use RibbonTab.IsPanelEnabled.")]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_IsEnabled
+        public bool IsEnabled { get; set; } = true;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("IsEnabled")]
+        public string IsEnabledDef
+        {
+            get => IsEnabled.ToString();
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    IsEnabled = true;
+                    return;
+                }
+                IsEnabled = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+            }
+        }
+
+        [RPInfoOut]
+        [RPInternalUseOnly]
+        [XmlIgnore]
+        [DefaultValue(RibbonResizeStyles.None)]
+        public RibbonResizeStyles ResizeStyle { get; set; } = RibbonResizeStyles.None;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("ResizeStyle")]
+        public string ResizeStyleDef
+        {
+            get => ResizeStyle.ToString();
+            set
+            {
+                if (!Enum.TryParse(value, true, out RibbonResizeStyles result))
+                    result = RibbonResizeStyles.None;
+                ResizeStyle = result;
+            }
+        }
+
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(System.Windows.Controls.Orientation.Vertical)]
@@ -61,7 +334,7 @@ namespace Shared.Controllers.Models.RibbonXml
             get => CanToggleOrientation.ToString();
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                 {
                     CanToggleOrientation = true;
                     return;
@@ -72,229 +345,11 @@ namespace Shared.Controllers.Models.RibbonXml
         }
 
         [RPInfoOut]
-        [XmlIgnore]
-        [DefaultValue(false)]
-        [Description("Accesses the highlight state for the ribbon panel's title bar.")]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_HighlightPanelTitleBar
-        public bool HighlightPanelTitleBar { get; set; } = false;
-
-        [RPInternalUseOnly]
-        [XmlAttribute("HighlightPanelTitleBar")]
-        public string HighlightPanelTitleBarDef
-        {
-            get => HighlightPanelTitleBar.ToString();
-            set
-            {
-                if (value == null)
-                {
-                    HighlightPanelTitleBar = false;
-                    return;
-                }
-                HighlightPanelTitleBar
-                    = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
-            }
-        }
-
-        [RPInfoOut]
-        [XmlIgnore]
-        [DefaultValue(false)]
-        [Description("Accesses the highlight state for the ribbon panel's title bar.")]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_HighlightWhenCollapsed
-        public bool HighlightWhenCollapsed { get; set; } = false;
-
-        [RPInternalUseOnly]
-        [XmlAttribute("HighlightWhenCollapsed")]
-        public string HighlightWhenCollapsedDef
-        {
-            get => HighlightWhenCollapsed.ToString();
-            set
-            {
-                if (value == null)
-                {
-                    HighlightWhenCollapsed = false;
-                    return;
-                }
-                HighlightWhenCollapsed
-                    = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
-            }
-        }
-
-        [RPInfoOut]
         [XmlAttribute("Id")]
         [DefaultValue("")]
         [Description("Accesses the Id for the ribbon panel.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_Id
         public string Id { get; set; } = "";
-
-        [RPInfoOut]
-        [XmlIgnore]
-        [DefaultValue(true)]
-        [Description("Gets or sets the value that indicates whether this panel is enabled. " +
-            "If the value is true, the panel is enabled. " +
-            "If the value is false, the panel is disabled. " +
-            "When a panel is disabled all the items in the panel are disabled. " +
-            "The default value is true. " +
-            "To disable all panels in a tab use RibbonTab.IsPanelEnabled.")]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_IsEnabled
-        public bool IsEnabled { get; set; } = true;
-
-        [RPInternalUseOnly]
-        [XmlAttribute("IsEnabled")]
-        public string IsEnabledDef
-        {
-            get => IsEnabled.ToString();
-            set
-            {
-                if (value == null)
-                {
-                    IsEnabled = true;
-                    return;
-                }
-                IsEnabled = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
-            }
-        }
-
-        [RPInfoOut]
-        [XmlIgnore]
-        [DefaultValue(true)]
-        [Description("If the value is true, the panel is enabled. " +
-            "If the value is false, the panel is disabled. " +
-            "When a panel is disabled all the items in the panel are disabled. " +
-            "The default value is true. " +
-            "To disable all panels in a tab use RibbonTab.IsPanelEnabled. " +
-            "" +
-            "If the value is true, the panel is visible in the ribbon. " +
-            "If the value is false, it is hidden in the ribbon. " +
-            "Both visible and hidden panels of a tab are available in the ribbon's right-click menu under the Panels menu option, which allows the user to show or hide the panels. " +
-            "If the panel's IsAnonymous property is set to false, it is not included in the right-click menu and the user cannot control its visibility. " +
-            "The default value is true.")]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_IsVisible
-        public bool IsVisible { get; set; } = true;
-
-        [RPInternalUseOnly]
-        [XmlAttribute("IsVisible")]
-        public string IsVisibleDef
-        {
-            get => IsVisible.ToString();
-            set
-            {
-                if (value == null)
-                {
-                    IsVisible = true;
-                    return;
-                }
-                IsVisible = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
-            }
-        }
-
-        [RPInfoOut]
-        [DefaultValue(null)]
-        [Description("Gets or sets the source that contains the ribbon items to be displayed by this panel. " +
-            "The default value is null.")]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_Source
-        public RibbonPanelSource Source => SourceDef != null ? SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[SourceDef.GetType()]()) : null;
-
-        [RPInternalUseOnly]
-        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
-        [XmlElement("RibbonPanelSource", typeof(RibbonPanelSourceDef))]
-        [XmlElement("RibbonPanelSpacer", typeof(RibbonPanelSourceDef.RibbonPanelSpacerDef))]
-        public RibbonPanelSourceDef SourceDef { get; set; } = null;
-
-        [RPInfoOut]
-        [RPInternalUseOnly]
-        [XmlIgnore]
-        [DefaultValue(null)]
-        public System.Windows.Media.Brush CustomPanelBackground { get; set; } = null;
-
-        [RPInternalUseOnly]
-        [XmlElement("CustomPanelBackground")]
-        public XmlElement CustomPanelBackgroundDef
-        {
-            get
-            {
-                if (CustomPanelBackground == null)
-                    return null;
-                XmlDocument document = new XmlDocument();
-                document.LoadXml(XamlWriter.Save(CustomPanelBackground));
-                return document.DocumentElement;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    string xaml = value.OuterXml;
-                    CustomPanelBackground = (System.Windows.Media.Brush) XamlReader.Parse(xaml);
-                }
-                else
-                {
-                    CustomPanelBackground = null;
-                }
-            }
-        }
-
-        [RPInfoOut]
-        [RPInternalUseOnly]
-        [XmlIgnore]
-        [DefaultValue(null)]
-        public System.Windows.Media.Brush CustomSlideOutPanelBackground { get; set; } = null;
-
-        [RPInternalUseOnly]
-        [XmlElement("CustomSlideOutPanelBackground")]
-        public XmlElement CustomSlideOutPanelBackgroundDef
-        {
-            get
-            {
-                if (CustomSlideOutPanelBackground == null)
-                    return null;
-                XmlDocument document = new XmlDocument();
-                document.LoadXml(XamlWriter.Save(CustomSlideOutPanelBackground));
-                return document.DocumentElement;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    string xaml = value.OuterXml;
-                    CustomSlideOutPanelBackground = (System.Windows.Media.Brush)XamlReader.Parse(xaml);
-                }
-                else
-                {
-                    CustomSlideOutPanelBackground = null;
-                }
-            }
-        }
-
-        [RPInfoOut]
-        [RPInternalUseOnly]
-        [XmlIgnore]
-        [DefaultValue(null)]
-        public System.Windows.Media.Brush CustomPanelTitleBarBackground { get; set; } = null;
-
-        [RPInternalUseOnly]
-        [XmlElement("CustomPanelTitleBarBackground")]
-        public XmlElement CustomPanelTitleBarBackgroundDef
-        {
-            get
-            {
-                if (CustomPanelTitleBarBackground == null)
-                    return null;
-                XmlDocument document = new XmlDocument();
-                document.LoadXml(XamlWriter.Save(CustomPanelTitleBarBackground));
-                return document.DocumentElement;
-            }
-            set
-            {
-                if (value != null)
-                {
-                    string xaml = value.OuterXml;
-                    CustomPanelTitleBarBackground = (System.Windows.Media.Brush)XamlReader.Parse(xaml);
-                }
-                else
-                {
-                    CustomPanelTitleBarBackground = null;
-                }
-            }
-        }
 
         [RPInfoOut]
         [RPInternalUseOnly]
@@ -309,9 +364,9 @@ namespace Shared.Controllers.Models.RibbonXml
             get => IsContextualTabThemeIgnored.ToString();
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                 {
-                    IsContextualTabThemeIgnored = true;
+                    IsContextualTabThemeIgnored = false;
                     return;
                 }
                 IsContextualTabThemeIgnored

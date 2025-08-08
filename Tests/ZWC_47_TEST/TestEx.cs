@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Shared.Controllers;
 using Shared.Controllers.Models.RibbonXml;
 using Shared.Controllers.Models.RibbonXml.Items;
+using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
+
 using ZwSoft.Windows;
 using ZwSoft.ZwCAD.ApplicationServices;
 using ZwSoft.ZwCAD.Runtime;
@@ -28,21 +31,38 @@ namespace ZWC_47_TEST
                 foreach (var panel in resource.PanelsDef)
                 {
                     var panelRef = panel.Transform(new RibbonPanel());
-                    panelRef.Source = panel.SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[panel.SourceDef.GetType()]());
+                    panelRef.Source = panel.SourceDef?.Transform(RibbonPanelSourceDef.SourceFactory[panel.SourceDef.GetType()]());
+                    if (panel.SourceDef != null && panel.SourceDef is RibbonPanelSpacer)
+                        // RibbonPanelSpacer can't have any items in it,
+                        // so why should we bother translating them over
+                        continue;
                     foreach (var item in panel.SourceDef.ItemsDef)
                     {
-                        var itemRef = item.Transform(RibbonItemDef.ItemsFactory[item.GetType()]());
-                        panelRef.Source.Items.Add(itemRef);
+                        try
+                        {
+                            var itemRef = item.Transform(RibbonItemDef.ItemsFactory[item.GetType()]());
+                            // There should be a better way to handle nested items
+                            if (item is RibbonRowPanelDef def1)
+                                foreach (var itemDef in def1.ItemsDef)
+                                    ((RibbonRowPanel)itemRef).Items.Add(itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]()));
+                            if (item is RibbonListDef def2)
+                                foreach (var itemDef in def2.ItemsDef)
+                                    ((RibbonList)itemRef).Items.Add(itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]()));
+                            panelRef.Source.Items.Add(itemRef);
+                        }
+                        catch (NotImplementedException exception) { } // Some items in ZWCAD are created but not implemented
                     }
-                    tab?.Panels.Add(panelRef);
+                    tab.Panels.Add(panelRef);
                 }
                 Ribbon.Tabs.Add(tab);
             }
+            document.Editor.WriteMessage("Registrace proběhla ! (Test: ZWCAD_DLL)");
+            new ClassWalker();
         }
 
         public void Terminate()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

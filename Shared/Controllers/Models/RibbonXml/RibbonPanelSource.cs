@@ -3,10 +3,10 @@
 #pragma warning disable CS8625
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Windows.Markup;
 using System.Xml;
+using System.ComponentModel;
+using System.Collections.Generic;
+using System.Windows.Markup;
 using System.Xml.Serialization;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
@@ -33,7 +33,6 @@ namespace Shared.Controllers.Models.RibbonXml
         "The items can also be organized into two panels - main panel and slide-out panel - by adding a RibbonPanelBreak item at the index where the slide-out panel is to start.")]
     public class RibbonPanelSourceDef : BaseRibbonXml
     {
-
         [RPInternalUseOnly]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         // RibbonItem
@@ -51,12 +50,16 @@ namespace Shared.Controllers.Models.RibbonXml
         [XmlElement("RibbonTextBox", typeof(RibbonTextBoxDef))]
         // RibbonCommandItem
         [XmlElement("DocumentItem", typeof(DocumentItemDef))]
+#if ZWCAD
+        // ZWCAD Does not support this
+#else
         [XmlElement("ProgressBarSource", typeof(ProgressBarSourceDef))]
+#endif
         [XmlElement("RibbonCheckBox", typeof(RibbonCheckBoxDef))]
         [XmlElement("RibbonMenuItem", typeof(RibbonMenuItemDef))]
         // RibbonButton
         [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
-        public List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
+        public virtual List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
 
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Description
         [RPInfoOut]
@@ -150,18 +153,18 @@ namespace Shared.Controllers.Models.RibbonXml
         [RPPrivateUseOnly]
         public class RibbonPanelSpacerDef : RibbonPanelSourceDef
         {
-            /*
+            /* 
              * Creation:
-            <RibbonPanelSpacerDef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                                  xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-              <LeftBorderBrush>
-                &lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Color="#FFFF0000" /&gt;
-              </LeftBorderBrush>
-              <RightBorderBrush>
-                &lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Color="#FF0000FF" /&gt;
-              </RightBorderBrush>
-            </RibbonPanelSpacerDef>
-             */
+                <RibbonPanelSpacerDef xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                                        xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+                    <LeftBorderBrush>
+                    &lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Color="#FFFF0000" /&gt;
+                    </LeftBorderBrush>
+                    <RightBorderBrush>
+                    &lt;SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" Color="#FF0000FF" /&gt;
+                    </RightBorderBrush>
+                </RibbonPanelSpacerDef>
+            */
             [RPInfoOut]
             [XmlIgnore]
             [DefaultValue("Transparent")]

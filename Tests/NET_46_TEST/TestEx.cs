@@ -56,6 +56,12 @@ namespace NET_46_TEST
                     foreach (var item in panel.SourceDef.ItemsDef)
                     {
                         var itemRef = item.Transform(RibbonItemDef.ItemsFactory[item.GetType()]());
+                        if (item is RibbonRowPanelDef def1)
+                            foreach (var itemDef in def1.ItemsDef)
+                                ((RibbonRowPanel)itemRef).Items.Add(itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]()));
+                        if (item is RibbonListDef def2)
+                            foreach (var itemDef in def2.ItemsDef)
+                                ((RibbonList)itemRef).Items.Add(itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]()));
                         panelRef.Source.Items.Add(itemRef);
                         Debug.WriteLine($"Registering: {item}");
                     }
@@ -63,6 +69,7 @@ namespace NET_46_TEST
                 }
                 Ribbon.Tabs.Add(tab);
             }
+            new ClassWalker();
         }
 
         public void Terminate()
@@ -145,7 +152,7 @@ namespace NET_46_TEST
                     $"  - Items: {panel.Source.Items} [default: []]\n" +
                     $"  - Description: {panel.Source.Description} {TryGetDefault(panel.Source, "Description")}\n" +
                     $"  - DialogLauncher: {panel.Source.DialogLauncher} {TryGetDefault(panel.Source, "DialogLauncher")}\n" +
-                    $"{TryVisit(panel.Source.DialogLauncher)}" +
+                    $"{TryVisit(panel.Source?.DialogLauncher)}" +
                     $"  - Id: {panel.Source.Id} {TryGetDefault(panel.Source, "Id")}\n" +
                     $"  - Name: {panel.Source.Name} {TryGetDefault(panel.Source, "Name")}\n" +
                     $"  - KeyTip: {panel.Source.KeyTip} {TryGetDefault(panel.Source, "KeyTip")}\n" +
@@ -164,6 +171,52 @@ namespace NET_46_TEST
                 return;
             }
             editor.WriteMessage("Error");
+        }
+
+        [CommandMethod("INSPECT_PANEL_ITEM")]
+        public void InspectPanelItem()
+        {
+            Document document = Application.DocumentManager.MdiActiveDocument;
+            Editor editor = document.Editor;
+            PromptStringOptions options = new PromptStringOptions("Name of panel:");
+            options.AllowSpaces = true;
+            PromptResult result = editor.GetString(options);
+            if (result.Status == PromptStatus.OK)
+            {
+                string panelName = result.StringResult;
+                RibbonTab tab = Ribbon.Tabs.Where(t => t.Panels.Any(p => p.Source?.Title == panelName)).FirstOrDefault();
+                if (tab == null)
+                {
+                    editor.WriteMessage("Error, NoTab");
+                    return;
+                }
+                RibbonPanel panel = tab.Panels.Where(p => p.Source?.Title == panelName).FirstOrDefault();
+                if (panel == null)
+                {
+                    editor.WriteMessage("Error, NoPanel");
+                    return;
+                }
+                PromptIntegerOptions intOpt = new PromptIntegerOptions("Index of item:");
+                PromptIntegerResult intResult = editor.GetInteger(intOpt);
+                if (intResult.Status == PromptStatus.OK)
+                {
+                    if (panel.Source == null)
+                    {
+                        editor.WriteMessage("Error, NoSource");
+                        return;
+                    }
+                    RibbonItem item = panel.Source.Items[intResult.Value];
+                    Debug.WriteLine($"--- Item({item.GetType().Name}): {item.Name ?? item.GetType().Name}  ---\n");
+                    PropertyInfo[] properties = item.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
+                        .Where(property => property.SetMethod != null && property.SetMethod.IsPublic && !property.SetMethod.IsStatic).ToArray();
+                    foreach (var property in properties)
+                    {
+                        var declaringSetterType = property.SetMethod.DeclaringType;
+                        var inheritedFrom = (declaringSetterType != null && declaringSetterType != item.GetType()) ? $"{declaringSetterType.Name}->" : "";
+                        Debug.WriteLine($"{inheritedFrom}{property.Name}: {property.GetValue(item)} {TryGetDefault(item, property.Name)}");
+                    }
+                }
+            }
         }
 
         [CommandMethod("INSPECT_ITEM")]
@@ -236,6 +289,8 @@ namespace NET_46_TEST
 
         private object TryVisit(object source)
         {
+            if (source == null)
+                return null;
             try
             {
                 PropertyInfo[] properties = source.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public)
@@ -243,12 +298,10 @@ namespace NET_46_TEST
                 string result = "";
                 foreach (var property in properties)
                     result = result + $"    - {property.Name}: {property.GetValue(source)}\n";
-                return result;
+                return result; ;
             }
-            catch
-            {
-                return null;
-            }
+            catch (System.Exception) { }
+            return null;
         }
 
         private void Compare(object ob1, object ob2)

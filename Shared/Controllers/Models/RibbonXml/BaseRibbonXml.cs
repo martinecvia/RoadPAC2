@@ -72,6 +72,8 @@ namespace Shared.Controllers.Models.RibbonXml
                         Debug.WriteLine($"Transform: {target.GetType().Name}:{sourceProperty.Name} was not found");
                         continue;
                     }
+                    if (sourceProperty.GetMethod == null || sourceProperty.GetMethod.GetMethodBody() == null)
+                        continue; // prevention of NotImplementedException 
                     if (targetProperty.CanWrite == true
                         && targetProperty.PropertyType.IsAssignableFrom(sourceProperty.PropertyType))
                         targetProperty.SetValue(target, sourceProperty.GetValue(source), null);

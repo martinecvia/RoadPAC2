@@ -25,6 +25,9 @@ namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
         "The data elements are linked to and drive the visual elements by the concept of data binding.")]
     public class ProgressBarSourceDef : RibbonCommandItemDef
     {
+#if ZWCAD
+        // ZWCAD Does not support this
+#else
         public ProgressBarSourceDef()
         {
             if (MaximumValue < MinimumValue)
@@ -45,7 +48,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
             get => HasCancelButton.ToString();
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                 {
                     HasCancelButton = false;
                     return;
@@ -144,5 +147,6 @@ namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
                 CurrentValue = MinimumValue;
             }
         }
+#endif
     }
 }

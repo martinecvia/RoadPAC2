@@ -1,6 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
+
+#region O_PROGRAM_DETERMINE_CAD_PLATFORM 
+#if ZWCAD
+using ZwSoft.Windows;
+#else
+using Autodesk.Windows;
+#endif
+#endregion
 
 using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
 
@@ -26,7 +35,11 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [XmlElement("RibbonTextBox", typeof(RibbonTextBoxDef))]
         // RibbonCommandItem
         [XmlElement("DocumentItem", typeof(DocumentItemDef))]
+#if ZWCAD
+// ZWCAD Does not support this
+#else
         [XmlElement("ProgressBarSource", typeof(ProgressBarSourceDef))]
+#endif
         [XmlElement("RibbonCheckBox", typeof(RibbonCheckBoxDef))]
         [XmlElement("RibbonMenuItem", typeof(RibbonMenuItemDef))]
         // RibbonButton

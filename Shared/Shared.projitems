@@ -32,6 +32,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonPanelSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\Items\RibbonSeparator.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\Items\RibbonSpinner.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonSubPanelSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonTab.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\CommandHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\ContextualRibbonTab.cs" />
@@ -51,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_roadpac_32.ico" />
-    <None Include="$(MSBuildThisFileDirectory)Resources\Icons\ignore_roadpac_900x900.jpg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_roadpac_16.ico" />
@@ -63,5 +63,8 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_RoadPAC.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_icon.jpg" />
   </ItemGroup>
 </Project>

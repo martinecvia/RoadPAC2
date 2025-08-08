@@ -11,7 +11,11 @@ namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         // RibbonCommandItem
         [XmlElement("DocumentItem", typeof(DocumentItemDef))]
+#if ZWCAD
+// ZWCAD Does not support this
+#else
         [XmlElement("ProgressBarSource", typeof(ProgressBarSourceDef))]
+#endif
         [XmlElement("RibbonCheckBox", typeof(RibbonCheckBoxDef))]
         [XmlElement("RibbonMenuItem", typeof(RibbonMenuItemDef))]
         // RibbonButton

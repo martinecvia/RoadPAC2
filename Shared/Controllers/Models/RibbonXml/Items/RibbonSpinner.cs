@@ -187,7 +187,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             get => IsEditable.ToString();
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                 {
                     IsEditable = false;
                     return;

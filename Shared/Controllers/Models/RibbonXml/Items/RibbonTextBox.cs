@@ -67,7 +67,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             get => AcceptTextOnLostFocus.ToString();
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                 {
                     AcceptTextOnLostFocus = true;
                     return;
@@ -140,7 +140,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             get => InvokesCommand.ToString();
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                 {
                     InvokesCommand = false;
                     return;
@@ -167,7 +167,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             get => IsEmptyTextValid.ToString();
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                 {
                     IsEmptyTextValid = true;
                     return;
@@ -203,7 +203,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             get => SelectTextOnFocus.ToString();
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                 {
                     SelectTextOnFocus = false;
                     return;
@@ -232,7 +232,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             get => ShowImageAsButton.ToString();
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                 {
                     ShowImageAsButton = false;
                     return;

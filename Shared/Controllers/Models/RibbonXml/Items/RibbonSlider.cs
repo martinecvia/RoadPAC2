@@ -28,7 +28,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             get => IsSnapToTickEnabled.ToString();
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                 {
                     IsSnapToTickEnabled = true;
                     return;
@@ -96,7 +96,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             get => TextBox1Editable.ToString();
             set
             {
-                if (value == null)
+                if (string.IsNullOrEmpty(value))
                 {
                     TextBox1Editable = false;
                     return;

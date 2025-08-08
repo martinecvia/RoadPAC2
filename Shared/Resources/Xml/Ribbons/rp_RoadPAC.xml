@@ -10,32 +10,50 @@
 							AllowInToolBar="True" AllowInStatusBar="True" ResizeStyle="HideText"
 							Text="Otevři složku aktuálního projektu" ShowText="False" CommandHandler="RP_COMMAND(OPEN_ACTIVE_DIRECTORY)" />
 			<!-- RibbonItem[] -->
-			<RibbonButton Text="Spusti RoadPAC"
-						  Name="RP_TAB_MAIN.PROJECT_MANAGER.RUN_ROADPAC"
+			<RibbonButton Text="RoadPAC" Name="RP_TAB_MAIN.PROJECT_MANAGER.RUN_ROADPAC"
 						  ShowText="True"
 						  Size="Large"
-						  Image="rp_img_btn_manual_16"
-						  LargeImage="rp_img_btn_manual_32"
+						  Image="rp_img_default_16"
+						  LargeImage="rp_img_default_16"
 						  Orientation="Vertical"
 						  ShowImage="True"
 						  CommandHandler="RP_RUN_ROADPAC" />
-			<DocumentItem />
-			<ProgressBarSource />
-			<RibbonCheckBox />
-			<RibbonMenuItem />
-			<RibbonCombo />
-			<RibbonGallery />
-			<RibbonLabel />
+			<RibbonSeparator SeparatorStyle="Spacer" />
+			<RibbonRowPanel>
+				<ProgressBarSource />
+				<RibbonButton Text="test" Name="test2"
+							  ShowText="True"
+							  Size="Large"
+							  Image="rp_img_default_16"
+							  LargeImage="rp_img_default_16"
+							  Orientation="Vertical"
+							  ShowImage="True"
+							  CommandHandler="RP_RUN_ROADPAC" />
+			</RibbonRowPanel>
 			<RibbonPanelBreak />
-			<RibbonRowBreak />
-			<RibbonRowPanel />
-			<RibbonFlowPanel />
-			<RibbonFoldPanel />
-			<RibbonSeparator />
-			<RibbonSlider />
-			<RibbonSpinner />
-			<RibbonTextBox />
 		</RibbonPanelSource>
+	</RibbonPanel>
+	<RibbonPanel>
+		<RibbonPanelSpacer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+			<LeftBorderBrush>
+				
+				<SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+								 Color="#FF98FB98" />
+			</LeftBorderBrush>
+			<RightBorderBrush>
+				<SolidColorBrush xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+								 Color="#FF98FB98" />
+			</RightBorderBrush>
+			<ProgressBarSource />
+				<RibbonButton Text="test3" Name="test3"
+							  ShowText="True"
+							  Size="Large"
+							  Image="rp_img_default_16"
+							  LargeImage="rp_img_default_16"
+							  Orientation="Vertical"
+							  ShowImage="True"
+							  CommandHandler="RP_RUN_ROADPAC" />
+		</RibbonPanelSpacer>
 	</RibbonPanel>
 	<!-- https://learn.microsoft.com/en-us/dotnet/media/art-color-table.png?view=windowsdesktop-9.0 !-->
 	<!--
