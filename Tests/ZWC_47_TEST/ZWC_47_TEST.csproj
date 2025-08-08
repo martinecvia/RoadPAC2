@@ -94,7 +94,6 @@
   <ItemGroup>
     <Compile Include="TestEx.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Walker.cs" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="stdole">

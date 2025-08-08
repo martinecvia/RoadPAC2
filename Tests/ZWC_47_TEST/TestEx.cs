@@ -57,7 +57,6 @@ namespace ZWC_47_TEST
                 Ribbon.Tabs.Add(tab);
             }
             document.Editor.WriteMessage("Registrace proběhla ! (Test: ZWCAD_DLL)");
-            new ClassWalker();
         }
 
         public void Terminate()

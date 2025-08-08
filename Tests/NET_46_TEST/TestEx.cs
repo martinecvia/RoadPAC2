@@ -69,7 +69,6 @@ namespace NET_46_TEST
                 }
                 Ribbon.Tabs.Add(tab);
             }
-            new ClassWalker();
         }
 
         public void Terminate()
