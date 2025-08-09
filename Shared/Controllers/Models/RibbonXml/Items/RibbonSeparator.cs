@@ -23,6 +23,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             base.MinWidth = 0.0;
             base.Width = double.NaN;
         }
+
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(RibbonSeparatorStyle.Line)]

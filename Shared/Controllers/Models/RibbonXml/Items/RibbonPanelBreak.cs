@@ -19,24 +19,5 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         "There can be only one object of this type in RibbonPanelSource. " +
         "If there are multiple RibbonPanelBreak objects in the same panel source, only the first one will be used.")]
     public class RibbonPanelBreakDef : RibbonItemDef
-    {
-        [RPInfoOut]
-        [XmlIgnore]
-        [DefaultValue(RibbonSupportedSubPanelStyle.None)]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelBreak_SupportedSubPanel
-        public RibbonSupportedSubPanelStyle SupportedSubPanel { get; set; } = RibbonSupportedSubPanelStyle.None;
-
-        [RPInternalUseOnly]
-        [XmlAttribute("SupportedSubPanel")]
-        public string SupportedSubPanelDef
-        {
-            get => SupportedSubPanel.ToString();
-            set
-            {
-                if (!Enum.TryParse(value, true, out RibbonSupportedSubPanelStyle result))
-                    result = RibbonSupportedSubPanelStyle.None;
-                SupportedSubPanel = result;
-            }
-        }
-    }
+    { }
 }

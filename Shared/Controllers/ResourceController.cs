@@ -3,8 +3,9 @@
 #pragma warning disable CS8604
 #pragma warning disable CS8634
 
-#pragma warning disable IDE0028
-#pragma warning disable IDE0090
+#pragma warning disable IDE0063 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
+#pragma warning disable IDE0028 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
+#pragma warning disable IDE0090 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
 
 using System; // Keep for .NET 4.6
 using System.Collections.Generic; // Keep for .NET 4.6
@@ -31,10 +32,30 @@ namespace Shared.Controllers
         private static readonly List<string> _cachedXml = new List<string>();
 
         /// <summary>
-        /// Loads embedded image resources from the executing assembly into the `_cachedBitMaps` dictionary.
-        /// Only resources starting with "rp_" and recognized as image files are considered.
-        /// The file name (without extension) is used as the dictionary key.
+        /// Loads embedded resources with the <c>rp_</c> prefix from the executing assembly
+        /// and caches them for later use.
         /// </summary>
+        /// <remarks>
+        /// <para>
+        /// This method performs the following steps:
+        /// </para>
+        /// <list type="number">
+        /// <item>Retrieves all manifest resource names from the executing assembly.</item>
+        /// <item>Filters resources to those whose names contain the <c>rp_</c> prefix.</item>
+        /// <item>
+        /// For resources recognized as images (<see cref="IsImage"/> returns <c>true</c>),
+        /// attempts to load them into memory via <see cref="LoadResourceImage"/> and stores
+        /// them in the <c>_cachedBitMaps</c> collection, keyed by the resource’s base filename.
+        /// </item>
+        /// <item>
+        /// For resources recognized as XML (<see cref="IsXml"/> returns <c>true</c>),
+        /// adds their base filenames to the <c>_cachedXml</c> collection.
+        /// </item>
+        /// </list>
+        /// <para>
+        /// If a resource fails to load (e.g., due to format errors or corruption), it is skipped.
+        /// </para>
+        /// </remarks>
         public static void LoadEmbeddedResources()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
@@ -81,8 +102,10 @@ namespace Shared.Controllers
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-                using (Image _ = Image.FromStream(stream))
-                    return true;
+                using (Image _ = Image.FromStream(stream)) // Keep for .NET 4.6, System.Drawing must be as dependency,
+                                                           // sole purpose of this change is to assert if file was loaded successfully as Image
+                                                           // and not as something that is not image-like
+                    return !IsXml(resourceName);           // XML can be loaded as Image too, so we want to check if this is really not a XML file
             } catch {
                 return false;
             }
@@ -91,6 +114,9 @@ namespace Shared.Controllers
         [RPPrivateUseOnly]
         private static BitmapImage LoadResourceImage(string resourceName)
         {
+            BitmapImage _cachedBitMap = GetImageSource(resourceName);
+            if (_cachedBitMap != null)
+                return _cachedBitMap; // We don't want to load same file twice by accident, right?
             try
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();

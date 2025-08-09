@@ -57,33 +57,6 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(double.NaN)]
-        [Description("Gets or sets the maximum height of the drop-down window that is displayed when a drop-down item is opened. " +
-            "The height must be in device independent units. " +
-            "The actual drop-down height depends on the number of items in the list and will not exceed the value set in this property. " +
-            "The default value is a calculated value that is based on system max screen height parameters.")]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonList_MaxDropDownHeight
-        public double MaxDropDownHeight { get; set; } = double.NaN;
-
-        [XmlAttribute("MaxDropDownHeight")]
-        [RPInternalUseOnly]
-        public string MaxDropDownHeightDef
-        {
-            get => MaxDropDownHeight.ToString();
-            set
-            {
-                if (string.IsNullOrEmpty(value)) return;
-                if (double.TryParse(value, out var result))
-                {
-                    MaxDropDownHeight = result;
-                    return;
-                }
-                MaxDropDownHeight = double.NaN;
-            }
-        }
-
-        [RPInfoOut]
-        [XmlIgnore]
-        [DefaultValue(double.NaN)]
         [Description("Gets or sets the width of the drop-down window that is displayed when a drop-down item is opened. " +
             "The width must be in device independent units. " +
             "The default value is NaN. " +
@@ -109,10 +82,103 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             }
         }
 
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(double.NaN)]
+        [Description("Gets or sets the maximum height of the drop-down window that is displayed when a drop-down item is opened. " +
+            "The height must be in device independent units. " +
+            "The actual drop-down height depends on the number of items in the list and will not exceed the value set in this property. " +
+            "The default value is a calculated value that is based on system max screen height parameters.")]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonList_MaxDropDownHeight
+        public double MaxDropDownHeight { get; set; } = double.NaN;
+
+        [XmlAttribute("MaxDropDownHeight")]
+        [RPInternalUseOnly]
+        public string MaxDropDownHeightDef
+        {
+            get => MaxDropDownHeight.ToString();
+            set
+            {
+                if (string.IsNullOrEmpty(value)) return;
+                if (double.TryParse(value, out var result))
+                {
+                    MaxDropDownHeight = result;
+                    return;
+                }
+                MaxDropDownHeight = double.NaN;
+            }
+        }
+
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonCombo
         [RPPrivateUseOnly]
         public class RibbonComboDef : RibbonListDef
         {
+            [RPInfoOut]
+            [RPInternalUseOnly]
+            [XmlAttribute("TextPath")]
+            [DefaultValue("Text")]
+            public string TextPath { get; set; } = "Text";
+
+            [RPInfoOut]
+            [XmlIgnore]
+            [DefaultValue(false)]
+            [Description("Gets or sets the value that indicates whether the combo box text is editable. " +
+                "If this property is true, the combo box allows text to be entered that is not in the list. " +
+                "The entered text is not added to the list. " +
+                "The entered text can be validated in the EditableTextChanging event. " +
+                "The default value is false.")]
+            // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonCombo_IsEditable
+            public bool IsEditable { get; set; } = false;
+
+            [RPInternalUseOnly]
+            [XmlAttribute("IsEditable")]
+            public string IsEditableDef
+            {
+                get => IsEditable.ToString();
+                set
+                {
+                    if (string.IsNullOrEmpty(value))
+                    {
+                        IsEditable = false;
+                        return;
+                    }
+                    IsEditable = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+                }
+            }
+
+            [RPInfoOut]
+            [XmlAttribute("EditableText")]
+            // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonCombo_EditableText
+            [Description("Gets or sets the editable text in the combo box. This property is applicable only if IsEditable is true. " +
+                "The default value is null.")]
+#if NET8_0_OR_GREATER
+            public string? EditableText { get; set; } = null;
+#else
+            public string EditableText { get; set; } = null;
+#endif
+
+            [RPInfoOut]
+            [RPInternalUseOnly]
+            [XmlIgnore]
+            [DefaultValue(true)]
+            public bool IsTextSearchEnabled { get; set; } = true;
+
+            [RPInternalUseOnly]
+            [XmlAttribute("IsTextSearchEnabled")]
+            public string IsTextSearchEnabledDef
+            {
+                get => IsTextSearchEnabled.ToString();
+                set
+                {
+                    if (string.IsNullOrEmpty(value))
+                    {
+                        IsTextSearchEnabled = true;
+                        return;
+                    }
+                    IsTextSearchEnabled = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+                }
+            }
+
             [RPInfoOut]
             [XmlIgnore]
             [DefaultValue(null)]
@@ -140,44 +206,6 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 {
                     if (!string.IsNullOrEmpty(value))
                         CommandHandler = new CommandHandler(value);
-                }
-            }
-
-            [RPInfoOut]
-            [XmlAttribute("EditableText")]
-            // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonCombo_EditableText
-            [Description("Gets or sets the editable text in the combo box. This property is applicable only if IsEditable is true. " +
-                "The default value is null.")]
-#if NET8_0_OR_GREATER
-            public string? EditableText { get; set; } = null;
-#else
-            public string EditableText { get; set; } = null;
-#endif
-
-            [RPInfoOut]
-            [XmlIgnore]
-            [DefaultValue(false)]
-            [Description("Gets or sets the value that indicates whether the combo box text is editable. " +
-                "If this property is true, the combo box allows text to be entered that is not in the list. " +
-                "The entered text is not added to the list. " +
-                "The entered text can be validated in the EditableTextChanging event. " +
-                "The default value is false.")]
-            // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonCombo_IsEditable
-            public bool IsEditable { get; set; } = false;
-
-            [RPInternalUseOnly]
-            [XmlAttribute("IsEditable")]
-            public string IsEditableDef
-            {
-                get => IsEditable.ToString();
-                set
-                {
-                    if (string.IsNullOrEmpty(value))
-                    {
-                        IsEditable = false;
-                        return;
-                    }
-                    IsEditable = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
                 }
             }
 #if NET8_0_OR_GREATER
@@ -234,34 +262,6 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 }
             }
 
-            [RPInfoOut]
-            [RPInternalUseOnly]
-            [XmlAttribute("TextPath")]
-            [DefaultValue("Text")]
-            public string TextPath { get; set; } = "Text";
-
-            [RPInfoOut]
-            [RPInternalUseOnly]
-            [XmlIgnore]
-            [DefaultValue(true)]
-            public bool IsTextSearchEnabled { get; set; } = true;
-
-            [RPInternalUseOnly]
-            [XmlAttribute("IsTextSearchEnabled")]
-            public string IsTextSearchEnabledDef
-            {
-                get => IsTextSearchEnabled.ToString();
-                set
-                {
-                    if (string.IsNullOrEmpty(value))
-                    {
-                        IsTextSearchEnabled = true;
-                        return;
-                    }
-                    IsTextSearchEnabled = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
-                }
-            }
-
             // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonGallery
             [RPPrivateUseOnly]
             public class RibbonGalleryDef : RibbonComboDef
@@ -270,6 +270,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 {
                     base.ResizeStyle = RibbonItemResizeStyles.ResizeWidth | RibbonItemResizeStyles.Collapse;
                 }
+
                 [RPInfoOut]
                 [XmlIgnore]
                 [Description("Gets or sets the display mode of the gallery. " +

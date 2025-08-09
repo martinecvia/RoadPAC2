@@ -25,6 +25,101 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         "The items can be organized into multiple rows by adding a RibbonRowBreak item at the index where the new row is to start.")]
     public class RibbonRowPanelDef : RibbonItemObservableCollectionDef
     {
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [RPInternalUseOnly]
+        [DefaultValue(null)]
+        public RibbonSubPanelSource Source => SourceDef?.Transform(new RibbonSubPanelSource());
+
+        [RPInternalUseOnly]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        public RibbonSubPanelSourceDef SourceDef { get; set; } = null;
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [RPInternalUseOnly]
+        [DefaultValue(100)]
+        public int ResizePriority { get; set; } = 100;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("ResizePriority")]
+        public string ResizePriorityDef
+        {
+            get => ResizePriority.ToString();
+            set
+            {
+                if (int.TryParse(value, out var x)) ResizePriority = x;
+                else
+                {
+                    ResizePriority = 100;
+                }
+            }
+        }
+
+        [RPInfoOut]
+        [RPInternalUseOnly]
+        [XmlIgnore]
+        [DefaultValue(RibbonFoldPanelResizeStyle.None)]
+        public RibbonFoldPanelResizeStyle SubPanelResizeStyle { get; set; } = RibbonFoldPanelResizeStyle.None;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("SubPanelResizeStyle")]
+        public string SubPanelResizeStyleDef
+        {
+            get => SubPanelResizeStyle.ToString();
+            set
+            {
+                if (!Enum.TryParse(value, true, out RibbonFoldPanelResizeStyle result))
+                    result = RibbonFoldPanelResizeStyle.None;
+                SubPanelResizeStyle = result;
+            }
+        }
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [RPInternalUseOnly]
+        [DefaultValue(false)]
+        public bool IsTopJustified { get; set; } = false;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("IsTopJustified")]
+        public string IsTopJustifiedDef
+        {
+            get => IsTopJustified.ToString();
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    IsTopJustified = false;
+                    return;
+                }
+                IsTopJustified = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+            }
+        }
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [RPInternalUseOnly]
+        [DefaultValue(false)]
+        public bool AreItemArrangedFromRightToLeft { get; set; } = false;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("AreItemArrangedFromRightToLeft")]
+        public string AreItemArrangedFromRightToLeftDef
+        {
+            get => AreItemArrangedFromRightToLeft.ToString();
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    AreItemArrangedFromRightToLeft = false;
+                    return;
+                }
+                AreItemArrangedFromRightToLeft = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+            }
+        }
+
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonFlowPanel
         [RPPrivateUseOnly]
         public class RibbonFlowPanelDef : RibbonRowPanelDef
@@ -175,26 +270,6 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                     MinSize = result;
                 }
             }
-            /*
-            // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonFoldPanel_SubPanelResizeStyle
-            [RPInfoOut]
-            [XmlIgnore]
-            [DefaultValue(RibbonFoldPanelResizeStyle.None)]
-            public RibbonFoldPanelResizeStyle SubPanelResizeStyle { get; set; } = RibbonFoldPanelResizeStyle.None;
-
-            [RPInternalUseOnly]
-            [XmlAttribute("SubPanelResizeStyle")]
-            public string SubPanelResizeStyleDef
-            {
-                get => SubPanelResizeStyle.ToString();
-                set
-                {
-                    if (!Enum.TryParse(value, true, out RibbonFoldPanelResizeStyle result))
-                        result = RibbonFoldPanelResizeStyle.None;
-                    SubPanelResizeStyle = result;
-                }
-            }
-            */
         }
     }
 }

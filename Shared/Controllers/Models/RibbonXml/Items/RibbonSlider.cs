@@ -14,26 +14,24 @@ namespace Shared.Controllers.Models.RibbonXml.Items
     {
         [RPInfoOut]
         [XmlIgnore]
-        [DefaultValue(true)]
-        [Description("This is IsSnapToTickEnabled, a member of class RibbonSlider. " +
-            "The default value is true.")]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSlider_IsSnapToTickEnabled
-        public bool IsSnapToTickEnabled { get; set; } = true; // Default value was not mentioned in official documentation,
-                                                              // however in version 2017 there was true as default value
+        [DefaultValue(0.0d)]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSlider_Minimum
+        public double Minimum { get; set; } = 0.0d;
 
+        [XmlAttribute("Minimum")]
         [RPInternalUseOnly]
-        [XmlAttribute("IsSnapToTickEnabled")]
-        public string IsSnapToTickEnabledDef
+        public string MinimumDef
         {
-            get => IsSnapToTickEnabled.ToString();
+            get => Minimum.ToString();
             set
             {
-                if (string.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value)) return;
+                if (double.TryParse(value, out var result))
                 {
-                    IsSnapToTickEnabled = true;
+                    Minimum = result;
                     return;
                 }
-                IsSnapToTickEnabled = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+                Minimum = 0.0d;
             }
         }
 
@@ -62,24 +60,20 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 
         [RPInfoOut]
         [XmlIgnore]
-        [DefaultValue(0.0d)]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSlider_Minimum
-        public double Minimum { get; set; } = 0.0d;
+        [DefaultValue(Visibility.Collapsed)]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSlider_TextBox1Visibility
+        public Visibility TextBox1Visibility { get; set; } = Visibility.Collapsed;
 
-        [XmlAttribute("Minimum")]
         [RPInternalUseOnly]
-        public string MinimumDef
+        [XmlAttribute("TextBox1Visibility")]
+        public string TextBox1VisibilityDef
         {
-            get => Minimum.ToString();
+            get => TextBox1Visibility.ToString();
             set
             {
-                if (string.IsNullOrEmpty(value)) return;
-                if (double.TryParse(value, out var result))
-                {
-                    Minimum = result;
-                    return;
-                }
-                Minimum = 0.0d;
+                if (!Enum.TryParse(value, true, out Visibility result))
+                    result = Visibility.Collapsed;
+                TextBox1Visibility = result;
             }
         }
 
@@ -107,29 +101,26 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 
         [RPInfoOut]
         [XmlIgnore]
-        [DefaultValue(null)]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSlider_TextBox1Text
-#if NET8_0_OR_GREATER
-        public string? TextBox1Text { get; set; } = null;
-#else
-        public string TextBox1Text { get; set; } = null;
-#endif
-        [RPInfoOut]
-        [XmlIgnore]
-        [DefaultValue(Visibility.Collapsed)]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSlider_TextBox1Visibility
-        public Visibility TextBox1Visibility { get; set; } = Visibility.Collapsed;
+        [DefaultValue(true)]
+        [Description("This is IsSnapToTickEnabled, a member of class RibbonSlider. " +
+            "The default value is true.")]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSlider_IsSnapToTickEnabled
+        public bool IsSnapToTickEnabled { get; set; } = true; // Default value was not mentioned in official documentation,
+                                                              // however in version 2017 there was true as default value
 
         [RPInternalUseOnly]
-        [XmlAttribute("TextBox1Visibility")]
-        public string TextBox1VisibilityDef
+        [XmlAttribute("IsSnapToTickEnabled")]
+        public string IsSnapToTickEnabledDef
         {
-            get => TextBox1Visibility.ToString();
+            get => IsSnapToTickEnabled.ToString();
             set
             {
-                if (!Enum.TryParse(value, true, out Visibility result))
-                    result = Visibility.Collapsed;
-                TextBox1Visibility = result;
+                if (string.IsNullOrEmpty(value))
+                {
+                    IsSnapToTickEnabled = true;
+                    return;
+                }
+                IsSnapToTickEnabled = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
             }
         }
 
@@ -177,6 +168,29 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 
         [RPInfoOut]
         [XmlIgnore]
+        [DefaultValue(0.0)]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSlider_Value
+        public double Value { get; set; } = 0.0d;
+
+        [XmlAttribute("Value")]
+        [RPInternalUseOnly]
+        public string ValueDef
+        {
+            get => Value.ToString();
+            set
+            {
+                if (string.IsNullOrEmpty(value)) return;
+                if (double.TryParse(value, out var result))
+                {
+                    Value = result;
+                    return;
+                }
+                Value = 0.0d;
+            }
+        }
+
+        [RPInfoOut]
+        [XmlIgnore]
         [DefaultValue(null)]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSlider_Ticks
         public DoubleCollection Ticks { get; set; } = null;
@@ -204,25 +218,12 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 
         [RPInfoOut]
         [XmlIgnore]
-        [DefaultValue(0.0)]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSlider_Value
-        public double Value { get; set; } = 0.0d;
-
-        [XmlAttribute("Value")]
-        [RPInternalUseOnly]
-        public string ValueDef
-        {
-            get => Value.ToString();
-            set
-            {
-                if (string.IsNullOrEmpty(value)) return;
-                if (double.TryParse(value, out var result))
-                {
-                    Value = result;
-                    return;
-                }
-                Value = 0.0d;
-            }
-        }
+        [DefaultValue(null)]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSlider_TextBox1Text
+#if NET8_0_OR_GREATER
+        public string? TextBox1Text { get; set; } = null;
+#else
+        public string TextBox1Text { get; set; } = null;
+#endif
     }
 }
