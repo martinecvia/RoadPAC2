@@ -1,13 +1,19 @@
-#pragma warning disable
+#pragma warning disable CS8600
+#pragma warning disable CS8602
+#pragma warning disable CS8622
+
+#pragma warning disable IDE0028 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
+#pragma warning disable IDE0090 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
+#pragma warning disable IDE0305 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
 
 #define DEBUG
 #define NON_VOLATILE_MEMORY
 
-using System;
-using System.Collections.Generic;
+using System; // Keep for .NET 4.6
+using System.Collections.Generic; // Keep for .NET 4.6
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Linq;
+using System.Linq; // Keep for .NET 4.6
 using System.Reflection;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
@@ -62,13 +68,18 @@ namespace Shared.Controllers
         }
 
         [RPPrivateUseOnly]
-        private static T CreateTab<T>(string tabId, 
-                                          string tabName = null,
-                                          string tabDescription = null) where T: RibbonTab, new()
+        private static T CreateTab<T>(string tabId,
+#if NET8_0_OR_GREATER
+                                      string? tabName = null,
+                                      string? tabDescription = null) where T: RibbonTab, new()
+#else
+                                      string tabName = null,
+                                      string tabDescription = null) where T: RibbonTab, new()
+#endif
         {
-            #if NON_VOLATILE_MEMORY
+#if NON_VOLATILE_MEMORY
             AssertInitialized();
-            #endif
+#endif
             Assert.IsNotNull(tabId, nameof(tabId));
             RibbonTabDef xml = ResourceController.LoadResourceRibbon<RibbonTabDef>(tabId);
             T tab = new T
@@ -99,17 +110,17 @@ namespace Shared.Controllers
                             target.SetValue(tab, property.GetValue(xml), null);
                         else
                         {
-                            #if DEBUG
+#if DEBUG
                             Debug.WriteLine($"{property.Name}: " +
                                 $"Has different type target:{target.PropertyType} from source:{property.PropertyType}");
-                            #endif
+#endif
                         }
                     }
                     catch (System.Exception exception) // Collision with *CAD.Runtime.Exception & System.Exception
                     {
-                        #if DEBUG
+#if DEBUG
                         Debug.WriteLine($"{property.Name}: {exception.Message}");
-                        #endif
+#endif
                     }
                 }
             };
@@ -131,7 +142,12 @@ namespace Shared.Controllers
         /// <param name="tabName">Optional override for the tab display name. If not set, <paramref name="tabId"/> is used.</param>
         /// <param name="tabDescription">Optional description to show in UI tooltips or documentation.</param>
         /// <returns>A fully initialized <see cref="RibbonTab"/> instance.</returns>
-        public static RibbonTab CreateTab(string tabId, string tabName = null, string tabDescription = null) 
+        public static RibbonTab CreateTab(string tabId,
+#if NET8_0_OR_GREATER
+                                          string? tabName = null, string? tabDescription = null)
+#else
+                                          string tabName = null, string tabDescription = null)
+#endif
             => CreateTab<RibbonTab>(tabId, tabName, tabDescription);
 
         /// <summary>
@@ -152,12 +168,17 @@ namespace Shared.Controllers
         /// </remarks>
         public static ContextualRibbonTab CreateContextualTab(string tabId, 
             Func<SelectionSet, bool> onSelectionMatch, // Selector switch when this tab should be opened
+#if NET8_0_OR_GREATER
+            string? tabName = null,
+            string? tabDescription = null)
+#else
             string tabName = null,
             string tabDescription = null)
+#endif
         {
-            #if NON_VOLATILE_MEMORY
+#if NON_VOLATILE_MEMORY
             AssertInitialized();
-            #endif
+#endif
             Assert.IsNotNull(tabId, nameof(tabId));
             RibbonTabDef xml = ResourceController.LoadResourceRibbon<RibbonTabDef>(tabId);
             ContextualRibbonTab tab = CreateTab<ContextualRibbonTab>(tabId, tabName, tabDescription);
@@ -218,22 +239,25 @@ namespace Shared.Controllers
                 }
             }
             var selection = result.Value;
-            foreach (KeyValuePair<string, Func<SelectionSet, bool>> pair in _contextualTabConditions)
+            if (selection != null)
             {
-                if (pair.Value == null)
-                    continue; // If for some reason Func<SelectionSet, bool>> will be null during tab creation
-                              // we will just skip handling this tab and treat it as normal one
-                if (pair.Value.Invoke(selection))
+                foreach (KeyValuePair<string, Func<SelectionSet, bool>> pair in _contextualTabConditions)
                 {
-                    var tab = Ribbon.Tabs.FirstOrDefault(t => t.Id == pair.Key);
-                    if (tab != null && tab is ContextualRibbonTab selected)
+                    if (pair.Value == null)
+                        continue; // If for some reason Func<SelectionSet, bool>> will be null during tab creation
+                                  // we will just skip handling this tab and treat it as normal one
+                    if (pair.Value.Invoke(selection))
                     {
-                        selected.Show();
-                        Ribbon.UpdateLayout();
-                        IsSelectionHandled = false;
-                        return;
+                        var tab = Ribbon.Tabs.FirstOrDefault(t => t.Id == pair.Key);
+                        if (tab != null && tab is ContextualRibbonTab selected)
+                        {
+                            selected.Show();
+                            Ribbon.UpdateLayout();
+                            IsSelectionHandled = false;
+                            return;
+                        }
                     }
-                }
+            }
             }
             // Release the lock
             IsSelectionHandled = false;

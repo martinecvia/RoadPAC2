@@ -2,10 +2,10 @@
 #pragma warning disable CS8603
 #pragma warning disable CS8625
 
-using System;
+using System; // Keep for .NET 4.6
 using System.Xml;
 using System.ComponentModel;
-using System.Collections.Generic;
+using System.Collections.Generic; // Keep for .NET 4.6
 using System.Windows.Markup;
 using System.Xml.Serialization;
 

@@ -3,12 +3,15 @@
 #pragma warning disable CS8604
 #pragma warning disable CS8634
 
-using System;
-using System.Collections.Generic;
+#pragma warning disable IDE0028
+#pragma warning disable IDE0090
+
+using System; // Keep for .NET 4.6
+using System.Collections.Generic; // Keep for .NET 4.6
 using System.Diagnostics;
 using System.Drawing; // To test if file is loadable as Image
 using System.IO;
-using System.Linq;
+using System.Linq; // Keep for .NET 4.6
 using System.Reflection;
 using System.Windows.Media.Imaging;
 using System.Xml;

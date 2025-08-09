@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System; // Keep for .NET 4.6
+using System.Collections.Generic; // Keep for .NET 4.6
 using System.ComponentModel;
 using System.Xml.Serialization;
 

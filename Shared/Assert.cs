@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System; // Keep for .NET 4.6
 using System.Collections;
 using System.Diagnostics;
 
@@ -20,9 +20,7 @@ namespace Shared
         {
             if (obj == null)
             {
-                #if DEBUG
                 Debug.WriteLine(obj, paramName);
-                #endif
                 throw new ArgumentNullException(paramName);
             }
         }
@@ -38,9 +36,7 @@ namespace Shared
         {
             if (!((IEnumerable)obj).GetEnumerator().MoveNext())
             {
-                #if DEBUG
                 Debug.WriteLine(obj, paramName);
-                #endif
                 throw new ArgumentException("Empty sequence", paramName);
             }
         }

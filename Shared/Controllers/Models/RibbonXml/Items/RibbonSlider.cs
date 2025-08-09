@@ -1,6 +1,6 @@
-using System;
+using System; // Keep for .NET 4.6
 using System.ComponentModel;
-using System.Linq;
+using System.Linq; // Keep for .NET 4.6
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;

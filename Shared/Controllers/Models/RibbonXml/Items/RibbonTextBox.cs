@@ -1,7 +1,7 @@
 ﻿#pragma warning disable CS8603
 #pragma warning disable CS8625
 
-using System;
+using System; // Keep for .NET 4.6
 using System.ComponentModel;
 using System.Xml.Serialization;
 
@@ -26,6 +26,96 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         {
             base.ShowImage = false;
         }
+
+        [RPInfoOut]
+        [XmlAttribute("Value")]
+        [DefaultValue(null)]
+        [Description("Gets or sets the Value property. " +
+    "The value can be a string or other data type. " +
+    "If it is not a string, you must derive from this class and implement the virtual data conversion methods. " +
+    "The default value is null.")]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox_Value
+        public string Value { get; set; } = null;
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(RibbonTextBoxImageLocation.Left)]
+        [Description("Gets or sets the location for the image that is displayed in the text box. " +
+            "ShowImage must be set to true to see the image. " +
+            "This property is ignored if ShowImage is false. " +
+            "The default value is Left.")]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox_ImageLocation
+        public RibbonTextBoxImageLocation ImageLocation { get; set; } = RibbonTextBoxImageLocation.Left;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("ImageLocation")]
+        public string ImageLocationDef
+        {
+            get => ImageLocation.ToString();
+            set
+            {
+                if (!Enum.TryParse(value, true, out RibbonTextBoxImageLocation result))
+                    result = RibbonTextBoxImageLocation.Left;
+                ImageLocation = result;
+            }
+        }
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(false)]
+        [Description("Gets or sets the value that indicates whether the Image set in the text box should be displayed as a clickable button. " +
+            "If ShowImageAsButton is true, ShowImage must also be true, and ImageLocation must be set to InsideLeft or InsideRight. " +
+            "If ShowImage is false, the button will not be visible. " +
+            "If ImageLocation is Left, this property will not have any effect. " +
+            "Clicking this button will invoke the command handler if InvokesCommand is true. " +
+            "The default value is false.")]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox_ShowImageAsButton
+        public bool ShowImageAsButton { get; set; } = false;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("ShowImageAsButton")]
+        public string ShowImageAsButtonDef
+        {
+            get => ShowImageAsButton.ToString();
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    ShowImageAsButton = false;
+                    return;
+                }
+                ShowImageAsButton
+                    = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+            }
+        }
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(false)]
+        [Description("Gets or sets the value that indicates whether the text is selected when the text box gains focus. " +
+            "If the value is true, all the text in the text box is selected when the text box gets keyboard focus. " +
+            "If it is false, the text is not selected. " +
+            "The default value is false.")]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox_SelectTextOnFocus
+        public bool SelectTextOnFocus { get; set; } = false;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("SelectTextOnFocus")]
+        public string SelectTextOnFocusDef
+        {
+            get => SelectTextOnFocus.ToString();
+            set
+            {
+                if (string.IsNullOrEmpty(value))
+                {
+                    SelectTextOnFocus = false;
+                    return;
+                }
+                SelectTextOnFocus
+                    = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+            }
+        }
+
 #if NET8_0_OR_GREATER
         [RPInfoOut]
         [XmlIgnore]
@@ -79,53 +169,6 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 
         [RPInfoOut]
         [XmlIgnore]
-        [DefaultValue(null)]
-        [Description("Gets or sets the command handler to be called when the text is changed." +
-            "The property InvokesCommand must be true for the command handler to be called. " +
-            "If it is false, no command will be invoked by the text box. " +
-            "Also, the command will not be invoked by the text box if the text is not accepted (i.e., validation has failed). " +
-            "The default value is null.")]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox_CommandHandler
-        public System.Windows.Input.ICommand CommandHandler { get; set; } = null;
-
-        [RPInternalUseOnly]
-        [XmlAttribute("CommandHandler")]
-        public string CommandHandlerDef
-        {
-            get => CommandHandler != null && CommandHandler is CommandHandler handler
-                ? handler.Command : string.Empty;
-            set
-            {
-                if (!string.IsNullOrEmpty(value))
-                    CommandHandler = new CommandHandler(value);
-            }
-        }
-
-        [RPInfoOut]
-        [XmlIgnore]
-        [DefaultValue(RibbonTextBoxImageLocation.Left)]
-        [Description("Gets or sets the location for the image that is displayed in the text box. " +
-            "ShowImage must be set to true to see the image. " +
-            "This property is ignored if ShowImage is false. " +
-            "The default value is Left.")]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox_ImageLocation
-        public RibbonTextBoxImageLocation ImageLocation { get; set; } = RibbonTextBoxImageLocation.Left;
-
-        [RPInternalUseOnly]
-        [XmlAttribute("ImageLocation")]
-        public string ImageLocationDef
-        {
-            get => ImageLocation.ToString();
-            set
-            {
-                if (!Enum.TryParse(value, true, out RibbonTextBoxImageLocation result))
-                    result = RibbonTextBoxImageLocation.Left;
-                ImageLocation = result;
-            }
-        }
-
-        [RPInfoOut]
-        [XmlIgnore]
         [DefaultValue(false)]
         [Description("Gets or sets the value that indicates whether the command handler needs to be invoked whenever text is changed. " +
             " If the value is true, the command handler is invoked when text is changed in the UI; if the value is false, no command is invoked. " +
@@ -147,6 +190,43 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 }
                 InvokesCommand
                     = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+            }
+        }
+
+        [RPInfoOut]
+        [XmlAttribute("Prompt")]
+        [DefaultValue(null)]
+        [Description("Gets or sets the prompt text for the text box. " +
+            "Prompt text is displayed when the text box is empty and does not have keyboard focus. " +
+            "The default value is null.")]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox_Prompt
+        public string Prompt { get; set; } = null;
+
+        [RPInfoOut]
+        [XmlIgnore]
+        [DefaultValue(null)]
+        [Description("Gets or sets the command handler to be called when the text is changed." +
+            "The property InvokesCommand must be true for the command handler to be called. " +
+            "If it is false, no command will be invoked by the text box. " +
+            "Also, the command will not be invoked by the text box if the text is not accepted (i.e., validation has failed). " +
+            "The default value is null.")]
+        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox_CommandHandler
+#if NET8_0_OR_GREATER
+        public System.Windows.Input.ICommand? CommandHandler { get; set; } = null;
+#else
+        public System.Windows.Input.ICommand CommandHandler { get; set; } = null;
+#endif
+
+        [RPInternalUseOnly]
+        [XmlAttribute("CommandHandler")]
+        public string CommandHandlerDef
+        {
+            get => CommandHandler != null && CommandHandler is CommandHandler handler
+                ? handler.Command : string.Empty;
+            set
+            {
+                if (!string.IsNullOrEmpty(value))
+                    CommandHandler = new CommandHandler(value);
             }
         }
 
@@ -176,81 +256,6 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                     = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
             }
         }
-
-        [RPInfoOut]
-        [XmlAttribute("Prompt")]
-        [DefaultValue(null)]
-        [Description("Gets or sets the prompt text for the text box. " +
-            "Prompt text is displayed when the text box is empty and does not have keyboard focus. " +
-            "The default value is null.")]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox_Prompt
-        public string Prompt { get; set; } = null;
-
-        [RPInfoOut]
-        [XmlIgnore]
-        [DefaultValue(false)]
-        [Description("Gets or sets the value that indicates whether the text is selected when the text box gains focus. " +
-            "If the value is true, all the text in the text box is selected when the text box gets keyboard focus. " +
-            "If it is false, the text is not selected. " +
-            "The default value is false.")]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox_SelectTextOnFocus
-        public bool SelectTextOnFocus { get; set; } = false;
-
-        [RPInternalUseOnly]
-        [XmlAttribute("SelectTextOnFocus")]
-        public string SelectTextOnFocusDef
-        {
-            get => SelectTextOnFocus.ToString();
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    SelectTextOnFocus = false;
-                    return;
-                }
-                SelectTextOnFocus
-                    = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
-            }
-        }
-
-        [RPInfoOut]
-        [XmlIgnore]
-        [DefaultValue(false)]
-        [Description("Gets or sets the value that indicates whether the Image set in the text box should be displayed as a clickable button. " +
-            "If ShowImageAsButton is true, ShowImage must also be true, and ImageLocation must be set to InsideLeft or InsideRight. " +
-            "If ShowImage is false, the button will not be visible. " +
-            "If ImageLocation is Left, this property will not have any effect. " +
-            "Clicking this button will invoke the command handler if InvokesCommand is true. " +
-            "The default value is false.")]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox_ShowImageAsButton
-        public bool ShowImageAsButton { get; set; } = false;
-
-        [RPInternalUseOnly]
-        [XmlAttribute("ShowImageAsButton")]
-        public string ShowImageAsButtonDef
-        {
-            get => ShowImageAsButton.ToString();
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    ShowImageAsButton = false;
-                    return;
-                }
-                ShowImageAsButton
-                    = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
-            }
-        }
-
-        [RPInfoOut]
-        [XmlAttribute("Value")]
-        [DefaultValue(null)]
-        [Description("Gets or sets the Value property. " +
-            "The value can be a string or other data type. " +
-            "If it is not a string, you must derive from this class and implement the virtual data conversion methods. " +
-            "The default value is null.")]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox_Value
-        public string Value { get; set; } = null;
 
         [RPInfoOut]
         [XmlIgnore]

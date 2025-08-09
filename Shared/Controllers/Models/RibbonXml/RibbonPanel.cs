@@ -1,7 +1,7 @@
 ﻿#pragma warning disable CS8603
 #pragma warning disable CS8625
 
-using System;
+using System; // Keep for .NET 4.6
 using System.ComponentModel;
 using System.Xml;
 using System.Windows.Markup;

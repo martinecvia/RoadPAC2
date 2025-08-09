@@ -1,6 +1,6 @@
-﻿using System.ComponentModel;
+﻿using System; // Keep for .NET 4.6
+using System.ComponentModel;
 using System.Xml.Serialization;
-using System;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD

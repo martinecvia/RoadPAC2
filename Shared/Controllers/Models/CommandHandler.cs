@@ -4,7 +4,7 @@
 #pragma warning disable CS8618
 #pragma warning disable CS8767
 
-using System;
+using System; // Keep for .NET 4.6
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD

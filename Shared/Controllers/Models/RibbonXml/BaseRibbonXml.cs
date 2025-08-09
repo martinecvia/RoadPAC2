@@ -2,10 +2,13 @@
 #pragma warning disable CS8602
 #pragma warning disable CS8603
 
-using System;
+#pragma warning disable IDE0083 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
+#pragma warning disable IDE0305 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
+
+using System; // Keep for .NET 4.6
 using System.Collections;
 using System.Diagnostics;
-using System.Linq;
+using System.Linq; // Keep for .NET 4.6
 using System.Reflection;
 
 namespace Shared.Controllers.Models.RibbonXml
@@ -47,6 +50,43 @@ namespace Shared.Controllers.Models.RibbonXml
 
         internal Target Transform<Target>(Target target) => Transform(target, this);
 
+        /// <summary>
+        /// Copies values from members of a source object to matching members of a target object
+        /// using reflection, based on the <see cref="RPInfoOutAttribute"/> marker.
+        /// </summary>
+        /// <typeparam name="Target">The type of the target object.</typeparam>
+        /// <typeparam name="Source">
+        /// The type of the source object, which must derive from <see cref="BaseRibbonXml"/>.
+        /// </typeparam>
+        /// <param name="target">The object to receive the copied values.</param>
+        /// <param name="source">The object providing the values.</param>
+        /// <returns>
+        /// The updated <paramref name="target"/> instance, or <see langword="default"/> if either
+        /// argument is <see langword="null"/>.
+        /// </returns>
+        /// <remarks>
+        /// <para>
+        /// This method scans all public instance properties of the <paramref name="source"/> object
+        /// (including those inherited from base classes) that are decorated with
+        /// <see cref="RPInfoOutAttribute"/>. For each matching property found in
+        /// <paramref name="target"/>:
+        /// </para>
+        /// <list type="bullet">
+        /// <item>Properties must be readable on the source.</item>
+        /// <item>Properties must be writable on the target and have a compatible type, or a
+        /// nullable-to-non-nullable type conversion will be attempted.</item>
+        /// <item>If the property does not exist on the target (due to CAD version differences),
+        /// a debug message is logged and the property is skipped.</item>
+        /// </list>
+        /// <para>
+        /// This method is designed to support multiple CAD environments (e.g., AutoCAD, ZWCAD)
+        /// where property sets may differ between versions or platforms.
+        /// </para>
+        /// <para>
+        /// Any exceptions thrown during assignment are caught, and details are written to the debug
+        /// output to avoid runtime disruption.
+        /// </para>
+        /// </remarks>
         internal Target Transform<Target, Source>(Target target, Source source) where Source : BaseRibbonXml
         {
             if (target == null || source == null)

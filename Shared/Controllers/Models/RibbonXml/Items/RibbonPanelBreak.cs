@@ -1,4 +1,4 @@
-using System;
+using System; // Keep for .NET 4.6
 using System.ComponentModel;
 using System.Xml.Serialization;
 

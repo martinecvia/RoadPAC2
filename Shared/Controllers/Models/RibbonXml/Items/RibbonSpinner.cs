@@ -41,9 +41,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 else if (int.TryParse(value, out var y)) Value  = y;
                 else
                 {
-                    #if DEBUG
                     Debug.WriteLine($"{nameof(value)}: No valid value is set. Supported values are: [double, int]");
-                    #endif
                     Value = null;
                 }
             }
