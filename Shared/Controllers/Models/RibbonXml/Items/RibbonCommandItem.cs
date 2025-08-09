@@ -15,6 +15,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
     [XmlInclude(typeof(RibbonButtonDef))]
     [XmlInclude(typeof(RibbonCheckBoxDef))]
     [XmlInclude(typeof(RibbonMenuItemDef))]
+    [XmlInclude(typeof(RibbonMenuItemDef.ApplicationMenuItemDef))]
     [XmlInclude(typeof(RibbonToggleButtonDef))]
     public class RibbonCommandItemDef : RibbonItemDef
     {

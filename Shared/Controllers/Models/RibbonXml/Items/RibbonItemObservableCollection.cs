@@ -42,6 +42,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 #endif
         [XmlElement("RibbonCheckBox", typeof(RibbonCheckBoxDef))]
         [XmlElement("RibbonMenuItem", typeof(RibbonMenuItemDef))]
+        [XmlElement("ApplicationMenuItem", typeof(RibbonMenuItemDef.ApplicationMenuItemDef))]
         // RibbonButton
         [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
         public List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();

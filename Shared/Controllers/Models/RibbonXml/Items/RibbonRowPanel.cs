@@ -30,11 +30,19 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [XmlIgnore]
         [RPInternalUseOnly]
         [DefaultValue(null)]
+#if NET8_0_OR_GREATER
+        public RibbonSubPanelSource? Source => SourceDef?.Transform(new RibbonSubPanelSource());
+#else
         public RibbonSubPanelSource Source => SourceDef?.Transform(new RibbonSubPanelSource());
+#endif
 
         [RPInternalUseOnly]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+#if NET8_0_OR_GREATER
+        public RibbonSubPanelSourceDef? SourceDef { get; set; } = null;
+#else
         public RibbonSubPanelSourceDef SourceDef { get; set; } = null;
+#endif
 
         [RPInfoOut]
         [XmlIgnore]
@@ -60,8 +68,8 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [RPInfoOut]
         [RPInternalUseOnly]
         [XmlIgnore]
-        [DefaultValue(RibbonFoldPanelResizeStyle.None)]
-        public RibbonFoldPanelResizeStyle SubPanelResizeStyle { get; set; } = RibbonFoldPanelResizeStyle.None;
+        [DefaultValue(RibbonRowPanelResizeStyle.None)]
+        public RibbonRowPanelResizeStyle SubPanelResizeStyle { get; set; } = RibbonRowPanelResizeStyle.None;
 
         [RPInternalUseOnly]
         [XmlAttribute("SubPanelResizeStyle")]
@@ -70,8 +78,8 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             get => SubPanelResizeStyle.ToString();
             set
             {
-                if (!Enum.TryParse(value, true, out RibbonFoldPanelResizeStyle result))
-                    result = RibbonFoldPanelResizeStyle.None;
+                if (!Enum.TryParse(value, true, out RibbonRowPanelResizeStyle result))
+                    result = RibbonRowPanelResizeStyle.None;
                 SubPanelResizeStyle = result;
             }
         }
@@ -97,7 +105,9 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 IsTopJustified = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
             }
         }
-
+#if NET8_0_OR_GREATER // This was removed in AutoCAD 
+                      // however keeping this does not affect usability, and its still used in .NET 4.6 and ZWCAD
+#else
         [RPInfoOut]
         [XmlIgnore]
         [RPInternalUseOnly]
@@ -119,6 +129,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 AreItemArrangedFromRightToLeft = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
             }
         }
+#endif
 
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonFlowPanel
         [RPPrivateUseOnly]
@@ -213,6 +224,25 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 }
             }
             */
+
+            [RPInfoOut]
+            [RPInternalUseOnly]
+            [XmlIgnore]
+            [DefaultValue(RibbonFoldPanelResizeStyle.None)]
+            public new RibbonFoldPanelResizeStyle SubPanelResizeStyle { get; set; } = RibbonFoldPanelResizeStyle.None;
+
+            [RPInternalUseOnly]
+            [XmlAttribute("SubPanelResizeStyle")]
+            public new string SubPanelResizeStyleDef
+            {
+                get => SubPanelResizeStyle.ToString();
+                set
+                {
+                    if (!Enum.TryParse(value, true, out RibbonFoldPanelResizeStyle result))
+                        result = RibbonFoldPanelResizeStyle.None;
+                    SubPanelResizeStyle = result;
+                }
+            }
 
             // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonFoldPanel_DefaultSize
             [RPInfoOut]

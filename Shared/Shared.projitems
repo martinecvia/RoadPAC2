@@ -57,6 +57,7 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_roadpac_16.ico" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="$(MSBuildThisFileDirectory)Resources\Icons\Civil3D\" />
     <Folder Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\" />
   </ItemGroup>
   <ItemGroup>
@@ -66,5 +67,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_icon.jpg" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\Civil3D\rp_project_explorer.bmp" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_open_sidebar_32.ico" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_open_sidebar_16.ico" />
   </ItemGroup>
 </Project>

@@ -105,7 +105,7 @@ namespace Shared.Controllers
                 using (Image _ = Image.FromStream(stream)) // Keep for .NET 4.6, System.Drawing must be as dependency,
                                                            // sole purpose of this change is to assert if file was loaded successfully as Image
                                                            // and not as something that is not image-like
-                    return !IsXml(resourceName);           // XML can be loaded as Image too, so we want to check if this is really not a XML file
+                    return true;
             } catch {
                 return false;
             }
@@ -114,9 +114,6 @@ namespace Shared.Controllers
         [RPPrivateUseOnly]
         private static BitmapImage LoadResourceImage(string resourceName)
         {
-            BitmapImage _cachedBitMap = GetImageSource(resourceName);
-            if (_cachedBitMap != null)
-                return _cachedBitMap; // We don't want to load same file twice by accident, right?
             try
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();
@@ -135,6 +132,7 @@ namespace Shared.Controllers
                     bitMap.EndInit();
                     // To make it thread safe and immutable
                     bitMap.Freeze();
+                    Debug.WriteLine($"LoadResourceImage: {resourceName.Split('.').Reverse().Skip(1).First()}");
                     return bitMap;
                 }
             }

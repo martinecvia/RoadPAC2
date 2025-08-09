@@ -30,6 +30,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
     [XmlInclude(typeof(RibbonButtonDef))]
     [XmlInclude(typeof(RibbonCheckBoxDef))]
     [XmlInclude(typeof(RibbonMenuItemDef))]
+    [XmlInclude(typeof(RibbonMenuItemDef.ApplicationMenuItemDef))]
     [XmlInclude(typeof(RibbonToggleButtonDef))]
     [XmlInclude(typeof(RibbonButtonDef))]
     [XmlInclude(typeof(RibbonItemDef))]
@@ -534,6 +535,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 #endif
             { typeof(RibbonCheckBoxDef), () => new RibbonCheckBox() },
             { typeof(RibbonMenuItemDef), () => new RibbonMenuItem() },
+            { typeof(RibbonMenuItemDef.ApplicationMenuItemDef), () => new ApplicationMenuItem() },
             // RibbonButton
             { typeof(RibbonButtonDef), () => new RibbonButton() },
         };

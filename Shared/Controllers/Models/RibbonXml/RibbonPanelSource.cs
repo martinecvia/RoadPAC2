@@ -57,6 +57,7 @@ namespace Shared.Controllers.Models.RibbonXml
 #endif
         [XmlElement("RibbonCheckBox", typeof(RibbonCheckBoxDef))]
         [XmlElement("RibbonMenuItem", typeof(RibbonMenuItemDef))]
+        [XmlElement("ApplicationMenuItem", typeof(RibbonMenuItemDef.ApplicationMenuItemDef))]
         // RibbonButton
         [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
         public List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
@@ -125,7 +126,11 @@ namespace Shared.Controllers.Models.RibbonXml
             get
             {
                 // It must be RibbonButton if you want it to work
+#if NET8_0_OR_GREATER
+                RibbonButton? button = DialogLauncherDef?.Transform(new RibbonButton());
+#else
                 RibbonButton button = DialogLauncherDef?.Transform(new RibbonButton());
+#endif
                 if (button != null)
                 {
                     // DialogLauncher depends on this, thus must be changed

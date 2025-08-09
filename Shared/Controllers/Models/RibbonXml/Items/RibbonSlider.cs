@@ -1,3 +1,6 @@
+#pragma warning disable CS8604
+#pragma warning disable CS8625
+
 using System; // Keep for .NET 4.6
 using System.ComponentModel;
 using System.Linq; // Keep for .NET 4.6

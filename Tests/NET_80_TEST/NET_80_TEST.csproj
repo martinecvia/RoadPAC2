@@ -6,6 +6,15 @@
     <Nullable>enable</Nullable>
 	<UseWPF>true</UseWPF>
 	<Platforms>AnyCPU;x64</Platforms>
+	<AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Optimize>True</Optimize>
   </PropertyGroup>
 
   <Import Project="..\..\Shared\Shared.projitems" Label="Shared" />
@@ -17,21 +26,27 @@
   <ItemGroup>
     <Reference Include="accoremgd">
       <HintPath>..\..\Libraries\AutoCAD\2025\AcCoreMgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Acdbmgd">
       <HintPath>..\..\Libraries\AutoCAD\2025\AcDbMgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Acmgd">
       <HintPath>..\..\Libraries\AutoCAD\2025\AcMgd.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="AdWindows">
       <HintPath>..\..\Libraries\AutoCAD\2025\AdWindows.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Autodesk.AutoCAD.Interop">
       <HintPath>..\..\Libraries\AutoCAD\2025\Autodesk.AutoCAD.Interop.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="Autodesk.AutoCAD.Interop.Common">
       <HintPath>..\..\Libraries\AutoCAD\2025\Autodesk.AutoCAD.Interop.Common.dll</HintPath>
+      <Private>False</Private>
     </Reference>
   </ItemGroup>
 
