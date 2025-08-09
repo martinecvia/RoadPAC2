@@ -115,7 +115,7 @@ namespace Shared.Controllers
             catch (Exception exception) {
                 Debug.WriteLine($"LoadResourceImage: Something went horribly wrong ! " +
                     $"{resourceName}: {exception.GetType().Name}/{exception.Message}");
-                throw exception; // pass
+                throw; // pass
             }
         }
 

@@ -109,8 +109,11 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [XmlIgnore]
         [DefaultValue(null)]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSlider_TextBox1Text
+#if NET8_0_OR_GREATER
+        public string? TextBox1Text { get; set; } = null;
+#else
         public string TextBox1Text { get; set; } = null;
-
+#endif
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(Visibility.Collapsed)]
