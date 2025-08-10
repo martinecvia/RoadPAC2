@@ -12,6 +12,7 @@ using Autodesk.Windows;
 using Shared.Controllers;
 using Shared.Controllers.Models.RibbonXml;
 using Shared.Controllers.Models.RibbonXml.Items;
+using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
 
 // https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-4E1AAFA9-740E-4097-800C-CAED09CDFF12
 // https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-C3F3C736-40CF-44A0-9210-55F6A939B6F2
@@ -46,9 +47,9 @@ namespace NET_46_TEST
             }, "Trasa");
             */
             var resource = ResourceController.LoadResourceRibbon<RibbonTabDef>("rp_RoadPAC");
-            var tab = resource?.Transform(new RibbonTab());
             if (resource != null)
             {
+                var tab = resource.Transform(new RibbonTab());
                 foreach (var panel in resource.PanelsDef)
                 {
                     var panelRef = panel.Transform(new RibbonPanel());
@@ -57,8 +58,18 @@ namespace NET_46_TEST
                     {
                         var itemRef = item.Transform(RibbonItemDef.ItemsFactory[item.GetType()]());
                         if (item is RibbonRowPanelDef def1)
+                        {
+                            if (def1.SourceDef != null && def1.ItemsDef.Count != 0) // Source can't be set when Items is not empty.
+                                foreach (var itemDef in def1.ItemsDef)
+                                    def1.SourceDef.ItemsDef.Add(itemDef);           // To avoid InvalidOperationException we are effectively transferring everything to SubSource instead
                             foreach (var itemDef in def1.ItemsDef)
+                            {
+                                if (itemDef is RibbonRowPanelDef || itemDef is RibbonPanelBreakDef)
+                                    continue; // The following item types are not supported in this collection: RibbonRowPanel and RibbonPanelBreak.
+                                              // An exception is thrown if these objects are added to the collection.
                                 ((RibbonRowPanel)itemRef).Items.Add(itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]()));
+                            }
+                        }
                         if (item is RibbonListDef def2)
                             foreach (var itemDef in def2.ItemsDef)
                                 ((RibbonList)itemRef).Items.Add(itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]()));
@@ -68,6 +79,58 @@ namespace NET_46_TEST
                     tab.Panels.Add(panelRef);
                 }
                 Ribbon.Tabs.Add(tab);
+            }
+            // Test defs
+            {
+                BaseRibbonXml[] defs = new[] {
+                    (BaseRibbonXml)new DocumentItemDef(), 
+                    new ProgressBarSourceDef(),
+                    new RibbonButtonDef(),
+                    new RibbonCommandItemDef(),
+                    new RibbonCheckBoxDef(),
+                    new RibbonItemDef(),
+                    new RibbonLabelDef(),
+                    new RibbonListDef.RibbonComboDef(),
+                    new RibbonListDef.RibbonComboDef.RibbonGalleryDef(),
+                    new RibbonMenuItemDef(),
+                    new RibbonMenuItemDef.ApplicationMenuItemDef(),
+                    new RibbonPanelBreakDef(),
+                    new RibbonPanelDef(),
+                    new RibbonPanelSourceDef(),
+                    new RibbonPanelSourceDef.RibbonPanelSpacerDef(),
+                    new RibbonRowBreakDef(),
+                    new RibbonRowPanelDef(),
+                    new RibbonRowPanelDef.RibbonFlowPanelDef(),
+                    new RibbonRowPanelDef.RibbonFoldPanelDef(),
+                    new RibbonSeparatorDef(),
+                    new RibbonSliderDef(),
+                    new RibbonSpinnerDef(),
+                    new RibbonSubPanelSourceDef(),
+                    new RibbonTabDef(),
+                    new RibbonTextBoxDef(),
+                    new RibbonToggleButtonDef()
+                };
+                foreach (var def in defs)
+                {
+                    if (def is RibbonItemDef itemDef)
+                    {
+                        if (!RibbonItemDef.ItemsFactory.ContainsKey(itemDef.GetType()))
+                        {
+                            Debug.WriteLine($"{itemDef.GetType()} not in ItemsFactory");
+                            continue;
+                        }
+                        itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]());
+                    }
+                    if (def is RibbonPanelSourceDef sourceDef)
+                    {
+                        if (!RibbonPanelSourceDef.SourceFactory.ContainsKey(sourceDef.GetType()))
+                        {
+                            Debug.WriteLine($"{sourceDef.GetType()} not in SourceFactory");
+                            continue;
+                        }
+                        sourceDef.Transform(RibbonPanelSourceDef.SourceFactory[sourceDef.GetType()]());
+                    }
+                }
             }
         }
 

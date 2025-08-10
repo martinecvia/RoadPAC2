@@ -25,7 +25,6 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         "The items can be organized into multiple rows by adding a RibbonRowBreak item at the index where the new row is to start.")]
     public class RibbonRowPanelDef : RibbonItemObservableCollectionDef
     {
-
         [RPInfoOut]
         [XmlIgnore]
         [RPInternalUseOnly]
@@ -35,9 +34,9 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 #else
         public RibbonSubPanelSource Source => SourceDef?.Transform(new RibbonSubPanelSource());
 #endif
-
         [RPInternalUseOnly]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        [XmlElement("RibbonSubPanelSource", typeof(RibbonSubPanelSourceDef))]
 #if NET8_0_OR_GREATER
         public RibbonSubPanelSourceDef? SourceDef { get; set; } = null;
 #else

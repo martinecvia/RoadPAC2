@@ -51,7 +51,7 @@ namespace Shared.Controllers.Models.RibbonXml
         // RibbonCommandItem
         [XmlElement("DocumentItem", typeof(DocumentItemDef))]
 #if ZWCAD
-        // ZWCAD Does not support this
+        // ZWCAD Does not support this yet
 #else
         [XmlElement("ProgressBarSource", typeof(ProgressBarSourceDef))]
 #endif
@@ -60,6 +60,7 @@ namespace Shared.Controllers.Models.RibbonXml
         [XmlElement("ApplicationMenuItem", typeof(RibbonMenuItemDef.ApplicationMenuItemDef))]
         // RibbonButton
         [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
+        [XmlElement("RibbonToggleButton", typeof(RibbonToggleButtonDef))]
         public List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
 
 

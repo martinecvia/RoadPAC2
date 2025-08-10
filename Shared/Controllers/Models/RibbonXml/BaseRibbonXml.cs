@@ -1,6 +1,7 @@
 ﻿#pragma warning disable CS8600
 #pragma warning disable CS8602
 #pragma warning disable CS8603
+#pragma warning disable CS8604  // Compiler thinks that object can be null, even tho in higher scope we have checked object is not null
 
 #pragma warning disable IDE0083 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
 #pragma warning disable IDE0305 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
@@ -87,7 +88,7 @@ namespace Shared.Controllers.Models.RibbonXml
         /// output to avoid runtime disruption.
         /// </para>
         /// </remarks>
-        internal Target Transform<Target, Source>(Target target, Source source) where Source : BaseRibbonXml
+        internal static Target Transform<Target, Source>(Target target, Source source) where Source : BaseRibbonXml
         {
             if (target == null || source == null)
                 return default;
@@ -105,7 +106,11 @@ namespace Shared.Controllers.Models.RibbonXml
                     // we have to first check if property exists in current running version
                     // if not we will just print information into a debug console and call it a day
                     PropertyInfo targetProperty = target.GetType()
-                        .GetProperty(sourceProperty.Name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy);
+                        .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
+                        .FirstOrDefault(property => property.Name == sourceProperty.Name && // If there are overloads with the same name but different property types,
+                                                                                            // filter to those assignable from the source type
+                                                                                            // attempt to fix AmbiguousMatchException
+                                                    property.PropertyType.IsAssignableFrom(sourceProperty.PropertyType));
                     // Property not found in API
                     if (targetProperty == null)
                     {
@@ -114,27 +119,34 @@ namespace Shared.Controllers.Models.RibbonXml
                     }
                     if (sourceProperty.GetMethod == null || sourceProperty.GetMethod.GetMethodBody() == null)
                         continue; // prevention of NotImplementedException 
+                    var sourceValue = sourceProperty.GetValue(source);
                     if (targetProperty.CanWrite == true
                         && targetProperty.PropertyType.IsAssignableFrom(sourceProperty.PropertyType))
-                        targetProperty.SetValue(target, sourceProperty.GetValue(source), null);
+                        targetProperty.SetValue(target, sourceValue, null);
+                    // Type? -> Type conversion
+                    else if (Nullable.GetUnderlyingType(sourceProperty.PropertyType) == targetProperty.PropertyType
+                            && sourceValue != null)
+                    {
+                        try
+                        {
+                            // Unwrap Nullable<T> to T
+                            targetProperty.SetValue(target, Convert.ChangeType(sourceValue, targetProperty.PropertyType), null);
+                        }
+                        catch { } // Silent catch, its a dirty way to convert bool? to bool if not null
+                                  // however it saves a lot of time and provides "user friendly" approach
+                    }
+                    else if (sourceValue != null &&
+                            // Fail IsAssignableFrom when types have the same name but come from different assemblies
+                            targetProperty.PropertyType.FullName == sourceProperty.PropertyType.FullName &&
+                            targetProperty.PropertyType.IsEnum && sourceProperty.PropertyType.IsEnum)
+                    {
+                        // Cross-assembly enum fix
+                        targetProperty.SetValue(target, Enum.Parse(targetProperty.PropertyType, sourceValue.ToString()));
+                    }
                     else
                     {
-                        // Type? -> Type conversion
-                        if (Nullable.GetUnderlyingType(sourceProperty.PropertyType) == targetProperty.PropertyType
-                            && sourceProperty.GetValue(source) != null)
-                        {
-                            try
-                            {
-                                // Unwrap Nullable<T> to T
-                                targetProperty.SetValue(target, Convert.ChangeType(sourceProperty.GetValue(source), targetProperty.PropertyType), null);
-                            } catch { } // Silent catch, its a dirty way to convert bool? to bool if not null
-                                        // however it saves a lot of time and provides "user friendly" approach
-                        }
-                        else
-                        {
-                            Debug.WriteLine($"{sourceProperty.Name}: " +
-                                $"Has different type target:{targetProperty.PropertyType} from source:{sourceProperty.PropertyType}");
-                        }
+                        Debug.WriteLine($"{sourceProperty.Name}: " +
+                            $"Has different type target:{targetProperty.PropertyType} from source:{sourceProperty.PropertyType}");
                     }
                 }
                 catch (System.Exception exception) // Collision with *CAD.Runtime.Exception & System.Exception

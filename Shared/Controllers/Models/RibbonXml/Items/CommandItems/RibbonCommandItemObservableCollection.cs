@@ -12,7 +12,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
         // RibbonCommandItem
         [XmlElement("DocumentItem", typeof(DocumentItemDef))]
 #if ZWCAD
-// ZWCAD Does not support this
+// ZWCAD Does not support this yet
 #else
         [XmlElement("ProgressBarSource", typeof(ProgressBarSourceDef))]
 #endif
@@ -21,6 +21,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
         [XmlElement("ApplicationMenuItem", typeof (RibbonMenuItemDef.ApplicationMenuItemDef))]
         // RibbonButton
         [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
+        [XmlElement("RibbonToggleButton", typeof(RibbonToggleButtonDef))]
         public List<RibbonCommandItemDef> ItemsDef { get; set; } = new List<RibbonCommandItemDef>();
     }
 }

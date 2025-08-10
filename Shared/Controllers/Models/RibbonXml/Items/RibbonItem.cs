@@ -538,6 +538,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             { typeof(RibbonMenuItemDef.ApplicationMenuItemDef), () => new ApplicationMenuItem() },
             // RibbonButton
             { typeof(RibbonButtonDef), () => new RibbonButton() },
+            { typeof(RibbonToggleButtonDef), () => new RibbonToggleButton() },
         };
     }
 }
