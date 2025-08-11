@@ -115,7 +115,11 @@ namespace Shared.Controllers
             return (T) tab;
         }
 
+#if NET8_0_OR_GREATER
+        private static RibbonItem? ProcessRibbonItem(RibbonItemDef itemDef,
+#else
         private static RibbonItem ProcessRibbonItem(RibbonItemDef itemDef, 
+#endif
             int currentDepth = 0) // this signalizes how many hops had happend during reccursion,
                                  // we don't want to be looped, so depth is actually checked for depth
         {
@@ -168,16 +172,28 @@ namespace Shared.Controllers
                                 ((RibbonCombo)itemRef).MenuItems.Add(childRef);
                         }
                         break;
-                    case RibbonListButtonDef.RibbonSplitButtonDef item:
+                    case RibbonListButtonDef item:
                         foreach (var childDef in item.ItemsDef)
                         {
-                            // The items in the drop-down list should be of type RibbonCommandItem or RibbonSeparator
-                            if (childDef is RibbonCommandItemDef || childDef is RibbonSeparatorDef)
+                            // Set of rules for each implementation of RibbonListButtonDef
+                            switch (item)
                             {
-                                var childRef = ProcessRibbonItem(childDef, currentDepth + 1);
-                                if (childRef != null)
-                                    ((RibbonSplitButton)itemRef).Items.Add(childRef);
+                                case RibbonListButtonDef.RibbonMenuButtonDef _:
+                                    if (!(childDef is RibbonMenuItemDef) || !(childDef is RibbonSeparatorDef))
+                                        continue;
+                                    break;
+                                case RibbonListButtonDef.RibbonRadioButtonGroupDef _:
+                                    if (!(childDef is RibbonToggleButtonDef))
+                                        continue;
+                                    break;
+                                default:
+                                    if (!(childDef is RibbonCommandItemDef) || !(childDef is RibbonSeparatorDef))
+                                        continue;
+                                    break;
                             }
+                            var childRef = ProcessRibbonItem(childDef, currentDepth + 1);
+                            if (childRef != null)
+                                ((RibbonListButton)itemRef).Items.Add(childRef);
                         }
                         break;
                     { } // Little C# hack for better memory management
