@@ -49,9 +49,7 @@ namespace Shared.Controllers.Models.RibbonXml
         [XmlElement("RibbonSpinner", typeof(RibbonSpinnerDef))]
         [XmlElement("RibbonTextBox", typeof(RibbonTextBoxDef))]
         // RibbonCommandItem
-#if ZWCAD
-        // ZWCAD Does not support this yet
-#else
+#if !ZWCAD
         [XmlElement("ProgressBarSource", typeof(ProgressBarSourceDef))]
 #endif
         [XmlElement("RibbonCheckBox", typeof(RibbonCheckBoxDef))]
@@ -63,6 +61,10 @@ namespace Shared.Controllers.Models.RibbonXml
 #if (NET8_0_OR_GREATER || ZWCAD)
         [XmlElement("ToolBarShareButton", typeof(RibbonToggleButtonDef.ToolBarShareButtonDef))]
 #endif
+        [XmlElement("RibbonChecklistButton", typeof(RibbonListButtonDef.RibbonChecklistButtonDef))]
+        [XmlElement("RibbonMenuButton", typeof(RibbonListButtonDef.RibbonMenuButtonDef))]
+        [XmlElement("RibbonRadioButtonGroup", typeof(RibbonListButtonDef.RibbonRadioButtonGroupDef))]
+        [XmlElement("RibbonSplitButton", typeof(RibbonListButtonDef.RibbonSplitButtonDef))]
         public List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
 
 

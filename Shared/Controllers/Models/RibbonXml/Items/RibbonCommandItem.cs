@@ -7,9 +7,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonCommandItem
     [RPPrivateUseOnly]
-#if ZWCAD
-    // ZWCAD Does not support this
-#else
+#if !ZWCAD
     [XmlInclude(typeof(ProgressBarSourceDef))]
 #endif
     [XmlInclude(typeof(RibbonButtonDef))]
@@ -21,6 +19,10 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 #if (NET8_0_OR_GREATER || ZWCAD)
     [XmlInclude(typeof(RibbonToggleButtonDef.ToolBarShareButtonDef))]
 #endif
+    [XmlInclude(typeof(RibbonListButtonDef.RibbonChecklistButtonDef))]
+    [XmlInclude(typeof(RibbonListButtonDef.RibbonMenuButtonDef))]
+    [XmlInclude(typeof(RibbonListButtonDef.RibbonRadioButtonGroupDef))]
+    [XmlInclude(typeof(RibbonListButtonDef.RibbonSplitButtonDef))]
     public class RibbonCommandItemDef : RibbonItemDef
     {
         [RPInfoOut]

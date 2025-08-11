@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.Xml.Serialization;
 
 namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
@@ -8,8 +9,44 @@ namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
     [Description("This class is used to support hierarchical items. " +
         "This class is used in places where a hierarchy is supported. " +
         "Examples are application menu and RibbonMenuItem.")]
-    public class RibbonMenuItemDef : RibbonCommandItemObservableCollectionDef
+    [XmlInclude(typeof(RibbonMenuItemDef))]
+    [XmlInclude(typeof(ApplicationMenuItemDef))]
+    public class RibbonMenuItemDef : RibbonCommandItemDef
     {
+        [RPInternalUseOnly]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        // RibbonItem
+        [XmlElement("RibbonCombo", typeof(RibbonListDef.RibbonComboDef))]
+        [XmlElement("RibbonGallery", typeof(RibbonListDef.RibbonComboDef.RibbonGalleryDef))]
+        [XmlElement("RibbonLabel", typeof(RibbonLabelDef))]
+        [XmlElement("RibbonPanelBreak", typeof(RibbonPanelBreakDef))]
+        [XmlElement("RibbonRowBreak", typeof(RibbonRowBreakDef))]
+        [XmlElement("RibbonRowPanel", typeof(RibbonRowPanelDef))]
+        [XmlElement("RibbonFlowPanel", typeof(RibbonRowPanelDef.RibbonFlowPanelDef))]
+        [XmlElement("RibbonFoldPanel", typeof(RibbonRowPanelDef.RibbonFoldPanelDef))]
+        [XmlElement("RibbonSeparator", typeof(RibbonSeparatorDef))]
+        [XmlElement("RibbonSlider", typeof(RibbonSliderDef))]
+        [XmlElement("RibbonSpinner", typeof(RibbonSpinnerDef))]
+        [XmlElement("RibbonTextBox", typeof(RibbonTextBoxDef))]
+        // RibbonCommandItem
+#if !ZWCAD
+        [XmlElement("ProgressBarSource", typeof(ProgressBarSourceDef))]
+#endif
+        [XmlElement("RibbonCheckBox", typeof(RibbonCheckBoxDef))]
+        [XmlElement("RibbonMenuItem", typeof(RibbonMenuItemDef))]
+        [XmlElement("ApplicationMenuItem", typeof(ApplicationMenuItemDef))]
+        // RibbonButton
+        [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
+        [XmlElement("RibbonToggleButton", typeof(RibbonToggleButtonDef))]
+#if (NET8_0_OR_GREATER || ZWCAD)
+        [XmlElement("ToolBarShareButton", typeof(RibbonToggleButtonDef.ToolBarShareButtonDef))]
+#endif
+        [XmlElement("RibbonChecklistButton", typeof(RibbonListButtonDef.RibbonChecklistButtonDef))]
+        [XmlElement("RibbonMenuButton", typeof(RibbonListButtonDef.RibbonMenuButtonDef))]
+        [XmlElement("RibbonRadioButtonGroup", typeof(RibbonListButtonDef.RibbonRadioButtonGroupDef))]
+        [XmlElement("RibbonSplitButton", typeof(RibbonListButtonDef.RibbonSplitButtonDef))]
+        public List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
+
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_ApplicationMenuItem
         [RPPrivateUseOnly]
         [Description("The ApplicationMenuItem class is used to manage a single menu item and its sub-menu items in a hierarchical structure in the application menu. " +

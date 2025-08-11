@@ -20,14 +20,13 @@ using Autodesk.Windows.ToolBars;
 #endregion
 
 using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
+using static Shared.Controllers.Models.RibbonXml.Items.CommandItems.RibbonListButtonDef;
 
 namespace Shared.Controllers.Models.RibbonXml.Items
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem
     [RPPrivateUseOnly]
-#if ZWCAD
-    // ZWCAD Does not support this
-#else
+#if !ZWCAD
     [XmlInclude(typeof(ProgressBarSourceDef))]
 #endif
     [XmlInclude(typeof(RibbonButtonDef))]
@@ -35,10 +34,13 @@ namespace Shared.Controllers.Models.RibbonXml.Items
     [XmlInclude(typeof(RibbonMenuItemDef))]
     [XmlInclude(typeof(RibbonMenuItemDef.ApplicationMenuItemDef))]
     [XmlInclude(typeof(RibbonToggleButtonDef))]
+    [XmlInclude(typeof(RibbonChecklistButtonDef))]
+    [XmlInclude(typeof(RibbonMenuButtonDef))]
+    [XmlInclude(typeof(RibbonRadioButtonGroupDef))]
+    [XmlInclude(typeof(RibbonSplitButtonDef))]
 #if (NET8_0_OR_GREATER || ZWCAD)
     [XmlInclude(typeof(RibbonToggleButtonDef.ToolBarShareButtonDef))]
 #endif
-    [XmlInclude(typeof(RibbonButtonDef))]
     [XmlInclude(typeof(RibbonItemDef))]
     [XmlInclude(typeof(RibbonLabelDef))]
     [XmlInclude(typeof(RibbonListDef.RibbonComboDef))]
@@ -521,7 +523,6 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             // RibbonItem
             { typeof(RibbonListDef.RibbonComboDef), () => new RibbonCombo() },
             { typeof(RibbonListDef.RibbonComboDef.RibbonGalleryDef), () => new RibbonGallery() },
-//            { typeof(RibbonItemDef), () => new RibbonItem() },
             { typeof(RibbonLabelDef), () => new RibbonLabel() },
             { typeof(RibbonPanelBreakDef), () => new RibbonPanelBreak() },
             { typeof(RibbonRowBreakDef), () => new RibbonRowBreak() },
@@ -533,9 +534,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             { typeof(RibbonSpinnerDef), () => new RibbonSpinner() },
             { typeof(RibbonTextBoxDef), () => new RibbonTextBox() },
             // RibbonCommandItem
-#if ZWCAD
-    // ZWCAD Does not support this
-#else
+#if !ZWCAD
             { typeof(ProgressBarSourceDef), () => new ProgressBarSource() },
 #endif
             { typeof(RibbonCheckBoxDef), () => new RibbonCheckBox() },

@@ -30,6 +30,7 @@ using Autodesk.Windows;
 using Shared.Controllers.Models;
 using Shared.Controllers.Models.RibbonXml;
 using Shared.Controllers.Models.RibbonXml.Items;
+using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
 
 namespace Shared.Controllers
 {
@@ -125,7 +126,7 @@ namespace Shared.Controllers
                 switch (itemDef)
                 {
                     case RibbonRowPanelDef item:
-                        List<RibbonItemDef> children = new List<RibbonItemDef>();
+                        List<RibbonItemDef> children;
                         if (item.SourceDef != null && item.ItemsDef.Count != 0)
                         {
                             item.SourceDef.ItemsDef.AddRange(item.ItemsDef);
@@ -136,6 +137,7 @@ namespace Shared.Controllers
                         var target = ((RibbonRowPanel)itemRef).Source?.Items ?? ((RibbonRowPanel)itemRef).Items;
                         foreach (var childDef in children)
                         {
+                            // The following item types are not supported in this collection: RibbonRowPanel and RibbonPanelBreak
                             if (childDef is RibbonRowPanelDef || childDef is RibbonPanelBreakDef)
                                 continue;
                             Debug.WriteLine($"ProcessRibbonItem: {childDef}");
@@ -144,13 +146,38 @@ namespace Shared.Controllers
                                 target.Add(childRef);
                         }
                         break;
-                    case RibbonListDef item:
-                        foreach (var childDef in item.ItemsDef)
+                    case RibbonListDef.RibbonComboDef item:
+                        // If ItemsBinding is set to a valid binding, this collection should not be modified
+                        // An exception is thrown if the Items collection is modified when ItemsBinding is not null
+                        if (((RibbonList) itemRef).ItemsBinding == null && item.ItemsDef.Count > 0)
+                        {
+                            // Either Items or ItemsBinding can be used to manage the collection, but not both
+                            foreach (var childDef in item.ItemsDef)
+                            {
+                                Debug.WriteLine($"ProcessRibbonItem: {childDef}");
+                                var childRef = ProcessRibbonItem(childDef, currentDepth + 1);
+                                if (childRef != null)
+                                    ((RibbonList)itemRef).Items.Add(childRef);
+                            }
+                        }
+                        foreach (var childDef in item.MenuItemsDef)
                         {
                             Debug.WriteLine($"ProcessRibbonItem: {childDef}");
-                            var childRef = ProcessRibbonItem(childDef, currentDepth + 1);
+                            var childRef = (RibbonCommandItem) ProcessRibbonItem(childDef, currentDepth + 1);
                             if (childRef != null)
-                                ((RibbonList)itemRef).Items.Add(childRef);
+                                ((RibbonCombo)itemRef).MenuItems.Add(childRef);
+                        }
+                        break;
+                    case RibbonListButtonDef.RibbonSplitButtonDef item:
+                        foreach (var childDef in item.ItemsDef)
+                        {
+                            // The items in the drop-down list should be of type RibbonCommandItem or RibbonSeparator
+                            if (childDef is RibbonCommandItemDef || childDef is RibbonSeparatorDef)
+                            {
+                                var childRef = ProcessRibbonItem(childDef, currentDepth + 1);
+                                if (childRef != null)
+                                    ((RibbonSplitButton)itemRef).Items.Add(childRef);
+                            }
                         }
                         break;
                     { } // Little C# hack for better memory management

@@ -1,4 +1,5 @@
 ﻿using System; // Keep for .NET 4.6
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Xml.Serialization;
 
@@ -9,6 +10,8 @@ using ZwSoft.Windows;
 using Autodesk.Windows;
 #endif
 #endregion
+
+using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
 
 namespace Shared.Controllers.Models.RibbonXml.Items
 {
@@ -23,8 +26,43 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         "For example, a sub-panel could be used to create a row containing two large buttons and two rows of small buttons. " +
         "The items in the sub-panel are stored and managed in the Items collection. " +
         "The items can be organized into multiple rows by adding a RibbonRowBreak item at the index where the new row is to start.")]
-    public class RibbonRowPanelDef : RibbonItemObservableCollectionDef
+    public class RibbonRowPanelDef : RibbonItemDef
     {
+
+        [RPInternalUseOnly]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        // RibbonItem
+        [XmlElement("RibbonCombo", typeof(RibbonListDef.RibbonComboDef))]
+        [XmlElement("RibbonGallery", typeof(RibbonListDef.RibbonComboDef.RibbonGalleryDef))]
+        [XmlElement("RibbonLabel", typeof(RibbonLabelDef))]
+        [XmlElement("RibbonPanelBreak", typeof(RibbonPanelBreakDef))]
+        [XmlElement("RibbonRowBreak", typeof(RibbonRowBreakDef))]
+        [XmlElement("RibbonRowPanel", typeof(RibbonRowPanelDef))]
+        [XmlElement("RibbonFlowPanel", typeof(RibbonFlowPanelDef))]
+        [XmlElement("RibbonFoldPanel", typeof(RibbonFoldPanelDef))]
+        [XmlElement("RibbonSeparator", typeof(RibbonSeparatorDef))]
+        [XmlElement("RibbonSlider", typeof(RibbonSliderDef))]
+        [XmlElement("RibbonSpinner", typeof(RibbonSpinnerDef))]
+        [XmlElement("RibbonTextBox", typeof(RibbonTextBoxDef))]
+        // RibbonCommandItem
+#if !ZWCAD
+        [XmlElement("ProgressBarSource", typeof(ProgressBarSourceDef))]
+#endif
+        [XmlElement("RibbonCheckBox", typeof(RibbonCheckBoxDef))]
+        [XmlElement("RibbonMenuItem", typeof(RibbonMenuItemDef))]
+        [XmlElement("ApplicationMenuItem", typeof(RibbonMenuItemDef.ApplicationMenuItemDef))]
+        // RibbonButton
+        [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
+        [XmlElement("RibbonToggleButton", typeof(RibbonToggleButtonDef))]
+#if (NET8_0_OR_GREATER || ZWCAD)
+        [XmlElement("ToolBarShareButton", typeof(RibbonToggleButtonDef.ToolBarShareButtonDef))]
+#endif
+        [XmlElement("RibbonChecklistButton", typeof(RibbonListButtonDef.RibbonChecklistButtonDef))]
+        [XmlElement("RibbonMenuButton", typeof(RibbonListButtonDef.RibbonMenuButtonDef))]
+        [XmlElement("RibbonRadioButtonGroup", typeof(RibbonListButtonDef.RibbonRadioButtonGroupDef))]
+        [XmlElement("RibbonSplitButton", typeof(RibbonListButtonDef.RibbonSplitButtonDef))]
+        public List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
+
         [RPInfoOut]
         [XmlIgnore]
         [RPInternalUseOnly]

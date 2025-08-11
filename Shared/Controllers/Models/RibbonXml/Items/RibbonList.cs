@@ -1,4 +1,5 @@
 using System; // Keep for .NET 4.6
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
 using System.Xml.Serialization;
@@ -11,18 +12,75 @@ using Autodesk.Windows;
 #endif
 #endregion
 
+using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
+
 namespace Shared.Controllers.Models.RibbonXml.Items
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonList
     [RPPrivateUseOnly]
     [XmlInclude(typeof(RibbonComboDef))]
     [XmlInclude(typeof(RibbonComboDef.RibbonGalleryDef))]
-    public abstract class RibbonListDef : RibbonItemObservableCollectionDef
+    public abstract class RibbonListDef : RibbonItemDef
     {
         public RibbonListDef()
         {
             base.ShowImage = false;
         }
+
+        [RPInternalUseOnly]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        // RibbonItem
+        [XmlElement("RibbonCombo", typeof(RibbonComboDef))]
+        [XmlElement("RibbonGallery", typeof(RibbonComboDef.RibbonGalleryDef))]
+        [XmlElement("RibbonLabel", typeof(RibbonLabelDef))]
+        [XmlElement("RibbonPanelBreak", typeof(RibbonPanelBreakDef))]
+        [XmlElement("RibbonRowBreak", typeof(RibbonRowBreakDef))]
+        [XmlElement("RibbonRowPanel", typeof(RibbonRowPanelDef))]
+        [XmlElement("RibbonFlowPanel", typeof(RibbonRowPanelDef.RibbonFlowPanelDef))]
+        [XmlElement("RibbonFoldPanel", typeof(RibbonRowPanelDef.RibbonFoldPanelDef))]
+        [XmlElement("RibbonSeparator", typeof(RibbonSeparatorDef))]
+        [XmlElement("RibbonSlider", typeof(RibbonSliderDef))]
+        [XmlElement("RibbonSpinner", typeof(RibbonSpinnerDef))]
+        [XmlElement("RibbonTextBox", typeof(RibbonTextBoxDef))]
+        // RibbonCommandItem
+#if !ZWCAD
+        [XmlElement("ProgressBarSource", typeof(ProgressBarSourceDef))]
+#endif
+        [XmlElement("RibbonCheckBox", typeof(RibbonCheckBoxDef))]
+        [XmlElement("RibbonMenuItem", typeof(RibbonMenuItemDef))]
+        [XmlElement("ApplicationMenuItem", typeof(RibbonMenuItemDef.ApplicationMenuItemDef))]
+        // RibbonButton
+        [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
+        [XmlElement("RibbonToggleButton", typeof(RibbonToggleButtonDef))]
+#if (NET8_0_OR_GREATER || ZWCAD)
+        [XmlElement("ToolBarShareButton", typeof(RibbonToggleButtonDef.ToolBarShareButtonDef))]
+#endif
+        [XmlElement("RibbonChecklistButton", typeof(RibbonListButtonDef.RibbonChecklistButtonDef))]
+        [XmlElement("RibbonMenuButton", typeof(RibbonListButtonDef.RibbonMenuButtonDef))]
+        [XmlElement("RibbonRadioButtonGroup", typeof(RibbonListButtonDef.RibbonRadioButtonGroupDef))]
+        [XmlElement("RibbonSplitButton", typeof(RibbonListButtonDef.RibbonSplitButtonDef))]
+        public List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
+
+        [RPInternalUseOnly]
+        [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
+        // RibbonCommandItem
+#if !ZWCAD
+        [XmlElement("ProgressBarSource", typeof(ProgressBarSourceDef))]
+#endif
+        [XmlElement("RibbonCheckBox", typeof(RibbonCheckBoxDef))]
+        [XmlElement("RibbonMenuItem", typeof(RibbonMenuItemDef))]
+        [XmlElement("ApplicationMenuItem", typeof(RibbonMenuItemDef.ApplicationMenuItemDef))]
+        // RibbonButton
+        [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
+        [XmlElement("RibbonToggleButton", typeof(RibbonToggleButtonDef))]
+#if (NET8_0_OR_GREATER || ZWCAD)
+        [XmlElement("ToolBarShareButton", typeof(RibbonToggleButtonDef.ToolBarShareButtonDef))]
+#endif
+        [XmlElement("RibbonChecklistButton", typeof(RibbonListButtonDef.RibbonChecklistButtonDef))]
+        [XmlElement("RibbonMenuButton", typeof(RibbonListButtonDef.RibbonMenuButtonDef))]
+        [XmlElement("RibbonRadioButtonGroup", typeof(RibbonListButtonDef.RibbonRadioButtonGroupDef))]
+        [XmlElement("RibbonSplitButton", typeof(RibbonListButtonDef.RibbonSplitButtonDef))]
+        public List<RibbonCommandItemDef> MenuItemsDef { get; set; } = new List<RibbonCommandItemDef>();
 
         [RPInfoOut]
         [XmlIgnore]
@@ -341,5 +399,14 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 }
             }
         }
+
+        [XmlIgnore]
+        [RPPrivateUseOnly]
+        public static readonly Dictionary<Type, Func<RibbonCombo>> ListFactory = new Dictionary<Type, Func<RibbonCombo>>()
+        {
+            // RibbonItem
+            { typeof(RibbonComboDef), () => new RibbonCombo() },
+            { typeof(RibbonComboDef.RibbonGalleryDef), () => new RibbonGallery() },
+        };
     }
 }
