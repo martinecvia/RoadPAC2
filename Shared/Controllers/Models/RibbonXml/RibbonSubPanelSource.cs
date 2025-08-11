@@ -1,10 +1,11 @@
 ﻿#pragma warning disable CS8625
 
-using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
-using Shared.Controllers.Models.RibbonXml.Items;
 using System.Collections.Generic; // Keep for .NET 4.6
 using System.ComponentModel;
 using System.Xml.Serialization;
+
+using Shared.Controllers.Models.RibbonXml.Items;
+using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
 
 namespace Shared.Controllers.Models.RibbonXml
 {
@@ -28,7 +29,6 @@ namespace Shared.Controllers.Models.RibbonXml
         [XmlElement("RibbonSpinner", typeof(RibbonSpinnerDef))]
         [XmlElement("RibbonTextBox", typeof(RibbonTextBoxDef))]
         // RibbonCommandItem
-        [XmlElement("DocumentItem", typeof(DocumentItemDef))]
 #if ZWCAD
         // ZWCAD Does not support this yet
 #else
@@ -40,6 +40,9 @@ namespace Shared.Controllers.Models.RibbonXml
         // RibbonButton
         [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
         [XmlElement("RibbonToggleButton", typeof(RibbonToggleButtonDef))]
+#if (NET8_0_OR_GREATER || ZWCAD)
+        [XmlElement("ToolBarShareButton", typeof(RibbonToggleButtonDef.ToolBarShareButtonDef))]
+#endif
         public List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
 
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSubPanelSource_Id

@@ -10,8 +10,12 @@ using System.Xml.Serialization;
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
 using ZwSoft.Windows;
+using ZwSoft.Windows.ToolBars;
 #else
 using Autodesk.Windows;
+#if NET8_0_OR_GREATER
+using Autodesk.Windows.ToolBars;
+#endif
 #endif
 #endregion
 
@@ -21,7 +25,6 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem
     [RPPrivateUseOnly]
-    [XmlInclude(typeof(DocumentItemDef))]
 #if ZWCAD
     // ZWCAD Does not support this
 #else
@@ -32,6 +35,9 @@ namespace Shared.Controllers.Models.RibbonXml.Items
     [XmlInclude(typeof(RibbonMenuItemDef))]
     [XmlInclude(typeof(RibbonMenuItemDef.ApplicationMenuItemDef))]
     [XmlInclude(typeof(RibbonToggleButtonDef))]
+#if (NET8_0_OR_GREATER || ZWCAD)
+    [XmlInclude(typeof(RibbonToggleButtonDef.ToolBarShareButtonDef))]
+#endif
     [XmlInclude(typeof(RibbonButtonDef))]
     [XmlInclude(typeof(RibbonItemDef))]
     [XmlInclude(typeof(RibbonLabelDef))]
@@ -527,7 +533,6 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             { typeof(RibbonSpinnerDef), () => new RibbonSpinner() },
             { typeof(RibbonTextBoxDef), () => new RibbonTextBox() },
             // RibbonCommandItem
-            { typeof(DocumentItemDef), () => new DocumentItem() },
 #if ZWCAD
     // ZWCAD Does not support this
 #else
@@ -539,6 +544,9 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             // RibbonButton
             { typeof(RibbonButtonDef), () => new RibbonButton() },
             { typeof(RibbonToggleButtonDef), () => new RibbonToggleButton() },
+#if (NET8_0_OR_GREATER || ZWCAD)
+            { typeof(RibbonToggleButtonDef.ToolBarShareButtonDef), () => new ToolBarShareButton() },
+#endif
         };
     }
 }

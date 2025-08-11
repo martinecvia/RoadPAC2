@@ -30,6 +30,7 @@ using Autodesk.Windows;
 
 using Shared.Controllers.Models;
 using Shared.Controllers.Models.RibbonXml;
+using Shared.Controllers.Models.RibbonXml.Items;
 
 namespace Shared.Controllers
 {
@@ -74,81 +75,83 @@ namespace Shared.Controllers
                                       string? tabDescription = null) where T: RibbonTab, new()
 #else
                                       string tabName = null,
-                                      string tabDescription = null) where T: RibbonTab, new()
+                                      string tabDescription = null) where T : RibbonTab, new()
 #endif
         {
 #if NON_VOLATILE_MEMORY
             AssertInitialized();
 #endif
             Assert.IsNotNull(tabId, nameof(tabId));
-            RibbonTabDef xml = ResourceController.LoadResourceRibbon<RibbonTabDef>(tabId);
-            T tab = new T
+            RibbonTabDef resource = ResourceController.LoadResourceRibbon<RibbonTabDef>(tabId);
+            RibbonTab tab = resource?.Transform(new RibbonTab()) ?? new RibbonTab
             {
-                Id = RibbonTab__Prefix + tabId, // We want to add mark those tabs as RoadPAC ones.
-                                                // For further compatibility and to prevent being overriden.
+                Id = RibbonTab__Prefix + tabId       // We want to mark these tabs as RoadPAC ones.
+                                                     // For further compatibility and to prevent being overriden.
             };
-            if (xml != null)
+            if (resource != null)
             {
-                // All properties from xml definition
-                PropertyInfo[] applyableProperties = typeof(RibbonTabDef)
-                    .GetProperties(BindingFlags.Instance | BindingFlags.Public)
-                    .Where(property => property.GetCustomAttribute<RPInfoOutAttribute>() != null)
-                    .ToArray();
-                foreach (PropertyInfo property in applyableProperties)
+                foreach (var panel in resource.PanelsDef)
                 {
-                    if (!property.CanRead)
-                        continue; // Very weird? Must be manipulated in memory
-                    try
+                    var panelRef = panel.Transform(new RibbonPanel());
+                    panelRef.Source = panel.SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[panel.SourceDef.GetType()]());
+                    foreach (var item in panel.SourceDef.ItemsDef)
                     {
-                        // Since we are supporting multiple versions of CAD
-                        // we have to first check if property exists in current running version
-                        // if not we will just print information into a debug console and call it a day
-                        PropertyInfo target = typeof(RibbonTab)
-                            .GetProperty(property.Name, BindingFlags.Instance | BindingFlags.Public);
-                        if (target?.CanWrite == true 
-                            && target.PropertyType.IsAssignableFrom(property.PropertyType)) 
-                            target.SetValue(tab, property.GetValue(xml), null);
-                        else
+                        var itemRef = item.Transform(RibbonItemDef.ItemsFactory[item.GetType()]());
+                        if (item is RibbonRowPanelDef def1)
                         {
-#if DEBUG
-                            Debug.WriteLine($"{property.Name}: " +
-                                $"Has different type target:{target.PropertyType} from source:{property.PropertyType}");
-#endif
+                            if (def1.SourceDef != null && def1.ItemsDef.Count != 0) // Source can't be set when Items is not empty.
+                            {
+                                foreach (var itemDef in def1.ItemsDef)
+                                    def1.SourceDef.ItemsDef.Add(itemDef);           // To avoid InvalidOperationException we are effectively transferring everything to SubSource instead
+                                foreach (var itemDef in def1.SourceDef.ItemsDef)
+                                {
+                                    if (itemDef is RibbonRowPanelDef || itemDef is RibbonPanelBreakDef)
+                                        continue;
+                                    ((RibbonRowPanel)itemRef).Source.Items.Add(itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]()));
+                                }
+                            }
+                            else
+                            {
+                                foreach (var itemDef in def1.ItemsDef)
+                                {
+                                    if (itemDef is RibbonRowPanelDef || itemDef is RibbonPanelBreakDef)
+                                        continue; // The following item types are not supported in this collection: RibbonRowPanel and RibbonPanelBreak.
+                                                    // An exception is thrown if these objects are added to the collection.
+                                    ((RibbonRowPanel)itemRef).Items.Add(itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]()));
+                                }
+                            }
+                            continue; // We don't want to halt system with other if-checks
                         }
+                        if (item is RibbonListDef def2)
+                            foreach (var itemDef in def2.ItemsDef)
+                                ((RibbonList)itemRef).Items.Add(itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]()));
+                        panelRef.Source.Items.Add(itemRef);
+                        Debug.WriteLine($"Registering: {item}");
                     }
-                    catch (System.Exception exception) // Collision with *CAD.Runtime.Exception & System.Exception
-                    {
-#if DEBUG
-                        Debug.WriteLine($"{property.Name}: {exception.Message}");
-#endif
-                    }
+                    tab.Panels.Add(panelRef);
                 }
-            };
+            }
             tab.IsEnabled = true;
             if (!string.IsNullOrEmpty(tabName) || string.IsNullOrEmpty(tab.Name))
                 tab.Name = tabName ?? tabId; tab.Title = tabName ?? tab.Name;
             if (!string.IsNullOrEmpty(tabDescription))
                 tab.Description = tabDescription;
-            return tab;
+            Ribbon.Tabs.Add(tab);
+            return (T) tab;
         }
 
         [RPPrivateUseOnly]
         private static readonly Dictionary<string, Func<SelectionSet, bool>> _contextualTabConditions = new Dictionary<string, Func<SelectionSet, bool>>();
 
-        /// <summary>
-        /// Creates a standard ribbon tab using the specified resource identifier and optional name/description.
-        /// </summary>
-        /// <param name="tabId">The identifier of the ribbon tab resource.</param>
-        /// <param name="tabName">Optional override for the tab display name. If not set, <paramref name="tabId"/> is used.</param>
-        /// <param name="tabDescription">Optional description to show in UI tooltips or documentation.</param>
-        /// <returns>A fully initialized <see cref="RibbonTab"/> instance.</returns>
         public static RibbonTab CreateTab(string tabId,
 #if NET8_0_OR_GREATER
-                                          string? tabName = null, string? tabDescription = null)
+            string? tabName = null,
+            string? tabDescription = null)
 #else
-                                          string tabName = null, string tabDescription = null)
+            string tabName = null,
+            string tabDescription = null)
 #endif
-            => CreateTab<RibbonTab>(tabId, tabName, tabDescription);
+        => CreateTab<RibbonTab>(tabId, tabName, tabDescription);
 
         /// <summary>
         /// Creates a contextual ribbon tab that is shown conditionally based on the current selection in the drawing.

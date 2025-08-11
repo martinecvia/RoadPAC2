@@ -1,12 +1,12 @@
 ﻿using System.ComponentModel;
 using System.Xml.Serialization;
+
 using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
 
 namespace Shared.Controllers.Models.RibbonXml.Items
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonCommandItem
     [RPPrivateUseOnly]
-    [XmlInclude(typeof(DocumentItemDef))]
 #if ZWCAD
     // ZWCAD Does not support this
 #else
@@ -14,9 +14,13 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 #endif
     [XmlInclude(typeof(RibbonButtonDef))]
     [XmlInclude(typeof(RibbonCheckBoxDef))]
+    [XmlInclude(typeof(RibbonListButtonDef))]
     [XmlInclude(typeof(RibbonMenuItemDef))]
     [XmlInclude(typeof(RibbonMenuItemDef.ApplicationMenuItemDef))]
     [XmlInclude(typeof(RibbonToggleButtonDef))]
+#if (NET8_0_OR_GREATER || ZWCAD)
+    [XmlInclude(typeof(RibbonToggleButtonDef.ToolBarShareButtonDef))]
+#endif
     public class RibbonCommandItemDef : RibbonItemDef
     {
         [RPInfoOut]

@@ -10,7 +10,6 @@ namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
         [RPInternalUseOnly]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         // RibbonCommandItem
-        [XmlElement("DocumentItem", typeof(DocumentItemDef))]
 #if ZWCAD
 // ZWCAD Does not support this yet
 #else
@@ -22,6 +21,9 @@ namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
         // RibbonButton
         [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
         [XmlElement("RibbonToggleButton", typeof(RibbonToggleButtonDef))]
+#if (NET8_0_OR_GREATER || ZWCAD)
+        [XmlElement("ToolBarShareButton", typeof(RibbonToggleButtonDef.ToolBarShareButtonDef))]
+#endif
         public List<RibbonCommandItemDef> ItemsDef { get; set; } = new List<RibbonCommandItemDef>();
     }
 }

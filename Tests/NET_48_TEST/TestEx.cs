@@ -43,9 +43,9 @@ namespace NET_48_TEST
             }, "Trasa");
             */
             var resource = ResourceController.LoadResourceRibbon<RibbonTabDef>("rp_RoadPAC");
-            var tab = resource?.Transform(new RibbonTab());
             if (resource != null)
             {
+                var tab = resource.Transform(new RibbonTab());
                 foreach (var panel in resource.PanelsDef)
                 {
                     var panelRef = panel.Transform(new RibbonPanel());
@@ -53,6 +53,22 @@ namespace NET_48_TEST
                     foreach (var item in panel.SourceDef.ItemsDef)
                     {
                         var itemRef = item.Transform(RibbonItemDef.ItemsFactory[item.GetType()]());
+                        if (item is RibbonRowPanelDef def1)
+                        {
+                            if (def1.SourceDef != null && def1.ItemsDef.Count != 0) // Source can't be set when Items is not empty.
+                                foreach (var itemDef in def1.ItemsDef)
+                                    def1.SourceDef.ItemsDef.Add(itemDef);           // To avoid InvalidOperationException we are effectively transferring everything to SubSource instead
+                            foreach (var itemDef in def1.ItemsDef)
+                            {
+                                if (itemDef is RibbonRowPanelDef || itemDef is RibbonPanelBreakDef)
+                                    continue; // The following item types are not supported in this collection: RibbonRowPanel and RibbonPanelBreak.
+                                              // An exception is thrown if these objects are added to the collection.
+                                ((RibbonRowPanel)itemRef).Items.Add(itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]()));
+                            }
+                        }
+                        if (item is RibbonListDef def2)
+                            foreach (var itemDef in def2.ItemsDef)
+                                ((RibbonList)itemRef).Items.Add(itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]()));
                         panelRef.Source.Items.Add(itemRef);
                         Debug.WriteLine($"Registering: {item}");
                     }

@@ -25,32 +25,34 @@ namespace ZWC_47_TEST
             Document document = Application.DocumentManager.MdiActiveDocument;
             ResourceController.LoadEmbeddedResources(); // To load icons, configuration files etc.
             var resource = ResourceController.LoadResourceRibbon<RibbonTabDef>("rp_RoadPAC");
-            var tab = resource?.Transform(new RibbonTab());
             if (resource != null)
             {
+                var tab = resource.Transform(new RibbonTab());
                 foreach (var panel in resource.PanelsDef)
                 {
                     var panelRef = panel.Transform(new RibbonPanel());
-                    panelRef.Source = panel.SourceDef?.Transform(RibbonPanelSourceDef.SourceFactory[panel.SourceDef.GetType()]());
-                    if (panel.SourceDef != null && panel.SourceDef is RibbonPanelSpacer)
-                        // RibbonPanelSpacer can't have any items in it,
-                        // so why should we bother translating them over
-                        continue;
+                    panelRef.Source = panel.SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[panel.SourceDef.GetType()]());
                     foreach (var item in panel.SourceDef.ItemsDef)
                     {
-                        try
+                        var itemRef = item.Transform(RibbonItemDef.ItemsFactory[item.GetType()]());
+                        if (item is RibbonRowPanelDef def1)
                         {
-                            var itemRef = item.Transform(RibbonItemDef.ItemsFactory[item.GetType()]());
-                            // There should be a better way to handle nested items
-                            if (item is RibbonRowPanelDef def1)
+                            if (def1.SourceDef != null && def1.ItemsDef.Count != 0) // Source can't be set when Items is not empty.
                                 foreach (var itemDef in def1.ItemsDef)
-                                    ((RibbonRowPanel)itemRef).Items.Add(itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]()));
-                            if (item is RibbonListDef def2)
-                                foreach (var itemDef in def2.ItemsDef)
-                                    ((RibbonList)itemRef).Items.Add(itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]()));
-                            panelRef.Source.Items.Add(itemRef);
+                                    def1.SourceDef.ItemsDef.Add(itemDef);           // To avoid InvalidOperationException we are effectively transferring everything to SubSource instead
+                            foreach (var itemDef in def1.ItemsDef)
+                            {
+                                if (itemDef is RibbonRowPanelDef || itemDef is RibbonPanelBreakDef)
+                                    continue; // The following item types are not supported in this collection: RibbonRowPanel and RibbonPanelBreak.
+                                              // An exception is thrown if these objects are added to the collection.
+                                ((RibbonRowPanel)itemRef).Items.Add(itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]()));
+                            }
                         }
-                        catch (NotImplementedException exception) { } // Some items in ZWCAD are created but not implemented
+                        if (item is RibbonListDef def2)
+                            foreach (var itemDef in def2.ItemsDef)
+                                ((RibbonList)itemRef).Items.Add(itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]()));
+                        panelRef.Source.Items.Add(itemRef);
+                        Debug.WriteLine($"Registering: {item}");
                     }
                     tab.Panels.Add(panelRef);
                 }

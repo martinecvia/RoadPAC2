@@ -7,7 +7,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
     [Description("This is an abstract base class for list type buttons. " +
         "List type buttons are buttons that support a drop-down list. " +
         "RibbonSplitButton, RibbonChecklistButton, RibbonMenuButton are examples of list type buttons.")]
-    public abstract class RibbonListButtonDef : RibbonButtonDef
+    public abstract class RibbonListButtonDef : RibbonCommandItemObservableCollectionDef
     {
 
     }

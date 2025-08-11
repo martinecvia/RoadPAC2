@@ -49,7 +49,6 @@ namespace Shared.Controllers.Models.RibbonXml
         [XmlElement("RibbonSpinner", typeof(RibbonSpinnerDef))]
         [XmlElement("RibbonTextBox", typeof(RibbonTextBoxDef))]
         // RibbonCommandItem
-        [XmlElement("DocumentItem", typeof(DocumentItemDef))]
 #if ZWCAD
         // ZWCAD Does not support this yet
 #else
@@ -61,6 +60,9 @@ namespace Shared.Controllers.Models.RibbonXml
         // RibbonButton
         [XmlElement("RibbonButton", typeof(RibbonButtonDef))]
         [XmlElement("RibbonToggleButton", typeof(RibbonToggleButtonDef))]
+#if (NET8_0_OR_GREATER || ZWCAD)
+        [XmlElement("ToolBarShareButton", typeof(RibbonToggleButtonDef.ToolBarShareButtonDef))]
+#endif
         public List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
 
 
@@ -266,7 +268,7 @@ namespace Shared.Controllers.Models.RibbonXml
         public static readonly Dictionary<Type, Func<RibbonPanelSource>> SourceFactory = new Dictionary<Type, Func<RibbonPanelSource>>()
         {
             { typeof(RibbonPanelSourceDef), () => new RibbonPanelSource() },
-            { typeof(RibbonPanelSpacerDef), () => new RibbonPanelSpacer() }
+            { typeof(RibbonPanelSpacerDef), () => new RibbonPanelSpacer() },
         };
     }
 }

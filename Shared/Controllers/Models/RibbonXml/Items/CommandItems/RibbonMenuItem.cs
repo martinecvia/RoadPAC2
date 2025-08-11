@@ -8,7 +8,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
     [Description("This class is used to support hierarchical items. " +
         "This class is used in places where a hierarchy is supported. " +
         "Examples are application menu and RibbonMenuItem.")]
-    public class RibbonMenuItemDef : RibbonCommandItemDef
+    public class RibbonMenuItemDef : RibbonCommandItemObservableCollectionDef
     {
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_ApplicationMenuItem
         [RPPrivateUseOnly]
