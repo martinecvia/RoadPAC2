@@ -30,57 +30,7 @@ namespace NET_46_TEST
         {
             Document document = Application.DocumentManager.MdiActiveDocument;
             ResourceController.LoadEmbeddedResources(); // To load icons, configuration files etc.
-            // Test defs
-            {
-                BaseRibbonXml[] defs = new[] {
-                    (BaseRibbonXml)new ProgressBarSourceDef(),
-                    new RibbonButtonDef(),
-                    new RibbonCommandItemDef(),
-                    new RibbonCheckBoxDef(),
-                    new RibbonItemDef(),
-                    new RibbonLabelDef(),
-                    new RibbonListDef.RibbonComboDef(),
-                    new RibbonListDef.RibbonComboDef.RibbonGalleryDef(),
-                    new RibbonMenuItemDef(),
-                    new RibbonMenuItemDef.ApplicationMenuItemDef(),
-                    new RibbonPanelBreakDef(),
-                    new RibbonPanelDef(),
-                    new RibbonPanelSourceDef(),
-                    new RibbonPanelSourceDef.RibbonPanelSpacerDef(),
-                    new RibbonRowBreakDef(),
-                    new RibbonRowPanelDef(),
-                    new RibbonRowPanelDef.RibbonFlowPanelDef(),
-                    new RibbonRowPanelDef.RibbonFoldPanelDef(),
-                    new RibbonSeparatorDef(),
-                    new RibbonSliderDef(),
-                    new RibbonSpinnerDef(),
-                    new RibbonSubPanelSourceDef(),
-                    new RibbonTabDef(),
-                    new RibbonTextBoxDef(),
-                    new RibbonToggleButtonDef()
-                };
-                foreach (var def in defs)
-                {
-                    if (def is RibbonItemDef itemDef)
-                    {
-                        if (!RibbonItemDef.ItemsFactory.ContainsKey(itemDef.GetType()))
-                        {
-                            Debug.WriteLine($"{itemDef.GetType()} not in ItemsFactory");
-                            continue;
-                        }
-                        itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]());
-                    }
-                    if (def is RibbonPanelSourceDef sourceDef)
-                    {
-                        if (!RibbonPanelSourceDef.SourceFactory.ContainsKey(sourceDef.GetType()))
-                        {
-                            Debug.WriteLine($"{sourceDef.GetType()} not in SourceFactory");
-                            continue;
-                        }
-                        sourceDef.Transform(RibbonPanelSourceDef.SourceFactory[sourceDef.GetType()]());
-                    }
-                }
-            }
+            RibbonController.CreateTab("rp_RoadPAC");
         }
 
         public void Terminate()

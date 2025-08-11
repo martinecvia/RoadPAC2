@@ -111,21 +111,21 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [XmlIgnore]
         [RPInternalUseOnly]
         [DefaultValue(false)]
-        public bool AreItemArrangedFromRightToLeft { get; set; } = false;
+        public bool AreItemsArrangedFromRightToLeft { get; set; } = false;
 
         [RPInternalUseOnly]
-        [XmlAttribute("AreItemArrangedFromRightToLeft")]
-        public string AreItemArrangedFromRightToLeftDef
+        [XmlAttribute("AreItemsArrangedFromRightToLeft")]
+        public string AreItemsArrangedFromRightToLeftDef
         {
-            get => AreItemArrangedFromRightToLeft.ToString();
+            get => AreItemsArrangedFromRightToLeft.ToString();
             set
             {
                 if (string.IsNullOrEmpty(value))
                 {
-                    AreItemArrangedFromRightToLeft = false;
+                    AreItemsArrangedFromRightToLeft = false;
                     return;
                 }
-                AreItemArrangedFromRightToLeft = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
+                AreItemsArrangedFromRightToLeft = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
             }
         }
 #endif

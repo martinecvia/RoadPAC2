@@ -14,7 +14,6 @@ using System.Collections.Generic; // Keep for .NET 4.6
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq; // Keep for .NET 4.6
-using System.Reflection;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -44,7 +43,6 @@ namespace Shared.Controllers
         private const string RibbonTab__Prefix = "RP_TAB_"; // RoadPAC prefix for tabs. so we can distinguish
                                                             // other tab's from AutoCAD.
                                                             // This also prevents using the same name from different applications.
-        private const string RibbonGroupPrefix = "RP_GRP_";
 
         private static RibbonControl Ribbon => ComponentManager.Ribbon; // Should be same with ZWCAD
 
@@ -90,43 +88,19 @@ namespace Shared.Controllers
             };
             if (resource != null)
             {
-                foreach (var panel in resource.PanelsDef)
+                foreach (var panelDef in resource.PanelsDef)
                 {
-                    var panelRef = panel.Transform(new RibbonPanel());
-                    panelRef.Source = panel.SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[panel.SourceDef.GetType()]());
-                    foreach (var item in panel.SourceDef.ItemsDef)
+                    var panelRef = panelDef.Transform(new RibbonPanel());
+                    panelRef.Source = panelDef.SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[panelDef.SourceDef.GetType()]());
+                    foreach (var itemDef in panelDef.SourceDef.ItemsDef)
                     {
-                        var itemRef = item.Transform(RibbonItemDef.ItemsFactory[item.GetType()]());
-                        if (item is RibbonRowPanelDef def1)
-                        {
-                            if (def1.SourceDef != null && def1.ItemsDef.Count != 0) // Source can't be set when Items is not empty.
-                            {
-                                foreach (var itemDef in def1.ItemsDef)
-                                    def1.SourceDef.ItemsDef.Add(itemDef);           // To avoid InvalidOperationException we are effectively transferring everything to SubSource instead
-                                foreach (var itemDef in def1.SourceDef.ItemsDef)
-                                {
-                                    if (itemDef is RibbonRowPanelDef || itemDef is RibbonPanelBreakDef)
-                                        continue;
-                                    ((RibbonRowPanel)itemRef).Source.Items.Add(itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]()));
-                                }
-                            }
-                            else
-                            {
-                                foreach (var itemDef in def1.ItemsDef)
-                                {
-                                    if (itemDef is RibbonRowPanelDef || itemDef is RibbonPanelBreakDef)
-                                        continue; // The following item types are not supported in this collection: RibbonRowPanel and RibbonPanelBreak.
-                                                    // An exception is thrown if these objects are added to the collection.
-                                    ((RibbonRowPanel)itemRef).Items.Add(itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]()));
-                                }
-                            }
-                            continue; // We don't want to halt system with other if-checks
-                        }
-                        if (item is RibbonListDef def2)
-                            foreach (var itemDef in def2.ItemsDef)
-                                ((RibbonList)itemRef).Items.Add(itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]()));
-                        panelRef.Source.Items.Add(itemRef);
-                        Debug.WriteLine($"Registering: {item}");
+                        var itemRef = ProcessRibbonItem(itemDef, currentDepth: 0); // Directly setting currentDepth to zero here,
+                                                                                   // because sometimes C# keeps refference to previous currentDepth, which is odd 
+                                                                                   // even tho function has default value defined, so some might think it will take the default value.
+                                                                                   // This is a compiler issue with .NET 4.6 NDP46-KB3045557-x86-x64
+                        Debug.WriteLine($"Processed: {itemDef}");
+                        if (itemRef != null) // null RibbonItem definitions will break cad instance
+                            panelRef.Source.Items.Add(itemRef);
                     }
                     tab.Panels.Add(panelRef);
                 }
@@ -138,6 +112,52 @@ namespace Shared.Controllers
                 tab.Description = tabDescription;
             Ribbon.Tabs.Add(tab);
             return (T) tab;
+        }
+
+        private static RibbonItem ProcessRibbonItem(RibbonItemDef itemDef, 
+            int currentDepth = 0) // this signalizes how many hops had happend during reccursion,
+                                 // we don't want to be looped, so depth is actually checked for depth
+        {
+            // Maximal depth we want to be in
+            if (currentDepth < 4 || RibbonItemDef.ItemsFactory.ContainsKey(itemDef.GetType()))
+            {
+                var itemRef = itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]());
+                switch (itemDef)
+                {
+                    case RibbonRowPanelDef item:
+                        List<RibbonItemDef> children = new List<RibbonItemDef>();
+                        if (item.SourceDef != null && item.ItemsDef.Count != 0)
+                        {
+                            item.SourceDef.ItemsDef.AddRange(item.ItemsDef);
+                            children = item.SourceDef.ItemsDef;
+                        } else {
+                            children = item.ItemsDef;
+                        }
+                        var target = ((RibbonRowPanel)itemRef).Source?.Items ?? ((RibbonRowPanel)itemRef).Items;
+                        foreach (var childDef in children)
+                        {
+                            if (childDef is RibbonRowPanelDef || childDef is RibbonPanelBreakDef)
+                                continue;
+                            Debug.WriteLine($"ProcessRibbonItem: {childDef}");
+                            var childRef = ProcessRibbonItem(childDef, currentDepth + 1);
+                            if (childRef != null)
+                                target.Add(childRef);
+                        }
+                        break;
+                    case RibbonListDef item:
+                        foreach (var childDef in item.ItemsDef)
+                        {
+                            Debug.WriteLine($"ProcessRibbonItem: {childDef}");
+                            var childRef = ProcessRibbonItem(childDef, currentDepth + 1);
+                            if (childRef != null)
+                                ((RibbonList)itemRef).Items.Add(childRef);
+                        }
+                        break;
+                    { } // Little C# hack for better memory management
+                }
+                return itemRef;
+            }
+            return null;
         }
 
         [RPPrivateUseOnly]
@@ -183,8 +203,8 @@ namespace Shared.Controllers
             AssertInitialized();
 #endif
             Assert.IsNotNull(tabId, nameof(tabId));
-            RibbonTabDef xml = ResourceController.LoadResourceRibbon<RibbonTabDef>(tabId);
             ContextualRibbonTab tab = CreateTab<ContextualRibbonTab>(tabId, tabName, tabDescription);
+            tab.IsContextualTab = true;
             _contextualTabConditions.Add(tab.Id, onSelectionMatch);
             if (!HasAnyContextualTab)
             {
