@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Runtime;
 using Autodesk.Windows;
 
 using Shared.Controllers;
-using Shared.Controllers.Models.RibbonXml;
-using Shared.Controllers.Models.RibbonXml.Items;
-using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
 
 // https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-4E1AAFA9-740E-4097-800C-CAED09CDFF12
 // https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-C3F3C736-40CF-44A0-9210-55F6A939B6F2
@@ -35,7 +32,13 @@ namespace NET_46_TEST
 
         public void Terminate()
         {
-            throw new NotImplementedException();
+
+        }
+
+        [CommandMethod("HIT_BREAKPOINT")]
+        public void Breakpoint()
+        {
+            var Ribbons = Ribbon;
         }
 
         [CommandMethod("INSPECT_TAB")]
