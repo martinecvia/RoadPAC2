@@ -11,7 +11,6 @@
 						  Image="rp_img_default_16" LargeImage="rp_img_default_32" CommandHandler="RP_RUN_ROADPAC" />
 		</RibbonPanelSource>
 	</RibbonPanel>
-	<!-- Panel: Project-Manager -->
 	<RibbonPanel Id="RP_RBN_0002" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
 				 IsEnabled="True" IsVisible="True" IsContextualTabThemeIgnored="False"
 				 UID="ID_WSR_0002_54DGD">
@@ -19,17 +18,16 @@
 			<DialogLauncher Orientation="Horizontal" IsCheckable="False" ShowImage="True" IsVisible="True" IsEnabled="True" Size="Standard" GroupLocation="Middle"
 							AllowInToolBar="True" AllowInStatusBar="True" ResizeStyle="HideText"
 							Text="Otevři složku aktuálního projektu" ShowText="False" CommandHandler="RP_COMMAND(OPEN_ACTIVE_DIRECTORY)" />
-			<!-- RibbonButton: Project-Explorer -->
 			<RibbonButton Text="Project&#13;Explorer" Name="RP_RUN_PROJECT_EXPLORER" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True" 
 						  Image="rp_img_open_sidebar_16" LargeImage="rp_img_open_sidebar_32" CommandHandler="RP_RUN_PROJECT_EXPLORER" />
-			<RibbonSeparator SeparatorStyle="Spacer" />
-			<RibbonRowPanel Id="RP_RBN_002_64F5D">
-				<RibbonCombo />
-				<RibbonSeparator />
+			<RibbonSeparator Id="AcRibbonSeparator" SeparatorStyle="Spacer" UID="AcRibbonSeparator"/>
+			<RibbonRowPanel Id="RP_RBN_002_64F5D" Cookie="Item=RP_RBN_002_64F5D__" IsTopJustified="True">
+				<RibbonCombo Current="{{Aktivní projekt}}"/>
+				<RibbonSeparator Id="AcRibbonSeparator" SeparatorStyle="Spacer" AllowInToolBar="False" UID="AcRibbonSeparator"/>
 				<RibbonButton />
 				<RibbonRowBreak />
-				<RibbonCombo />
-				<RibbonSeparator />
+				<RibbonCombo Current="{{Aktivní trasa}}"/>
+				<RibbonSeparator Id="AcRibbonSeparator" SeparatorStyle="Spacer" AllowInToolBar="False" UID="AcRibbonSeparator"/>
 				<RibbonButton />
 				<RibbonRowBreak />
 			</RibbonRowPanel>

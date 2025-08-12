@@ -154,6 +154,13 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [RPPrivateUseOnly]
         public class RibbonComboDef : RibbonListDef
         {
+
+            [RPInfoOut]
+            [RPInternalUseOnly]
+            [XmlAttribute("Current")]
+            [DefaultValue("")]
+            public string Current { get; set; } = string.Empty;
+
             [RPInfoOut]
             [RPInternalUseOnly]
             [XmlAttribute("TextPath")]
@@ -314,6 +321,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 
                 [RPInfoOut]
                 [XmlIgnore]
+                [DefaultValue(GalleryDisplayMode.Window)]
                 [Description("Gets or sets the display mode of the gallery. " +
                     "The display mode is used to specify the appearance of the gallery in the ribbon. " +
                     "The default value is Window.")]

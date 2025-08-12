@@ -92,7 +92,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Documenteer.cs" />
     <Compile Include="TestEx.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
