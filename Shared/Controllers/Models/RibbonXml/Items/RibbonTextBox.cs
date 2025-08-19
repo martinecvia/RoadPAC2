@@ -3,6 +3,7 @@
 
 using System; // Keep for .NET 4.6
 using System.ComponentModel;
+using System.Xml;
 using System.Xml.Serialization;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
@@ -31,11 +32,24 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         [XmlAttribute("Value")]
         [DefaultValue(null)]
         [Description("Gets or sets the Value property. " +
-    "The value can be a string or other data type. " +
-    "If it is not a string, you must derive from this class and implement the virtual data conversion methods. " +
-    "The default value is null.")]
+            "The value can be a string or other data type. " +
+            "If it is not a string, you must derive from this class and implement the virtual data conversion methods. " +
+            "The default value is null.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox_Value
         public string Value { get; set; } = null;
+
+        [RPInternalUseOnly]
+        [XmlElement("Value")]
+        public XmlCDataSection ValueCData
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Value))
+                    return null;
+                return new XmlDocument().CreateCDataSection(Value);
+            }
+            set { Value = value?.Value; }
+        }
 
         [RPInfoOut]
         [XmlIgnore]
@@ -201,6 +215,19 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             "The default value is null.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox_Prompt
         public string Prompt { get; set; } = null;
+
+        [RPInternalUseOnly]
+        [XmlElement("Prompt")]
+        public XmlCDataSection PromptCData
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Prompt))
+                    return null;
+                return new XmlDocument().CreateCDataSection(Prompt);
+            }
+            set { Prompt = value?.Value; }
+        }
 
         [RPInfoOut]
         [XmlIgnore]

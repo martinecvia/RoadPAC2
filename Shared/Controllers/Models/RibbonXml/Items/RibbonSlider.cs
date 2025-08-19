@@ -7,6 +7,7 @@ using System.Linq; // Keep for .NET 4.6
 using System.Windows;
 using System.Windows.Controls.Primitives;
 using System.Windows.Media;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace Shared.Controllers.Models.RibbonXml.Items
@@ -227,5 +228,18 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 #else
         public string TextBox1Text { get; set; } = null;
 #endif
+
+        [RPInternalUseOnly]
+        [XmlElement("TextBox1Text")]
+        public XmlCDataSection TextBox1TextCData
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(TextBox1Text))
+                    return null;
+                return new XmlDocument().CreateCDataSection(TextBox1Text);
+            }
+            set { TextBox1Text = value?.Value; }
+        }
     }
 }

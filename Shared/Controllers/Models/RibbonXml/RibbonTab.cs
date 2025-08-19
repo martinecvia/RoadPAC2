@@ -3,6 +3,7 @@
 
 using System.Collections.Generic; // Keep for .NET 4.6
 using System.ComponentModel;
+using System.Xml;
 using System.Xml.Serialization;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
@@ -52,6 +53,19 @@ namespace Shared.Controllers.Models.RibbonXml
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTab_Title
         public string Title { get; set; } = null;
 
+        [RPInternalUseOnly]
+        [XmlElement("Title")]
+        public XmlCDataSection TitleCData
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Title))
+                    return null;
+                return new XmlDocument().CreateCDataSection(Title);
+            }
+            set { Title = value?.Value; }
+        }
+
         [RPInfoOut]
         [XmlAttribute("Name")]
         [DefaultValue(null)]
@@ -63,6 +77,19 @@ namespace Shared.Controllers.Models.RibbonXml
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTab_Name
         public string Name { get; set; } = null;
 
+        [RPInternalUseOnly]
+        [XmlElement("Name")]
+        public XmlCDataSection NameCData
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Name))
+                    return null;
+                return new XmlDocument().CreateCDataSection(Name);
+            }
+            set { Name = value?.Value; }
+        }
+
         [RPInfoOut]
         [XmlAttribute("Description")]
         [DefaultValue(null)]
@@ -72,6 +99,19 @@ namespace Shared.Controllers.Models.RibbonXml
             "The default value is null.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTab_Description
         public string Description { get; set; } = null;
+
+        [RPInternalUseOnly]
+        [XmlElement("Description")]
+        public XmlCDataSection DescriptionCData
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Description))
+                    return null;
+                return new XmlDocument().CreateCDataSection(Description);
+            }
+            set { Description = value?.Value; }
+        }
 
         [RPInfoOut]
         [XmlAttribute("Id")]

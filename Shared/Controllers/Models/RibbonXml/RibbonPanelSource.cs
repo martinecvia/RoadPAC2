@@ -86,6 +86,19 @@ namespace Shared.Controllers.Models.RibbonXml
             "The default value is null.")]
         public string Title { get; set; } = null;
 
+        [RPInternalUseOnly]
+        [XmlElement("Title")]
+        public XmlCDataSection TitleCData
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Title))
+                    return null;
+                return new XmlDocument().CreateCDataSection(Title);
+            }
+            set { Title = value?.Value; }
+        }
+
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Name
         [RPInfoOut]
         [XmlAttribute("Name")]
@@ -97,6 +110,19 @@ namespace Shared.Controllers.Models.RibbonXml
             "The default value is null.")]
         public string Name { get; set; } = null;
 
+        [RPInternalUseOnly]
+        [XmlElement("Name")]
+        public XmlCDataSection NameCData
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Name))
+                    return null;
+                return new XmlDocument().CreateCDataSection(Name);
+            }
+            set { Name = value?.Value; }
+        }
+
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Description
         [RPInfoOut]
         [XmlAttribute("Description")]
@@ -106,6 +132,19 @@ namespace Shared.Controllers.Models.RibbonXml
             "Applications can use this to store a description if it is required in other UI customization dialogs. " +
             "The default value is null.")]
         public string Description { get; set; } = null;
+
+        [RPInternalUseOnly]
+        [XmlElement("Description")]
+        public XmlCDataSection DescriptionCData
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Description))
+                    return null;
+                return new XmlDocument().CreateCDataSection(Description);
+            }
+            set { Description = value?.Value; }
+        }
 
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Tag
         [RPInfoOut]

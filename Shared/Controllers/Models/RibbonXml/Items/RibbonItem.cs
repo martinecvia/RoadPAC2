@@ -5,6 +5,7 @@ using System; // Keep for .NET 4.6
 using System.Collections.Generic; // Keep for .NET 4.6
 using System.ComponentModel;
 using System.Windows.Media;
+using System.Xml;
 using System.Xml.Serialization;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
@@ -80,6 +81,19 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             "The default value is null.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem_Text
         public string Text { get; set; } = null;
+
+        [RPInternalUseOnly]
+        [XmlElement("Text")]
+        public XmlCDataSection TextCData
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Text))
+                    return null;
+                return new XmlDocument().CreateCDataSection(Text);
+            }
+            set { Text = value?.Value; }
+        }
 
         [RPInfoOut]
         [XmlIgnore]
@@ -465,6 +479,19 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             "The description text is used in the application menu, tooltips, and drop-down lists in a RibbonListButton when the list style is set to Descriptive.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem_Description
         public string Description { get; set; } = null;
+
+        [RPInternalUseOnly]
+        [XmlElement("Description")]
+        public XmlCDataSection DescriptionCData
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Description))
+                    return null;
+                return new XmlDocument().CreateCDataSection(Description);
+            }
+            set { Description = value?.Value; }
+        }
 
         [RPInfoOut]
         [RPInternalUseOnly]

@@ -2,6 +2,7 @@ using System; // Keep for .NET 4.6
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Windows;
+using System.Xml;
 using System.Xml.Serialization;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
@@ -204,6 +205,19 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 #else
             public string EditableText { get; set; } = null;
 #endif
+
+            [RPInternalUseOnly]
+            [XmlElement("EditableText")]
+            public XmlCDataSection EditableTextCData
+            {
+                get
+                {
+                    if (string.IsNullOrEmpty(EditableText))
+                        return null;
+                    return new XmlDocument().CreateCDataSection(EditableText);
+                }
+                set { EditableText = value?.Value; }
+            }
 
             [RPInfoOut]
             [RPInternalUseOnly]

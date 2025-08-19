@@ -1,5 +1,6 @@
 ﻿using System; // Keep for .NET 4.6
 using System.ComponentModel;
+using System.Xml;
 using System.Xml.Serialization;
 
 namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
@@ -60,6 +61,18 @@ namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
         [XmlAttribute("CurrentOperation")]
         [DefaultValue("")]
         public string CurrentOperation { get; set; } = string.Empty;
+
+        [XmlElement("CurrentOperation")]
+        public XmlCDataSection CurrentOperationCData
+        {
+            get
+            { 
+                if (string.IsNullOrEmpty(CurrentOperation))
+                    return null;
+                return new XmlDocument().CreateCDataSection(CurrentOperation);
+            }
+            set { CurrentOperation = value?.Value ?? string.Empty; }
+        }
 
         [RPInfoOut]
         [RPInternalUseOnly]
