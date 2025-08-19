@@ -45,6 +45,10 @@ namespace Shared.Controllers
                                                             // other tab's from AutoCAD.
                                                             // This also prevents using the same name from different applications.
 
+        [RPInternalUseOnly]
+        internal static readonly string ControlsNamespace = "Shared.Controllers.Controls.Ribbon";
+        internal static readonly Dictionary<string, object> RegisteredControls = new Dictionary<string, object>();
+
         private static RibbonControl Ribbon => ComponentManager.Ribbon; // Should be same with ZWCAD
 
         [DefaultValue(false)]

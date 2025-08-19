@@ -3,6 +3,7 @@
 #pragma warning disable CS8603
 #pragma warning disable CS8604  // Compiler thinks that object can be null, even tho in higher scope we have checked object is not null
 
+#pragma warning disable IDE0001 // Collision with *CAD.Runtime.Exception & System.Exception
 #pragma warning disable IDE0083 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
 #pragma warning disable IDE0305 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
 
@@ -11,12 +12,17 @@ using System.Collections;
 using System.Diagnostics;
 using System.Linq; // Keep for .NET 4.6
 using System.Reflection;
+using System.Xml.Serialization;
 
 namespace Shared.Controllers.Models.RibbonXml
 {
     [RPPrivateUseOnly]
     public abstract class BaseRibbonXml
     {
+        [RPPrivateUseOnly]
+        [XmlAttribute("ControlsId")]
+        public string ControlsId { get; set; } = null;
+
         /// <summary>
         /// Returns a string representation of the object, including only properties marked with <see cref="RPInfoOutAttribute"/>
         /// that have non-null values.
@@ -45,7 +51,8 @@ namespace Shared.Controllers.Models.RibbonXml
                         return $"{property.Name}=[{list}]";
                     }
                     return $"{property.Name}={value}";
-                });
+                }).ToList();
+            values.Add($"ControlsId={ControlsId}");
             return $"{GetType().Name}({string.Join(", ", values)})";
         }
 
@@ -88,10 +95,13 @@ namespace Shared.Controllers.Models.RibbonXml
         /// output to avoid runtime disruption.
         /// </para>
         /// </remarks>
-        internal static Target Transform<Target, Source>(Target target, Source source) where Source : BaseRibbonXml
+        internal static Target Transform<Target, Source>(Target target, Source source) 
+            where Source : BaseRibbonXml
         {
             if (target == null || source == null)
                 return default;
+            if (source is Shared.Controllers.Models.RibbonXml.RibbonPanelSourceDef)
+                Debug.WriteLine(source.GetType());
             PropertyInfo[] applyableProperties = source.GetType()
                     .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
                     .Where(property => property.GetCustomAttribute<RPInfoOutAttribute>() != null)
@@ -149,9 +159,30 @@ namespace Shared.Controllers.Models.RibbonXml
                             $"Has different type target:{targetProperty.PropertyType} from source:{sourceProperty.PropertyType}");
                     }
                 }
-                catch (System.Exception exception) // Collision with *CAD.Runtime.Exception & System.Exception
+                catch (System.Exception exception)
                 {
                     Debug.WriteLine($"{sourceProperty.Name}: {exception.Message}");
+                }
+            }
+            if (!string.IsNullOrEmpty(source.ControlsId) && 
+                !RibbonController.RegisteredControls.ContainsKey(source.ControlsId))
+            {
+                Type wrapperType = Assembly.GetExecutingAssembly()
+                    .GetType($"{RibbonController.ControlsNamespace}.{source.ControlsId}", false, true);
+                if (wrapperType != null)
+                {
+                    try
+                    {
+                        // We'll try to invoke our ControlsId, and our target so we can individualy control each control
+                        var invoke = wrapperType.GetConstructors()
+                            .FirstOrDefault()?.Invoke(new object[] { source.ControlsId, target });
+                        if (invoke != null)
+                            RibbonController.RegisteredControls.Add(source.ControlsId, invoke);
+                    }
+                    catch (System.Exception exception)
+                    {
+                        Debug.WriteLine($"{wrapperType.Name}: {exception.Message}");
+                    }
                 }
             }
             return target;

@@ -23,7 +23,6 @@ namespace Shared.Controllers.Models.RibbonXml
         "RibbonPanel displays the content of the RibbonPanelSource set in the Source property.")]
     public class RibbonPanelDef : BaseRibbonXml
     {
-        [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(null)]
         [Description("Gets or sets the source that contains the ribbon items to be displayed by this panel. " +

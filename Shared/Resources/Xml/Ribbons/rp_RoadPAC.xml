@@ -3,6 +3,7 @@
 		   KeyTip="RP" Name="RoadPAC2" Title="RoadPAC2" IsEnabled="True" IsPanelEnabled="True" IsMergedContextualTab="False" AllowTearOffContextualPanels="False"
 		   UID="ID_WSR_001_62AEA">
 	<!-- Panel: Run RoadPAC -->
+	<!--
 	<RibbonPanel Id="RP_RBN_0001" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
 				 IsEnabled="True" IsVisible="True" IsContextualTabThemeIgnored="False"
 				 UID="ID_WSR_0001_2303A">
@@ -11,10 +12,11 @@
 						  Image="rp_img_default_16" LargeImage="rp_img_default_32" CommandHandler="RP_RUN_ROADPAC" />
 		</RibbonPanelSource>
 	</RibbonPanel>
+	-->
 	<RibbonPanel Id="RP_RBN_0002" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
 				 IsEnabled="True" IsVisible="True" IsContextualTabThemeIgnored="False"
 				 UID="ID_WSR_0002_54DGD">
-		<RibbonPanelSource Id="RP_RBN_0002_54DGD" Title="Projekt manažér">
+		<RibbonPanelSource Id="RP_RBN_0002_54DGD" Title="Projekt manažér" ControlsId="RibbonPanelSource_RP_RBN_0002_54DGD">
 			<DialogLauncher Orientation="Horizontal" IsCheckable="False" ShowImage="True" IsVisible="True" IsEnabled="True" Size="Standard" GroupLocation="Middle"
 							AllowInToolBar="True" AllowInStatusBar="True" ResizeStyle="HideText"
 							Text="Otevři složku aktuálního projektu" ShowText="False" CommandHandler="RP_COMMAND(OPEN_ACTIVE_DIRECTORY)" />
