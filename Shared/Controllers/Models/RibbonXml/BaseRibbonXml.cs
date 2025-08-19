@@ -100,8 +100,6 @@ namespace Shared.Controllers.Models.RibbonXml
         {
             if (target == null || source == null)
                 return default;
-            if (source is Shared.Controllers.Models.RibbonXml.RibbonPanelSourceDef)
-                Debug.WriteLine(source.GetType());
             PropertyInfo[] applyableProperties = source.GetType()
                     .GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.FlattenHierarchy)
                     .Where(property => property.GetCustomAttribute<RPInfoOutAttribute>() != null)

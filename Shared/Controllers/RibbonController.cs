@@ -96,6 +96,8 @@ namespace Shared.Controllers
                 foreach (var panelDef in resource.PanelsDef)
                 {
                     var panelRef = panelDef.Transform(new RibbonPanel());
+                    if (panelDef.SourceDef == null)
+                        continue;
                     panelRef.Source = panelDef.SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[panelDef.SourceDef.GetType()]());
                     foreach (var itemDef in panelDef.SourceDef.ItemsDef)
                     {

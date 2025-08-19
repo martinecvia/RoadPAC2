@@ -565,6 +565,10 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             { typeof(ProgressBarSourceDef), () => new ProgressBarSource() },
 #endif
             { typeof(RibbonCheckBoxDef), () => new RibbonCheckBox() },
+            { typeof(RibbonChecklistButtonDef), () => new RibbonChecklistButton() },
+            { typeof(RibbonMenuButtonDef), () => new RibbonMenuButton() },
+            { typeof(RibbonRadioButtonGroupDef), () => new RibbonRadioButtonGroup() },
+            { typeof(RibbonSplitButtonDef), () => new RibbonSplitButton() },
             { typeof(RibbonMenuItemDef), () => new RibbonMenuItem() },
             { typeof(RibbonMenuItemDef.ApplicationMenuItemDef), () => new ApplicationMenuItem() },
             // RibbonButton
