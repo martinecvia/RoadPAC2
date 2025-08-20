@@ -64,10 +64,10 @@ jobs:
       with:
         name: NET_DLL
         path: |
-            Tests/NET_46_TEST/bin/x64/Release/NET_46_TEST.dll
-            Tests/ZWC_47_TEST/bin/x64/Release/ZWC_47_TEST.dll
-            Tests/NET_48_TEST/bin/x64/Release/NET_48_TEST.dll
-            Tests/NET_80_TEST/bin/x64/Release/NET_80_TEST.dll
+            Tests/NET_46_TEST/bin/Release/NET_46_TEST.dll
+            Tests/ZWC_47_TEST/bin/Release/ZWC_47_TEST.dll
+            Tests/NET_48_TEST/bin/Release/NET_48_TEST.dll
+            Tests/NET_80_TEST/bin/Release/NET_80_TEST.dll
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
@@ -77,9 +77,9 @@ jobs:
         draft: false
         prerelease: true
         files: |
-            Tests/NET_46_TEST/bin/x64/Release/NET_46_TEST.dll
-            Tests/ZWC_47_TEST/bin/x64/Release/ZWC_47_TEST.dll
-            Tests/NET_48_TEST/bin/x64/Release/NET_48_TEST.dll
-            Tests/NET_80_TEST/bin/x64/Release/net8.0-windows8.0/NET_80_TEST.dll
+            Tests/NET_46_TEST/bin/Release/NET_46_TEST.dll
+            Tests/ZWC_47_TEST/bin/Release/ZWC_47_TEST.dll
+            Tests/NET_48_TEST/bin/Release/NET_48_TEST.dll
+            Tests/NET_80_TEST/bin/Release/net8.0-windows8.0/NET_80_TEST.dll
       env:
         GITHUB_TOKEN: ${{ secrets.GH_PAT }}
