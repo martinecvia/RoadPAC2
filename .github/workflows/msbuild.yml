@@ -7,13 +7,23 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build-net4:
+  build-cad-4:
     runs-on: windows-2022
     steps:
     - uses: actions/checkout@v4
-    - name: Install .NET Framework 4.6.2 Developer Pack
+  
+    # Install .NET Framework Developer Packs
+    - name: Install .NET Framework 4.6 Developer Pack
       run: |
-        choco install netfx-4.6.2-devpack -y --no-progress
+        choco install netfx-4.6-devpack -y --no-progress
+
+    - name: Install .NET Framework 4.7 Developer Pack
+      run: |
+        choco install netfx-4.7-devpack -y --no-progress
+
+    - name: Install .NET Framework 4.8 Developer Pack
+      run: |
+        choco install netfx-4.8-devpack -y --no-progress
         
     - name: Setup MSBuild
       uses: microsoft/setup-msbuild@v1
@@ -24,5 +34,36 @@ jobs:
     - name: Restore Packages
       run: nuget restore RoadPAC2.sln
 
-    - name: Build .NET 4.6 (AutoCAD) (Test 46)
+    # Build .NET 4.6 project
+    - name: Build .NET 4.6 (ACAD) (Test 46)
       run: msbuild Tests/NET_46_TEST/NET_46_TEST.csproj /p:Configuration=Release
+
+    # Build .NET 4.7 project (ZWCAD)
+    - name: Build .NET 4.7 (ZCAD) (Test 47)
+      run: msbuild Tests/ZWC_47_TEST/ZWC_47_TEST.csproj /p:Configuration=Release /p:DefineConstants=ZWCAD
+
+    # Build .NET 4.8 project
+    - name: Build .NET 4.8 (ACAD) (Test 48)
+      run: msbuild Tests/NET_48_TEST/NET_48_TEST.csproj /p:Configuration=Release
+
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: NET_DLL
+        path: |
+            Tests/NET_46_TEST/bin/Release/NET_46_TEST.dll
+            Tests/ZWC_47_TEST/bin/Release/ZWC_47_TEST.dll
+            Tests/NET_48_TEST/bin/Release/NET_48_TEST.dll
+
+    - name: Create GitHub Release
+      uses: softprops/action-gh-release@v2
+      if: github.ref == 'refs/heads/master'
+      with:
+        tag_name: v${{ github.run_number }}
+        name: Release ${{ github.run_number }}
+        draft: false
+        prerelease: true
+        files: |
+            Tests/NET_46_TEST/bin/Release/NET_46_TEST.dll
+            Tests/ZWC_47_TEST/bin/Release/ZWC_47_TEST.dll
+            Tests/NET_48_TEST/bin/Release/NET_48_TEST.dll
