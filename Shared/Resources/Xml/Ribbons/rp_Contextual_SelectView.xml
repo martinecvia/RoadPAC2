@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<RibbonTab xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="RP_ACAD.ID_ContextualSelectView_54A6C" 
+		   IsContextualTab="True" IsVisible="False" IsMergedContextualTab="False" AllowTearOffContextualPanels="False"
+		   KeyTip="SV" Name="RP2SelectView Contextual Tab" Title="RP2SelectView" IsEnabled="True" IsPanelEnabled="True"
+		   Cookie="Tab=RP_ACAD.ID_ContextualSelectView_54A6C_RP2SelectView Contextual Tab"
+		   UID="ID_WSR_002_04FFG">
+</RibbonTab>

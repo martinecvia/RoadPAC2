@@ -9,6 +9,7 @@ using Autodesk.Windows;
 #endif
 #endregion
 
+// https://adndevblog.typepad.com/autocad/2012/04/displaying-a-contextual-tab-upon-entity-selection-using-ribbon-runtime-api.html
 namespace Shared.Controllers.Models
 {
     public class ContextualRibbonTab : RibbonTab

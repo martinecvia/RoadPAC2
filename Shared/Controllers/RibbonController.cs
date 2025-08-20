@@ -2,6 +2,7 @@
 #pragma warning disable CS8602
 #pragma warning disable CS8622
 
+#pragma warning disable IDE0001
 #pragma warning disable IDE0028 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
 #pragma warning disable IDE0090 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
 #pragma warning disable IDE0305 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
@@ -19,10 +20,12 @@ using System.Linq; // Keep for .NET 4.6
 #if ZWCAD
 using ZwSoft.ZwCAD.ApplicationServices;
 using ZwSoft.ZwCAD.EditorInput;
+using ZwSoft.Internal.Windows;
 using ZwSoft.Windows;
 #else
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.EditorInput;
+using Autodesk.Internal.Windows;
 using Autodesk.Windows;
 #endif
 #endregion
@@ -121,13 +124,16 @@ namespace Shared.Controllers
             return (T) tab;
         }
 
+        private static T CloneBrush<T>(T brush) where T : class
+            => brush == null ? null : (brush as dynamic).Clone();
+
 #if NET8_0_OR_GREATER
         private static RibbonItem? ProcessRibbonItem(RibbonItemDef itemDef,
 #else
         private static RibbonItem ProcessRibbonItem(RibbonItemDef itemDef, 
 #endif
             int currentDepth = 0) // this signalizes how many hops had happend during reccursion,
-                                 // we don't want to be looped, so depth is actually checked for depth
+                                  // we don't want to be stack-overflowed, so depth is actually checked limited
         {
             // Maximal depth we want to be in
             if (currentDepth < 4 || RibbonItemDef.ItemsFactory.ContainsKey(itemDef.GetType()))
@@ -260,11 +266,41 @@ namespace Shared.Controllers
                 Document document = Application.DocumentManager.MdiActiveDocument;
                 document.ImpliedSelectionChanged += OnSelectionChanged;
                 HasAnyContextualTab = true;
-            }
+            };
             tab.IsVisible = false;
             tab.IsAnonymous = true;             // This is crucial, since Ribbon#ShowContextualTab() is broken
                                                 // because it disallows user to "intentionaly" show this tab, thus
                                                 // RibbonTab#IsVisible property will be use to show or hide contextual tab
+            try
+            {
+                var hatchTab = Ribbon.Tabs.FirstOrDefault(t =>
+                    t.IsContextualTab &&
+                    ((t.Name == "Hatch Editor" || t.Id == "ACAD.RBN_01738148") ||
+                     (t.Name == "Vytváøení šraf" || t.Id == "")));
+                if (hatchTab?.Theme is TabTheme theme)
+                {
+                    tab.Theme = new TabTheme
+                    {
+                        InnerBorder = CloneBrush(theme.InnerBorder),
+                        OuterBorder = CloneBrush(theme.OuterBorder),
+                        PanelBackground = CloneBrush(theme.PanelBackground),
+                        PanelBackgroundVerticalLeft = CloneBrush(theme.PanelBackgroundVerticalLeft),
+                        PanelBackgroundVerticalRight = CloneBrush(theme.PanelBackgroundVerticalRight),
+                        PanelBorder = CloneBrush(theme.PanelBorder),
+                        PanelDialogBoxLauncherBrush = CloneBrush(theme.PanelDialogBoxLauncherBrush),
+                        PanelTitleBackground = CloneBrush(theme.PanelTitleBackground),
+                        PanelTitleBorderBrushVertical = CloneBrush(theme.PanelTitleBorderBrushVertical),
+                        PanelTitleForeground = CloneBrush(theme.PanelTitleForeground),
+                        SelectedTabHeaderBackground = CloneBrush(theme.SelectedTabHeaderBackground),
+                        SlideoutPanelBorder = CloneBrush(theme.SlideoutPanelBorder),
+                        TabHeaderBackground = CloneBrush(theme.TabHeaderBackground)
+                    };
+                }
+            }
+            catch (System.Exception exception)
+            {
+                Debug.WriteLine(exception);
+            }
             return tab;
         }
 

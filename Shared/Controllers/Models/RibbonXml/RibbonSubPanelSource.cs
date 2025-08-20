@@ -2,6 +2,7 @@
 
 using System.Collections.Generic; // Keep for .NET 4.6
 using System.ComponentModel;
+using System.Xml;
 using System.Xml.Serialization;
 
 using Shared.Controllers.Models.RibbonXml.Items;
@@ -61,12 +62,38 @@ namespace Shared.Controllers.Models.RibbonXml
         [DefaultValue(null)]
         public string Description { get; set; } = null;
 
+        [RPInternalUseOnly]
+        [XmlElement("Description")]
+        public XmlCDataSection DescriptionCData
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Description))
+                    return null;
+                return new XmlDocument().CreateCDataSection(Description);
+            }
+            set { Description = value?.Value; }
+        }
+
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSubPanelSource_Name
         [RPInfoOut]
         [RPInternalUseOnly]
         [XmlAttribute("Name")]
         [DefaultValue(null)]
         public string Name { get; set; } = null;
+
+        [RPInternalUseOnly]
+        [XmlElement("Name")]
+        public XmlCDataSection NameCData
+        {
+            get
+            {
+                if (string.IsNullOrEmpty(Name))
+                    return null;
+                return new XmlDocument().CreateCDataSection(Name);
+            }
+            set { Name = value?.Value; }
+        }
 
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSubPanelSource_Tag
         [RPInfoOut]

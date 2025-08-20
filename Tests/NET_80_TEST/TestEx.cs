@@ -26,6 +26,12 @@ namespace NET_80_TEST
             ResourceController.LoadEmbeddedResources(); // To load icons, configuration files etc.
         }
 
+        [CommandMethod("HIT_BREAKPOINT")]
+        public void Breakpoint()
+        {
+            var Ribbons = Ribbon;
+        }
+
         [CommandMethod("INSPECT_TAB")]
         public void InspectTab()
         {

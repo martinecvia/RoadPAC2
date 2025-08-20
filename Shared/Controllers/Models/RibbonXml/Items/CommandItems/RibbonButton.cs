@@ -2,6 +2,14 @@
 using System.ComponentModel;
 using System.Xml.Serialization;
 
+#region O_PROGRAM_DETERMINE_CAD_PLATFORM 
+#if ZWCAD
+using ZwSoft.Windows;
+#else
+using Autodesk.Windows;
+#endif
+#endregion
+
 namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonButton
@@ -12,6 +20,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
         {
             base.MinWidth = 0;
             base.Width = double.NaN;
+            base.ResizeStyle = RibbonItemResizeStyles.HideText;
         }
 
         [RPInfoOut]
