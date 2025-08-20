@@ -184,7 +184,7 @@ namespace Shared.Controllers.Models.RibbonXml
                     {
                         // We'll try to invoke our ControlsId, and our target so we can individualy control each control
                         var invoke = wrapperType.GetConstructors()
-                            .FirstOrDefault()?.Invoke(new object[] { source.Id, target, source });
+                            .FirstOrDefault()?.Invoke(new object[] { target, source });
                         if (invoke != null)
                             RibbonController.RegisteredControls.Add(source.Id, invoke);
                     }

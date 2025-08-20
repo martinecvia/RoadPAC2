@@ -19,18 +19,8 @@ namespace Shared.Controllers.Controls
         public BaseRibbonXml Source { get; }
 
         /// <summary>
-        /// Gets the Id of the Ribbon control.
-        /// This corresponds to the XML definition's <c>Id</c> attribute.
-        /// </summary>
-        public string Id { get; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="BaseRibbonControl{RibbonRef}"/> class.
         /// </summary>
-        /// <param name="id">
-        /// The Id of the Ribbon control. Must not be null or empty.
-        /// Typically comes from the XML definition and is used for dynamic lookup.
-        /// </param>
         /// <param name="target">
         /// A reference to the underlying Ribbon item instance.
         /// Must not be null.
@@ -40,17 +30,14 @@ namespace Shared.Controllers.Controls
         /// Must not be null.
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// Thrown if <paramref name="id"/> is null or empty, or if <paramref name="target"/> is null.
+        /// Thrown if <paramref name="target"/> is null or empty, or if <paramref name="source"/> is null.
         /// </exception>
-        public BaseRibbonControl(string id, RibbonRef target, BaseRibbonXml source)
+        public BaseRibbonControl(RibbonRef target, BaseRibbonXml source)
         { 
-            // Id can't be null or empty, since it was created in Transform method with valid Id
-            if (string.IsNullOrEmpty(id))
-                throw new ArgumentNullException(nameof(id), "Ribbon control Id cannot be null or empty.");
-            Target = target ?? throw new ArgumentNullException(nameof(target), 
-                "Ribbon item reference cannot be null.");
-            Source = source;
-            Id = id;
+            Target = target ?? throw new ArgumentNullException(nameof(target),
+                "Ribbon target reference cannot be null.");
+            Source = source ?? throw new ArgumentNullException(nameof(source),
+                "Ribbon source reference cannot be null.");
         }
     }
 }

@@ -17,8 +17,8 @@ namespace Shared.Controllers.Controls.Ribbon
 {
     public class RibbonButton_Close_ContextualTab : BaseRibbonControl<RibbonButton>
     {
-        public RibbonButton_Close_ContextualTab(string id, RibbonButton target, BaseRibbonXml source) 
-            : base(id, target, source) { }
+        public RibbonButton_Close_ContextualTab(RibbonButton target, BaseRibbonXml source) 
+            : base(target, source) { }
 
         public class RibbonButton_Close_ContextualTab_Commander
         {
