@@ -8,7 +8,7 @@
 		<RibbonPanelSource Id="RP_RBN_9000_44GCD">
 			<Title><![CDATA[Zavřít]]></Title>
 			<RibbonButton Id="RibbonButton_Close_ContextualTab" Image="rp_img_default_16" LargeImage="rp_img_default_32" Name="RP_AECCLCTX"
-						  Size="Large" Text="Zavřít&#13;nabídku" ShowText="True" Orientation="Vertical" ShowImage="True" CommandHandler="RP_AECCLCTX"/>
+						  Size="Large" Text="Zavřít&#13;nabídku" ShowText="True" Orientation="Vertical" ShowImage="True" CommandHandler="RP_AECCLCTX" />
 		</RibbonPanelSource>
 	</RibbonPanel>
 </RibbonTab>
