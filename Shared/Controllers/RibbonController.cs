@@ -20,12 +20,10 @@ using System.Linq; // Keep for .NET 4.6
 #if ZWCAD
 using ZwSoft.ZwCAD.ApplicationServices;
 using ZwSoft.ZwCAD.EditorInput;
-using ZwSoft.Internal.Windows;
 using ZwSoft.Windows;
 #else
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.EditorInput;
-using Autodesk.Internal.Windows;
 using Autodesk.Windows;
 #endif
 #endregion
@@ -34,6 +32,8 @@ using Shared.Controllers.Models;
 using Shared.Controllers.Models.RibbonXml;
 using Shared.Controllers.Models.RibbonXml.Items;
 using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
+using System.Net;
+using System.Windows.Controls;
 
 namespace Shared.Controllers
 {
@@ -88,26 +88,30 @@ namespace Shared.Controllers
             AssertInitialized();
 #endif
             Assert.IsNotNull(tabId, nameof(tabId));
-            RibbonTabDef resource = ResourceController.LoadResourceRibbon<RibbonTabDef>(tabId);
-            RibbonTab tab = resource?.Transform(new RibbonTab()) ?? new RibbonTab
+            RibbonTabDef tabDef = ResourceController.LoadResourceRibbon<RibbonTabDef>(tabId);
+            T tab = tabDef?.Transform(new T()) ?? new T();
+            tab.Id = RibbonTab__Prefix + tabId;       // We want to mark these tabs as RoadPAC ones.
+                                                      // For further compatibility and to prevent being overriden.
+            if (tabDef != null)
             {
-                Id = RibbonTab__Prefix + tabId       // We want to mark these tabs as RoadPAC ones.
-                                                     // For further compatibility and to prevent being overriden.
-            };
-            if (resource != null)
-            {
-                foreach (var panelDef in resource.PanelsDef)
+                Debug.WriteLine($"Processed: {tabDef}");
+                foreach (var panelDef in tabDef.PanelsDef)
                 {
                     var panelRef = panelDef.Transform(new RibbonPanel());
+                    panelDef.Cookie = panelDef.Cookie.Replace("%Parent", tabDef.Id);
+                    Debug.WriteLine($"Processed: {panelDef}");
                     if (panelDef.SourceDef == null)
                         continue;
                     panelRef.Source = panelDef.SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[panelDef.SourceDef.GetType()]());
+                    Debug.WriteLine($"Processed: {panelDef.SourceDef}");
                     foreach (var itemDef in panelDef.SourceDef.ItemsDef)
                     {
-                        var itemRef = ProcessRibbonItem(itemDef, currentDepth: 0); // Directly setting currentDepth to zero here,
-                                                                                   // because sometimes C# keeps refference to previous currentDepth, which is odd 
-                                                                                   // even tho function has default value defined, so some might think it will take the default value.
-                                                                                   // This is a compiler issue with .NET 4.6 NDP46-KB3045557-x86-x64
+                        var itemRef = ProcessRibbonItem(itemDef, panelDef, currentDepth: 0); // Directly setting currentDepth to zero here,
+                                                                                             // because sometimes C# keeps refference to previous currentDepth, which is odd 
+                                                                                             // even tho function has default value defined, so some might think it will take the default value.
+                                                                                             // This is a compiler issue with .NET 4.6 NDP46-KB3045557-x86-x64
+                        itemDef.Cookie = itemDef.Cookie.Replace("%Parent", panelDef.Id);
+                        itemRef.Tag = itemRef.Tag ?? itemDef.Cookie;
                         Debug.WriteLine($"Processed: {itemDef}");
                         if (itemRef != null) // null RibbonItem definitions will break cad instance
                             panelRef.Source.Items.Add(itemRef);
@@ -121,16 +125,13 @@ namespace Shared.Controllers
             if (!string.IsNullOrEmpty(tabDescription))
                 tab.Description = tabDescription;
             Ribbon.Tabs.Add(tab);
-            return (T) tab;
+            return tab;
         }
 
-        private static T CloneBrush<T>(T brush) where T : class
-            => brush == null ? null : (brush as dynamic).Clone();
-
 #if NET8_0_OR_GREATER
-        private static RibbonItem? ProcessRibbonItem(RibbonItemDef itemDef,
+        private static RibbonItem? ProcessRibbonItem(RibbonItemDef itemDef, RibbonPanelDef panelDef,
 #else
-        private static RibbonItem ProcessRibbonItem(RibbonItemDef itemDef, 
+        private static RibbonItem ProcessRibbonItem(RibbonItemDef itemDef, RibbonPanelDef panelDef,
 #endif
             int currentDepth = 0) // this signalizes how many hops had happend during reccursion,
                                   // we don't want to be stack-overflowed, so depth is actually checked limited
@@ -139,12 +140,15 @@ namespace Shared.Controllers
             if (currentDepth < 4 || RibbonItemDef.ItemsFactory.ContainsKey(itemDef.GetType()))
             {
                 var itemRef = itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]());
+                itemDef.Cookie = itemDef.Cookie.Replace("%Parent", panelDef.Id);
+                itemRef.Tag = itemRef.Tag ?? itemDef.Cookie;
                 switch (itemDef)
                 {
                     case RibbonRowPanelDef item:
                         List<RibbonItemDef> children;
                         if (item.SourceDef != null && item.ItemsDef.Count != 0)
                         {
+                            Debug.WriteLine($"ProcessRibbonItem: {item.SourceDef}");
                             item.SourceDef.ItemsDef.AddRange(item.ItemsDef);
                             children = item.SourceDef.ItemsDef;
                         } else {
@@ -156,8 +160,8 @@ namespace Shared.Controllers
                             // The following item types are not supported in this collection: RibbonRowPanel and RibbonPanelBreak
                             if (childDef is RibbonRowPanelDef || childDef is RibbonPanelBreakDef)
                                 continue;
+                            var childRef = ProcessRibbonItem(childDef, panelDef, currentDepth + 1);
                             Debug.WriteLine($"ProcessRibbonItem: {childDef}");
-                            var childRef = ProcessRibbonItem(childDef, currentDepth + 1);
                             if (childRef != null)
                                 target.Add(childRef);
                         }
@@ -170,16 +174,16 @@ namespace Shared.Controllers
                             // Either Items or ItemsBinding can be used to manage the collection, but not both
                             foreach (var childDef in item.ItemsDef)
                             {
+                                var childRef = ProcessRibbonItem(childDef, panelDef, currentDepth + 1);
                                 Debug.WriteLine($"ProcessRibbonItem: {childDef}");
-                                var childRef = ProcessRibbonItem(childDef, currentDepth + 1);
                                 if (childRef != null)
                                     ((RibbonList)itemRef).Items.Add(childRef);
                             }
                         }
                         foreach (var childDef in item.MenuItemsDef)
                         {
+                            var childRef = (RibbonCommandItem) ProcessRibbonItem(childDef, panelDef, currentDepth + 1);
                             Debug.WriteLine($"ProcessRibbonItem: {childDef}");
-                            var childRef = (RibbonCommandItem) ProcessRibbonItem(childDef, currentDepth + 1);
                             if (childRef != null)
                                 ((RibbonCombo)itemRef).MenuItems.Add(childRef);
                         }
@@ -203,7 +207,8 @@ namespace Shared.Controllers
                                         continue;
                                     break;
                             }
-                            var childRef = ProcessRibbonItem(childDef, currentDepth + 1);
+                            var childRef = ProcessRibbonItem(childDef, panelDef, currentDepth + 1);
+                            Debug.WriteLine($"ProcessRibbonItem: {childDef}");
                             if (childRef != null)
                                 ((RibbonListButton)itemRef).Items.Add(childRef);
                         }
@@ -259,7 +264,7 @@ namespace Shared.Controllers
 #endif
             Assert.IsNotNull(tabId, nameof(tabId));
             ContextualRibbonTab tab = CreateTab<ContextualRibbonTab>(tabId, tabName, tabDescription);
-            tab.IsContextualTab = true;
+            //tab.IsContextualTab = true;
             _contextualTabConditions.Add(tab.Id, onSelectionMatch);
             if (!HasAnyContextualTab)
             {
@@ -271,36 +276,7 @@ namespace Shared.Controllers
             tab.IsAnonymous = true;             // This is crucial, since Ribbon#ShowContextualTab() is broken
                                                 // because it disallows user to "intentionaly" show this tab, thus
                                                 // RibbonTab#IsVisible property will be use to show or hide contextual tab
-            try
-            {
-                var hatchTab = Ribbon.Tabs.FirstOrDefault(t =>
-                    t.IsContextualTab &&
-                    ((t.Name == "Hatch Editor" || t.Id == "ACAD.RBN_01738148") ||
-                     (t.Name == "Vytváøení šraf" || t.Id == "")));
-                if (hatchTab?.Theme is TabTheme theme)
-                {
-                    tab.Theme = new TabTheme
-                    {
-                        InnerBorder = CloneBrush(theme.InnerBorder),
-                        OuterBorder = CloneBrush(theme.OuterBorder),
-                        PanelBackground = CloneBrush(theme.PanelBackground),
-                        PanelBackgroundVerticalLeft = CloneBrush(theme.PanelBackgroundVerticalLeft),
-                        PanelBackgroundVerticalRight = CloneBrush(theme.PanelBackgroundVerticalRight),
-                        PanelBorder = CloneBrush(theme.PanelBorder),
-                        PanelDialogBoxLauncherBrush = CloneBrush(theme.PanelDialogBoxLauncherBrush),
-                        PanelTitleBackground = CloneBrush(theme.PanelTitleBackground),
-                        PanelTitleBorderBrushVertical = CloneBrush(theme.PanelTitleBorderBrushVertical),
-                        PanelTitleForeground = CloneBrush(theme.PanelTitleForeground),
-                        SelectedTabHeaderBackground = CloneBrush(theme.SelectedTabHeaderBackground),
-                        SlideoutPanelBorder = CloneBrush(theme.SlideoutPanelBorder),
-                        TabHeaderBackground = CloneBrush(theme.TabHeaderBackground)
-                    };
-                }
-            }
-            catch (System.Exception exception)
-            {
-                Debug.WriteLine(exception);
-            }
+            
             return tab;
         }
 
@@ -336,12 +312,10 @@ namespace Shared.Controllers
                 // Hide all contextual tabs
                 // Logic should be further refined in future to keep tab open
                 // if we want to, for now - all tabs will be closed after de-selection
-                foreach (var tab in Ribbon.Tabs.Where(t => t is ContextualRibbonTab
-                        && t.Id.StartsWith(RibbonTab__Prefix) 
-                        && t.IsVisible))
+                foreach (ContextualRibbonTab tab in Ribbon.Tabs
+                    .Where(t => t is ContextualRibbonTab && t.Id.StartsWith(RibbonTab__Prefix) && t.IsVisible))
                 {
-                    ((ContextualRibbonTab) tab).Hide();
-                    Ribbon.UpdateLayout();
+                    tab.Hide();
                     IsSelectionHandled = false;
                     return;
                 }
@@ -360,12 +334,11 @@ namespace Shared.Controllers
                         if (tab != null && tab is ContextualRibbonTab selected)
                         {
                             selected.Show();
-                            Ribbon.UpdateLayout();
                             IsSelectionHandled = false;
                             return;
                         }
                     }
-            }
+                }
             }
             // Release the lock
             IsSelectionHandled = false;

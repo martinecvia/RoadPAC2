@@ -7,6 +7,7 @@ using System.Xml.Serialization;
 
 using Shared.Controllers.Models.RibbonXml.Items;
 using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Shared.Controllers.Models.RibbonXml
 {
@@ -14,6 +15,13 @@ namespace Shared.Controllers.Models.RibbonXml
     [RPPrivateUseOnly]
     public class RibbonSubPanelSourceDef : BaseRibbonXml
     {
+        private string _cookie;
+        public override string Cookie
+        {
+            get => _cookie ?? $"%Parent:SubPanelSource={Id}__{Name}";
+            set => _cookie = value;
+        }
+
         [RPInternalUseOnly]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         // RibbonItem
@@ -47,13 +55,6 @@ namespace Shared.Controllers.Models.RibbonXml
         [XmlElement("RibbonRadioButtonGroup", typeof(RibbonListButtonDef.RibbonRadioButtonGroupDef))]
         [XmlElement("RibbonSplitButton", typeof(RibbonListButtonDef.RibbonSplitButtonDef))]
         public List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
-
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSubPanelSource_Id
-        [RPInfoOut]
-        [RPInternalUseOnly]
-        [XmlAttribute("Id")]
-        [DefaultValue(null)]
-        public string Id { get; set; } = null;
 
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonSubPanelSource_Description
         [RPInfoOut]

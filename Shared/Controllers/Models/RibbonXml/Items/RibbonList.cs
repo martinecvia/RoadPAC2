@@ -208,7 +208,11 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 
             [RPInternalUseOnly]
             [XmlElement("EditableText")]
+#if NET8_0_OR_GREATER
+            public XmlCDataSection? EditableTextCData
+#else
             public XmlCDataSection EditableTextCData
+#endif
             {
                 get
                 {

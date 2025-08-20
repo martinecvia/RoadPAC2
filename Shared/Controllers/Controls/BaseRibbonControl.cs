@@ -1,4 +1,5 @@
 ﻿using System;
+using Shared.Controllers.Models.RibbonXml;
 
 namespace Shared.Controllers.Controls
 {
@@ -14,7 +15,8 @@ namespace Shared.Controllers.Controls
         /// <summary>
         /// Gets the strongly-typed reference to the underlying Ribbon item.
         /// </summary>
-        public RibbonRef Ref { get; }
+        public RibbonRef Target { get; }
+        public BaseRibbonXml Source { get; }
 
         /// <summary>
         /// Gets the Id of the Ribbon control.
@@ -29,20 +31,25 @@ namespace Shared.Controllers.Controls
         /// The Id of the Ribbon control. Must not be null or empty.
         /// Typically comes from the XML definition and is used for dynamic lookup.
         /// </param>
-        /// <param name="reference">
+        /// <param name="target">
         /// A reference to the underlying Ribbon item instance.
         /// Must not be null.
         /// </param>
+        /// <param name="source">
+        /// A reference to the underlying RibbonXml item instance.
+        /// Must not be null.
+        /// </param>
         /// <exception cref="ArgumentNullException">
-        /// Thrown if <paramref name="id"/> is null or empty, or if <paramref name="reference"/> is null.
+        /// Thrown if <paramref name="id"/> is null or empty, or if <paramref name="target"/> is null.
         /// </exception>
-        public BaseRibbonControl(string id, RibbonRef reference)
+        public BaseRibbonControl(string id, RibbonRef target, BaseRibbonXml source)
         { 
             // Id can't be null or empty, since it was created in Transform method with valid Id
             if (string.IsNullOrEmpty(id))
                 throw new ArgumentNullException(nameof(id), "Ribbon control Id cannot be null or empty.");
-            Ref = reference ?? throw new ArgumentNullException(nameof(reference), 
+            Target = target ?? throw new ArgumentNullException(nameof(target), 
                 "Ribbon item reference cannot be null.");
+            Source = source;
             Id = id;
         }
     }

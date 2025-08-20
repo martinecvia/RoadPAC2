@@ -9,6 +9,7 @@
 
 using System; // Keep for .NET 4.6
 using System.Collections;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq; // Keep for .NET 4.6
 using System.Reflection;
@@ -19,9 +20,19 @@ namespace Shared.Controllers.Models.RibbonXml
     [RPPrivateUseOnly]
     public abstract class BaseRibbonXml
     {
+        [RPInfoOut]
+        [XmlAttribute("Id")]
+        [DefaultValue("")]
+        [Description("Gets or sets the item id. " +
+            "This id is used as the automation id for the corresponding control in the UI. " +
+            "The framework does not otherwise use or validate it. " +
+            "It is up to the application to set and use this id. " +
+            "The default value is null.")]
+        public string Id { get; set; } = Guid.NewGuid().ToString("N").Substring(0, 8);
+
         [RPPrivateUseOnly]
-        [XmlAttribute("ControlsId")]
-        public string ControlsId { get; set; } = null;
+        [XmlIgnore]
+        public virtual string Cookie { get; set; } = string.Empty;
 
         /// <summary>
         /// Returns a string representation of the object, including only properties marked with <see cref="RPInfoOutAttribute"/>
@@ -52,7 +63,7 @@ namespace Shared.Controllers.Models.RibbonXml
                     }
                     return $"{property.Name}={value}";
                 }).ToList();
-            values.Add($"ControlsId={ControlsId}");
+            values.Add($"Cookie={Cookie}");
             return $"{GetType().Name}({string.Join(", ", values)})";
         }
 
@@ -162,20 +173,20 @@ namespace Shared.Controllers.Models.RibbonXml
                     Debug.WriteLine($"{sourceProperty.Name}: {exception.Message}");
                 }
             }
-            if (!string.IsNullOrEmpty(source.ControlsId) && 
-                !RibbonController.RegisteredControls.ContainsKey(source.ControlsId))
+            if (!string.IsNullOrEmpty(source.Id) && 
+                !RibbonController.RegisteredControls.ContainsKey(source.Id))
             {
                 Type wrapperType = Assembly.GetExecutingAssembly()
-                    .GetType($"{RibbonController.ControlsNamespace}.{source.ControlsId}", false, true);
+                    .GetType($"{RibbonController.ControlsNamespace}.{source.Id}", false, true);
                 if (wrapperType != null)
                 {
                     try
                     {
                         // We'll try to invoke our ControlsId, and our target so we can individualy control each control
                         var invoke = wrapperType.GetConstructors()
-                            .FirstOrDefault()?.Invoke(new object[] { source.ControlsId, target });
+                            .FirstOrDefault()?.Invoke(new object[] { source.Id, target, source });
                         if (invoke != null)
-                            RibbonController.RegisteredControls.Add(source.ControlsId, invoke);
+                            RibbonController.RegisteredControls.Add(source.Id, invoke);
                     }
                     catch (System.Exception exception)
                     {

@@ -231,7 +231,11 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 
         [RPInternalUseOnly]
         [XmlElement("TextBox1Text")]
+#if NET8_0_OR_GREATER
+        public XmlCDataSection? TextBox1TextCData
+#else
         public XmlCDataSection TextBox1TextCData
+#endif
         {
             get
             {

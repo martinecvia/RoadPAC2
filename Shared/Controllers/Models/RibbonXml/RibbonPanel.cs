@@ -6,6 +6,10 @@ using System.ComponentModel;
 using System.Xml;
 using System.Windows.Markup;
 using System.Xml.Serialization;
+using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
+
+
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -23,6 +27,13 @@ namespace Shared.Controllers.Models.RibbonXml
         "RibbonPanel displays the content of the RibbonPanelSource set in the Source property.")]
     public class RibbonPanelDef : BaseRibbonXml
     {
+        private string _cookie;
+        public override string Cookie
+        {
+            get => _cookie ?? $" %Parent:Panel={SourceDef?.Id}_{SourceDef?.Title}_{SourceDef?.Name}";
+            set => _cookie = value;
+        }
+
         [XmlIgnore]
         [DefaultValue(null)]
         [Description("Gets or sets the source that contains the ribbon items to be displayed by this panel. " +
@@ -343,13 +354,6 @@ namespace Shared.Controllers.Models.RibbonXml
                     = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
             }
         }
-
-        [RPInfoOut]
-        [XmlAttribute("Id")]
-        [DefaultValue("")]
-        [Description("Accesses the Id for the ribbon panel.")]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanel_Id
-        public string Id { get; set; } = "";
 
         [RPInfoOut]
         [RPInternalUseOnly]

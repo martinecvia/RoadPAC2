@@ -57,17 +57,16 @@ namespace Shared.Controllers.Models.RibbonXml.Items
     [XmlInclude(typeof(RibbonTextBoxDef))]
     public class RibbonItemDef : BaseRibbonXml
     {
-
-        [RPInfoOut]
-        [XmlAttribute("Id")]
-        [DefaultValue("")]
-        [Description("Gets or sets the item id. " +
-            "This id is used as the automation id for the corresponding control in the UI. " +
-            "The framework does not otherwise use or validate it. " +
-            "It is up to the application to set and use this id. " +
-            "The default value is null.")]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonItem_Id
-        public string Id { get; set; } = "";
+#if NET8_0_OR_GREATER
+        private string? _cookie;
+#else
+        private string _cookie;
+#endif
+        public override string Cookie
+        {
+            get => _cookie ?? $"%Parent:Item={Id}_{Text}_{Name}";
+            set => _cookie = value;
+        }
 
         [RPInfoOut]
         [XmlAttribute("Text")]

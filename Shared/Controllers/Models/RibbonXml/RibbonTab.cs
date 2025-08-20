@@ -4,6 +4,7 @@
 using System.Collections.Generic; // Keep for .NET 4.6
 using System.ComponentModel;
 using System.Xml;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
@@ -22,6 +23,13 @@ namespace Shared.Controllers.Models.RibbonXml
     [Description("The class RibbonTab is used to store and manage the contents of a ribbon tab.")]
     public class RibbonTabDef : BaseRibbonXml
     {
+        private string _cookie;
+        public override string Cookie
+        {
+            get => _cookie ?? $"%Parent:Tab={Id}_{Title}_{Name}";
+            set => _cookie = value;
+        }
+
         [XmlIgnore]
         [Description("Gets the collection used to store the panels in the tab. " +
             "The default is an empty collection.")]
@@ -113,16 +121,7 @@ namespace Shared.Controllers.Models.RibbonXml
             set { Description = value?.Value; }
         }
 
-        [RPInfoOut]
-        [XmlAttribute("Id")]
-        [DefaultValue(null)]
-        [Description("Gets or sets the id for the tab. " +
-            "The framework does not use or validate this id. " +
-            "It is left to the applications to set this id and use it. " +
-            "The default value is null.")]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTab_Id
-        public string Id { get; set; } = null;
-
+        /*
         [RPInfoOut]
         [XmlIgnore]
         [DefaultValue(true)]
@@ -151,6 +150,7 @@ namespace Shared.Controllers.Models.RibbonXml
                 IsVisible = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
             }
         }
+        */
 
         [RPInfoOut]
         [XmlIgnore]
@@ -302,36 +302,6 @@ namespace Shared.Controllers.Models.RibbonXml
             "The default value is null.")]
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTab_KeyTip
         public string KeyTip { get; set; } = null;
-
-        [RPInfoOut]
-        [RPInternalUseOnly]
-        [XmlIgnore]
-        [DefaultValue(false)]
-        [Description("Gets or sets the value that indicates whether the tab is visible in the ribbon. " +
-            "If the value is true, the tab is visible in the ribbon. " +
-            "If the value is false, it is hidden in ribbon. " +
-            "Both visible and hidden tabs are available in the ribbon by right-clicking the menu under the Tabs menu option, which allows the user to show or hide the tabs. " +
-            "If the tab's IsAnonymous property is set to false, it is not included in the right-click menu, and the user cannot control its visibility. " +
-            "If an active tab is hidden, the next or previous visible tab is set as the active tab. " +
-            "The default value is true.")]
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTab_IsVisited
-        public bool IsVisited { get; set; } = false;
-
-        [RPInternalUseOnly]
-        [XmlAttribute("IsVisited")]
-        public string IsVisitedDef
-        {
-            get => IsVisited.ToString();
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    IsVisited = false;
-                    return;
-                }
-                IsVisited = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
-            }
-        }
 
         [RPInfoOut]
         [XmlAttribute("Tag")]

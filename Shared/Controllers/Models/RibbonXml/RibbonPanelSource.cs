@@ -33,6 +33,13 @@ namespace Shared.Controllers.Models.RibbonXml
         "The items can also be organized into two panels - main panel and slide-out panel - by adding a RibbonPanelBreak item at the index where the slide-out panel is to start.")]
     public class RibbonPanelSourceDef : BaseRibbonXml
     {
+        private string _cookie;
+        public override string Cookie
+        {
+            get => _cookie ?? $"%Parent:PanelSource={Id}_{Title}_{Name}";
+            set => _cookie = value;
+        }
+
         [RPInternalUseOnly]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         // RibbonItem
@@ -66,17 +73,6 @@ namespace Shared.Controllers.Models.RibbonXml
         [XmlElement("RibbonRadioButtonGroup", typeof(RibbonListButtonDef.RibbonRadioButtonGroupDef))]
         [XmlElement("RibbonSplitButton", typeof(RibbonListButtonDef.RibbonSplitButtonDef))]
         public List<RibbonItemDef> ItemsDef { get; set; } = new List<RibbonItemDef>();
-
-
-        // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Id
-        [RPInfoOut]
-        [XmlAttribute("Id")]
-        [DefaultValue(null)]
-        [Description("Gets or sets the id for the panel source. " +
-            "The framework does not use or validate this id. " +
-            "It is left to an application to set and use this id. " +
-            "The default value is null.")]
-        public string Id { get; set; } = null;
 
         // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonPanelSource_Title
         [RPInfoOut]
