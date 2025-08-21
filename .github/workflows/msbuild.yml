@@ -69,16 +69,13 @@ jobs:
             Tests/NET_48_TEST/bin/Release/NET_48_TEST.dll
             Tests/NET_80_TEST/bin/Release/NET_80_TEST.dll
 
-    # Generate version string: YYYY.MM.run_number
-    - name: Set version
-      run: echo "::set-env name=NOW::$(date +'%Y.%m')"
-
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
       if: github.ref == 'refs/heads/master'
       with:
-        tag_name: ${{ env.NOW }}v${{ github.run_number }}
-        name: Release ${{ env.NOW }}v${{ github.run_number }}
+        # Generate version string: YYYY.MM.run_number
+        tag_name: $(date +'%Y.%m')v${{ github.run_number }}
+        name: Release $(date +'%Y.%m')v${{ github.run_number }}
         draft: false
         prerelease: true
         files: |
