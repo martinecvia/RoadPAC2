@@ -21,7 +21,7 @@ namespace Shared.Controllers.Models.RibbonXml
     public abstract class BaseRibbonXml
     {
         [RPPrivateUseOnly]
-        private readonly string UUID = Guid.NewGuid().ToString("N").Substring(0, 8);
+        public readonly string UUID = Guid.NewGuid().ToString("N").Substring(0, 8);
 
         [RPInfoOut]
         [XmlAttribute("Id")]
@@ -66,7 +66,7 @@ namespace Shared.Controllers.Models.RibbonXml
                     }
                     return $"{property.Name}={value}";
                 }).ToList();
-            values.Add($"Cookie={Cookie}");
+            values.Add($"Cookie={Cookie}"); values.Add($"UUID={UUID}");
             return $"{GetType().Name}({string.Join(", ", values)})";
         }
 
@@ -174,27 +174,6 @@ namespace Shared.Controllers.Models.RibbonXml
                 catch (System.Exception exception)
                 {
                     Debug.WriteLine($"{sourceProperty.Name}: {exception.Message}");
-                }
-            }
-            if (!string.IsNullOrEmpty(source.UUID) && 
-                !RibbonController.RegisteredControls.ContainsKey(source.UUID))
-            {
-                Type wrapperType = Assembly.GetExecutingAssembly()
-                    .GetType($"{RibbonController.ControlsNamespace}.{source.Id}", false, true);
-                if (wrapperType != null)
-                {
-                    try
-                    {
-                        // We'll try to invoke our Id, and our target so we can individualy control each control
-                        var invoke = wrapperType.GetConstructors()
-                            .FirstOrDefault()?.Invoke(new object[] { target, source });
-                        if (invoke != null)
-                            RibbonController.RegisteredControls.Add(source.UUID, invoke);
-                    }
-                    catch (System.Exception exception)
-                    {
-                        Debug.WriteLine($"{wrapperType.Name}: {exception.Message}");
-                    }
                 }
             }
             return target;

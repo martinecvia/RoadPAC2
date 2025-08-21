@@ -26,7 +26,7 @@ namespace Shared.Controllers.Models.RibbonXml
         private string _cookie;
         public override string Cookie
         {
-            get => _cookie ?? $"%Parent:Tab={Id}_{Title}_{Name}";
+            get => _cookie ?? $"Tab={Id}_{Title}_{Name}";
             set => _cookie = value;
         }
 

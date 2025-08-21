@@ -114,6 +114,25 @@ namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
         [RPInfoOut]
         [RPInternalUseOnly]
         [XmlIgnore]
+        [DefaultValue(RibbonListButton.RibbonListButtonSynchronizeOption.All)]
+        public RibbonListButton.RibbonListButtonSynchronizeOption SynchronizeOption { get; set; } = RibbonListButton.RibbonListButtonSynchronizeOption.All;
+
+        [RPInternalUseOnly]
+        [XmlAttribute("SynchronizeOption")]
+        public string SynchronizeOptionDef
+        {
+            get => SynchronizeOption.ToString();
+            set
+            {
+                if (!Enum.TryParse(value, true, out RibbonListButton.RibbonListButtonSynchronizeOption result))
+                    result = RibbonListButton.RibbonListButtonSynchronizeOption.All;
+                SynchronizeOption = result;
+            }
+        }
+
+        [RPInfoOut]
+        [RPInternalUseOnly]
+        [XmlIgnore]
         [DefaultValue(false)]
         public bool AllowOrientation { get; set; } = false;
 
@@ -280,6 +299,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
         {
             public RibbonSplitButtonDef() {
                 base.IsSplit = true;
+                base.SynchronizeOption = RibbonListButton.RibbonListButtonSynchronizeOption.Image;
             }
 
             [RPInfoOut]

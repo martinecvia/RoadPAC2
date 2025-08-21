@@ -8,19 +8,22 @@
 		<RibbonPanelSource Id="RP_RBN_0001_2303A" Title="RoadPAC">
 			<RibbonButton Text="Spusti&#13;RoadPAC" Name="RP_RUN_ROADPAC" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True"
 						  Image="rp_img_default_16" LargeImage="rp_img_default_32" CommandHandler="RP_RUN_ROADPAC" />
+			<RibbonButton Text="Projektor" Name="RP_RUN_ROADPAC_PROJECTOR" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True"
+							Image="rp_img_default_16" LargeImage="rp_img_default_32" CommandHandler="RP_RUN_ROADPAC_PROJECTOR" />
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: ProjectManager -->
 	<RibbonPanel Id="RP_RBN_0002" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
 				 IsEnabled="True" IsContextualTabThemeIgnored="False">
-		<RibbonPanelSource Id="RP_RBN_0002_54DGD" Title="Projekt manažér">
+		<RibbonPanelSource Id="RP_RBN_0002_54DGD">
+			<Title><![CDATA[Projekt manažér]]></Title>
 			<DialogLauncher Orientation="Horizontal" IsCheckable="False" ShowImage="True" IsEnabled="True" Size="Standard" GroupLocation="Middle"
 							AllowInToolBar="True" AllowInStatusBar="True" ResizeStyle="HideText"
 							Text="Otevři složku aktuálního projektu" ShowText="False" CommandHandler="RP_COMMAND(OPEN_ACTIVE_DIRECTORY)" />
 			<RibbonButton Text="Project&#13;Explorer" Name="RP_RUN_PROJECT_EXPLORER" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True" 
 						  Image="rp_img_default_16" LargeImage="rp_img_default_32" CommandHandler="RP_RUN_PROJECT_EXPLORER" />
 			<RibbonSeparator Id="AcRibbonSeparator" SeparatorStyle="Spacer" />
-			<RibbonRowPanel Id="RP_RBN_0002_64F5D" IsTopJustified="True">
+			<RibbonRowPanel IsTopJustified="True">
 				<RibbonCombo Id="RibbonCombo_SelectProject" />
 				<RibbonSeparator Id="AcRibbonSeparator" SeparatorStyle="Spacer" AllowInToolBar="False"/>
 				<RibbonButton Text="Přidat projekt" Image="rp_img_default_16" Id="RibbonButton_AddNewProject" />
@@ -41,14 +44,21 @@
 	<RibbonPanel Id="RP_RBN_0003" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
 				 IsEnabled="True" IsContextualTabThemeIgnored="False"
 				 UID="ID_WSR_0003_87DJJ">
-		<RibbonPanelSource Id="RP_RBN_0003_87DJJ" Title="Terén">
+		<RibbonPanelSource Id="RP_RBN_0003_87DJJ">
+			<Title><![CDATA[Terén]]></Title>
 			<DialogLauncher Orientation="Horizontal" IsCheckable="False" ShowImage="True" IsEnabled="True" Size="Standard" GroupLocation="Middle"
 							AllowInToolBar="True" AllowInStatusBar="True" ResizeStyle="HideText"
 							Text="Otevři složku s terénními modely" ShowText="False" CommandHandler="RP_COMMAND(OPEN_ACTIVE_DTM_DIRECTORY)" />
 			<RibbonSplitButton Text="Terénní&#13;práce" Name="RP_RUN_DTM" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True"
-							   Image="rp_img_default_16" LargeImage="rp_img_default_32" CommandHandler="RP_RUN(DTM)" />
+							   Image="rp_img_default_16" LargeImage="rp_img_default_32" CommandHandler="RP_RUN(DTM)" SynchronizeOption="Image">
+				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Spusti DTM" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
+				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text=">Příčné řezy" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
+				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Podélné řezy" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
+				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Ornice" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
+				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Geologie" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
+			</RibbonSplitButton>
 			<RibbonSeparator Id="AcRibbonSeparator" SeparatorStyle="Spacer" UID="AcRibbonSeparator" />
-			<RibbonRowPanel Id="RP_RBN_0003_74JHK" IsTopJustified="True">
+			<RibbonRowPanel IsTopJustified="True">
 				<RibbonButton Image="rp_img_default_16" />
 				<RibbonRowBreak />
 				<RibbonButton Image="rp_img_default_16" />
@@ -61,13 +71,17 @@
 	<RibbonPanel Id="RP_RBN_0004" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
 				 IsEnabled="True" IsContextualTabThemeIgnored="False"
 				 UID="ID_WSR_0004_14CHC">
-		<RibbonPanelSource Id="RP_RBN_0004_14CHC" Title="Směrové vedení" />
+		<RibbonPanelSource Id="RP_RBN_0004_14CHC">
+			<Title><![CDATA[Směrové vedení]]></Title>
+		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: Výškové vedení trasy -->
 	<RibbonPanel Id="RP_RBN_0005" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
 			 IsEnabled="True" IsContextualTabThemeIgnored="False"
 			 UID="ID_WSR_0005_07CS5">
-		<RibbonPanelSource Id="RP_RBN_0005_07CS5" Title="Výškové vedení" />
+		<RibbonPanelSource Id="RP_RBN_0005_07CS5">
+			<Title><![CDATA[Výškové vedení]]></Title>
+		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: Koridor & přičné úspořádání -->
 	<RibbonPanel Id="RP_RBN_0006" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
@@ -77,10 +91,38 @@
 			<Title><![CDATA[Koridor & příčné uspořádání]]></Title>
 		</RibbonPanelSource>
 	</RibbonPanel>
-	<!-- Panel: Nastavení -->
+	<!-- Panel: Vytyčení -->
 	<RibbonPanel Id="RP_RBN_0007" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
 			 IsEnabled="True" IsContextualTabThemeIgnored="False"
-			 UID="ID_WSR_0007_11IIH">
-		<RibbonPanelSource Id="RP_RBN_0007_11IIH" Title="Nastavení" />
+			 UID="ID_WSR_0007_67FFV">
+		<RibbonPanelSource Id="RP_RBN_0007_67FFV">
+			<Title><![CDATA[Vytyčení]]></Title>
+			<RibbonSplitButton AllowInStatusBar="True" AllowInToolBar="True" AllowOrientation="True" SynchronizeOption="Image"
+							Orientation="Vertical" ResizeStyle="HideText" ShowImage="True" ShowText="True" 
+							Size="Large" Image="rp_img_default_16" LargeImage="rp_img_default_32" UID="AcRibbonSplitButton">
+				<Text><![CDATA[Vytyčení]]></Text>
+				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Vozovky" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
+				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Koridoru" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
+				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Vozovky a koridoru" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
+				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Prostorové osy" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
+				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Trvalého záboru" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
+			</RibbonSplitButton>
+			<RibbonSeparator Id="AcRibbonSeparator" SeparatorStyle="Spacer" UID="AcRibbonSeparator" />
+			<RibbonRowPanel IsTopJustified="True">
+				<RibbonButton Text="Body vytyčení" Image="rp_img_default_16" />
+				<RibbonRowBreak />
+				<RibbonButton Text="Body vytyčení z Excelu" Image="rp_excel_16" />
+				<RibbonRowBreak />
+				<RibbonButton Text="Tabulka vytyčení" Image="rp_img_default_16" />
+			</RibbonRowPanel>
+		</RibbonPanelSource>
+	</RibbonPanel>
+	<!-- Panel: Nastavení -->
+	<RibbonPanel Id="RP_RBN_0008" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
+			 IsEnabled="True" IsContextualTabThemeIgnored="False"
+			 UID="ID_WSR_0008_11IIH">
+		<RibbonPanelSource Id="RP_RBN_0008_11IIH">
+			<Title><![CDATA[Nastavení]]></Title>
+		</RibbonPanelSource>
 	</RibbonPanel>
 </RibbonTab>

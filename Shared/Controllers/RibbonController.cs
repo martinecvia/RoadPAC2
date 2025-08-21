@@ -17,6 +17,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Windows.Controls;
 using System.Linq; // Keep for .NET 4.6
+using System.Reflection;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -92,31 +93,36 @@ namespace Shared.Controllers
             T tab = tabDef?.Transform(new T()) ?? new T();
             tab.Id = RibbonTab__Prefix + tabId;       // We want to mark these tabs as RoadPAC ones.
                                                       // For further compatibility and to prevent being overriden.
+            tab.UID = tab.Id;
+            Ribbon.Tabs.Add(tab);
             if (tabDef != null)
             {
-                Debug.WriteLine($"Processed: {tabDef}");
                 foreach (var panelDef in tabDef.PanelsDef)
                 {
+                    // Setting up cookie must happend before transforming to reference item
+                    string cookie = tab.Id;
+                    panelDef.Cookie = panelDef.Cookie.Replace("%Parent", cookie);
+                    cookie += $";{panelDef.Id}";
                     var panelRef = panelDef.Transform(new RibbonPanel());
-                    panelDef.Cookie = panelDef.Cookie.Replace("%Parent", tabDef.Id);
-                    Debug.WriteLine($"Processed: {panelDef}");
                     if (panelDef.SourceDef == null)
                         continue;
+                    panelRef.UID = panelDef.Id; // For some reason panel can't have Id
+                    tab.Panels.Add(panelRef);
+                    panelDef.SourceDef.Cookie = panelDef.SourceDef.Cookie.Replace("%Parent", cookie);
+                    cookie += $";{panelDef.SourceDef.Id}";
                     panelRef.Source = panelDef.SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[panelDef.SourceDef.GetType()]());
-                    Debug.WriteLine($"Processed: {panelDef.SourceDef}");
                     foreach (var itemDef in panelDef.SourceDef.ItemsDef)
                     {
-                        var itemRef = ProcessRibbonItem(itemDef, panelDef, currentDepth: 0); // Directly setting currentDepth to zero here,
-                                                                                             // because sometimes C# keeps refference to previous currentDepth, which is odd 
-                                                                                             // even tho function has default value defined, so some might think it will take the default value.
-                                                                                             // This is a compiler issue with .NET 4.6 NDP46-KB3045557-x86-x64
-                        itemDef.Cookie = itemDef.Cookie.Replace("%Parent", panelDef.Id);
-                        itemRef.Tag = itemRef.Tag ?? itemDef.Cookie;
-                        Debug.WriteLine($"Processed: {itemDef}");
+                        itemDef.Cookie = itemDef.Cookie.Replace("%Parent", cookie);
+                        cookie += $";{itemDef.Id}";
+                        var itemRef = ProcessRibbonItem(itemDef, panelDef, cookie, currentDepth: 0); // Directly setting currentDepth to zero here,
+                                                                                                     // because sometimes C# keeps refference to previous currentDepth, which is odd 
+                                                                                                     // even tho function has default value defined,
+                                                                                                     // so some might think it will take the default value.
+                                                                                                     // This is a compiler issue with .NET 4.6 NDP46-KB3045557-x86-x64
                         if (itemRef != null) // null RibbonItem definitions will break cad instance
                             panelRef.Source.Items.Add(itemRef);
                     }
-                    tab.Panels.Add(panelRef);
                 }
             }
             tab.IsEnabled = true;
@@ -124,7 +130,6 @@ namespace Shared.Controllers
                 tab.Name = tabName ?? tabId; tab.Title = tabName ?? tab.Name;
             if (!string.IsNullOrEmpty(tabDescription))
                 tab.Description = tabDescription;
-            Ribbon.Tabs.Add(tab);
             return tab;
         }
 
@@ -133,22 +138,23 @@ namespace Shared.Controllers
 #else
         private static RibbonItem ProcessRibbonItem(RibbonItemDef itemDef, RibbonPanelDef panelDef,
 #endif
+            string cookie,
             int currentDepth = 0) // this signalizes how many hops had happend during reccursion,
                                   // we don't want to be stack-overflowed, so depth is actually checked limited
         {
-            // Maximal depth we want to be in
+            // Maximal depth check
             if (currentDepth < 4 || RibbonItemDef.ItemsFactory.ContainsKey(itemDef.GetType()))
             {
+                itemDef.Cookie = itemDef.Cookie.Replace("%Parent", cookie);
                 var itemRef = itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]());
-                itemDef.Cookie = itemDef.Cookie.Replace("%Parent", panelDef.Id);
-                itemRef.Tag = itemRef.Tag ?? itemDef.Cookie;
                 switch (itemDef)
                 {
                     case RibbonRowPanelDef item:
                         List<RibbonItemDef> children;
                         if (item.SourceDef != null && item.ItemsDef.Count != 0)
                         {
-                            Debug.WriteLine($"ProcessRibbonItem: {item.SourceDef}");
+                            item.SourceDef.Cookie = item.SourceDef.Cookie.Replace("%Parent", item.Id);
+                            cookie += $";{item.SourceDef.Id}";
                             item.SourceDef.ItemsDef.AddRange(item.ItemsDef);
                             children = item.SourceDef.ItemsDef;
                         } else {
@@ -160,8 +166,7 @@ namespace Shared.Controllers
                             // The following item types are not supported in this collection: RibbonRowPanel and RibbonPanelBreak
                             if (childDef is RibbonRowPanelDef || childDef is RibbonPanelBreakDef)
                                 continue;
-                            var childRef = ProcessRibbonItem(childDef, panelDef, currentDepth + 1);
-                            Debug.WriteLine($"ProcessRibbonItem: {childDef}");
+                            var childRef = ProcessRibbonItem(childDef, panelDef, $"{cookie}", currentDepth + 1);
                             if (childRef != null)
                                 target.Add(childRef);
                         }
@@ -174,28 +179,27 @@ namespace Shared.Controllers
                             // Either Items or ItemsBinding can be used to manage the collection, but not both
                             foreach (var childDef in item.ItemsDef)
                             {
-                                var childRef = ProcessRibbonItem(childDef, panelDef, currentDepth + 1);
-                                Debug.WriteLine($"ProcessRibbonItem: {childDef}");
+                                var childRef = ProcessRibbonItem(childDef, panelDef, $"{cookie}", currentDepth + 1);
                                 if (childRef != null)
                                     ((RibbonList)itemRef).Items.Add(childRef);
                             }
                         }
                         foreach (var childDef in item.MenuItemsDef)
                         {
-                            var childRef = (RibbonCommandItem) ProcessRibbonItem(childDef, panelDef, currentDepth + 1);
-                            Debug.WriteLine($"ProcessRibbonItem: {childDef}");
+                            var childRef = (RibbonCommandItem) ProcessRibbonItem(childDef, panelDef, $"{cookie}", currentDepth + 1);
                             if (childRef != null)
                                 ((RibbonCombo)itemRef).MenuItems.Add(childRef);
                         }
                         break;
                     case RibbonListButtonDef item:
+
                         foreach (var childDef in item.ItemsDef)
                         {
                             // Set of rules for each implementation of RibbonListButtonDef
                             switch (item)
                             {
                                 case RibbonListButtonDef.RibbonMenuButtonDef _:
-                                    if (!(childDef is RibbonMenuItemDef) || !(childDef is RibbonSeparatorDef))
+                                    if (!(childDef is RibbonMenuItemDef) && !(childDef is RibbonSeparatorDef))
                                         continue;
                                     break;
                                 case RibbonListButtonDef.RibbonRadioButtonGroupDef _:
@@ -203,17 +207,36 @@ namespace Shared.Controllers
                                         continue;
                                     break;
                                 default:
-                                    if (!(childDef is RibbonCommandItemDef) || !(childDef is RibbonSeparatorDef))
+                                    if (!(childDef is RibbonCommandItemDef) && !(childDef is RibbonSeparatorDef))
                                         continue;
                                     break;
                             }
-                            var childRef = ProcessRibbonItem(childDef, panelDef, currentDepth + 1);
-                            Debug.WriteLine($"ProcessRibbonItem: {childDef}");
+                            var childRef = ProcessRibbonItem(childDef, panelDef, $"{cookie}", currentDepth + 1);
                             if (childRef != null)
                                 ((RibbonListButton)itemRef).Items.Add(childRef);
                         }
                         break;
                     { } // Little C# hack for better memory management
+                }
+                if (!string.IsNullOrEmpty(itemDef.UUID) && !RibbonController.RegisteredControls.ContainsKey(itemDef.UUID))
+                {
+                    Type wrapperType = Assembly.GetExecutingAssembly()
+                        .GetType($"{RibbonController.ControlsNamespace}.{itemDef.Id}", false, true);
+                    if (wrapperType != null)
+                    {
+                        try
+                        {
+                            // We'll try to invoke our Id, and our target so we can individualy control each control
+                            var invoke = wrapperType.GetConstructors()
+                                .FirstOrDefault()?.Invoke(new object[] { itemRef, itemDef });
+                            if (invoke != null)
+                                RibbonController.RegisteredControls.Add(itemDef.UUID, invoke);
+                        }
+                        catch (System.Exception exception)
+                        {
+                            Debug.WriteLine($"{wrapperType.Name}: {exception.Message}");
+                        }
+                    }
                 }
                 return itemRef;
             }
