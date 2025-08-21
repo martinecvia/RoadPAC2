@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <RibbonTab xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="RP_ACAD.ID_ContextualSelectView_54A6C" 
-		   IsVisible="False" IsMergedContextualTab="False" AllowTearOffContextualPanels="False"
+		   IsMergedContextualTab="False" AllowTearOffContextualPanels="False"
 		   KeyTip="SV" Name="RP2SelectView Contextual Tab" Title="RP2SelectView" IsEnabled="True" IsPanelEnabled="True"
 		   UID="ID_WSR_011_54A6C">
 	<RibbonPanel Id="RP_CTX_0011" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
-		 IsEnabled="True" IsVisible="True" IsContextualTabThemeIgnored="False">
+		 IsEnabled="True" IsContextualTabThemeIgnored="False">
 		<RibbonPanelSource Id="RP_RBN_9000_44GCD">
 			<Title><![CDATA[Zavřít]]></Title>
 			<RibbonButton Id="RibbonButton_Close_ContextualTab" Image="rp_img_default_16" LargeImage="rp_img_default_32" Name="RP_AECCLCTX"

@@ -14,6 +14,8 @@ using System; // Keep for .NET 4.6
 using System.Collections.Generic; // Keep for .NET 4.6
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Net;
+using System.Windows.Controls;
 using System.Linq; // Keep for .NET 4.6
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
@@ -32,8 +34,6 @@ using Shared.Controllers.Models;
 using Shared.Controllers.Models.RibbonXml;
 using Shared.Controllers.Models.RibbonXml.Items;
 using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
-using System.Net;
-using System.Windows.Controls;
 
 namespace Shared.Controllers
 {

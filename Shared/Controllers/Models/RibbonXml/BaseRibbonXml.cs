@@ -20,6 +20,9 @@ namespace Shared.Controllers.Models.RibbonXml
     [RPPrivateUseOnly]
     public abstract class BaseRibbonXml
     {
+        [RPPrivateUseOnly]
+        private readonly string UUID = Guid.NewGuid().ToString("N").Substring(0, 8);
+
         [RPInfoOut]
         [XmlAttribute("Id")]
         [DefaultValue("")]
@@ -92,7 +95,7 @@ namespace Shared.Controllers.Models.RibbonXml
         /// </para>
         /// <list type="bullet">
         /// <item>Properties must be readable on the source.</item>
-        /// <item>Properties must be writable on the target and have a compatible type, or a
+        /// <item>Properties must be writable on the target and have a compatible type, or a 
         /// nullable-to-non-nullable type conversion will be attempted.</item>
         /// <item>If the property does not exist on the target (due to CAD version differences),
         /// a debug message is logged and the property is skipped.</item>
@@ -173,8 +176,8 @@ namespace Shared.Controllers.Models.RibbonXml
                     Debug.WriteLine($"{sourceProperty.Name}: {exception.Message}");
                 }
             }
-            if (!string.IsNullOrEmpty(source.Id) && 
-                !RibbonController.RegisteredControls.ContainsKey(source.Id))
+            if (!string.IsNullOrEmpty(source.UUID) && 
+                !RibbonController.RegisteredControls.ContainsKey(source.UUID))
             {
                 Type wrapperType = Assembly.GetExecutingAssembly()
                     .GetType($"{RibbonController.ControlsNamespace}.{source.Id}", false, true);
@@ -182,11 +185,11 @@ namespace Shared.Controllers.Models.RibbonXml
                 {
                     try
                     {
-                        // We'll try to invoke our ControlsId, and our target so we can individualy control each control
+                        // We'll try to invoke our Id, and our target so we can individualy control each control
                         var invoke = wrapperType.GetConstructors()
                             .FirstOrDefault()?.Invoke(new object[] { target, source });
                         if (invoke != null)
-                            RibbonController.RegisteredControls.Add(source.Id, invoke);
+                            RibbonController.RegisteredControls.Add(source.UUID, invoke);
                     }
                     catch (System.Exception exception)
                     {

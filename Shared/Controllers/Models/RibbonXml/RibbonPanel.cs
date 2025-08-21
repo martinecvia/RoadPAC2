@@ -7,9 +7,6 @@ using System.Xml;
 using System.Windows.Markup;
 using System.Xml.Serialization;
 using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
-
-
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD

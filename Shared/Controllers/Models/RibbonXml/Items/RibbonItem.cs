@@ -21,7 +21,6 @@ using Autodesk.Windows.ToolBars;
 #endregion
 
 using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
-using static Shared.Controllers.Models.RibbonXml.Items.CommandItems.RibbonListButtonDef;
 
 namespace Shared.Controllers.Models.RibbonXml.Items
 {
@@ -35,10 +34,10 @@ namespace Shared.Controllers.Models.RibbonXml.Items
     [XmlInclude(typeof(RibbonMenuItemDef))]
     [XmlInclude(typeof(RibbonMenuItemDef.ApplicationMenuItemDef))]
     [XmlInclude(typeof(RibbonToggleButtonDef))]
-    [XmlInclude(typeof(RibbonChecklistButtonDef))]
-    [XmlInclude(typeof(RibbonMenuButtonDef))]
-    [XmlInclude(typeof(RibbonRadioButtonGroupDef))]
-    [XmlInclude(typeof(RibbonSplitButtonDef))]
+    [XmlInclude(typeof(RibbonListButtonDef.RibbonChecklistButtonDef))]
+    [XmlInclude(typeof(RibbonListButtonDef.RibbonMenuButtonDef))]
+    [XmlInclude(typeof(RibbonListButtonDef.RibbonRadioButtonGroupDef))]
+    [XmlInclude(typeof(RibbonListButtonDef.RibbonSplitButtonDef))]
 #if (NET8_0_OR_GREATER || ZWCAD)
     [XmlInclude(typeof(RibbonToggleButtonDef.ToolBarShareButtonDef))]
 #endif
@@ -564,10 +563,10 @@ namespace Shared.Controllers.Models.RibbonXml.Items
             { typeof(ProgressBarSourceDef), () => new ProgressBarSource() },
 #endif
             { typeof(RibbonCheckBoxDef), () => new RibbonCheckBox() },
-            { typeof(RibbonChecklistButtonDef), () => new RibbonChecklistButton() },
-            { typeof(RibbonMenuButtonDef), () => new RibbonMenuButton() },
-            { typeof(RibbonRadioButtonGroupDef), () => new RibbonRadioButtonGroup() },
-            { typeof(RibbonSplitButtonDef), () => new RibbonSplitButton() },
+            { typeof(RibbonListButtonDef.RibbonChecklistButtonDef), () => new RibbonChecklistButton() },
+            { typeof(RibbonListButtonDef.RibbonMenuButtonDef), () => new RibbonMenuButton() },
+            { typeof(RibbonListButtonDef.RibbonRadioButtonGroupDef), () => new RibbonRadioButtonGroup() },
+            { typeof(RibbonListButtonDef.RibbonSplitButtonDef), () => new RibbonSplitButton() },
             { typeof(RibbonMenuItemDef), () => new RibbonMenuItem() },
             { typeof(RibbonMenuItemDef.ApplicationMenuItemDef), () => new ApplicationMenuItem() },
             // RibbonButton

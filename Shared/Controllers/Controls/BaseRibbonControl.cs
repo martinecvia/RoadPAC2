@@ -16,6 +16,10 @@ namespace Shared.Controllers.Controls
         /// Gets the strongly-typed reference to the underlying Ribbon item.
         /// </summary>
         public RibbonRef Target { get; }
+
+        /// <summary>
+        /// Gets the strongly-typed reference to the underlying Ribbon definition.
+        /// </summary>
         public BaseRibbonXml Source { get; }
 
         /// <summary>
@@ -26,7 +30,7 @@ namespace Shared.Controllers.Controls
         /// Must not be null.
         /// </param>
         /// <param name="source">
-        /// A reference to the underlying RibbonXml item instance.
+        /// A reference to the underlying RibbonXml definition instance.
         /// Must not be null.
         /// </param>
         /// <exception cref="ArgumentNullException">

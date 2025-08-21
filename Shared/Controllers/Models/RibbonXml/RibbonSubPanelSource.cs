@@ -7,7 +7,6 @@ using System.Xml.Serialization;
 
 using Shared.Controllers.Models.RibbonXml.Items;
 using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Shared.Controllers.Models.RibbonXml
 {

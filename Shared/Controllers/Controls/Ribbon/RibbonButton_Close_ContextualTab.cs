@@ -10,9 +10,9 @@ using Autodesk.Windows;
 
 using Shared.Controllers.Models;
 using Shared.Controllers.Models.RibbonXml;
-using static Shared.Controllers.Controls.Ribbon.RibbonButton_Close_ContextualTab;
 
-[assembly: CommandClass(typeof(RibbonButton_Close_ContextualTab_Commander))]
+[assembly: CommandClass(typeof(Shared.Controllers.Controls.Ribbon.
+    RibbonButton_Close_ContextualTab.RibbonButton_Close_ContextualTab_Commander))]
 namespace Shared.Controllers.Controls.Ribbon
 {
     public class RibbonButton_Close_ContextualTab : BaseRibbonControl<RibbonButton>
