@@ -71,16 +71,14 @@ jobs:
 
     # Generate version string: YYYY.MM.run_number
     - name: Set version
-      id: version
-      run: echo "VERSION=$(Get-Date -Format 'yyyy.MM').${{ github.run_number }}" >> $GITHUB_ENV
-      shell: pwsh
+      run: echo "::set-env name=NOW::$(date +'%Y.%m')"
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
       if: github.ref == 'refs/heads/master'
       with:
-        tag_name: ${{ env.VERSION }}
-        name: Release ${{ env.VERSION }}
+        tag_name: ${{ env.NOW }}v${{ github.run_number }}
+        name: Release ${{ env.NOW }}v${{ github.run_number }}
         draft: false
         prerelease: true
         files: |
