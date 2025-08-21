@@ -72,7 +72,8 @@ jobs:
     # Generate version string: YYYY.MM.run_number
     - name: Set version
       id: version
-      run: echo "VERSION=$(date +'%Y.%m').${{ github.run_number }}" >> $GITHUB_ENV
+      run: echo "VERSION=$(Get-Date -Format 'yyyy.MM').${{ github.run_number }}" >> $GITHUB_ENV
+      shell: pwsh
 
     - name: Create GitHub Release
       uses: softprops/action-gh-release@v2
