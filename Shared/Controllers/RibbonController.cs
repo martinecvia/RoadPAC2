@@ -47,8 +47,7 @@ namespace Shared.Controllers
 
         private static bool HasAnyContextualTab { get; set; } = false;
 
-        private static RibbonTab _contextualTab;
-        private static string _contextualIdx;
+        private static RibbonTab _contextualTab = null;
 
         [DefaultValue(false)]
         private static bool IsSelectionHandled { get; set; } = false;
@@ -153,6 +152,8 @@ namespace Shared.Controllers
                 _contextualIdx = null;
             }
         }
+
+        private static string _contextualIdx = null;
 
         [RPPrivateUseOnly]
         private static void OnSelectionIdle(object sender, EventArgs eventArgs)

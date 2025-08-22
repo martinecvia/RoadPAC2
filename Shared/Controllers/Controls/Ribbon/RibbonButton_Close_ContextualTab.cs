@@ -14,9 +14,11 @@ using Shared.Controllers.Models.RibbonXml;
     RibbonButton_Close_ContextualTab.RibbonButton_Close_ContextualTab_Commander))]
 namespace Shared.Controllers.Controls.Ribbon
 {
-    public class RibbonButton_Close_ContextualTab(RibbonButton target, BaseRibbonXml source) 
-        : BaseRibbonControl<RibbonButton>(target, source)
+    public class RibbonButton_Close_ContextualTab : BaseRibbonControl<RibbonButton>
     {
+        public RibbonButton_Close_ContextualTab(RibbonButton target, BaseRibbonXml source)
+            : base(target, source) { }
+
         public class RibbonButton_Close_ContextualTab_Commander
         {
             [CommandMethod("RP_AECCLCTX")]

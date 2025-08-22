@@ -3,6 +3,7 @@
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.EditorInput;
 using Autodesk.AutoCAD.Runtime;
+using Autodesk.AutoCAD.Windows.Data;
 using Autodesk.Windows;
 using Shared.Controllers;
 using Shared.Controllers.Models.RibbonXml;
@@ -24,9 +25,10 @@ namespace NET_80_TEST
             Document document = Application.DocumentManager.MdiActiveDocument;
             ResourceController.LoadEmbeddedResources(); // To load icons, configuration files etc.
             RibbonController.CreateTab("rp_RoadPAC");
-            RibbonController.CreateContextualTab("rp_Contextual_SelectView", (_) =>
+            RibbonController.CreateContextualTab("rp_Contextual_SelectView", (selection) =>
             {
-                return true;
+                return selection.Cast<SelectedObject>()
+                .Any(obj => obj.ObjectId.ObjectClass.DxfName == "LWPOLYLINE");
             });
         }
 
