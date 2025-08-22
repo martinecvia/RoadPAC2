@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <RibbonTab xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="RP_ACAD.ID_TabRoadPAC" IsContextualTab="False" IsVisible="True" 
-		   KeyTip="RP" Name="RoadPAC2" Title="RoadPAC2" IsEnabled="True" IsPanelEnabled="True" IsMergedContextualTab="False" AllowTearOffContextualPanels="False"
+		   KeyTip="RP" Name="RoadPAC2" Title="RoadPAC2" IsEnabled="True" IsPanelEnabled="True" AllowTearOffContextualPanels="False"
 		   UID="ID_WSR_001_62AEA">
 	<!-- Panel: Run RoadPAC -->
 	<RibbonPanel Id="RP_RBN_0001" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"

@@ -8,26 +8,23 @@ using Autodesk.Windows;
 #endif
 #endregion
 
-using Shared.Controllers.Models;
 using Shared.Controllers.Models.RibbonXml;
 
-/*[assembly: CommandClass(typeof(Shared.Controllers.Controls.Ribbon.
-    RibbonButton_Close_ContextualTab.RibbonButton_Close_ContextualTab_Commander))]*/
+[assembly: CommandClass(typeof(Shared.Controllers.Controls.Ribbon.
+    RibbonButton_Close_ContextualTab.RibbonButton_Close_ContextualTab_Commander))]
 namespace Shared.Controllers.Controls.Ribbon
 {
-    public class RibbonButton_Close_ContextualTab : BaseRibbonControl<RibbonButton>
+    public class RibbonButton_Close_ContextualTab(RibbonButton target, BaseRibbonXml source) 
+        : BaseRibbonControl<RibbonButton>(target, source)
     {
-        public RibbonButton_Close_ContextualTab(RibbonButton target, BaseRibbonXml source) 
-            : base(target, source) { }
-
         public class RibbonButton_Close_ContextualTab_Commander
         {
             [CommandMethod("RP_AECCLCTX")]
-            public void CloseContextualTab()
+            public static void CloseContextualTab()
             {
-                if (ComponentManager.Ribbon.ActiveTab is RibbonTab selected 
+                if (ComponentManager.Ribbon.ActiveTab is RibbonTab selected
                     && selected.Id.StartsWith(RibbonController.RibbonTab__Prefix))
-                    selected.IsVisible = false;
+                    RibbonController.HideContextualTab();
             }
         }
     }

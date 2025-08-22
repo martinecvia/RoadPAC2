@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <RibbonTab xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Id="RP_ACAD.ID_ContextualSelectView_54A6C" 
-		   IsMergedContextualTab="False" AllowTearOffContextualPanels="False"
+		   AllowTearOffContextualPanels="False"
 		   KeyTip="SV" Name="RP2SelectView Contextual Tab" Title="RP2SelectView" IsEnabled="True" IsPanelEnabled="True"
 		   UID="ID_WSR_011_54A6C">
 	<RibbonPanel Id="RP_CTX_0011" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"

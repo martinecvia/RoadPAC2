@@ -24,7 +24,7 @@ namespace NET_80_TEST
             Document document = Application.DocumentManager.MdiActiveDocument;
             ResourceController.LoadEmbeddedResources(); // To load icons, configuration files etc.
             RibbonController.CreateTab("rp_RoadPAC");
-            RibbonController.CreateContextualTab("rp_Contextual_SelectView", selection =>
+            RibbonController.CreateContextualTab("rp_Contextual_SelectView", (_) =>
             {
                 return true;
             });
