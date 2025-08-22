@@ -4,7 +4,6 @@
 using System.Collections.Generic; // Keep for .NET 4.6
 using System.ComponentModel;
 using System.Xml;
-using System.Xml.Linq;
 using System.Xml.Serialization;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 

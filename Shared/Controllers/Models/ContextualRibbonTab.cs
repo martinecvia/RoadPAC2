@@ -1,7 +1,6 @@
 #define DEBUG
 #define NON_VOLATILE_MEMORY
 
-using System.Diagnostics;
 using System.Linq;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 

@@ -14,8 +14,6 @@ using System; // Keep for .NET 4.6
 using System.Collections.Generic; // Keep for .NET 4.6
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Net;
-using System.Windows.Controls;
 using System.Linq; // Keep for .NET 4.6
 using System.Reflection;
 

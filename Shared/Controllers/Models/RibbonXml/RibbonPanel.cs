@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Xml;
 using System.Windows.Markup;
 using System.Xml.Serialization;
-using System.Xml.Linq;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
