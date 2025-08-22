@@ -219,7 +219,7 @@ namespace Shared.Controllers.Models.RibbonXml
                 IsPanelEnabled = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
             }
         }
-        /*
+
         [RPInfoOut]
         [RPInternalUseOnly]
         [XmlIgnore]
@@ -247,7 +247,7 @@ namespace Shared.Controllers.Models.RibbonXml
                 IsContextualTab = value.Trim().ToUpper() == "TRUE"; // This is more reliable than bool#TryParse method
             }
         }
-        */
+
         [RPInfoOut]
         [RPInternalUseOnly]
         [XmlIgnore]

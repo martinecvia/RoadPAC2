@@ -43,7 +43,7 @@ namespace Shared.Controllers
         [RPInternalUseOnly]
         internal static readonly string IsSelectionHandledPropertyName = "IsSelectionHandled";
 
-        private const string RibbonTab__Prefix = "RP_TAB_"; // RoadPAC prefix for tabs. so we can distinguish
+        public const string RibbonTab__Prefix = "RP_TAB_";  // RoadPAC prefix for tabs. so we can distinguish
                                                             // other tab's from AutoCAD.
                                                             // This also prevents using the same name from different applications.
 
@@ -241,9 +241,6 @@ namespace Shared.Controllers
             return null;
         }
 
-        [RPPrivateUseOnly]
-        private static readonly Dictionary<string, Func<SelectionSet, bool>> _contextualTabConditions = new Dictionary<string, Func<SelectionSet, bool>>();
-
         public static RibbonTab CreateTab(string tabId,
 #if NET8_0_OR_GREATER
             string? tabName = null,
@@ -270,7 +267,7 @@ namespace Shared.Controllers
         /// This method ensures contextual behavior is registered only once by attaching to <see cref="Document.ImpliedSelectionChanged"/>.
         /// The created tab is hidden by default and marked as anonymous to allow manual visibility control via <see cref="RibbonTab.IsVisible"/>.
         /// </remarks>
-        public static ContextualRibbonTab CreateContextualTab(string tabId, 
+        public static RibbonTab CreateContextualTab(string tabId, 
             Func<SelectionSet, bool> onSelectionMatch, // Selector switch when this tab should be opened
 #if NET8_0_OR_GREATER
             string? tabName = null,
@@ -284,20 +281,16 @@ namespace Shared.Controllers
             AssertInitialized();
 #endif
             Assert.IsNotNull(tabId, nameof(tabId));
-            ContextualRibbonTab tab = CreateTab<ContextualRibbonTab>(tabId, tabName, tabDescription);
-            //tab.IsContextualTab = true;
-            _contextualTabConditions.Add(tab.Id, onSelectionMatch);
+            RibbonTab tab = CreateTab(tabId, tabName, tabDescription);
+            tab.IsVisible = false;
+            tab.IsContextualTab = true;
+            _contextualTabConditions.Add(tabId, onSelectionMatch);
             if (!HasAnyContextualTab)
             {
                 Document document = Application.DocumentManager.MdiActiveDocument;
                 document.ImpliedSelectionChanged += OnSelectionChanged;
                 HasAnyContextualTab = true;
             };
-            tab.IsVisible = false;
-            tab.IsAnonymous = true;             // This is crucial, since Ribbon#ShowContextualTab() is broken
-                                                // because it disallows user to "intentionaly" show this tab, thus
-                                                // RibbonTab#IsVisible property will be use to show or hide contextual tab
-            
             return tab;
         }
 
@@ -315,6 +308,39 @@ namespace Shared.Controllers
         // public - to allow program to wait for property change, so user will see Contextual tab first
 
         [RPPrivateUseOnly]
+#if NET8_0_OR_GREATER
+        private static RibbonTab? _contextualTab;
+#else
+        private static RibbonTab _contextualTab;
+#endif
+
+        [RPPrivateUseOnly]
+        private static readonly Dictionary<string, Func<SelectionSet, bool>> _contextualTabConditions 
+            = new Dictionary<string, Func<SelectionSet, bool>>();
+
+        [RPPrivateUseOnly]
+        private static void OnIdle(object sender, EventArgs eventArgs)
+        {
+            if (eventArgs == null)  // Case that happens when AutoCAD's main thread is occupied
+                                    // and event was fired in the middle of cleaning up databases
+                                    // [bug at: Autodesk AutoCAD 2017 #11387]
+                return;
+            if (_contextualTab == null) return;
+            if (IsSelectionHandled)
+            {
+                if (!_contextualTab.IsVisible)
+                {
+                    Ribbon.ShowContextualTab(_contextualTab, false, true);
+                    _contextualTab.IsActive = true;
+                }
+                if (!_contextualTab.IsActive)
+                    _contextualTab.IsActive = true;
+                IsSelectionHandled = false;
+            }
+            return;
+        }
+
+        [RPPrivateUseOnly]
         private static void OnSelectionChanged(object sender, EventArgs eventArgs)
         {
             if (IsSelectionHandled) // Sometimes events are fired multiple times per-say
@@ -330,16 +356,16 @@ namespace Shared.Controllers
             var result = document.Editor.SelectImplied();
             if (result.Status != PromptStatus.OK || result.Value == null || result.Value.Count == 0)
             {
-                // Hide all contextual tabs
-                // Logic should be further refined in future to keep tab open
-                // if we want to, for now - all tabs will be closed after de-selection
-                foreach (ContextualRibbonTab tab in Ribbon.Tabs
-                    .Where(t => t is ContextualRibbonTab && t.Id.StartsWith(RibbonTab__Prefix) && t.IsVisible))
+                if (_contextualTab != null && _contextualTab.IsVisible)
                 {
-                    tab.Hide();
-                    IsSelectionHandled = false;
-                    return;
+                    Application.Idle -= OnIdle;
+                    Ribbon.HideContextualTab(_contextualTab);
+                    _contextualTab.IsVisible = false; // Does the same as HideContextualTab,
+                                                      // but sometimes platform wraps it's own instance of RibbonTab
+                                                      // thus it's state will be ignored, this will ensure is hidden
                 }
+                IsSelectionHandled = false;
+                return;
             }
             var selection = result.Value;
             if (selection != null)
@@ -351,13 +377,25 @@ namespace Shared.Controllers
                                   // we will just skip handling this tab and treat it as normal one
                     if (pair.Value.Invoke(selection))
                     {
-                        var tab = Ribbon.Tabs.FirstOrDefault(t => t.Id == pair.Key);
-                        if (tab != null && tab is ContextualRibbonTab selected)
+                        if (_contextualTab == null || !_contextualTab.IsVisible)
                         {
-                            selected.Show();
-                            IsSelectionHandled = false;
-                            return;
+                            _contextualTab = Ribbon.Tabs
+                                .FirstOrDefault(t => t.IsContextualTab && t.Id == (RibbonTab__Prefix + pair.Key));
+                            if (_contextualTab == null)
+                            {
+                                _contextualTab = new RibbonTab
+                                {
+                                    Name = $"RP_ERROR_{pair.Key}",
+                                    Id = RibbonTab__Prefix + pair.Key,
+                                    IsVisible = true,
+                                    Title = $"RP_ERROR_{pair.Key}",
+                                    IsContextualTab = true
+                                };
+                            }
+                            Application.Idle += OnIdle;
                         }
+                        // IsSelectionHandled will be awaited in OnIdle Event
+                        return;
                     }
                 }
             }

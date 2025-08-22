@@ -25,8 +25,9 @@ namespace Shared.Controllers.Controls.Ribbon
             [CommandMethod("RP_AECCLCTX")]
             public void CloseContextualTab()
             {
-                if (ComponentManager.Ribbon.ActiveTab is ContextualRibbonTab selected)
-                    selected.Hide();
+                if (ComponentManager.Ribbon.ActiveTab is RibbonTab selected 
+                    && selected.Id.StartsWith(RibbonController.RibbonTab__Prefix))
+                    selected.IsVisible = false;
             }
         }
     }

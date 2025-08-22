@@ -34,7 +34,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonSubPanelSource.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonTab.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\CommandHandler.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\ContextualRibbonTab.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\Items\RibbonTextBox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonToolTip.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)controllers\ResourceController.cs" />
