@@ -3,19 +3,14 @@
 #pragma warning disable CS8604
 #pragma warning disable CS8634
 
-#pragma warning disable IDE0063 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
-#pragma warning disable IDE0028 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
-#pragma warning disable IDE0090 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
-
 using System; // Keep for .NET 4.6
 using System.Collections.Generic; // Keep for .NET 4.6
 using System.Diagnostics;
-using System.Drawing; // To test if file is loadable as Image
 using System.IO;
 using System.Linq; // Keep for .NET 4.6
 using System.Reflection;
+using System.Text;
 using System.Windows.Media.Imaging;
-using System.Xml;
 using System.Xml.Serialization;
 
 using Shared.Controllers.Models.RibbonXml;
@@ -62,38 +57,37 @@ namespace Shared.Controllers
             // First we have to filter out files that does not start with prefix rp_
             string[] manifestResources = assembly.GetManifestResourceNames()
                 .Where(resource => resource.Contains("rp_")).ToArray();
-            foreach (string resourceName in manifestResources
-                .Where(IsImage).ToArray())
+            foreach (string resourceName in manifestResources)
             {
-                // Image loading and caching
+                string key = resourceName.Split('.').Reverse().Skip(1).FirstOrDefault();
+                if (string.IsNullOrEmpty(key))
+                    continue;
                 try
                 {
-                    _cachedBitMaps.Add(resourceName.Split('.').Reverse().Skip(1).First(),
-                        LoadResourceImage(resourceName));
-                } catch (Exception) {
-                    continue; // Seems like file was not loaded correctly, thus must be skipped
+                    if (IsImage(resourceName))
+                    {
+                        var img = LoadResourceImage(resourceName);
+                        if (img != null)
+                            _cachedBitMaps[key] = img;
+                        continue;
+                    }
+                    if (IsXml(resourceName))
+                        _cachedXml.Add(key);
                 }
-            }
-            foreach (string resourceName in manifestResources
-                .Where(IsXml).ToArray())
-            {
-                // Xml loading and caching
-                try
-                {
-                    _cachedXml.Add(resourceName.Split('.').Reverse().Skip(1).First());
-                }
-                catch (Exception) {
-                    continue; // Seems like file was not loaded correctly, thus must be skipped
-                }
+                catch (Exception)
+                { continue; }
             }
         }
         #region ImageResources
         /// <summary>
         /// Gets a BitmapImage by resource key (file name without extension).
-        /// Returns null if not found.
+        /// If resource was not found, we attempt to return the default 32x32 icon.
+        /// If directive was wrongly build, likewise default image is not present or corruptted
+        /// Returns null if both {resourceName} and default not found.
         /// </summary>
         public static BitmapImage GetImageSource(string resourceName)
-            => _cachedBitMaps.TryGetValue(resourceName, out BitmapImage bitMap) ? bitMap : null;
+            => _cachedBitMaps.TryGetValue(resourceName, out BitmapImage bitMap) 
+            ? bitMap : (_cachedBitMaps.TryGetValue("rp_img_default_32.ico", out BitmapImage defaultBitMap) ? defaultBitMap : null);
 
         [RPPrivateUseOnly]
         private static bool IsImage(string resourceName)
@@ -102,13 +96,26 @@ namespace Shared.Controllers
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-                using (Image _ = Image.FromStream(stream)) // Keep for .NET 4.6, System.Drawing must be as dependency,
-                                                           // sole purpose of this change is to assert if file was loaded successfully as Image
-                                                           // and not as something that is not image-like
-                    return true;
-            } catch {
-                return false;
-            }
+                {
+                    if (stream == null || stream.Length < 4) return false;
+                    byte[] header = new byte[4];
+                    stream.Read(header, 0, header.Length);
+                    if ((header[0] == 0x89 && header[1] == 0x50 && header[2] == 0x4E && header[3] == 0x47) || // PNG (89 50 4E 47)
+                        (header[0] == 0xFF && header[1] == 0xD8) ||                                           // JPG (FF D8)
+                        (header[0] == 0x42 && header[1] == 0x4D) ||                                           // BMP (42 4D = "BM")
+                        (header[0] == 0x00 && header[1] == 0x00 && header[2] == 0x01 && header[3] == 0x00) || // ICO (00 00 01 00)
+                        (header[0] == 0x47 && header[1] == 0x49 && header[2] == 0x46 && header[3] == 0x38) || // GIF (ASCII "GIF8")
+                        (header[0] == 0x49 && header[1] == 0x49 && header[2] == 0x2A) ||
+                        (header[0] == 0x4D && header[1] == 0x4D && header[2] == 0x00 && header[3] == 0x2A))   // TIFF ("II*" or "MM*")
+                        return true;
+                    /*
+                    stream.Position = 0; // Resets the stream back to the position it was before read,
+                                         // this way we can check other formats not caught by header-types
+                    */
+                    return false;
+                }
+            } catch(Exception) 
+            { return false; }
         }
 
         [RPPrivateUseOnly]
@@ -132,7 +139,6 @@ namespace Shared.Controllers
                     bitMap.EndInit();
                     // To make it thread safe and immutable
                     bitMap.Freeze();
-                    Debug.WriteLine($"LoadResourceImage: {resourceName.Split('.').Reverse().Skip(1).First()}");
                     return bitMap;
                 }
             }
@@ -197,12 +203,16 @@ namespace Shared.Controllers
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();
                 using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-                using (XmlReader xmlReader = XmlReader.Create(stream, new XmlReaderSettings 
-                    { IgnoreComments = true, IgnoreWhitespace = true, CloseInput = true }))
-                    return true;
-            } catch {
-                return false;
-            }
+                using (StreamReader reader = new StreamReader(stream, Encoding.UTF8, true, 1024, true))
+                {
+                    // We just check couple of bytes to ensure it contains <,
+                    // which in fact is how XML starts, even comments starts with this tag
+                    char[] buffer = new char[5];
+                    int read = reader.Read(buffer, 0, buffer.Length);
+                    return new string(buffer, 0, read).TrimStart().StartsWith("<");
+                }
+            } catch(Exception) 
+            { return false; }
         }
         #endregion
     }
