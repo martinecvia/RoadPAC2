@@ -85,6 +85,8 @@ namespace Shared
                 $"RpDisplayName: {Config.DisplayName}\n" +
                 $"RpEnvironment: {(Environment.Is64BitProcess ? "64bit" : "32bit")}");
             ConfigController.SaveConfig(Config);
+            ResourceController.LoadEmbeddedResources();
+            RibbonController.CreateTab("rp_RoadPAC");
         }
 
         public object GetService(Type serviceType) => this;
