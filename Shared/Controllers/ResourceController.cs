@@ -143,7 +143,7 @@ namespace Shared.Controllers
                 }
             }
             catch (Exception exception) {
-                Debug.WriteLine($"LoadResourceImage: Something went horribly wrong ! " +
+                Debug.WriteLine($"[&] LoadResourceImage: Something went horribly wrong ! " +
                     $"{resourceName}: {exception.GetType().Name}/{exception.Message}");
                 throw; // pass
             }
@@ -182,17 +182,14 @@ namespace Shared.Controllers
                     Exception currentException = exception;
                     while (currentException != null)
                     {
-                        Debug.WriteLine($"{currentNest}:LoadResourceRibbon({resourceName}(InvalidOperationException)): {currentException.Message}");
+                        Debug.WriteLine($"[&] {currentNest}:LoadResourceRibbon({resourceName}(InvalidOperationException)): {currentException.Message}");
                         currentException = currentException.InnerException;
                         currentNest++;
                     }
                     return null;
                 }
-                catch (Exception exception)
-                {
-                    Debug.WriteLine($"LoadResourceRibbon: {exception.Message}");
-                    return default;
-                }
+                catch (Exception)
+                { return default; }
             }
         }
 

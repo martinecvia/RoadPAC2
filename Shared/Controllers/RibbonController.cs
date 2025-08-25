@@ -178,7 +178,6 @@ namespace Shared.Controllers
         [RPPrivateUseOnly]
         private static void OnSelectionIdle(object sender, EventArgs eventArgs)
         {
-            Debug.WriteLine("[@] IDLING");
             if (eventArgs == null)  // Case that happens when AutoCAD's main thread is occupied
                                     // and event was fired in the middle of cleaning up databases
                                     // [bug at: Autodesk AutoCAD 2017 #11387]
@@ -361,10 +360,8 @@ namespace Shared.Controllers
                             if (invoke != null)
                                 _registeredControls.Add(itemDef.UUID, invoke);
                         }
-                        catch (System.Exception exception)
-                        {
-                            Debug.WriteLine($"{wrapperType.Name}: {exception.Message}");
-                        }
+                        catch (System.Exception)
+                        { }
                     }
                 }
                 return itemRef;

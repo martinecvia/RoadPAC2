@@ -41,7 +41,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 else if (int.TryParse(value, out var y)) Value  = y;
                 else
                 {
-                    Debug.WriteLine($"{nameof(value)}: No valid value is set. Supported values are: [double, int]");
+                    Debug.WriteLine($"[&] {nameof(value)}: No valid value is set. Supported values are: [double, int]");
                     Value = null;
                 }
             }
@@ -72,7 +72,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                     else if (int.TryParse(value, out var b)) Change = b;
                     else
                     {
-                        Debug.WriteLine($"{nameof(value)}: No valid value is set. Supported values are: [double, int]");
+                        Debug.WriteLine($"[&] {nameof(value)}: No valid value is set. Supported values are: [double, int]");
                         Change = null;
                     }
                     return;
@@ -81,7 +81,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 else if (int.TryParse(value, out var d)) Change = d;
                 else
                 {
-                    Debug.WriteLine($"{nameof(value)}: No valid value is set. Supported values are: [double, int]");
+                    Debug.WriteLine($"[&] {nameof(value)}: No valid value is set. Supported values are: [double, int]");
                     Change = null;
                 }
             }
@@ -112,7 +112,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                     else if (int.TryParse(value, out var b)) Maximum = b;
                     else
                     {
-                        Debug.WriteLine($"{nameof(value)}: No valid value is set. Supported values are: [double, int]");
+                        Debug.WriteLine($"[&] {nameof(value)}: No valid value is set. Supported values are: [double, int]");
                         Maximum = null;
                     }
                     return;
@@ -121,7 +121,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 else if (int.TryParse(value, out var d)) Maximum = d;
                 else
                 {
-                    Debug.WriteLine($"{nameof(value)}: No valid value is set. Supported values are: [double, int]");
+                    Debug.WriteLine($"[&] {nameof(value)}: No valid value is set. Supported values are: [double, int]");
                     Maximum = null;
                 }
             }
@@ -153,7 +153,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                     else if (int.TryParse(value, out var b)) Minimum = b;
                     else
                     {
-                        Debug.WriteLine($"{nameof(value)}: No valid value is set. Supported values are: [double, int]");
+                        Debug.WriteLine($"[&] {nameof(value)}: No valid value is set. Supported values are: [double, int]");
                         Minimum = null;
                     }
                     return;
@@ -162,7 +162,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                 else if (int.TryParse(value, out var d)) Minimum = d;
                 else
                 {
-                    Debug.WriteLine($"{nameof(value)}: No valid value is set. Supported values are: [double, int]");
+                    Debug.WriteLine($"[&] {nameof(value)}: No valid value is set. Supported values are: [double, int]");
                     Minimum = null;
                 }
             }

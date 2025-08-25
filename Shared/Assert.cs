@@ -19,10 +19,7 @@ namespace Shared
         public static void IsNotNull<T>(T obj, string paramName) where T : class
         {
             if (obj == null)
-            {
-                Debug.WriteLine(obj, paramName);
                 throw new ArgumentNullException(paramName);
-            }
         }
 
         /// <summary>
@@ -35,10 +32,7 @@ namespace Shared
         public static void IsNotEmpty<T>(T obj, string paramName) where T : IEnumerable
         {
             if (!((IEnumerable)obj).GetEnumerator().MoveNext())
-            {
-                Debug.WriteLine(obj, paramName);
                 throw new ArgumentException("Empty sequence", paramName);
-            }
         }
     }
 }

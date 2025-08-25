@@ -136,7 +136,7 @@ namespace Shared.Controllers.Models.RibbonXml
                     // Property not found in API
                     if (targetProperty == null)
                     {
-                        Debug.WriteLine($"Transform: {target.GetType().Name}:{sourceProperty.Name} was not found");
+                        Debug.WriteLine($"[&] Transform: {target.GetType().Name}:{sourceProperty.Name} was not found");
                         continue;
                     }
                     if (sourceProperty.GetMethod == null || sourceProperty.GetMethod.GetMethodBody() == null)
@@ -167,14 +167,12 @@ namespace Shared.Controllers.Models.RibbonXml
                     }
                     else
                     {
-                        Debug.WriteLine($"{sourceProperty.Name}: " +
+                        Debug.WriteLine($"[&] {sourceProperty.Name}: " +
                             $"Has different type target:{targetProperty.PropertyType} from source:{sourceProperty.PropertyType}");
                     }
                 }
-                catch (System.Exception exception)
-                {
-                    Debug.WriteLine($"{sourceProperty.Name}: {exception.Message}");
-                }
+                catch (System.Exception)
+                { }
             }
             return target;
         }
