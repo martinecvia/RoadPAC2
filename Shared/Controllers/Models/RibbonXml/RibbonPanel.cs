@@ -23,7 +23,11 @@ namespace Shared.Controllers.Models.RibbonXml
         "RibbonPanel displays the content of the RibbonPanelSource set in the Source property.")]
     public class RibbonPanelDef : BaseRibbonXml
     {
+#if NET8_0_OR_GREATER
+        private string? _cookie;
+#else
         private string _cookie;
+#endif
         public override string Cookie
         {
             get => _cookie ?? $"%Parent:Panel={SourceDef?.Id}_{SourceDef?.Title}_{SourceDef?.Name}";

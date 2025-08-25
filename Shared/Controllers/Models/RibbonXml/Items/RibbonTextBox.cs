@@ -48,7 +48,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                     return null;
                 return new XmlDocument().CreateCDataSection(Value);
             }
-            set { Value = value?.Value; }
+            set { Value = value?.Value ?? string.Empty; }
         }
 
         [RPInfoOut]
@@ -226,7 +226,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                     return null;
                 return new XmlDocument().CreateCDataSection(Prompt);
             }
-            set { Prompt = value?.Value; }
+            set { Prompt = value?.Value ?? string.Empty; }
         }
 
         [RPInfoOut]

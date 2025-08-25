@@ -63,7 +63,11 @@ namespace Shared.Controllers.Models.RibbonXml.Items.CommandItems
         public string CurrentOperation { get; set; } = string.Empty;
 
         [XmlElement("CurrentOperation")]
+#if NET8_0_OR_GREATER
+        public XmlCDataSection? CurrentOperationCData
+#else
         public XmlCDataSection CurrentOperationCData
+#endif
         {
             get
             { 

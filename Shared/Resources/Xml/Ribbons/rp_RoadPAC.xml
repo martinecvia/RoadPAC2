@@ -51,7 +51,7 @@
 							Text="Otevři složku s terénními modely" ShowText="False" CommandHandler="RP_COMMAND(OPEN_ACTIVE_DTM_DIRECTORY)" />
 			<RibbonSplitButton Text="Terénní&#13;práce" Name="RP_RUN_DTM" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True"
 							   Image="rp_img_default_16" LargeImage="rp_img_default_32" CommandHandler="RP_RUN(DTM)" SynchronizeOption="Image">
-				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Spusti DTM" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
+				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Spusti DTM" ShowText="True" Image="rp_DTM" LargeImage="rp_DTM" />
 				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text=">Příčné řezy" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
 				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Podélné řezy" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
 				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Ornice" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />

@@ -22,7 +22,11 @@ namespace Shared.Controllers.Models.RibbonXml
     [Description("The class RibbonTab is used to store and manage the contents of a ribbon tab.")]
     public class RibbonTabDef : BaseRibbonXml
     {
+#if NET8_0_OR_GREATER
+        private string? _cookie;
+#else
         private string _cookie;
+#endif
         public override string Cookie
         {
             get => _cookie ?? $"Tab={Id}_{Title}_{Name}";
@@ -70,7 +74,7 @@ namespace Shared.Controllers.Models.RibbonXml
                     return null;
                 return new XmlDocument().CreateCDataSection(Title);
             }
-            set { Title = value?.Value; }
+            set { Title = value?.Value ?? Name; }
         }
 
         [RPInfoOut]
@@ -94,7 +98,7 @@ namespace Shared.Controllers.Models.RibbonXml
                     return null;
                 return new XmlDocument().CreateCDataSection(Name);
             }
-            set { Name = value?.Value; }
+            set { Name = value?.Value ?? Id; }
         }
 
         [RPInfoOut]
@@ -117,7 +121,7 @@ namespace Shared.Controllers.Models.RibbonXml
                     return null;
                 return new XmlDocument().CreateCDataSection(Description);
             }
-            set { Description = value?.Value; }
+            set { Description = value?.Value ?? string.Empty; }
         }
 
         /*

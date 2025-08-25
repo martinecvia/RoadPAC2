@@ -6,8 +6,6 @@
 
 using System; // Keep for .NET 4.6
 using System.Collections.Generic; // Keep for .NET 4.6
-using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq; // Keep for .NET 4.6
 using System.Reflection;
 
@@ -20,7 +18,7 @@ using ZwSoft.Windows;
 #else
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.EditorInput;
-using Autodesk.Internal.Windows;
+using Autodesk.Internal.Windows; // For ACAD Theme
 using Autodesk.Windows;
 #endif
 #endregion
@@ -45,9 +43,6 @@ namespace Shared.Controllers
         private static readonly Dictionary<string, RibbonTab> _activeContextualTabs = new Dictionary<string, RibbonTab>();
         private static readonly Dictionary<string, Func<SelectionSet, bool>> _contextualTabConditions 
             = new Dictionary<string, Func<SelectionSet, bool>>();
-
-        [DefaultValue(false)]
-        private static bool IsSelectionHandled { get; set; } = false;
 
         /// <summary>
         /// Ensures that the ribbon system has been properly initialized before use.
@@ -172,8 +167,22 @@ namespace Shared.Controllers
         }
 
         [RPInternalUseOnly]
-        internal static void HideContextualTab()
-        { }
+        internal static void HideContextualTab(string _contextualId)
+        {
+            if (_activeContextualTabs.ContainsKey(_contextualId))
+            {
+                var _contextualTab = _activeContextualTabs[_contextualId];
+                Ribbon.HideContextualTab(_contextualTab);
+                _contextualTab.IsVisible = false;
+                _activeContextualTabs.Remove(_contextualTab.Id);
+                if (_activeContextualTabs.Count == 0)
+                    Application.Idle -= OnSelectionIdle;
+            }
+        }
+
+        [RPInternalUseOnly]
+        internal static void HideContextualTab(RibbonTab _contextualTab)
+            => HideContextualTab(_contextualTab.Id);
 
         [RPPrivateUseOnly]
         private static void OnSelectionIdle(object sender, EventArgs eventArgs)

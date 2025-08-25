@@ -33,7 +33,11 @@ namespace Shared.Controllers.Models.RibbonXml
         "The items can also be organized into two panels - main panel and slide-out panel - by adding a RibbonPanelBreak item at the index where the slide-out panel is to start.")]
     public class RibbonPanelSourceDef : BaseRibbonXml
     {
+#if NET8_0_OR_GREATER
+        private string? _cookie;
+#else
         private string _cookie;
+#endif
         public override string Cookie
         {
             get => _cookie ?? $"%Parent:PanelSource={Id}_{Title}_{Name}";

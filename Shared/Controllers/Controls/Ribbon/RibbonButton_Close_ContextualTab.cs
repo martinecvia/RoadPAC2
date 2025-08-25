@@ -26,7 +26,7 @@ namespace Shared.Controllers.Controls.Ribbon
             {
                 if (ComponentManager.Ribbon.ActiveTab is RibbonTab selected
                     && selected.Id.StartsWith(RibbonController.RibbonTab__Prefix))
-                    RibbonController.HideContextualTab();
+                    RibbonController.HideContextualTab(selected);
             }
         }
     }

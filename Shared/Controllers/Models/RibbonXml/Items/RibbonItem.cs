@@ -1,5 +1,4 @@
-﻿#pragma warning disable CS8600
-#pragma warning disable CS8625
+﻿#pragma warning disable CS8600, CS8601, CS8625
 
 using System; // Keep for .NET 4.6
 using System.Collections.Generic; // Keep for .NET 4.6
@@ -82,7 +81,11 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 
         [RPInternalUseOnly]
         [XmlElement("Text")]
+#if NET8_0_OR_GREATER
+        public XmlCDataSection? TextCData
+#else
         public XmlCDataSection TextCData
+#endif
         {
             get
             {
@@ -480,7 +483,11 @@ namespace Shared.Controllers.Models.RibbonXml.Items
 
         [RPInternalUseOnly]
         [XmlElement("Description")]
+#if NET8_0_OR_GREATER
+        public XmlCDataSection? DescriptionCData
+#else
         public XmlCDataSection DescriptionCData
+#endif
         {
             get
             {
@@ -488,7 +495,7 @@ namespace Shared.Controllers.Models.RibbonXml.Items
                     return null;
                 return new XmlDocument().CreateCDataSection(Description);
             }
-            set { Description = value?.Value; }
+            set { Description = value?.Value ?? string.Empty; }
         }
 
         [RPInfoOut]
