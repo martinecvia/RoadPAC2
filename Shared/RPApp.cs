@@ -3,10 +3,9 @@
 using System; // Keep for .NET 4.6
 using System.Linq; // Keep for .NET 4.6
 using System.Runtime.InteropServices;
-using Shared.Controllers;
-using System.Diagnostics;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -22,29 +21,45 @@ using Autodesk.Windows;
 #endregion
 
 using Microsoft.Win32;
+using Shared.Controllers;
 
 namespace Shared
 {
-    [RPInternalUseOnly]
-    [Guid("68AC1E2A-8FB0-8323-98E1-F97CF372FC3D")]
-    internal sealed class RPApp : IServiceProvider
+    sealed class RPApp : IDisposable
     {
         public static bool IsAcad => AppDomain.CurrentDomain.GetAssemblies()
             .Any(assembly => assembly.FullName?.StartsWith("acdbmgd", StringComparison.OrdinalIgnoreCase) ?? false);
 
-        public static RPConfig Config { get; private set; } = null;
+        public static bool IsRdpPresent => AppDomain.CurrentDomain.GetAssemblies()
+            .Any(assembly => assembly.FullName?.StartsWith("RDPFILELib", StringComparison.OrdinalIgnoreCase) ?? false);
+
+        public static  RPConfig Config { get; private set; } = null;
 
         internal RPApp()
         {
-            var stopwatch = new Stopwatch();
-                stopwatch.Start();
-            Document document = Application.DocumentManager.MdiActiveDocument;
-            // First we need to find install location of RoadPAC
+            ResourceController.LoadEmbeddedResources();
             Config = ConfigController.LoadConfig<RPConfig>();
-            #region FRESH_INSTALATION
-            if (string.IsNullOrEmpty(Config.InstallPath))
+            CheckForInstallationRegistry();
+            #region RIBBON_REGISTRY
+            RibbonController.CreateTab("rp_RoadPAC");
+            RibbonController.CreateContextualTab("rp_Contextual_SelectView", selection => { return true; });
+            #endregion
+            Document document = Application.DocumentManager.MdiActiveDocument;
+            #region O_PROGRAM_HANDLE_ROADPAC \n#define RP_INSTALLED
+            // Hacky way hot to trick C# compiler to make sure RP_INSTALLED definition is on
+            SetDllDirectory(Config.InstallPath);
+            // Check Assemblies if RDPFILELib is present
+            if (IsRdpPresent)
+                return;
+            Assembly.LoadFrom(Path.Combine(Config.InstallPath, "RDPFILELib.dll"));
+            #endregion
+        }
+
+        #region O_INSTALLATION"HKEY_LOCAL_MACHINE"
+        private void CheckForInstallationRegistry()
+        {
+            if (string.IsNullOrEmpty(Config?.InstallPath))
             {
-                document.Editor.WriteMessage($"Fresh installation !\n");
                 string[] registryKeys =
                 {
                     @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
@@ -66,6 +81,8 @@ namespace Shared
                                     (!string.IsNullOrEmpty(_displayName) && _displayName.StartsWith("RoadPAC"))) // DisplayName check
                                 {
                                     // At this point registry key can't be null if already installed
+                                    if (Config == null)
+                                        Config = ConfigController.LoadConfig<RPConfig>();
                                     Config.InstallPath = (string)registrySub.GetValue("InstallLocation")
                                         ?? throw new ArgumentNullException("RoadPAC install location is null in registry");
                                     Config.DisplayName = (string)registrySub.GetValue("DisplayName")
@@ -76,50 +93,22 @@ namespace Shared
                     }
                 }
             }
-            #endregion
-            document.Editor.WriteMessage($"Elapsed: {stopwatch.Elapsed.Milliseconds}ms\n");
-            if (string.IsNullOrEmpty(Config.InstallPath))
-            {
-                document.Editor.WriteMessage("Installation of RoadPAC was not found or not valid");
-                throw new UnauthorizedAccessException("Installation of RoadPAC was not found or not valid");
-            }
-            SetDllDirectory(Config.InstallPath);
-            // Make sure that RDPFile.dll is present,
-            // if not try to load it from InstallDirectory
-            if (!File.Exists(Path.Combine(Path.GetDirectoryName(Config.InstallPath), "RDPFILELib.dll")))
-                throw new ArgumentNullException("RoadPAC install location does not contain RDP library");
-            /*
-            try
-            {
-                Assembly.LoadFrom(Path.Combine(Path.GetDirectoryName(Config.InstallPath), "RDPFILELib.dll"));
-            } catch(Exception)
-            { throw new ArgumentNullException("RoadPAC RDP library is malformed or have changed during process"); }
-            */
-            RDPFileHelper rdp = new RDPFileHelper(); // Safe-thread for working with RDP files
-            document.Editor.WriteMessage("\n" +
-                $"RpInstallPath: {Config.InstallPath}\n" +
-                $"RpDisplayName: {Config.DisplayName}\n" +
-                $"RpEnvironment: {(Environment.Is64BitProcess ? "64bit" : "32bit")}\n" +
-                $"RpCurrentWorkingDirectory: {rdp.CurrentWorkingDirectory}\n" +
-                $"RpCurrentRoute: {rdp.CurrentRoute}\n");
-            ConfigController.SaveConfig(Config);
-            stopwatch.Stop();
-            document.Editor.WriteMessage($"Elapsed: {stopwatch.Elapsed.Milliseconds}ms\n");
-            using (var service = new FileWatcherController())
-            {
-                service.FileCreated += (dir, file) => document.Editor.WriteMessage($"\n[+] Created in {dir}: {file}");
-                service.FileDeleted += (dir, file) => document.Editor.WriteMessage($"\n[-] Deleted from {dir}: {file}");
-                service.FileRenamed += (dir, oldFile, newFile) => document.Editor.WriteMessage($"\n[~] Renamed in {dir}: {oldFile} -> {newFile}");
-                service.AddDirectory(rdp.CurrentWorkingDirectory);
-            }
+        }
+        #endregion
+
+        public void Dispose()
+        {
+            if (Config != null)
+                ConfigController.SaveConfig(Config);
         }
 
+        #region WIN32_API
         public object GetService(Type serviceType) => this;
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool SetDllDirectory(string lpPathName);
 
         [DllImport("kernel32", CharSet = CharSet.Ansi, SetLastError = true)]
         public static extern int GetCurrentProcessId();
-
+        #endregion
     }
 }

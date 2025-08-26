@@ -1,5 +1,7 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Linq;
+using System.Xml.Linq;
 using Shared;
 using Shared.Controllers;
 using ZwSoft.Windows;
@@ -13,13 +15,7 @@ namespace ZWC_47_TEST
     {
         public void Initialize()
         {
-            ResourceController.LoadEmbeddedResources(); // This must happen before loading any ribbon, image etc.
-            RibbonController.CreateTab("rp_RoadPAC");
-            RibbonController.CreateContextualTab("rp_Contextual_SelectView", selection =>
-            {
-                return selection.GetObjectIds().Any(o => o.ObjectClass.DxfName.ToLower() == "lwpolyline");
-            });
-            new RPApp();
+            using (var application = new RPApp()) ;
         }
 
         [CommandMethod("HIT_BREAKPOINT")]

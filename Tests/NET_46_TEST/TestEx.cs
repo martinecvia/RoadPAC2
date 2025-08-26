@@ -9,7 +9,9 @@ namespace NET_46_TEST
 {
     public class TestEx : IExtensionApplication
     {
-        public void Initialize() => new RPApp();
+        public void Initialize() {
+            using (var application = new RPApp()) ;
+        }
 
         [CommandMethod("HIT_BREAKPOINT")]
         public void Breakpoint()
