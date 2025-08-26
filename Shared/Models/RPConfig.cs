@@ -1,6 +1,6 @@
 ﻿#pragma warning disable CS8625
 
-namespace Shared
+namespace Shared.Models
 {
     public class RPConfig
     {

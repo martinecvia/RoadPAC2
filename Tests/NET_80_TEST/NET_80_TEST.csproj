@@ -47,7 +47,7 @@
     <Reference Include="RDPFILELib">
       <HintPath>..\..\Libraries\RDPFILELib.dll</HintPath>
       <EmbedInteropTypes>False</EmbedInteropTypes>
-      <Private>False</Private>
+      <Private>True</Private>
       <SpecificVersion>False</SpecificVersion>
     </Reference>
   </ItemGroup>

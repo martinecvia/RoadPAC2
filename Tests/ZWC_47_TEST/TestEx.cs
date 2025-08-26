@@ -1,12 +1,7 @@
-﻿using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Xml.Linq;
-using Shared;
-using Shared.Controllers;
-using ZwSoft.Windows;
-using ZwSoft.ZwCAD.ApplicationServices;
+﻿using ZwSoft.Windows;
 using ZwSoft.ZwCAD.Runtime;
+
+using Shared;
 
 [assembly: CommandClass(typeof(ZWC_47_TEST.TestEx))]
 namespace ZWC_47_TEST
@@ -15,7 +10,7 @@ namespace ZWC_47_TEST
     {
         public void Initialize()
         {
-            using (var application = new RPApp()) ;
+            var application = new RPApp();
         }
 
         [CommandMethod("HIT_BREAKPOINT")]

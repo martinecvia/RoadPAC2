@@ -1,10 +1,12 @@
-﻿using System;
+﻿#pragma warning disable CS8600
+
+using System; // Keep for .NET 4.6
 using System.Collections.Concurrent;
 using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Xml;
+using System.Xml; // Keep for .NET 4.6
 using System.Xml.Serialization;
 
 namespace Shared.Controllers

@@ -9,7 +9,6 @@ using System.Collections.Generic; // Keep for .NET 4.6
 using System.Linq; // Keep for .NET 4.6
 using System.Reflection;
 
-
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
 using ZwSoft.ZwCAD.ApplicationServices;

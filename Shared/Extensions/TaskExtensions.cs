@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿#pragma warning disable CS8603
+
+using System; // Keep for .NET 4.6
+using System.Threading.Tasks; // Keep for .NET 4.6
 
 namespace Shared.Extensions
 {

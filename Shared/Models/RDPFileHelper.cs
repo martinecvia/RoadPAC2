@@ -1,15 +1,20 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿#pragma warning disable CS8603
 
+using System; // Keep for .NET 4.6
+using System.Threading.Tasks; // Keep for .NET 4.6
 
-namespace Shared
+using RDPFILELib;
+
+namespace Shared.Models
 {
     // Purpose of this class is to keep thread safe if RDPFile.dll was not found,
     // so we can safely exit program without cad platform crashing
     // Added factor is that DLL can change it's structure so it will be harder for us to
     public class RDPFileHelper
     {
-        private readonly RDPFILELib.RDPConfig _config = new RDPFILELib.RDPConfigClass();
+        private readonly RDPConfig _config;
+        internal RDPFileHelper()
+        { _config = new RDPConfigClass(); }
 
         public string CurrentWorkingDirectory
         { 

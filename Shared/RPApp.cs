@@ -1,27 +1,24 @@
-#pragma warning disable CS8600, CS8625
+#pragma warning disable CS8600, CS8604, CS8625
 
 using System; // Keep for .NET 4.6
 using System.Linq; // Keep for .NET 4.6
 using System.Runtime.InteropServices;
-using System.IO;
-using System.Reflection;
-using System.Threading.Tasks;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
 using ZwSoft.ZwCAD.ApplicationServices;
-using ZwSoft.ZwCAD.EditorInput;
-using ZwSoft.Windows;
+using System.Threading.Tasks;
 #else
 using Autodesk.AutoCAD.ApplicationServices;
-using Autodesk.AutoCAD.EditorInput;
-using Autodesk.Internal.Windows;
-using Autodesk.Windows;
 #endif
 #endregion
 
+// Microsoft WIN32 API
 using Microsoft.Win32;
+
 using Shared.Controllers;
+using Shared.Models;
+using System.Diagnostics;
 
 namespace Shared
 {
@@ -30,28 +27,43 @@ namespace Shared
         public static bool IsAcad => AppDomain.CurrentDomain.GetAssemblies()
             .Any(assembly => assembly.FullName?.StartsWith("acdbmgd", StringComparison.OrdinalIgnoreCase) ?? false);
 
-        public static bool IsRdpPresent => AppDomain.CurrentDomain.GetAssemblies()
-            .Any(assembly => assembly.FullName?.StartsWith("RDPFILELib", StringComparison.OrdinalIgnoreCase) ?? false);
+        private Document document = Application.DocumentManager.MdiActiveDocument;
 
-        public static  RPConfig Config { get; private set; } = null;
+        public static RPConfig Config { get; private set; } = null;
+        public static FileWatcherController FileWatcher { get; private set; } = new FileWatcherController();
 
         internal RPApp()
         {
             ResourceController.LoadEmbeddedResources();
             Config = ConfigController.LoadConfig<RPConfig>();
             CheckForInstallationRegistry();
+            if (Config.InstallPath == null)
+                throw new UnauthorizedAccessException("RoadPAC is not installed or installation is malformed!");
+            SetDllDirectory(Config.InstallPath);
+            document.Editor.WriteMessage($"RpInstallPath: {Config?.InstallPath}");
             #region RIBBON_REGISTRY
             RibbonController.CreateTab("rp_RoadPAC");
             RibbonController.CreateContextualTab("rp_Contextual_SelectView", selection => { return true; });
             #endregion
-            Document document = Application.DocumentManager.MdiActiveDocument;
-            // Hacky way hot to trick C# compiler to make sure RP_INSTALLED definition is on
-            SetDllDirectory(Config.InstallPath);
-            // Check Assemblies if RDPFILELib is present
-            if (IsRdpPresent)
-                return;
-            Assembly.LoadFrom(Path.Combine(Config.InstallPath, "RDPFILELib.dll"));
-
+            Action BeginInit = () =>
+            {
+                var rpfile = new RDPFileHelper();
+                document.Editor.WriteMessage(
+                    $"\nRpCurrentWorkingDirectory: {rpfile.CurrentWorkingDirectory ?? "None"}\n" +
+                    $"RpCurrentRoute: {rpfile.CurrentRoute ?? "None"}\n");
+                if (FileWatcher == null)
+                    return;
+                FileWatcher.AddDirectory(rpfile.CurrentWorkingDirectory);
+            };
+#if ZWCAD
+            Task.Run(BeginInit);
+#else
+            BeginInit(); // AutoCAD does not support multi-threading,
+                         // hence we are sacrificing a little bit of performance here,
+                         // but at init it does not really matter
+#endif
+            FileWatcher.FileCreated += (a, b) => Debug.WriteLine($"\nFileCreated: {a}, {b}\n");
+            document.Editor.WriteMessage("^C");
         }
 
         #region O_INSTALLATION"HKEY_LOCAL_MACHINE"
@@ -99,6 +111,8 @@ namespace Shared
         {
             if (Config != null)
                 ConfigController.SaveConfig(Config);
+            FileWatcher.Dispose();
+            FileWatcher = null;
         }
 
         #region WIN32_API
