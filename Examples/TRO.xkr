@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<XKR>
+<HEAD />
+<HEAD nazev='M_V1' akce='' trasa='' typ='pokrytí' kan='0' kategorie='*     Kategorie trasy není zapsána' dat1='10.06.2020' dat2='10.06.2020' prog1='SI43V20' prog2='SI43V20' />
+  <KLOPENI>
+    <USEK stan1="0.00000000000000000" stan2="0.91922200000000000" schema="9" c1="0" c2="0" oblouk="0" strana="" spad1="2.5" spad2="2.5" typ="1" vozl="4.25" vozp="4.25" spl="0" spp="0" vyznam="střecha" />
+    <USEK stan1="0.91922200000000000" stan2="1.01922100000000000" schema="9" c1="0" c2="0" oblouk="L" strana="" spad1="2.5" spad2="2.5" typ="3" vozl="4.25" vozp="4.25" spl="0" spp="0" vyznam="vzestupnice ze střechy" />
+    <USEK stan1="1.01922100000000000" stan2="1.90282100000000000" schema="9" c1="0" c2="0" oblouk="L" strana="" spad1="2.5" spad2="2.5" typ="2" vozl="4.25" vozp="4.25" spl="0" spp="0" vyznam="oblouk" />
+    <USEK stan1="1.90282100000000000" stan2="2.00282000000000000" schema="9" c1="0" c2="0" oblouk="L" strana="" spad1="2.5" spad2="2.5" typ="5" vozl="4.25" vozp="4.25" spl="0" spp="0" vyznam="sestupnice do střechy" />
+    <USEK stan1="2.00282000000000000" stan2="2.00282200000000000" schema="9" c1="0" c2="0" oblouk="0" strana="" spad1="2.5" spad2="2.5" typ="1" vozl="4.25" vozp="4.25" spl="0" spp="0" vyznam="střecha" />
+    <USEK stan1="2.00282200000000000" stan2="2.07282100000000000" schema="9" c1="0" c2="0" oblouk="P" strana="" spad1="2.5" spad2="2.5" typ="3" vozl="4.25" vozp="4.25" spl="0" spp="0" vyznam="vzestupnice ze střechy" />
+    <USEK stan1="2.07282100000000000" stan2="2.73780000000000000" schema="9" c1="0" c2="0" oblouk="P" strana="" spad1="2.5" spad2="2.5" typ="2" vozl="4.25" vozp="4.25" spl="0" spp="0" vyznam="oblouk" />
+    <USEK stan1="2.73780000000000000" stan2="2.80779900000000000" schema="9" c1="0" c2="0" oblouk="P" strana="" spad1="2.5" spad2="2.5" typ="5" vozl="4.25" vozp="4.25" spl="0" spp="0" vyznam="sestupnice do střechy" />
+    <USEK stan1="2.80779900000000000" stan2="2.82069344108424000" schema="9" c1="0" c2="0" oblouk="0" strana="" spad1="2.5" spad2="2.5" typ="1" vozl="4.25" vozp="4.25" spl="0" spp="0" vyznam="střecha" />
+    <USEK stan1="2.82069344108424000" stan2="2.82069344108424000" schema="9" c1="0" c2="0" oblouk="0" strana="" spad1="2.5" spad2="2.5" typ="9" vozl="4.25" vozp="4.25" spl="0" spp="0" vyznam="koncový bod úseku" />
+  </KLOPENI>
+</XKR>

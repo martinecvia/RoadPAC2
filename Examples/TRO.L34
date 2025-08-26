@@ -1,0 +1,62 @@
+ -------------------------------------------------------------------------------------------------------------------
+  PRAGOPROJEKT PRAHA, a. s. OBO CAD,                                        14754  Praha 4,  K Rysance 16         
+                                  PROGRAMOVÝ SYSTÉM  R O A D P A C - program  RP34  
+
+                                              KRESLENÍ PODÉLNÉHO ØEZU                          
+
+    Verze:   2017                         Datum zadání:   12.10.2023           Datum výpoètu:  12.10.2023  15:13:14
+    datum a èas kompilace:  24.05.2022  12:14
+ -------------------------------------------------------------------------------------------------------------------
+
+ Projekt:VUT                                                                                     
+ Trasa:  TRO.V34                                                                                 
+
+
+ *     Použit vstupní soubor Hlavní body smìru s názvem TRO.SHB
+ *     Akce:                                                                                
+ *     Trasa:                                                                               
+ *     Datum vzniku        19.04.2023  programem  ISHB5 
+ *     Datum posl. zápisu  19.04.2023  programem  ISHB5 
+ *     Soubor .SHB nového typu
+
+
+ *     Použit vstupní soubor Terénní øezy s názvem TRO.STR
+ *     Akce:    "Neznámá akce"                                                              
+ *     Trasa:   "Neznámá trasa"                                                             
+ *     Datum vzniku        19. 4.2023  programem  SI20  
+ *     Datum posl. zápisu  19. 4.2023  programem  SI20  
+
+ *     Použit vstupní soubor Podélný profil s názvem TRO.SPP
+ *     Akce:                                                                                
+ *     Trasa:                                                                               
+ *     Datum vzniku        19.04.2023  programem  DM04  
+ *     Datum posl. zápisu  19.04.2023  programem  DM04  
+
+ *     Použit vstupní soubor Niveleta s názvem TRO.SNI
+ *     Akce:                                                                                
+ *     Trasa:                                                                               
+ *     Datum vzniku        19.04.2023  programem  HNIV21
+ *     Datum posl. zápisu  19.04.2023  programem  HNIV21
+ *     Soubor .SNI nového typu
+
+ **  V sekci nelze kreslit pøíkopy
+
+ *   Dopoèitána výška zóny è. 4 =   99 mm na celkový souèet 584 mm v km     .000000
+
+ **  Sekce è. 1 pøekraèuje konec trasy:    2.820000
+
+ *   Schemata klopení se kreslí ze souboru TRO.XKR
+
+ K R E S L E N Í   S E K C E   È Í S L O  1
+ --------------------------------------------
+ Stanièení od km      .000000  do  km     2.820000
+ Meøítko délek:        1:  2000.
+ Meøítko výšek:        1:   200.
+
+ Výška kresby: 594 mm
+ Délka kresby:1460 mm
+
+ Automatizovaná srov. rovina  234.000 od km     .000000 do km    2.820000
+
+ *** VÝPOÈET UKONÈEN - NEZÁVAŽNÉ CHYBY ***
+     Doporuèujeme provìøit výsledky

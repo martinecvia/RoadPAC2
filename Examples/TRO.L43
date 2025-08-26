@@ -1,0 +1,2450 @@
+ -------------------------------------------------------------------------------------------------------------------
+  Pragoprojekt Praha, a. s.  stredisko CAD,                                         14754  Praha 4,  K Ryšánce 16
+                                 Programový systém  R o a d p a c - program  RP43
+ 
+                                           pokrytí silnièní komunikace
+ 
+  Verze:  H1.2024.6.1                        datum zadání: 19.04.2023             Datum výpoètu:26.09.2024 15:39:59
+ -------------------------------------------------------------------------------------------------------------------
+Pøehled oblastí pøeklápìní plánì (vrtule v pláni)
+V tìhto oblastech nebude dodržen minimalní zadaný sklon plánì v délce 20 m
+
+strana    stanièení   spád%      stanièení   spád%      nulový spád vozovky
+    1       1.992822   3.00%       2.012822  -3.00%          2.002822
+    1       2.762800  -3.00%       2.782800   3.00%          2.772800
+    2       0.959222   3.00%       0.979222  -3.00%          0.969222
+    2       1.992822  -3.00%       2.012822   3.00%          2.002822
+ Výpis øezù uložených do souboru SKR
+
+      0.000000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.020000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.040000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.060000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.080000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.100000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.120000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.140000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.160000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.180000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.200000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.220000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.240000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.260000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.280000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.300000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.320000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.340000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.360000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.380000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.400000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.420000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.440000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.460000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.480000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.500000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.520000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.540000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.560000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.580000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.600000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.620000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.640000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.660000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.680000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.700000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.720000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.740000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.760000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.780000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.800000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.820000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.840000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.860000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.880000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.900000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      0.920000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.024611
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.577096733467334 (3.00%) ) [I-PLAN-2-001] 
+
+      0.940000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.014611
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.534596308463085 (3.00%) ) [I-PLAN-2-001] 
+
+      0.960000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.004611
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.502021758458835 (2.77%) ) [I-PLAN-2-001] 
+
+      0.980000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.005389
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.704595458454584 ( S=-0.6, L=-0.57875(3.00%) , P=-0.704595458454584 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.000000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.015389
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.662095033450334 ( S=-0.6, L=-0.57875(3.00%) , P=-0.662095033450334 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.020000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.040000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.060000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.080000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.100000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.120000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.140000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.160000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.180000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.200000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.220000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.240000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.260000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.280000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.300000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.320000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.340000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.360000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.380000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.400000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.420000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.440000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.460000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.480000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.500000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.520000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.540000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.560000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.580000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.600000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.620000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.640000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.660000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.680000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.700000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.720000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.740000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.760000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.780000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.800000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.820000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.840000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.860000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.880000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.900000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.57875(3.00%) , P=-0.62125 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.920000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.016410
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6577557400574 ( S=-0.6, L=-0.57875(3.00%) , P=-0.6577557400574 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.940000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.006410
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.70025616506165 ( S=-0.6, L=-0.57875(3.00%) , P=-0.70025616506165 (-3.00%) ) [I-PLAN-2-001] 
+
+      1.960000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.003590
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.4877565900659 (3.00%) ) [I-PLAN-2-001] 
+
+      1.980000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.013590
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.53025701507015 (3.00%) ) [I-PLAN-2-001] 
+
+      2.000000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.023590
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.736237940074395 ( S=-0.6, L=-0.670269500000005(0.85%) , P=-0.736237940074395 (-0.85%) ) [I-PLAN-2-001] 
+
+      2.020000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.012730
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.526601755025071(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.040000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.001556
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.720886601951455 ( S=-0.6, L=-0.720886601951455(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.060000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.015842
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.66017144887784 ( S=-0.6, L=-0.66017144887784(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.080000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.100000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.120000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.140000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.160000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.180000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.200000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.220000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.240000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.260000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.280000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.300000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.320000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.340000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.360000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.380000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.400000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.420000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.440000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.460000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.480000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.500000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.520000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.540000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.560000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.580000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.600000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.620000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.640000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.660000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.680000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.700000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.720000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.62125 ( S=-0.6, L=-0.62125(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.740000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.023429
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.627928666838098 ( S=-0.6, L=-0.627928666838098(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.760000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky -0.009143
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.688643819911712 ( S=-0.6, L=-0.688643819911712(-3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.780000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.005143
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.530052597985329(2.16%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.800000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.019429
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.555074126058943(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.820000     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+      2.820693     0
+                   Strana: 1
+                   Strana: 2
+                   Strana: 1
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+                   Strana: 2
+                      Šíøky: sp: 0.000, sp-niv 0.000, vozovka 3.500 (3.500 + 0.000 ) Krajnice: 0.750 
+                      Klopení režim dvoupruh
+                      Výchozí spád vozovky 0.025000
+                      Pláò - Nedìlená - PA.X=0.000000 
+                       PB.X - 4.250000 (od krajnice - C - 431.A2)
+ * Pláò - režim dvoupruh, Z=-0.6 ( S=-0.6, L=-0.57875(3.00%) , P=-0.57875 (3.00%) ) [I-PLAN-2-001] 
+
+ * Ukládáno bez režimu kompat pro si.

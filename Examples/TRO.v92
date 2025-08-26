@@ -1,0 +1,17 @@
+<EquipmentItems version="1.0" AccDatabase="" verFIXREF="true" CreatedBy="SI92D 1.2020.4.1">
+  <Alignment Name="TRO">
+    <SafetyFences>
+      <Item Name="" Type="svo" StartChain="1.5" EndChain="1.9" RefPoint="LC" StartOffset="-0.5" StartOffsetY="0" EndOffset="-0.5" EndOffsetY="0" DrawingSideMod="L" EquipmentType="SVODIDLO OCEL JEDNOSTR, N2" Layer="" Length="398.228049157802" Object="" _position="LL" _RefPoint="LC" />
+      <Item Name="" Type="svo" StartChain="1.5" EndChain="1.9" RefPoint="RC" StartOffset="0.5" StartOffsetY="0" EndOffset="0.5" EndOffsetY="0" DrawingSideMod="P" EquipmentType="SVODIDLO OCEL JEDNOSTR, N2" Layer="" Length="401.771921850905" Object="" _position="PP" _RefPoint="RC" />
+    </SafetyFences>
+    <MarkPosts />
+    <Curbking />
+    <DitchBlocks />
+    <Drains />
+    <Fences />
+    <Gutters />
+    <NoiseBarrier />
+    <CurbBlocks />
+    <TrafficMarks />
+  </Alignment>
+</EquipmentItems>

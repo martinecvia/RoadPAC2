@@ -1,0 +1,45 @@
+* 4319.04.2023 1 1 1 0 0 0 0 0 0 4 0
+* V V43.2022 V43 - Verze 2022 - Nelze otevøít ve starém dialogu.
+    Máte starou verzi programu pokrytí. **Upgradujte Roadpac**! Kliknìte na <Storno> !
+* A                                                                             
+* B                                                                             
+* H TRO     
+* S TRO     
+* K TRO     
+*
+998
+4311L  0.000000             0.000  3500  0750 0.000 0.000  3000  0600 0 0       0
+4311P  0.000000             0.000  3500  0750 0.000 0.000  3000  0600 0 0       0
+43319  0.000000  2500 0.000 0.000                                               0
+43411      99999   1019221  2500   1902821 99999                                00
+43412      69999   2072821  2500   2737800 69999                                00
+999
+001  0.000000  2820693    20000                                                 0
+002   2820693              0                                                    0
+999
+/* 
+<-----ROADPAC-FILE-XDATA-SECTION----->
+<xdata><V43ExtFile xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+  <DTMFileName>TRO.dt4</DTMFileName>
+  <SirkaRezu i:nil="true" />
+  <StaniceniFix i:nil="true" xmlns:a="http://schemas.datacontract.org/2004/07/RDPVFiles.V43Ext" />
+  <VerzeVypoctu i:nil="true" />
+  <ZvlastniTvaryExt xmlns:a="http://schemas.datacontract.org/2004/07/RDPVFiles.V43Ext">
+    <a:V4364>
+      <Ignorovat xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</Ignorovat>
+      <KodStrany xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">OBE</KodStrany>
+      <StaniceniKonec xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</StaniceniKonec>
+      <StaniceniZacatek xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</StaniceniZacatek>
+      <a:BodSKR i:nil="true" />
+      <a:KodKorunaPlan>K</a:KodKorunaPlan>
+      <a:Poznamka i:nil="true" />
+      <a:SirkaNZK i:nil="true" />
+      <a:SirkaNZKonec i:nil="true" />
+      <a:TypBlok i:nil="true" />
+      <a:UkoncitBO>false</a:UkoncitBO>
+      <a:VRowID i:nil="true" />
+      <a:VlastniDefinice i:nil="true" />
+    </a:V4364>
+  </ZvlastniTvaryExt>
+</V43ExtFile></xdata>
+<-----ROADPAC-FILE-XDATA-SECTION----->

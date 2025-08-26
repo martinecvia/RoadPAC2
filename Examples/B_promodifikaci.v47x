@@ -1,0 +1,99 @@
+<x47>
+  <Nastaveni UseSklonNivelety="0" UseSPR="0" CalcSKR="1" DTMFileName="" UseStaryStav="0" StaryStavFileName="" SI51v19="0" SI51v19CommandLineArgs="" SI51useTRIM="0" SmeryCompatabilni2018="0" PrazdneHodnoty="0" TechnickeBody="0" adresarOcekavany="" adresar="D:\_roadpac\data\RDP_VUT\Data" shb="ctvrtek" sni="ctvrtek" skr="ctvrtek" sss="" v43="ctvrtek" vystup="" filter="" useSSS="0" useInterval="1" generujXLS="1" generujSOU="0" generujDWG="0" generujTXT="0" nepocitatSKR="0" trasaName="ctvrtek" />
+  <Body OutputAllLines="1" OutputAllPovrchy="1" MainPoint="">
+    <BodyRP47 KodVynechaniRadku="0" poradi="0" nazev="B" vztaznyBod="RB" vSmer="W" xOfset="-0.5" zOfset="-0.1" filtr="" CIS="B" popis="" poznamka="" vrstva="1" NazevStylu="" Only2D="0" />
+  </Body>
+  <Staniceni>
+    <StaniceniIntervalem>
+      <RP47StaniceniIntervalem staniceniOd="0.05" staniceniDo="0.25" krok="50" />
+    </StaniceniIntervalem>
+    <StaniceniIndividualni />
+  </Staniceni>
+  <Vrstvy />
+  <NastaveniVystupu>
+    <NastaveniXls sablona="default.xls" />
+    <NastaveniDWG intervalVrstevnic="0.1" maximalniDelkaHrany="0">
+      <vrstevnice draw="1" layer="acv-{vrstva}" fileName="{vrstva}.dwg" />
+      <body draw="0" layer="ac1-{vrstva}" fileName="{vrstva}.dwg" />
+      <trojuhelniky draw="0" layer="ac3-{vrstva}" fileName="{vrstva}.dwg" />
+    </NastaveniDWG>
+    <NastaveniDWGRezy />
+  </NastaveniVystupu>
+  <Definice />
+  <Vystupy />
+  <NamedDistance />
+  <Nastaveni2DVystupCad />
+  <Outputs>
+    <S GenerateOutput="1" FileName="" TypeName="OutputFileSettingsXls" Template="default.xls" UsePointRows="0" />
+    <S GenerateOutput="0" FileName="" TypeName="OutputFileSettingsTxt" />
+    <S GenerovatDT4="0" MaxDelkaSpojnice="25" UlozitAcv="0" UlozitTin="0" UlozitAC1="0" UlozitAC3="0" UlozitLandXml="0" intervalVrstevnic="0" GenerateOutput="0" FileName="" TypeName="OutputFileSettingsDTM" />
+    <S GenerateOutput="0" FileName="" TypeName="CoridorPrinterPlineT91Settings" InterpolovatNeexistujiciBody="0" />
+  </Outputs>
+  <SouboryBrialu>
+    <ArrayOfV90FileItem xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.RoadpacVXX" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+  </SouboryBrialu>
+  <Popisy>
+    <ArrayOfPopisItemType xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.si47" xmlns:i="http://www.w3.org/2001/XMLSchema-instance" />
+  </Popisy>
+  <NastaveniVystupuN47>
+    <RoadPACV47NFile.NastaveniVystupuType xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.si47" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <DWGNastaveni>
+        <body>
+          <draw>false</draw>
+          <fileName>{vrstva}.dwg</fileName>
+          <layer>ac1-{vrstva}</layer>
+        </body>
+        <intervalVrstevnic>0.1</intervalVrstevnic>
+        <maximalniDelkaHrany>0</maximalniDelkaHrany>
+        <trojuhelniky>
+          <draw>false</draw>
+          <fileName>{vrstva}.dwg</fileName>
+          <layer>ac3-{vrstva}</layer>
+        </trojuhelniky>
+        <vrstevnice>
+          <draw>true</draw>
+          <fileName>{vrstva}.dwg</fileName>
+          <layer>acv-{vrstva}</layer>
+        </vrstevnice>
+      </DWGNastaveni>
+      <NastaveniDebugT91>
+        <PopisBodu xmlns:a="http://schemas.datacontract.org/2004/07/RoadPAC.Cad.CadControls">
+          <_layerMod i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter" />
+          <_visible xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter">false</_visible>
+          <a:DelkaDeliciCary>1</a:DelkaDeliciCary>
+          <a:DescriptionTemplate>{0:0.00}</a:DescriptionTemplate>
+          <a:FullTextTemplate i:nil="true" />
+          <a:InsertOffset xmlns:b="http://schemas.datacontract.org/2004/07/jhsys.Math">
+            <b:x>0</b:x>
+            <b:y>1</b:y>
+          </a:InsertOffset>
+          <a:PosunUOsy>true</a:PosunUOsy>
+          <a:ShowVzdalenostOdOsy>false</a:ShowVzdalenostOdOsy>
+          <a:ShowVzdalenostOdOsyJednoradkove>true</a:ShowVzdalenostOdOsyJednoradkove>
+          <a:TextSize>0.18</a:TextSize>
+          <a:VerticalLineLength>0.2</a:VerticalLineLength>
+          <a:VzdalenostOdOsyTemplate>{0:0.000}</a:VzdalenostOdOsyTemplate>
+        </PopisBodu>
+        <PopisyBodu xmlns:a="http://schemas.datacontract.org/2004/07/RoadPAC.Cad.CadControls" />
+        <S91File i:nil="true" />
+        <TextHeight i:nil="true" />
+        <UseDebugT91>false</UseDebugT91>
+        <UseNazev>false</UseNazev>
+        <UsePopis>true</UsePopis>
+        <UsePoznamka>false</UsePoznamka>
+        <VelikostKrizku>0.2</VelikostKrizku>
+      </NastaveniDebugT91>
+      <NastaveniDwgRezy />
+      <TxtNastaveni>
+        <pocetDesetinnychMist>3</pocetDesetinnychMist>
+        <sirkaCis>12</sirkaCis>
+        <sirkaDx>9</sirkaDx>
+        <sirkaPozice>12</sirkaPozice>
+        <sirkaZ>9</sirkaZ>
+      </TxtNastaveni>
+      <XLSNastaveni>
+        <sablona>default.xls</sablona>
+      </XLSNastaveni>
+    </RoadPACV47NFile.NastaveniVystupuType>
+  </NastaveniVystupuN47>
+</x47>

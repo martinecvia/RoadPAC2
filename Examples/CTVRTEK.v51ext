@@ -1,0 +1,149 @@
+﻿<V51ExtFile xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+  <Curbking xmlns:a="http://schemas.datacontract.org/2004/07/RDPVFiles.V51Ext">
+    <a:CurbkingMod>
+      <a:DoVozovky>0</a:DoVozovky>
+      <a:EquipmentClass i:nil="true" />
+      <a:EquipmentType i:nil="true" />
+      <a:Hloubka>0</a:Hloubka>
+      <a:KodPolohy i:nil="true" />
+      <a:KodVynechaniRadku>0</a:KodVynechaniRadku>
+      <a:RefID i:nil="true" />
+      <a:Sirka>0</a:Sirka>
+      <a:SirkaVVPod>0</a:SirkaVVPod>
+      <a:StaniceniKonec>0</a:StaniceniKonec>
+      <a:StaniceniZacatek>0</a:StaniceniZacatek>
+    </a:CurbkingMod>
+  </Curbking>
+  <ModifikaceISV xmlns:a="http://schemas.datacontract.org/2004/07/RDPVFiles.V51Ext">
+    <a:VModifikaceISV>
+      <KodStrany xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">OBE</KodStrany>
+      <StaniceniKonec xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</StaniceniKonec>
+      <StaniceniZacatek xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</StaniceniZacatek>
+      <a:ISV i:nil="true" />
+    </a:VModifikaceISV>
+  </ModifikaceISV>
+  <NezpevnenaKrajnice xmlns:a="http://schemas.datacontract.org/2004/07/RDPVFiles.V51Ext">
+    <a:VNezpevnenaKrajnice>
+      <KodStrany xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">OBE</KodStrany>
+      <StaniceniKonec xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</StaniceniKonec>
+      <StaniceniZacatek xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</StaniceniZacatek>
+      <a:SirkaKonec>0</a:SirkaKonec>
+      <a:SirkaZacatek i:nil="true" />
+      <a:SpadKonec>0</a:SpadKonec>
+      <a:SpadPlaneKonec>0</a:SpadPlaneKonec>
+      <a:SpadPlaneZacatek i:nil="true" />
+      <a:SpadZacatek i:nil="true" />
+    </a:VNezpevnenaKrajnice>
+  </NezpevnenaKrajnice>
+  <Paraplan xmlns:a="http://schemas.datacontract.org/2004/07/RDPVFiles.V51Ext">
+    <a:ParaplanMod>
+      <a:KodStrany>OBE</a:KodStrany>
+      <a:StaniceniKonec>0</a:StaniceniKonec>
+      <a:StaniceniZacatek>0</a:StaniceniZacatek>
+      <a:Varianta>0</a:Varianta>
+    </a:ParaplanMod>
+  </Paraplan>
+  <PolniCesta xmlns:a="http://schemas.datacontract.org/2004/07/RDPVFiles.V51Ext">
+    <a:VPolniCesta>
+      <KodStrany xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">OBE</KodStrany>
+      <StaniceniKonec xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</StaniceniKonec>
+      <StaniceniZacatek xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</StaniceniZacatek>
+      <a:SirkaSvahu i:nil="true" />
+      <a:SpadHranyAktivniVrstvy>0</a:SpadHranyAktivniVrstvy>
+      <a:SpadSvahu i:nil="true" />
+      <a:TloustkaAktivniVrstvy>0</a:TloustkaAktivniVrstvy>
+    </a:VPolniCesta>
+  </PolniCesta>
+  <SablonyKrajnice xmlns:a="http://schemas.datacontract.org/2004/07/RDPVFiles.V51Ext">
+    <a:UpravaKrajniceTemplate>
+      <a:Casti>
+        <a:UpravaKrajniceTemplatePart>
+          <a:IfcColor i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing" />
+          <a:IfcCzElement i:nil="true" />
+          <a:IfcCzMaterial i:nil="true" />
+          <a:IfcCzName i:nil="true" />
+          <a:KonecKod i:nil="true" />
+          <a:KonecPosun>0</a:KonecPosun>
+          <a:Tloustka>0</a:Tloustka>
+          <a:ZacatekKod i:nil="true" />
+          <a:ZacatekPosun>0</a:ZacatekPosun>
+        </a:UpravaKrajniceTemplatePart>
+        <a:UpravaKrajniceTemplatePart>
+          <a:IfcColor i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing" />
+          <a:IfcCzElement i:nil="true" />
+          <a:IfcCzMaterial i:nil="true" />
+          <a:IfcCzName i:nil="true" />
+          <a:KonecKod>ZTN</a:KonecKod>
+          <a:KonecPosun>0</a:KonecPosun>
+          <a:Tloustka>0.1</a:Tloustka>
+          <a:ZacatekKod>ZT0</a:ZacatekKod>
+          <a:ZacatekPosun>0</a:ZacatekPosun>
+        </a:UpravaKrajniceTemplatePart>
+      </a:Casti>
+      <a:NazevSablony>Sablona 1</a:NazevSablony>
+    </a:UpravaKrajniceTemplate>
+  </SablonyKrajnice>
+  <SablonyVozovek xmlns:a="http://schemas.datacontract.org/2004/07/RDPVFiles.V51Ext" />
+  <SablonyVozovekFile i:nil="true" />
+  <SnizeniKrajnice xmlns:a="http://schemas.datacontract.org/2004/07/RDPVFiles.V51Ext">
+    <a:SnizeniKrajniceType>
+      <KodStrany xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">OBE</KodStrany>
+      <StaniceniKonec xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</StaniceniKonec>
+      <StaniceniZacatek xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</StaniceniZacatek>
+      <a:SnizeniKrajnice>0</a:SnizeniKrajnice>
+    </a:SnizeniKrajniceType>
+  </SnizeniKrajnice>
+  <Tvarnice xmlns:a="http://schemas.datacontract.org/2004/07/RDPVFiles.V51Ext">
+    <a:PrikopovaTvarniceExtType>
+      <KodStrany xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">OBE</KodStrany>
+      <StaniceniKonec xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</StaniceniKonec>
+      <StaniceniZacatek xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</StaniceniZacatek>
+      <a:BimTvarnice xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">
+        <b:BimAttributes />
+      </a:BimTvarnice>
+      <a:BimTvarniceLoze xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">
+        <b:BimAttributes />
+      </a:BimTvarniceLoze>
+      <a:BimVnejsiLoze xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">
+        <b:BimAttributes />
+      </a:BimVnejsiLoze>
+      <a:BimVnejsiPridlazba xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">
+        <b:BimAttributes />
+      </a:BimVnejsiPridlazba>
+      <a:BimVnitrniLoze xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">
+        <b:BimAttributes />
+      </a:BimVnitrniLoze>
+      <a:BimVnitrniPridlazba xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">
+        <b:BimAttributes />
+      </a:BimVnitrniPridlazba>
+    </a:PrikopovaTvarniceExtType>
+  </Tvarnice>
+  <UpravaKrajnice xmlns:a="http://schemas.datacontract.org/2004/07/RDPVFiles.V51Ext">
+    <a:UpravaKrajnicePouziti>
+      <KodStrany xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">OBE</KodStrany>
+      <StaniceniKonec xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">100</StaniceniKonec>
+      <StaniceniZacatek xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</StaniceniZacatek>
+      <a:Name i:nil="true" />
+    </a:UpravaKrajnicePouziti>
+  </UpravaKrajnice>
+  <ZlepseniPodlozi xmlns:a="http://schemas.datacontract.org/2004/07/RDPVFiles.V51Ext">
+    <a:ZlepseniPodlozi>
+      <Ignorovat xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</Ignorovat>
+      <KodStrany xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">OBE</KodStrany>
+      <StaniceniKonec xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</StaniceniKonec>
+      <StaniceniZacatek xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</StaniceniZacatek>
+      <a:PricnySpad i:nil="true" />
+      <a:Tloustka>0</a:Tloustka>
+      <a:TypPricnehoSklonu>0</a:TypPricnehoSklonu>
+    </a:ZlepseniPodlozi>
+  </ZlepseniPodlozi>
+  <ZpevneniKrajnice xmlns:a="http://schemas.datacontract.org/2004/07/RDPVFiles.V51Ext">
+    <a:ZpevneniKrajniceType>
+      <KodStrany xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">OBE</KodStrany>
+      <StaniceniKonec xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</StaniceniKonec>
+      <StaniceniZacatek xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</StaniceniZacatek>
+      <a:Material i:nil="true" />
+      <a:Tloustka>0</a:Tloustka>
+    </a:ZpevneniKrajniceType>
+  </ZpevneniKrajnice>
+</V51ExtFile>

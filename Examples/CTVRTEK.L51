@@ -1,0 +1,1643 @@
+ -------------------------------------------------------------------------------------------------------------------
+  Pragoprojekt Praha, a. s.  stredisko CAD,                                         14754  Praha 4,  K Ryšánce 16
+                                 Programový systém  R o a d p a c - program  RP51
+ 
+                                         konstrukce pøíèných øezù koridoru
+ 
+  verze: 2019 2.0.24.603                     datum zadání:03.10.2024            datum výpoètu:03.10.2024 12:56:48
+  Èíslo verze: 2.0.24.603 v19
+ -------------------------------------------------------------------------------------------------------------------
+ projekt: CTVRTEK                                                                               
+ trasa:   CTVRTEK.V51                                                                           
+ 
+ *    Ve výpoètu nebudou použity 3D polxgony
+ 
+ *     Použit vstupní soubor  Terénní øezy s názvem C:\TEMP\Temporary_Files\CTVRTEK.STR
+ *     Akce:       "Neznámá akce"                                                              
+ *     Trasa:      "Neznámá trasa"                                                             
+ *     Datum vzniku       12.10.2023  programem  SI20  
+ *     Datum posl. zápisu 12.10.2023  programem  SI20  
+ 
+ *     Použit vstupní soubor  niveleta s názvem C:\TEMP\Temporary_Files\CTVRTEK.SNI
+ *     Akce:                                                                                   
+ *     Trasa:                                                                                  
+ *     Datum vzniku       12.10.2023  programem  HNIV21
+ *     Datum posl. zápisu 12.10.2023  programem  HNIV21
+ 
+ 
+ *     Použit vstupní soubor  Pokrytí s názvem C:\TEMP\Temporary_Files\CTVRTEK.SKR
+ *     Akce:                                                                                   
+ *     Trasa:                                                                                  
+ *     Datum vzniku       03.10.2024  programem  S4322 
+ *     Datum posl. zápisu 03.10.2024  programem  S4322 
+ 
+ *     Vytvoøen výstupní soubor  Pøíèné øezy s názvem C:\TEMP\Temporary_Files\CTVRTEK.SPR
+ *     Akce:                                                                                  
+ *     Trasa:                                                                                 
+ *     Datum vzniku       03.10.2024  programem  S51011
+ *     Datum posl. zápisu 03.10.2024  programem  S51011
+ 
+ generovat hteleso, parapláò: ano 
+ generovat kresbu O51:        ne  
+ 
+ 
+ 
+ 
+ K O N T R O L N Í   T I S K   P A R A M E T R U   P O   S E T Ø Í D Ì N Í
+           L  e  v  á      s  t  r  a  n  a                              P  r  a  v  á    s  t  r  a  n  a
+ Význam  kód   stan.zaè.  stan.kon.  P-1    P-2    P-3    P-4   Význam  kód   stan.zaè.  stan.kon.  P-1    P-2    P-3    P-4  
+ pøíkop   60   0.000000   3.002549   0.00   0.40   3.00   1.20  pøíkop   60   0.000000   3.002549   0.00   0.40   3.00   1.20
+ pøíkop   61   0.000000   3.002549   0.00   0.30   3.00   0.90  pøíkop   61   0.000000   3.002549   0.00   0.30   3.00   0.90
+ pøíkop   62   0.000000   3.002549   0.00   0.00   0.00   1.00  pøíkop   62   0.000000   3.002549   0.00   0.00   0.00   1.00
+ krajnice 10   0.100000   0.500000   2.00  10.00  15.00   0.50  krajnice 10   0.100000   0.500000   2.00  10.00  15.00   0.50
+ krajnice 11   0.100000   0.500000   0.00   1.00   8.00  20.00  krajnice 11   0.100000   0.500000   0.00   1.00   8.00  20.00
+ humus.   70   0.100000   1.000000   0.15   0.20   0.30   0.44  humus.   70   0.100000   1.000000   0.15   0.20   0.30   0.44
+ odøez    91   0.100000   0.200000   1.00   3.00   0.00   0.00  stø.pruh 12   0.200000   0.286000   1.13   0.44  11.00   1.49
+  násyp   20   0.110000   0.120000   2.00   2.00   0.50   1.70  odøez    91   0.300000   0.400000   4.00   6.00   7.00   1.11
+  násyp   21   0.110000   0.120000   0.60   1.50   0.70   1.20
+  násyp   22   0.110000   0.120000   0.80   1.00   0.90   0.50
+  rùzné   90   0.123000   0.456000   0.00   1.00   2.00   3.21
+ stø.pruh 12   0.200000   0.286000   1.12   0.33  10.00   1.50
+ stø.pruh 12   0.210000   0.220000 999.00   0.00   5.00   0.40
+ 
+ 
+ 
+ poèet øezù na hláskách    :   0
+ z toho sjednoceno         :          0
+ poèet øezù v souboru SKR  : 152
+ poèet øezù po spojení     : 152
+ 
+Seznam stanièní byl získán metodou 2. (152 -> 152 )
+ 
+ *****   zpracovává se øez v km   0.000000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  G terén prodloužen vpravo
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.020000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Násypové øešení pøechodové oblasti          
+ **  P Pøíkop prohlouben na kotu 314.116
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 2) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vpravo
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.040000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Násypové øešení pøechodové oblasti          
+ **  P Pøíkop prohlouben na kotu 312.697
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 2) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vpravo
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.060000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.080000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Násypové øešení pøechodové oblasti          
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.100000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Násypové øešení pøechodové oblasti          
+ *   L odøez typu K13 = 1
+ *   L Pøíkop ve výkopu typuA1
+ **  L Odøez (vyplnìní) nelze zkonstruovat, ignorovány parametry P-91
+ **  L Pøíkop prohlouben na kotu 308.160
+ **  L Velká výška svahu za pøíkopem - zmírnìno P30-4 a P31-4
+ *   L Varianta svahu: násypové øešení PO (33)
+ *   P Násypové øešení pøechodové oblasti          
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  kontrola pøíè. øezu v km    0.100000  na korunì zrušen bod è.  5vlevo
+ **  opravena diference v napojení (sb19) v km    0.100000: dif= 0.161 0.145
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.120000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Násypové øešení pøechodové oblasti          
+ *   L odøez typu K13 = 1
+ *   L Pøíkop ve výkopu typuA1
+ **  L Odøez (vyplnìní) nelze zkonstruovat, ignorovány parametry P-91
+ **  L Pøíkop prohlouben na kotu 306.740
+ *   L Varianta svahu: násypové øešení PO (33)
+ *   P Násypové øešení pøechodové oblasti          
+ **  P Pøíkop prohlouben na kotu 306.740
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 2) =  3
+ **  kontrola pøíè. øezu v km    0.120000  na korunì vymìnìny body è.  6  5vlevo
+ **  opravena diference v napojení (sb19) v km    0.120000: dif= 0.037 0.007
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.140000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ **    Chybnì zadaný parametr P90-4, použita šíøka lavièky 1 m  
+ *   L Výkopové øešení pøechodové oblasti          
+ *   L odøez typu K13 = 1
+ *   L Pøíkop ve výkopu typuA1
+ **  L Odøez (vyplnìní) nelze zkonstruovat, ignorovány parametry P-91
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: výkopové øešení PO,  ISV = 41, 42
+ *     Doplnìní drenáže v krajnici v pøechodové oblasti
+ *   P Násypové øešení pøechodové oblasti          
+ **  P Pøíkop prohlouben na kotu 305.321
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 2) =  3
+ **  kontrola pøíè. øezu v km    0.140000  na korunì zrušen bod è.  5vlevo
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.160000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ **    Chybnì zadaný parametr P90-4, použita šíøka lavièky 1 m  
+ *   L Výkopové øešení pøechodové oblasti          
+ *   L odøez typu K13 = 1
+ *   L Pøíkop ve výkopu typuA1
+ **  L Odøez (vyplnìní) nelze zkonstruovat, ignorovány parametry P-91
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: výkopové øešení PO,  ISV = 41, 42
+ *     Doplnìní drenáže v krajnici v pøechodové oblasti
+ *   P Násypové øešení pøechodové oblasti          
+ **  P Pøíkop prohlouben na kotu 303.901
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 2) =  3
+ **  kontrola pøíè. øezu v km    0.160000  na korunì zrušen bod è.  5vlevo
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.180000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ **    Chybnì zadaný parametr P90-4, použita šíøka lavièky 1 m  
+ *   L Výkopové øešení pøechodové oblasti          
+ *   L odøez typu K13 = 1
+ *   L Pøíkop ve výkopu typuA1
+ **  L Odøez (vyplnìní) nelze zkonstruovat, ignorovány parametry P-91
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: výkopové øešení PO,  ISV = 41, 42
+ *     Doplnìní drenáže v krajnici v pøechodové oblasti
+ *   P Násypové øešení pøechodové oblasti          
+ **  P Pøíkop prohlouben na kotu 302.481
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 2) =  3
+ **  kontrola pøíè. øezu v km    0.180000  na korunì zrušen bod è.  5vlevo
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.200000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ **    Chybnì zadaný parametr P90-4, použita šíøka lavièky 1 m  
+ *   L Výkopové øešení pøechodové oblasti          
+ *   L odøez typu K13 = 1
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Nasyp
+ *     Doplnìní drenáže v krajnici v pøechodové oblasti
+ *   P Násypové øešení pøechodové oblasti          
+ **  P Pøíkop prohlouben na kotu 301.061
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 2) =  3
+ **  G terén prodloužen vlevo
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.220000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ **    Chybnì zadaný parametr P90-4, použita šíøka lavièky 1 m  
+ *   L Výkopové øešení pøechodové oblasti          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: výkopové øešení PO,  ISV = 41, 42
+ *     Doplnìní drenáže v krajnici v pøechodové oblasti
+ *   P Násypové øešení pøechodové oblasti          
+ **  P Pøíkop prohlouben na kotu 299.642
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 2) =  3
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.240000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ **    Chybnì zadaný parametr P90-4, použita šíøka lavièky 1 m  
+ *   L Výkopové øešení pøechodové oblasti          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: výkopové øešení PO,  ISV = 41, 42
+ *     Doplnìní drenáže v krajnici v pøechodové oblasti
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.260000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ **    Chybnì zadaný parametr P90-4, použita šíøka lavièky 1 m  
+ *   L Výkopové øešení pøechodové oblasti          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: výkopové øešení PO,  ISV = 41, 42
+ *     Doplnìní drenáže v krajnici v pøechodové oblasti
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.280000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ **    Chybnì zadaný parametr P90-4, použita šíøka lavièky 1 m  
+ *   L Výkopové øešení pøechodové oblasti          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: výkopové øešení PO,  ISV = 41, 42
+ *     Doplnìní drenáže v krajnici v pøechodové oblasti
+ *   P Násypové øešení pøechodové oblasti          
+ **  P Pøíkop prohlouben na kotu 295.383
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 2) =  3
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.300000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ **    Chybnì zadaný parametr P90-4, použita šíøka lavièky 1 m  
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *     Doplnìní drenáže v krajnici v pøechodové oblasti
+ *   P Èistý výkop          
+ *   P vyplnìní typu K13 = 4 
+ **  P Odøez (vyplnìní) nelze zkonstruovat, ignorovány parametry P-91
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.320000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ **    Chybnì zadaný parametr P90-4, použita šíøka lavièky 1 m  
+ *   L Výkopové øešení pøechodové oblasti          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: výkopové øešení PO,  ISV = 41, 42
+ *     Doplnìní drenáže v krajnici v pøechodové oblasti
+ *   P Èistý výkop          
+ *   P vyplnìní typu K13 = 4 
+ **  P Odøez (vyplnìní) nelze zkonstruovat, ignorovány parametry P-91
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.340000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ **    Chybnì zadaný parametr P90-4, použita šíøka lavièky 1 m  
+ *   L Výkopové øešení pøechodové oblasti          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: výkopové øešení PO,  ISV = 41, 42
+ *     Doplnìní drenáže v krajnici v pøechodové oblasti
+ *   P Èistý výkop          
+ *   P vyplnìní typu K13 = 4 
+ **  P Odøez (vyplnìní) nelze zkonstruovat, ignorovány parametry P-91
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.360000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ **    Chybnì zadaný parametr P90-4, použita šíøka lavièky 1 m  
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *     Doplnìní drenáže v krajnici v pøechodové oblasti
+ *   P Èistý výkop          
+ *   P vyplnìní typu K13 = 4 
+ **  P Odøez (vyplnìní) nelze zkonstruovat, ignorovány parametry P-91
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.380000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ **    Chybnì zadaný parametr P90-4, použita šíøka lavièky 1 m  
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *     Doplnìní drenáže v krajnici v pøechodové oblasti
+ *   P Èistý výkop          
+ *   P vyplnìní typu K13 = 4 
+ **  P Odøez (vyplnìní) nelze zkonstruovat, ignorovány parametry P-91
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.400000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ **    Chybnì zadaný parametr P90-4, použita šíøka lavièky 1 m  
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *     Doplnìní drenáže v krajnici v pøechodové oblasti
+ *   P Èistý výkop          
+ *   P vyplnìní typu K13 = 4 
+ **  P Odøez (vyplnìní) nelze zkonstruovat, ignorovány parametry P-91
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.420000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ **    Chybnì zadaný parametr P90-4, použita šíøka lavièky 1 m  
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *     Doplnìní drenáže v krajnici v pøechodové oblasti
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.440000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ **    Chybnì zadaný parametr P90-4, použita šíøka lavièky 1 m  
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *     Doplnìní drenáže v krajnici v pøechodové oblasti
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.460000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.480000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.500000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.520000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.540000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.560000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.580000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.600000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.620000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.640000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.660000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.680000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.700000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.720000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.740000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.760000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.780000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.800000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.820000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.840000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.860000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.880000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.900000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.920000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.940000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.960000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.980000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.000000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.020000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.040000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.060000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.080000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.100000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.120000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.140000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.160000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.180000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.200000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.220000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.240000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.260000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.280000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.300000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.320000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.340000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.360000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.380000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.400000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.420000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.440000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.460000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.480000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ *   Modifikace vozovky zvláštním tvarem na stranì LL, hloubka 0.085 do krajnice: 2.5, z vozovky 0, vvPod: 0 
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.500000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.520000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.540000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.560000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.580000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.600000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.620000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.640000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.660000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.680000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.700000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Násypové øešení pøechodové oblasti          
+ *   L Varianta svahu: násypové øešení PO (33)
+ *   P Násypové øešení pøechodové oblasti          
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.720000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.740000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.760000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.780000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.800000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.820000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.840000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.860000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.880000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.900000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.920000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.940000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.960000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.980000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.000000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.020000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.040000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.060000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.080000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.100000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.120000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Násypové øešení pøechodové oblasti          
+ *   L Varianta svahu: násypové øešení PO (33)
+ *   P Násypové øešení pøechodové oblasti          
+ **  P Pøíkop prohlouben na kotu 271.915
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 2) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vpravo
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.140000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.160000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.180000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.200000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.220000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.240000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.260000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.280000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.300000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.320000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.340000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.360000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.380000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.400000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.420000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.440000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.460000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.480000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.500000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.520000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Pøíkop prohlouben na kotu 266.513
+ *   L Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 1) =  3
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.540000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.560000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Násypové øešení pøechodové oblasti          
+ **  P Pøíkop prohlouben na kotu 265.689
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 2) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vpravo
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.580000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Násypové øešení pøechodové oblasti          
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.600000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Násypové øešení pøechodové oblasti          
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.620000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Násypové øešení pøechodové oblasti          
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.640000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.660000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.680000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.700000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.720000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.740000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Násypové øešení pøechodové oblasti          
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.760000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Násypové øešení pøechodové oblasti          
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.780000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Pøíkop prohlouben na kotu 263.423
+ *   L Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 1) =  3
+ *   P Násypové øešení pøechodové oblasti          
+ **  P Pøíkop prohlouben na kotu 263.408
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 2) =  3
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.800000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.820000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.840000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.860000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.880000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.900000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.920000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Násypové øešení pøechodové oblasti          
+ **  P Pøíkop prohlouben na kotu 261.925
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 2) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vpravo
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.940000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Násypové øešení pøechodové oblasti          
+ *   L Varianta svahu: násypové øešení PO (33)
+ *   P Násypové øešení pøechodové oblasti          
+ **  P Pøíkop prohlouben na kotu 261.713
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 2) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vpravo
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.960000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Pøíkop prohlouben na kotu 261.501
+ *   L Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 1) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vlevo
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.980000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   3.000000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Èistý výkop          
+ *   L Pøíkop ve výkopu typuA1
+ *   L Varianta svahu: Výkop
+ *   P Èistý výkop          
+ *   P Pøíkop ve výkopu typuA1
+ *   P Varianta svahu: Výkop
+ **  G terén prodloužen vlevo
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   3.002550  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ **  další øezy, poèínaje km   3.002550 leží za koncem trasy v km   3.002549
+ 
+ *** výpoèet ukonèen ***
+     doporuèujeme provìøit výsledky
+*** Soubor spr byl upraven z hlediska boèního omezení pro kompat. se starými programy. 

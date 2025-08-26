@@ -1,0 +1,2213 @@
+ -------------------------------------------------------------------------------------------------------------------
+  Pragoprojekt Praha, a. s.  stredisko CAD,                                         14754  Praha 4,  K Ryšánce 16
+                                 Programový systém  R o a d p a c - program  RP51
+ 
+                                         konstrukce pøíèných øezù koridoru
+ 
+  verze: 2019 2.0.23.601                     datum zadání:12.10.2023            datum výpoètu:12.10.2023 15:05:15
+  Èíslo verze: 2.0.23.601 v19
+ -------------------------------------------------------------------------------------------------------------------
+ projekt: TRO                                                                                   
+ trasa:   TRO.V51                                                                               
+ 
+ *    Ve výpoètu nebudou použity 3D polxgony
+ 
+ *     Použit vstupní soubor  Terénní øezy s názvem C:\TEMP\Temporary_Files\TRO.STR
+ *     Akce:       "Neznámá akce"                                                              
+ *     Trasa:      "Neznámá trasa"                                                             
+ *     Datum vzniku       19. 4.2023  programem  SI20  
+ *     Datum posl. zápisu 19. 4.2023  programem  SI20  
+ 
+ *     Použit vstupní soubor  niveleta s názvem C:\TEMP\Temporary_Files\TRO.SNI
+ *     Akce:                                                                                   
+ *     Trasa:                                                                                  
+ *     Datum vzniku       19.04.2023  programem  HNIV21
+ *     Datum posl. zápisu 19.04.2023  programem  HNIV21
+ 
+ 
+ *     Použit vstupní soubor  Pokrytí s názvem C:\TEMP\Temporary_Files\TRO.SKR
+ *     Akce:                                                                                   
+ *     Trasa:                                                                                  
+ *     Datum vzniku       19.04.2023  programem  S4322 
+ *     Datum posl. zápisu 19.04.2023  programem  S4322 
+ 
+ *     Vytvoøen výstupní soubor  Pøíèné øezy s názvem C:\TEMP\Temporary_Files\TRO.SPR
+ *     Akce:                                                                                  
+ *     Trasa:                                                                                 
+ *     Datum vzniku       12.10.2023  programem  S51011
+ *     Datum posl. zápisu 12.10.2023  programem  S51011
+ 
+ generovat hteleso, parapláò: ano 
+ generovat kresbu O51:        ne  
+ 
+ 
+ 
+ 
+ K O N T R O L N Í   T I S K   P A R A M E T R U   P O   S E T Ø Í D Ì N Í
+           L  e  v  á      s  t  r  a  n  a                              P  r  a  v  á    s  t  r  a  n  a
+ Význam  kód   stan.zaè.  stan.kon.  P-1    P-2    P-3    P-4   Význam  kód   stan.zaè.  stan.kon.  P-1    P-2    P-3    P-4  
+ humus.   70   0.000000   2.820693   0.15   0.00   0.00   0.00  humus.   70   0.000000   2.820693   0.15   0.00   0.00   0.00
+ krajnice 10   0.100000   0.200000   3.00   8.00   0.00   0.00   násyp   20   0.100000   0.200000   3.00   0.50   0.00   0.00
+ krajnice 11   0.100000   0.200000   0.00   0.75   3.00   0.00   násyp   21   0.100000   0.200000   0.00   0.00   0.00   0.00
+  násyp   20   0.100000   0.200000   3.00   0.50   0.00   0.00
+  násyp   21   0.100000   0.200000   0.00   0.00   0.00   0.00
+ 
+kóta dna       1.360000   1.560000 278.49 275.60                kóta dna        1.360000   1.680000 278.70 274.42
+ 
+ 
+ 
+ poèet øezù na hláskách    :   0
+ z toho sjednoceno         :          0
+ poèet øezù v souboru SKR  : 143
+ poèet øezù po spojení     : 143
+ 
+Seznam stanièní byl získán metodou 2. (143 -> 143 )
+ 
+ *****   zpracovává se øez v km   0.000000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  G terén prodloužen vpravo
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.020000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.040000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.060000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.080000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.100000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Velká výška svahu za pøíkopem - zmírnìno P30-4 a P31-4
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.120000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.140000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.160000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.180000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.200000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.220000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.240000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.260000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.280000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.300000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.320000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.340000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.360000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.380000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.400000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.420000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.440000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.460000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.480000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.500000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.520000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.540000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Násypové øešení pøechodové oblasti          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.560000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Pøíkop prohlouben na kotu 286.927
+ **  L Dno pøíkopu nad terénem, ignorována zadaná kóta dna
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 1) =  3
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Násypové øešení pøechodové oblasti          
+ **  P Pøíkop prohlouben na kotu 286.927
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 2) =  3
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.580000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Pøíkop prohlouben na kotu 286.668
+ **  L Dno pøíkopu nad terénem, ignorována zadaná kóta dna
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 1) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vlevo
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Násypové øešení pøechodové oblasti          
+ **  P Pøíkop prohlouben na kotu 286.668
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 2) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vpravo
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.600000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Pøíkop prohlouben na kotu 286.447
+ **  L Dno pøíkopu nad terénem, ignorována zadaná kóta dna
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 1) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vlevo
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.620000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Pøíkop prohlouben na kotu 286.225
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 1) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vlevo
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.640000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Pøíkop prohlouben na kotu 286.004
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 1) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vlevo
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.660000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.680000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.700000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Pøíkop prohlouben na kotu 285.340
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 1) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vlevo
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.720000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Pøíkop prohlouben na kotu 285.118
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 1) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vlevo
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.740000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Pøíkop prohlouben na kotu 284.897
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 1) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vlevo
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.760000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.780000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.800000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.820000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Pøíkop prohlouben na kotu 284.011
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 1) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vlevo
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.840000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Pøíkop prohlouben na kotu 283.790
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 1) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vlevo
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.860000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Pøíkop prohlouben na kotu 283.569
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 1) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vlevo
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.880000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Pøíkop prohlouben na kotu 283.347
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 1) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vlevo
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.900000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Pøíkop prohlouben na kotu 283.126
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 1) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vlevo
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.920000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Pøíkop prohlouben na kotu 282.904
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 1) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vlevo
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.940000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.960000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   0.980000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.000000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.020000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.040000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.060000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.080000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.100000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.120000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.140000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.160000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.180000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.200000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.220000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.240000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.260000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.280000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.300000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.320000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.340000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.360000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop se zadanou kótou rigolu - pøíkopu           278.490
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop se zadanou kótou rigolu - pøíkopu           278.700
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.380000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop se zadanou kótou rigolu - pøíkopu           278.201
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop se zadanou kótou rigolu - pøíkopu           278.433
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.400000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop se zadanou kótou rigolu - pøíkopu           277.912
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuC2
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop se zadanou kótou rigolu - pøíkopu           278.165
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuC2
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.420000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop se zadanou kótou rigolu - pøíkopu           277.623
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuC2
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop se zadanou kótou rigolu - pøíkopu           277.898
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuC2
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.440000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti se zadanou kótou patního pøíkopu  277.334
+ **  L Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  L Odstranuje se bod telesa 8.398056, 277.334 aby bylo mozne vlozit bod 8.223056 277.404 FIX191012
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Násypové øešení pøechodové oblasti se zadanou kótou patního pøíkopu  277.630
+ **  P Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  P Odstranuje se bod telesa 8.189316, 277.63 aby bylo mozne vlozit bod 8.014316 277.7 FIX191012
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.460000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti se zadanou kótou patního pøíkopu  277.045
+ **  L Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  L Odstranuje se bod telesa 9.450836, 277.045 aby bylo mozne vlozit bod 9.275836 277.115 FIX191012
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Násypové øešení pøechodové oblasti se zadanou kótou patního pøíkopu  277.363
+ **  P Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  P Odstranuje se bod telesa 9.188309, 277.3625 aby bylo mozne vlozit bod 9.013309 277.4325 FIX191012
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.480000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti se zadanou kótou patního pøíkopu  276.756
+ **  L Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  L Odstranuje se bod telesa 10.6562, 276.756 aby bylo mozne vlozit bod 10.4812 276.826 FIX191012
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Násypové øešení pøechodové oblasti se zadanou kótou patního pøíkopu  277.095
+ **  P Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  P Odstranuje se bod telesa 10.33997, 277.095 aby bylo mozne vlozit bod 10.16497 277.165 FIX191012
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.500000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp se zadanou kótou patního pøíkopu           276.467
+ **  L Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  L Odstranuje se bod telesa 11.87874, 276.467 aby bylo mozne vlozit bod 11.70374 276.537 FIX191012
+ **  L Dno pøíkopu nad terénem, ignorována zadaná kóta dna
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp se zadanou kótou patního pøíkopu           276.828
+ **  P Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  P Odstranuje se bod telesa 11.50871, 276.8275 aby bylo mozne vlozit bod 11.33371 276.8975 FIX191012
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.520000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp se zadanou kótou patního pøíkopu           276.178
+ **  L Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  L Odstranuje se bod telesa 13.52072, 276.178 aby bylo mozne vlozit bod 13.34572 276.248 FIX191012
+ **  L Dno pøíkopu nad terénem, ignorována zadaná kóta dna
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp se zadanou kótou patního pøíkopu           276.560
+ **  P Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  P Odstranuje se bod telesa 13.26653, 276.56 aby bylo mozne vlozit bod 13.09153 276.63 FIX191012
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.540000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp se zadanou kótou patního pøíkopu           275.889
+ **  L Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  L Odstranuje se bod telesa 14.25424, 275.889 aby bylo mozne vlozit bod 14.07924 275.959 FIX191012
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp se zadanou kótou patního pøíkopu           276.293
+ **  P Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  P Odstranuje se bod telesa 13.96773, 276.2925 aby bylo mozne vlozit bod 13.79273 276.3625 FIX191012
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.560000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti se zadanou kótou patního pøíkopu  275.600
+ **  L Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  L Odstranuje se bod telesa 14.98772, 275.6 aby bylo mozne vlozit bod 14.81272 275.67 FIX191012
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp se zadanou kótou patního pøíkopu           276.025
+ **  P Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  P Odstranuje se bod telesa 14.66898, 276.025 aby bylo mozne vlozit bod 14.49398 276.095 FIX191012
+ **  P Dno pøíkopu nad terénem, ignorována zadaná kóta dna
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.580000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp se zadanou kótou patního pøíkopu           275.758
+ **  P Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  P Odstranuje se bod telesa 15.37027, 275.7575 aby bylo mozne vlozit bod 15.19527 275.8275 FIX191012
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.600000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Násypové øešení pøechodové oblasti se zadanou kótou patního pøíkopu  275.490
+ **  P Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  P Odstranuje se bod telesa 16.07152, 275.49 aby bylo mozne vlozit bod 15.89652 275.56 FIX191012
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.620000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Násypové øešení pøechodové oblasti se zadanou kótou patního pøíkopu  275.223
+ **  P Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  P Odstranuje se bod telesa 16.77277, 275.2225 aby bylo mozne vlozit bod 16.59777 275.2925 FIX191012
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.640000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Násypové øešení pøechodové oblasti se zadanou kótou patního pøíkopu  274.955
+ **  P Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  P Odstranuje se bod telesa 17.45914, 274.955 aby bylo mozne vlozit bod 17.28414 275.025 FIX191012
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.660000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Násypové øešení pøechodové oblasti se zadanou kótou patního pøíkopu  274.688
+ **  P Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  P Odstranuje se bod telesa 18.79897, 274.6875 aby bylo mozne vlozit bod 18.62397 274.7575 FIX191012
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.680000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Násypové øešení pøechodové oblasti se zadanou kótou patního pøíkopu  274.420
+ **  P Je zadaná kota dna, typ pøíkopu se mìní na 4
+ *     Posun paty svahu u pøíkopového žlabu o     .175m
+ **  P Odstranuje se bod telesa 19.27962, 274.42 aby bylo mozne vlozit bod 19.10462 274.49 FIX191012
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.700000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.720000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.740000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.760000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.780000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.800000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.820000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.840000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.860000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.880000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.900000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.920000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.940000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.960000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   1.980000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.000000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.020000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.040000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý násyp          
+ *   P Varianta svahu: Nasyp
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.060000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Násypové øešení pøechodové oblasti          
+ **  P Pøíkop prohlouben na kotu 272.612
+ **  P Dno pøíkopu nad terénem, ignorována zadaná kóta dna
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 2) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vpravo
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.080000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.100000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.120000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.140000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.160000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.180000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.200000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.220000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.240000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.260000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.280000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.300000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.320000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.340000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.360000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.380000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.400000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.420000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.440000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.460000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.480000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.500000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.520000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.540000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.560000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.580000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.600000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.620000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.640000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.660000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.680000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.700000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.720000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.740000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý násyp          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Nasyp
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.760000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti          
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.780000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Násypové øešení pøechodové oblasti          
+ **  L Pøíkop prohlouben na kotu 261.333
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: násypové øešení PO (33)
+ **  doplnìn index sb(19, 1) =  3
+ *     Doplnìní drenáže v úžlabí lomené plánì
+ *     Doplnìny 2 body drenáže vlevo
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.800000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.820000  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  G terén prodloužen vlevo
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *****   zpracovává se øez v km   2.820693  =====     kryt pøeèten z SKR     terén pøeèten z STR
+ *   L Naèten žlab ze souboru V51Ext
+ *   L Èistý výkop          
+ **  L chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   L Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vlevo
+ *   L Varianta svahu: Výkop
+ *   P Naèten žlab ze souboru V51Ext
+ *   P Èistý výkop          
+ **  P chybnì zadaná hloubka pøíkopu f5 opravena podle pøíkopové tvárnice
+ *   P Pøíkop ve výkopu typuA1
+ *   Zapsán pøíkopový žlab vpravo
+ *   P Varianta svahu: Výkop
+ **  G terén prodloužen vlevo
+ **  L Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ **  P Chyba generování podsypu. Zkontroluj vozovokové vrstvy
+ 
+ *** výpoèet ukonèen ***
+     doporuèujeme provìøit výsledky
+*** Soubor spr byl upraven z hlediska boèního omezení pro kompat. se starými programy. 

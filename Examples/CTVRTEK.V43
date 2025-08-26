@@ -1,0 +1,337 @@
+* 4313.12.2024 1 0 1 0 0 0 0 0 0 4 0
+* V V43.2022 V43 - Verze 2022 - Nelze otevøít ve starém dialogu.
+    Máte starou verzi programu pokrytí. **Upgradujte Roadpac**! Kliknìte na <Storno> !
+* A                                                                             
+* B                                                                             
+* H CTVRTEK 
+* S CTVRTEK 
+* K CTVRTEK 
+*
+998
+4311L  0.000000             0.000  3500  0750 0.000 0.000  3000  0600 0 0       0
+4311P  0.000000             0.000  3500  0750 0.000 0.000  3000  0600 0 0       0
+43319  0.000000  2500 0.000 0.000                                               0
+43412      49999   0370925  4000   0617545 50000                                00
+43411      40000   1436732  6000   1984345 39999                                00
+43412      60000   2084345  4000   2734056 60000                                00
+999
+001  0.000000  3002550    20000                                                 0
+001   1240000  1260000     5000                                                 0
+002   3002550              0                                                    0
+999
+/* 
+<-----ROADPAC-FILE-XDATA-SECTION----->
+<xdata><V43ExtFile xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+  <DTMFileName>TRO.dt4</DTMFileName>
+  <ModifikaceReseni xmlns:a="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">
+    <a:ModifikaceReseniRow>
+      <a:Ignorovat>1</a:Ignorovat>
+      <a:Poznamka i:nil="true" />
+      <a:TypIntervaluVal>2</a:TypIntervaluVal>
+      <a:KodStrany>P</a:KodStrany>
+      <a:Body>
+        <a:Body>
+          <a:VBod>
+            <a:KodVynechaniRadku>0</a:KodVynechaniRadku>
+            <a:Poznamka i:nil="true" />
+            <a:X i:nil="true" />
+            <a:Y i:nil="true" />
+            <a:Z i:nil="true" />
+          </a:VBod>
+        </a:Body>
+        <a:IgnorovatVysku>false</a:IgnorovatVysku>
+        <a:RelativniVyska>false</a:RelativniVyska>
+        <a:SHB i:nil="true" />
+        <a:SNI i:nil="true" />
+        <a:StaniceniKonec i:nil="true" />
+        <a:StaniceniOffset>false</a:StaniceniOffset>
+        <a:StaniceniZacatek i:nil="true" />
+      </a:Body>
+      <a:DelkaPrechoduNaKonci>0</a:DelkaPrechoduNaKonci>
+      <a:DelkaPrechoduNaZacatku>0</a:DelkaPrechoduNaZacatku>
+      <a:KodBodu>B</a:KodBodu>
+      <a:StaniceniKonecPolygonu>0.2</a:StaniceniKonecPolygonu>
+      <a:StaniceniZacatekPolygonu>0.1</a:StaniceniZacatekPolygonu>
+    </a:ModifikaceReseniRow>
+    <a:ModifikaceReseniRow>
+      <a:Ignorovat>0</a:Ignorovat>
+      <a:Poznamka />
+      <a:TypIntervaluVal>2</a:TypIntervaluVal>
+      <a:KodStrany>P</a:KodStrany>
+      <a:Body>
+        <a:Body>
+          <a:VBod>
+            <a:KodVynechaniRadku>0</a:KodVynechaniRadku>
+            <a:Poznamka i:nil="true" />
+            <a:X i:nil="true" />
+            <a:Y i:nil="true" />
+            <a:Z i:nil="true" />
+          </a:VBod>
+        </a:Body>
+        <a:IgnorovatVysku>false</a:IgnorovatVysku>
+        <a:RelativniVyska>false</a:RelativniVyska>
+        <a:SHB i:nil="true" />
+        <a:SNI i:nil="true" />
+        <a:StaniceniKonec i:nil="true" />
+        <a:StaniceniOffset>false</a:StaniceniOffset>
+        <a:StaniceniZacatek i:nil="true" />
+      </a:Body>
+      <a:DelkaPrechoduNaKonci>0</a:DelkaPrechoduNaKonci>
+      <a:DelkaPrechoduNaZacatku>0</a:DelkaPrechoduNaZacatku>
+      <a:KodBodu>B</a:KodBodu>
+      <a:StaniceniKonecPolygonu>0.2</a:StaniceniKonecPolygonu>
+      <a:StaniceniZacatekPolygonu>0.1</a:StaniceniZacatekPolygonu>
+    </a:ModifikaceReseniRow>
+  </ModifikaceReseni>
+  <OmezeniPolygonExt xmlns:a="http://schemas.datacontract.org/2004/07/RDPVFiles.V43Ext" />
+  <RozsireniPolygonExt xmlns:a="http://schemas.datacontract.org/2004/07/RDPVFiles.V43Ext" />
+  <ZvlastniTvaryExt xmlns:a="http://schemas.datacontract.org/2004/07/RDPVFiles.V43Ext">
+    <a:V4364>
+      <Ignorovat xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</Ignorovat>
+      <KodStrany xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">L</KodStrany>
+      <StaniceniKonec xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">1.24</StaniceniKonec>
+      <StaniceniZacatek xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">1</StaniceniZacatek>
+      <a:BodSKR i:nil="true" />
+      <a:KodKorunaPlan>K</a:KodKorunaPlan>
+      <a:Poznamka i:nil="true" />
+      <a:SirkaNZK i:nil="true" />
+      <a:SirkaNZKonec i:nil="true" />
+      <a:SklonNZK i:nil="true" />
+      <a:SklonNZKonec i:nil="true" />
+      <a:TypBlok>CH</a:TypBlok>
+      <a:UkoncitBO>false</a:UkoncitBO>
+      <a:VRowID i:nil="true" />
+      <a:VlastniDefinice>
+        <a:KodVynechaniRadku>0</a:KodVynechaniRadku>
+        <a:Poznamka i:nil="true" />
+        <a:TypBlok i:nil="true" />
+        <a:VlastniData i:type="a:V4364_CH">
+          <a:BimDefinition xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">
+            <b:BimAttributes />
+          </a:BimDefinition>
+          <a:ID>0</a:ID>
+          <a:TypBlok i:nil="true" />
+          <a:CHod>
+            <a:BimDefinition i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base" />
+            <a:ID>0</a:ID>
+            <a:TypBlok i:nil="true" />
+            <a:Vrstvy />
+            <a:bim i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base" />
+            <a:sirka>1.25</a:sirka>
+            <a:sirkak i:nil="true" />
+            <a:sklon>2</a:sklon>
+            <a:sklonk i:nil="true" />
+          </a:CHod>
+          <a:Kraj>
+            <a:BimDefinition i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base" />
+            <a:ID>0</a:ID>
+            <a:TypBlok i:nil="true" />
+            <a:Vrstvy />
+            <a:bim i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base" />
+            <a:sirka>0.5</a:sirka>
+            <a:sirkak i:nil="true" />
+            <a:sklon>-8</a:sklon>
+            <a:sklonk i:nil="true" />
+          </a:Kraj>
+          <a:o1>
+            <a:BimDefinition i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base" />
+            <a:ID>0</a:ID>
+            <a:TypBlok i:nil="true" />
+            <a:B>150</a:B>
+            <a:H>250</a:H>
+            <a:Hs>100</a:Hs>
+            <a:Hs2>250</a:Hs2>
+            <a:Hv>150</a:Hv>
+            <a:Hvk>150</a:Hvk>
+            <a:Pouzit>true</a:Pouzit>
+            <a:Zkoseni>1</a:Zkoseni>
+            <a:sv>5</a:sv>
+            <a:sv2>5</a:sv2>
+            <a:ve>0</a:ve>
+          </a:o1>
+          <a:o2>
+            <a:BimDefinition i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base" />
+            <a:ID>0</a:ID>
+            <a:TypBlok i:nil="true" />
+            <a:B>100</a:B>
+            <a:H>250</a:H>
+            <a:Hs>250</a:Hs>
+            <a:Hs2>0</a:Hs2>
+            <a:Hv>20</a:Hv>
+            <a:Hvk>150</a:Hvk>
+            <a:Pouzit>true</a:Pouzit>
+            <a:Zkoseni>1</a:Zkoseni>
+            <a:sv>5</a:sv>
+            <a:sv2>0</a:sv2>
+            <a:ve>0</a:ve>
+          </a:o2>
+        </a:VlastniData>
+      </a:VlastniDefinice>
+    </a:V4364>
+    <a:V4364>
+      <Ignorovat xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</Ignorovat>
+      <KodStrany xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">L</KodStrany>
+      <StaniceniKonec xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">1.26</StaniceniKonec>
+      <StaniceniZacatek xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">1.24</StaniceniZacatek>
+      <a:BodSKR i:nil="true" />
+      <a:KodKorunaPlan>K</a:KodKorunaPlan>
+      <a:Poznamka i:nil="true" />
+      <a:SirkaNZK i:nil="true" />
+      <a:SirkaNZKonec i:nil="true" />
+      <a:SklonNZK i:nil="true" />
+      <a:SklonNZKonec i:nil="true" />
+      <a:TypBlok>CH</a:TypBlok>
+      <a:UkoncitBO>false</a:UkoncitBO>
+      <a:VRowID i:nil="true" />
+      <a:VlastniDefinice>
+        <a:KodVynechaniRadku>0</a:KodVynechaniRadku>
+        <a:Poznamka i:nil="true" />
+        <a:TypBlok i:nil="true" />
+        <a:VlastniData i:type="a:V4364_CH">
+          <a:BimDefinition xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">
+            <b:BimAttributes />
+          </a:BimDefinition>
+          <a:ID>0</a:ID>
+          <a:TypBlok i:nil="true" />
+          <a:CHod>
+            <a:BimDefinition i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base" />
+            <a:ID>0</a:ID>
+            <a:TypBlok i:nil="true" />
+            <a:Vrstvy />
+            <a:bim i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base" />
+            <a:sirka>1.25</a:sirka>
+            <a:sirkak>2.25</a:sirkak>
+            <a:sklon>2</a:sklon>
+            <a:sklonk i:nil="true" />
+          </a:CHod>
+          <a:Kraj>
+            <a:BimDefinition i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base" />
+            <a:ID>0</a:ID>
+            <a:TypBlok i:nil="true" />
+            <a:Vrstvy />
+            <a:bim i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base" />
+            <a:sirka>0.5</a:sirka>
+            <a:sirkak i:nil="true" />
+            <a:sklon>-8</a:sklon>
+            <a:sklonk i:nil="true" />
+          </a:Kraj>
+          <a:o1>
+            <a:BimDefinition i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base" />
+            <a:ID>0</a:ID>
+            <a:TypBlok i:nil="true" />
+            <a:B>150</a:B>
+            <a:H>250</a:H>
+            <a:Hs>100</a:Hs>
+            <a:Hs2>250</a:Hs2>
+            <a:Hv>150</a:Hv>
+            <a:Hvk>150</a:Hvk>
+            <a:Pouzit>true</a:Pouzit>
+            <a:Zkoseni>1</a:Zkoseni>
+            <a:sv>5</a:sv>
+            <a:sv2>5</a:sv2>
+            <a:ve>0</a:ve>
+          </a:o1>
+          <a:o2>
+            <a:BimDefinition i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base" />
+            <a:ID>0</a:ID>
+            <a:TypBlok i:nil="true" />
+            <a:B>100</a:B>
+            <a:H>250</a:H>
+            <a:Hs>250</a:Hs>
+            <a:Hs2>250</a:Hs2>
+            <a:Hv>20</a:Hv>
+            <a:Hvk>150</a:Hvk>
+            <a:Pouzit>true</a:Pouzit>
+            <a:Zkoseni>1</a:Zkoseni>
+            <a:sv>5</a:sv>
+            <a:sv2>5</a:sv2>
+            <a:ve>0</a:ve>
+          </a:o2>
+        </a:VlastniData>
+      </a:VlastniDefinice>
+    </a:V4364>
+    <a:V4364>
+      <Ignorovat xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">0</Ignorovat>
+      <KodStrany xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">L</KodStrany>
+      <StaniceniKonec xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">1.5</StaniceniKonec>
+      <StaniceniZacatek xmlns="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">1.26</StaniceniZacatek>
+      <a:BodSKR i:nil="true" />
+      <a:KodKorunaPlan>K</a:KodKorunaPlan>
+      <a:Poznamka i:nil="true" />
+      <a:SirkaNZK i:nil="true" />
+      <a:SirkaNZKonec i:nil="true" />
+      <a:SklonNZK i:nil="true" />
+      <a:SklonNZKonec i:nil="true" />
+      <a:TypBlok>CH</a:TypBlok>
+      <a:UkoncitBO>false</a:UkoncitBO>
+      <a:VRowID i:nil="true" />
+      <a:VlastniDefinice>
+        <a:KodVynechaniRadku>0</a:KodVynechaniRadku>
+        <a:Poznamka i:nil="true" />
+        <a:TypBlok i:nil="true" />
+        <a:VlastniData i:type="a:V4364_CH">
+          <a:BimDefinition xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base">
+            <b:BimAttributes />
+          </a:BimDefinition>
+          <a:ID>0</a:ID>
+          <a:TypBlok i:nil="true" />
+          <a:CHod>
+            <a:BimDefinition i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base" />
+            <a:ID>0</a:ID>
+            <a:TypBlok i:nil="true" />
+            <a:Vrstvy />
+            <a:bim i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base" />
+            <a:sirka>2.25</a:sirka>
+            <a:sirkak i:nil="true" />
+            <a:sklon>2</a:sklon>
+            <a:sklonk i:nil="true" />
+          </a:CHod>
+          <a:Kraj>
+            <a:BimDefinition i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base" />
+            <a:ID>0</a:ID>
+            <a:TypBlok i:nil="true" />
+            <a:Vrstvy />
+            <a:bim i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base" />
+            <a:sirka>0.5</a:sirka>
+            <a:sirkak i:nil="true" />
+            <a:sklon>-8</a:sklon>
+            <a:sklonk i:nil="true" />
+          </a:Kraj>
+          <a:o1>
+            <a:BimDefinition i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base" />
+            <a:ID>0</a:ID>
+            <a:TypBlok i:nil="true" />
+            <a:B>150</a:B>
+            <a:H>250</a:H>
+            <a:Hs>100</a:Hs>
+            <a:Hs2>250</a:Hs2>
+            <a:Hv>150</a:Hv>
+            <a:Hvk>150</a:Hvk>
+            <a:Pouzit>true</a:Pouzit>
+            <a:Zkoseni>1</a:Zkoseni>
+            <a:sv>5</a:sv>
+            <a:sv2>5</a:sv2>
+            <a:ve>0</a:ve>
+          </a:o1>
+          <a:o2>
+            <a:BimDefinition i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/RDPVFiles.Base" />
+            <a:ID>0</a:ID>
+            <a:TypBlok i:nil="true" />
+            <a:B>100</a:B>
+            <a:H>250</a:H>
+            <a:Hs>250</a:Hs>
+            <a:Hs2>0</a:Hs2>
+            <a:Hv>20</a:Hv>
+            <a:Hvk>150</a:Hvk>
+            <a:Pouzit>true</a:Pouzit>
+            <a:Zkoseni>1</a:Zkoseni>
+            <a:sv>5</a:sv>
+            <a:sv2>0</a:sv2>
+            <a:ve>0</a:ve>
+          </a:o2>
+        </a:VlastniData>
+      </a:VlastniDefinice>
+    </a:V4364>
+  </ZvlastniTvaryExt>
+</V43ExtFile></xdata>
+<-----ROADPAC-FILE-XDATA-SECTION----->

@@ -1,0 +1,615 @@
+<x940 HlavniTrasa="tro" MainStyle="100" DtmFile="TRO.dt4" AutoAddFiles="0">
+  <Doplnek>
+    <DoplnkovaKresbaList Typ="Soubor" FileName="TRO.v92" Color="" SirkaKoridoru="0" OdStaniceni="0" DoStaniceni="0" />
+    <DoplnkovaKresbaList Typ="Soubor" FileName="" Color="" SirkaKoridoru="0" OdStaniceni="0" DoStaniceni="0" />
+  </Doplnek>
+  <Staniceni FileNameSSS="" InputFromSSS="0" OutputToSSS="0" UseSeznamy="1">
+    <StaniceniIndividualni>
+      <ListStaniceniIndividualni staniceniKm="1.5" popis="C:\Jacek\RDP_TEST\RDP_VUT\Data\TRO.v92 A-19.04.2023 22:31:31" pocitaneStaniceniTyp="7" />
+      <ListStaniceniIndividualni staniceniKm="1.56" popis="511 A-19.04.2023 22:31:31" pocitaneStaniceniTyp="7" />
+      <ListStaniceniIndividualni staniceniKm="1.68" popis="511 A-19.04.2023 22:31:31" pocitaneStaniceniTyp="7" />
+    </StaniceniIndividualni>
+    <StaniceniIntervalem>
+      <ListStaniceniIntervalem staniceniOd="1.5" staniceniDo="1.9" krok="20" />
+    </StaniceniIntervalem>
+  </Staniceni>
+  <PripojeneTrasy />
+  <Styles>
+    <DrawSprStyles SrovnavaciRovinaHloubka="1" SrovnavaciRovinaSirka="6" SrovnavaciRovinaSirkaVT="6" Name="100" Koruna="1" Teleso="1" ZobrazitHteleso="1" Plan="1" Teren="1" ZobrazitHrubyTeren="1" KotaTerenuOsa="1" SrovnavaciRovina="1" PopisVysek="All" PricnySpad="All" AddTerenVlevo="0" AddTerenVpravo="0" RozsireniTerenu="0" YVzdalenostRezu="50" PocetRezuNaSloupec="5" DefaultHloubkaDrenaze="0.4" ZobrazitOhumusovani="1" ZobrazitOhumusovani2="0" ZobrazitDrenaze="1" TextPopisuSize="0.18" TextStaniceniSize="0.35" TextSrovnavaciRovinaSize="0.18" TextStaniceniColor="Red" TextStyle="rdp_popisy" DrawBocniOmezeni="0" DebugLines="0" DebugPrislusenstviLines="0" DebugNoMask="0" DrawGeologii="0" GeologickeVrstvy="1">
+      <StaniceniOffset x="0" y="7" />
+      <SrovnavaciRovinaSettings SrovnavaciRovinaHloubka="1" SrovnavaciRovinaSirka="6" SrovnavaciRovinaSirkaVT="6" Zobrazit="1" TextSrovnavaciRovinaSize="0.18" PopisTemplate="{0:0.000}" LayerMod="" />
+      <KotaVozovka CadStyle="rdp_kota100" Offset="5" MinimalVisibleLength="-1" OffsetArrangeDist="1" LayerMod="" Visible="1" />
+      <KotaVozovkaCasti ZobrazitSklon="1" ZobrazitKotu="1" CadStyle="rdp_kota100" Offset="4" MinimalVisibleLength="0" OffsetArrangeDist="1" LayerMod="" Visible="0" />
+      <KotaKrajnice CadStyle="rdp_kota100" Offset="5" MinimalVisibleLength="0.01" OffsetArrangeDist="1" LayerMod="" Visible="1" />
+      <KotaStredniPruh CadStyle="rdp_kota100" Offset="5" MinimalVisibleLength="-1" OffsetArrangeDist="1" LayerMod="" Visible="1" />
+      <KotaCelaVozovka CadStyle="rdp_kota100" Offset="5.7" MinimalVisibleLength="-1" OffsetArrangeDist="1" LayerMod="" Visible="1" />
+      <KotaZaboru CadStyle="rdp_kota100" Offset="-2" MinimalVisibleLength="-1" OffsetArrangeDist="1" LayerMod="" Visible="1" />
+      <KotaDnaPrikopu LineLength="1" TextSize="" TextYOffset="-0.1" PopisTemplate="{0:0.000}" LayerMod="" Visible="1">
+        <InsertOffset x="1" y="0" />
+      </KotaDnaPrikopu>
+      <VykoveKotyKoruny DescriptionTemplate="{0:0.00}" FullTextTemplate="" VerticalLineLength="0.2" TextSize="0.18" PosunUOsy="1" ShowVzdalenostOdOsy="0" ShowVzdalenostOdOsyJednoradkove="1" VzdalenostOdOsyTemplate="{0:0.000}" DelkaDeliciCary="1" LayerMod="" Visible="1">
+        <InsertOffset x="0" y="1" />
+      </VykoveKotyKoruny>
+      <Drenaze PopisDnaLayer="" LayerMod="rdp_drenaz" Visible="1" />
+      <PopisSklonuKrajnice LeftBlockName="rdp_sklon_l" RightBlockName="rdp_sklon_r" CenterPosition="1" PopisTemplate="{0:0.##}%" MinimalVisibleLength="0.2" LayerMod="" Visible="1">
+        <InsertionOffset x="0" y="0.2" />
+        <InsertionScale x="1" y="1" />
+      </PopisSklonuKrajnice>
+      <PopisSklonuStredniPruh LeftBlockName="rdp_sklon_l" RightBlockName="rdp_sklon_r" CenterPosition="0" PopisTemplate="{0:0.##}%" MinimalVisibleLength="0.2" LayerMod="" Visible="1">
+        <InsertionOffset x="0" y="0.2" />
+        <InsertionScale x="1" y="1" />
+      </PopisSklonuStredniPruh>
+      <PopisSklonuVozovka LeftBlockName="rdp_sklon_l" RightBlockName="rdp_sklon_r" CenterPosition="1" PopisTemplate="{0:0.##}%" MinimalVisibleLength="0.2" LayerMod="" Visible="1">
+        <InsertionOffset x="0" y="0.2" />
+        <InsertionScale x="1" y="1" />
+      </PopisSklonuVozovka>
+      <PopisSklonuPlan LeftBlockName="rdp_sklons_l" RightBlockName="rdp_sklons_r" CenterPosition="1" PopisTemplate="{0:0.##}%" MinimalVisibleLength="0.7" LayerMod="" Visible="1">
+        <InsertionOffset x="0" y="-0.2" />
+        <InsertionScale x="1" y="1" />
+      </PopisSklonuPlan>
+      <SirkaKreslenehoRezu Left="-60" Right="60" />
+      <SirkaTerenu />
+      <KotaVyskyOsa BlockName="rdp_vyk" Format="0.000" LayerMod="" Visible="1">
+        <InsertionScale x="1" y="1" />
+      </KotaVyskyOsa>
+      <PopisNiveletyStyle PopisTemplate="{0:0.000}" TextSize="" LayerMod="rdp_popis" Visible="1">
+        <InsertOffset x="-0.2" y="1" />
+      </PopisNiveletyStyle>
+      <PopisSklonuSvahu PopisTemplate="{0:0.##}" MinimalLength="0.5" LayerMod="" Visible="1">
+        <InsertionOffset x="0" y="0.2" />
+      </PopisSklonuSvahu>
+      <VrstvyOhumusovani VrstvaOhumusovaniStrednihoPasu="" VrstvaOhumusovaniPrava="" VrstvaOhumusovaniLeva="" />
+    </DrawSprStyles>
+    <DrawSprStyles SrovnavaciRovinaHloubka="2" SrovnavaciRovinaSirka="12" SrovnavaciRovinaSirkaVT="12" Name="200" Koruna="1" Teleso="1" ZobrazitHteleso="1" Plan="1" Teren="1" ZobrazitHrubyTeren="1" KotaTerenuOsa="1" SrovnavaciRovina="1" PopisVysek="All" PricnySpad="All" AddTerenVlevo="0" AddTerenVpravo="0" RozsireniTerenu="0" YVzdalenostRezu="50" PocetRezuNaSloupec="5" DefaultHloubkaDrenaze="0.4" ZobrazitOhumusovani="1" ZobrazitOhumusovani2="0" ZobrazitDrenaze="1" TextPopisuSize="0.36" TextStaniceniSize="0.7" TextSrovnavaciRovinaSize="0.36" TextStaniceniColor="Red" TextStyle="rdp_popisy" DrawBocniOmezeni="0" DebugLines="0" DebugPrislusenstviLines="0" DebugNoMask="0" DrawGeologii="0" GeologickeVrstvy="1">
+      <StaniceniOffset x="0" y="14" />
+      <SrovnavaciRovinaSettings SrovnavaciRovinaHloubka="2" SrovnavaciRovinaSirka="12" SrovnavaciRovinaSirkaVT="12" Zobrazit="1" TextSrovnavaciRovinaSize="0.36" PopisTemplate="{0:0.000}" LayerMod="" />
+      <KotaVozovka CadStyle="rdp_kota200" Offset="10" MinimalVisibleLength="0.01" OffsetArrangeDist="1" LayerMod="" Visible="1" />
+      <KotaVozovkaCasti ZobrazitSklon="1" ZobrazitKotu="1" CadStyle="rdp_kota100" Offset="4" MinimalVisibleLength="0" OffsetArrangeDist="1" LayerMod="" Visible="0" />
+      <KotaKrajnice CadStyle="rdp_kota200" Offset="10" MinimalVisibleLength="0.01" OffsetArrangeDist="1" LayerMod="" Visible="1" />
+      <KotaStredniPruh CadStyle="rdp_kota200" Offset="10" MinimalVisibleLength="0.01" OffsetArrangeDist="1" LayerMod="" Visible="1" />
+      <KotaCelaVozovka CadStyle="rdp_kota200" Offset="11.4" MinimalVisibleLength="-1" OffsetArrangeDist="1" LayerMod="" Visible="1" />
+      <KotaZaboru CadStyle="rdp_kota200" Offset="-4" MinimalVisibleLength="-1" OffsetArrangeDist="1" LayerMod="" Visible="1" />
+      <KotaDnaPrikopu LineLength="2" TextSize="" TextYOffset="-0.2" PopisTemplate="{0:0.000}" LayerMod="" Visible="1">
+        <InsertOffset x="2" y="0" />
+      </KotaDnaPrikopu>
+      <VykoveKotyKoruny DescriptionTemplate="{0:0.00}" FullTextTemplate="" VerticalLineLength="0.2" TextSize="0.18" PosunUOsy="1" ShowVzdalenostOdOsy="0" ShowVzdalenostOdOsyJednoradkove="1" VzdalenostOdOsyTemplate="{0:0.000}" DelkaDeliciCary="1" LayerMod="" Visible="1">
+        <InsertOffset x="0" y="1" />
+      </VykoveKotyKoruny>
+      <Drenaze PopisDnaLayer="" LayerMod="rdp_drenaz" Visible="1" />
+      <PopisSklonuKrajnice LeftBlockName="rdp_sklon_l" RightBlockName="rdp_sklon_r" CenterPosition="1" PopisTemplate="{0:0.##}%" MinimalVisibleLength="0.2" LayerMod="" Visible="1">
+        <InsertionOffset x="0" y="0.4" />
+        <InsertionScale x="2" y="2" />
+      </PopisSklonuKrajnice>
+      <PopisSklonuStredniPruh LeftBlockName="rdp_sklon_l" RightBlockName="rdp_sklon_r" CenterPosition="1" PopisTemplate="{0:0.##}%" MinimalVisibleLength="0.2" LayerMod="" Visible="1">
+        <InsertionOffset x="0" y="0.4" />
+        <InsertionScale x="2" y="2" />
+      </PopisSklonuStredniPruh>
+      <PopisSklonuVozovka LeftBlockName="rdp_sklon_l" RightBlockName="rdp_sklon_r" CenterPosition="1" PopisTemplate="{0:0.##}%" MinimalVisibleLength="0.2" LayerMod="" Visible="1">
+        <InsertionOffset x="0" y="0.4" />
+        <InsertionScale x="2" y="2" />
+      </PopisSklonuVozovka>
+      <PopisSklonuPlan LeftBlockName="rdp_sklons_l" RightBlockName="rdp_sklons_r" CenterPosition="1" PopisTemplate="{0:0.##}%" MinimalVisibleLength="0.7" LayerMod="" Visible="1">
+        <InsertionOffset x="0" y="-0.4" />
+        <InsertionScale x="2" y="2" />
+      </PopisSklonuPlan>
+      <SirkaKreslenehoRezu Left="-45" Right="45" />
+      <SirkaTerenu />
+      <KotaVyskyOsa BlockName="rdp_vyk" Format="0.000" LayerMod="" Visible="1">
+        <InsertionScale x="2" y="2" />
+      </KotaVyskyOsa>
+      <PopisNiveletyStyle PopisTemplate="{0:0.000}" TextSize="" LayerMod="rdp_popis" Visible="1">
+        <InsertOffset x="-0.2" y="1" />
+      </PopisNiveletyStyle>
+      <PopisSklonuSvahu PopisTemplate="{0:0.##}" MinimalLength="0.5" LayerMod="" Visible="1">
+        <InsertionOffset x="0" y="0.4" />
+      </PopisSklonuSvahu>
+      <VrstvyOhumusovani VrstvaOhumusovaniStrednihoPasu="" VrstvaOhumusovaniPrava="" VrstvaOhumusovaniLeva="" />
+    </DrawSprStyles>
+    <DrawSprStyles SrovnavaciRovinaHloubka="1" SrovnavaciRovinaSirka="6" SrovnavaciRovinaSirkaVT="6" Name="" Koruna="1" Teleso="1" ZobrazitHteleso="1" Plan="1" Teren="1" ZobrazitHrubyTeren="1" KotaTerenuOsa="1" SrovnavaciRovina="1" PopisVysek="All" PricnySpad="All" AddTerenVlevo="0" AddTerenVpravo="0" RozsireniTerenu="0" YVzdalenostRezu="50" PocetRezuNaSloupec="5" DefaultHloubkaDrenaze="0.4" ZobrazitOhumusovani="1" ZobrazitOhumusovani2="0" ZobrazitDrenaze="1" TextPopisuSize="0.18" TextStaniceniSize="0.35" TextSrovnavaciRovinaSize="0.18" TextStaniceniColor="Red" TextStyle="rdp_popisy" DrawBocniOmezeni="0" DebugLines="0" DebugPrislusenstviLines="0" DebugNoMask="0" DrawGeologii="0" GeologickeVrstvy="1">
+      <StaniceniOffset x="0" y="7" />
+      <SrovnavaciRovinaSettings SrovnavaciRovinaHloubka="1" SrovnavaciRovinaSirka="6" SrovnavaciRovinaSirkaVT="6" Zobrazit="1" TextSrovnavaciRovinaSize="0.18" PopisTemplate="{0:0.000}" LayerMod="" />
+      <KotaVozovka CadStyle="rdp_kota100" Offset="5" MinimalVisibleLength="0" OffsetArrangeDist="1" LayerMod="" Visible="1" />
+      <KotaVozovkaCasti ZobrazitSklon="1" ZobrazitKotu="1" CadStyle="rdp_kota100" Offset="4" MinimalVisibleLength="0" OffsetArrangeDist="1" LayerMod="" Visible="0" />
+      <KotaKrajnice CadStyle="rdp_kota100" Offset="5" MinimalVisibleLength="0.01" OffsetArrangeDist="1" LayerMod="" Visible="1" />
+      <KotaStredniPruh CadStyle="rdp_kota100" Offset="5" MinimalVisibleLength="0" OffsetArrangeDist="1" LayerMod="" Visible="1" />
+      <KotaCelaVozovka CadStyle="rdp_kota100" Offset="5.7" MinimalVisibleLength="0" OffsetArrangeDist="1" LayerMod="" Visible="1" />
+      <KotaZaboru CadStyle="rdp_kota100" Offset="-2" MinimalVisibleLength="0" OffsetArrangeDist="1" LayerMod="" Visible="1" />
+      <KotaDnaPrikopu LineLength="1" TextSize="" TextYOffset="-0.1" PopisTemplate="{0:0.000}" LayerMod="" Visible="1">
+        <InsertOffset x="1" y="0" />
+      </KotaDnaPrikopu>
+      <VykoveKotyKoruny DescriptionTemplate="{0:0.00}" FullTextTemplate="" VerticalLineLength="0.2" TextSize="0.18" PosunUOsy="1" ShowVzdalenostOdOsy="0" ShowVzdalenostOdOsyJednoradkove="1" VzdalenostOdOsyTemplate="{0:0.000}" DelkaDeliciCary="1" LayerMod="" Visible="1">
+        <InsertOffset x="0" y="1" />
+      </VykoveKotyKoruny>
+      <Drenaze PopisDnaLayer="" LayerMod="rdp_drenaz" Visible="1" />
+      <PopisSklonuKrajnice LeftBlockName="rdp_sklon_l" RightBlockName="rdp_sklon_r" CenterPosition="1" PopisTemplate="{0:0.#}%" MinimalVisibleLength="0.2" LayerMod="" Visible="1">
+        <InsertionOffset x="0" y="0.2" />
+        <InsertionScale x="1" y="1" />
+      </PopisSklonuKrajnice>
+      <PopisSklonuStredniPruh LeftBlockName="rdp_sklon_l" RightBlockName="rdp_sklon_r" CenterPosition="1" PopisTemplate="{0:0.#}%" MinimalVisibleLength="0.2" LayerMod="" Visible="1">
+        <InsertionOffset x="0" y="0.2" />
+        <InsertionScale x="1" y="1" />
+      </PopisSklonuStredniPruh>
+      <PopisSklonuVozovka LeftBlockName="rdp_sklon_l" RightBlockName="rdp_sklon_r" CenterPosition="1" PopisTemplate="{0:0.#}%" MinimalVisibleLength="0.2" LayerMod="" Visible="1">
+        <InsertionOffset x="0" y="0.2" />
+        <InsertionScale x="1" y="1" />
+      </PopisSklonuVozovka>
+      <PopisSklonuPlan LeftBlockName="rdp_sklons_l" RightBlockName="rdp_sklons_r" CenterPosition="1" PopisTemplate="{0:0.#}%" MinimalVisibleLength="0.7" LayerMod="" Visible="1">
+        <InsertionOffset x="0" y="-0.5" />
+        <InsertionScale x="1" y="1" />
+      </PopisSklonuPlan>
+      <SirkaKreslenehoRezu Left="-40" Right="40" />
+      <SirkaTerenu />
+      <KotaVyskyOsa BlockName="rdp_vyk" Format="0.000" LayerMod="" Visible="1">
+        <InsertionScale x="0.1" y="0.1" />
+      </KotaVyskyOsa>
+      <PopisNiveletyStyle PopisTemplate="{0:0.000}" TextSize="" LayerMod="rdp_popis" Visible="1">
+        <InsertOffset x="-0.2" y="1" />
+      </PopisNiveletyStyle>
+      <PopisSklonuSvahu PopisTemplate="{0:0.##}" MinimalLength="0.5" LayerMod="" Visible="1">
+        <InsertionOffset x="0" y="0.5" />
+      </PopisSklonuSvahu>
+      <VrstvyOhumusovani VrstvaOhumusovaniStrednihoPasu="" VrstvaOhumusovaniPrava="" VrstvaOhumusovaniLeva="" />
+    </DrawSprStyles>
+  </Styles>
+  <V92Settings>
+    <V92DrawSettings xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.RoadpacVXX.V92" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <Curbking>
+        <_layerMod i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter" />
+        <_visible xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter">true</_visible>
+        <OnlySource>false</OnlySource>
+        <ShowSource>true</ShowSource>
+      </Curbking>
+      <Drains>
+        <_layerMod i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter" />
+        <_visible xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter">true</_visible>
+        <OnlySource>false</OnlySource>
+        <ShowSource>true</ShowSource>
+      </Drains>
+      <Gutters>
+        <_layerMod i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter" />
+        <_visible xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter">true</_visible>
+        <OnlySource>false</OnlySource>
+        <ShowSource>true</ShowSource>
+      </Gutters>
+      <Obrubniky>
+        <_layerMod i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter" />
+        <_visible xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter">true</_visible>
+        <OnlySource>false</OnlySource>
+        <ShowSource>true</ShowSource>
+      </Obrubniky>
+      <Patniky>
+        <_layerMod i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter" />
+        <_visible xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter">true</_visible>
+        <OnlySource>false</OnlySource>
+        <ShowSource>true</ShowSource>
+      </Patniky>
+      <Ploty>
+        <_layerMod i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter" />
+        <_visible xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter">true</_visible>
+        <OnlySource>false</OnlySource>
+        <ShowSource>true</ShowSource>
+        <DelkaCarek>0.05</DelkaCarek>
+        <KreslitSkutecnouVyskuPlotu>false</KreslitSkutecnouVyskuPlotu>
+        <SkutecnaVyska>true</SkutecnaVyska>
+        <StredniCastPlotu>0.5</StredniCastPlotu>
+        <VyskaSchematu>4</VyskaSchematu>
+      </Ploty>
+      <PrikopoveTvarnice>
+        <_layerMod i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter" />
+        <_visible xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter">true</_visible>
+        <OnlySource>false</OnlySource>
+        <ShowSource>true</ShowSource>
+      </PrikopoveTvarnice>
+      <ProtihlukoveSteny>
+        <_layerMod i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter" />
+        <_visible xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter">true</_visible>
+        <OnlySource>false</OnlySource>
+        <ShowSource>true</ShowSource>
+        <SkutecnaVyska>true</SkutecnaVyska>
+        <VyskaSchematu>4</VyskaSchematu>
+      </ProtihlukoveSteny>
+      <Svodidla>
+        <_layerMod i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter" />
+        <_visible xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter">true</_visible>
+        <OnlySource>false</OnlySource>
+        <ShowSource>true</ShowSource>
+      </Svodidla>
+      <UrovenLadeni>0</UrovenLadeni>
+      <Znacky>
+        <_layerMod i:nil="true" xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter" />
+        <_visible xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.AutocadTools.TypedWriter">true</_visible>
+        <OnlySource>false</OnlySource>
+        <ShowSource>true</ShowSource>
+      </Znacky>
+    </V92DrawSettings>
+  </V92Settings>
+  <V91Settings>
+    <V91Settings xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.RoadpacVXX.V91" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <BIMCadOptions xmlns:a="http://schemas.datacontract.org/2004/07/RoadPAC.RoadpacVXX.V94">
+        <a:CAD3D_Mesh>true</a:CAD3D_Mesh>
+        <a:Generovat>true</a:Generovat>
+      </BIMCadOptions>
+      <BIM_Tvarnice_UseID>false</BIM_Tvarnice_UseID>
+      <BIM_XDELKA>false</BIM_XDELKA>
+      <BimOhumusovaniCele>true</BimOhumusovaniCele>
+      <BimParts xmlns:a="http://schemas.datacontract.org/2004/07/BimModelLib.Definice">
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>0</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>2</b:state>
+            <b:value>4286401280</b:value>
+          </a:Barva>
+          <a:CODE>VYKOP</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>ZP</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing" />
+          <a:CODE>VYKOPG</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>ZP</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>104</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>NASYP</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>ZP</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>0</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>2</b:state>
+            <b:value>4286644096</b:value>
+          </a:Barva>
+          <a:CODE>AKTIVNIZONA</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>ZP</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>127</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>VymenaPodlozi</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>ZP</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>127</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>SANACE</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>ZP</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>0</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>2</b:state>
+            <b:value>4286401280</b:value>
+          </a:Barva>
+          <a:CODE>ODHUMUSOVANI</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>ZP</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>0</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>2</b:state>
+            <b:value>4289056611</b:value>
+          </a:Barva>
+          <a:CODE>HUMUS</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>ZP</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing" />
+          <a:CODE />
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>ZP</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>78</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>DOSYPANI_KRAJNICE</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>ZP</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>141</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>PLAN</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>ZP</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>0</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>2</b:state>
+            <b:value>4286578943</b:value>
+          </a:Barva>
+          <a:CODE>DRENAZ</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>ZP</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>0</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>2</b:state>
+            <b:value>4286578943</b:value>
+          </a:Barva>
+          <a:CODE>DRENAZP</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>ZP</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>78</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>OBRUSNAVRSTVA</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>VOZ</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>78</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>LOZNAVRSTVA</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>VOZ</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>78</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>PODKLADNI_VRSTVA</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>VOZ</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>78</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>VOZ_V4</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>VOZ</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>78</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>VOZ_V5</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>VOZ</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>78</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>VOZ_V6</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>VOZ</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>78</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>VOZ_V7</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>VOZ</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>78</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>VOZ_V8</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>VOZ</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>78</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>ZPEVNENIKRAJNICE</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>VOZ</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>127</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>BPPOSYP</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>VOZ</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>48</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>SPOJOVACIPOSTRIK</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>VOZ</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>48</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>INFILTRACNIPOSTRIK</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>VOZ</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>48</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>SafetyFences</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>PRIS</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>0</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>2</b:state>
+            <b:value>4286513279</b:value>
+          </a:Barva>
+          <a:CODE>Curbking</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>PRIS</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>107</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>Gutters</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>PRIS</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>78</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>DitchBlocks</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>PRIS</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing">
+            <b:knownColor>166</b:knownColor>
+            <b:name i:nil="true" />
+            <b:state>1</b:state>
+            <b:value>0</b:value>
+          </a:Barva>
+          <a:CODE>DitchBlocksSubBase</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>PRIS</a:GCode>
+        </a:BimPart>
+        <a:BimPart>
+          <a:Barva i:nil="true" xmlns:b="http://schemas.datacontract.org/2004/07/System.Drawing" />
+          <a:CODE>Fences</a:CODE>
+          <a:Exportovat>1</a:Exportovat>
+          <a:GCode>PRIS</a:GCode>
+        </a:BimPart>
+      </BimParts>
+      <DEBUG_PlochyT91_GenerovatTRI>false</DEBUG_PlochyT91_GenerovatTRI>
+      <DebugMode>false</DebugMode>
+      <DebugSite>false</DebugSite>
+      <DesignPhase i:nil="true" />
+      <DisableStdBlocks>false</DisableStdBlocks>
+      <ExtIFCAttributes xmlns:a="http://schemas.datacontract.org/2004/07/BimModelLib.Definice" />
+      <ExtIfcAttributesElements xmlns:a="http://schemas.datacontract.org/2004/07/BimModelLib.Definice" />
+      <ExtIfcAttributesG1 xmlns:a="http://schemas.datacontract.org/2004/07/BimModelLib.Definice" />
+      <GenerateBim>true</GenerateBim>
+      <GenerateBimA>true</GenerateBimA>
+      <GenerateBimBrial>true</GenerateBimBrial>
+      <GenerateCrossDesc>false</GenerateCrossDesc>
+      <GenerovatPlochy>true</GenerovatPlochy>
+      <IFC_GenerovatHektometry>true</IFC_GenerovatHektometry>
+      <IFC_GenerovatOsuMimoRozdahVypoctu>false</IFC_GenerovatOsuMimoRozdahVypoctu>
+      <IFC_GenerovatOsuOptions>0</IFC_GenerovatOsuOptions>
+      <IFC_GenerovatStredniPlochuVozovkyJakoObjekt>false</IFC_GenerovatStredniPlochuVozovkyJakoObjekt>
+      <IFC_HektometryTyp>0</IFC_HektometryTyp>
+      <IFC_OsaPresnost>10</IFC_OsaPresnost>
+      <IFC_VykopJakoObjekt>true</IFC_VykopJakoObjekt>
+      <OhumusovaniCeleNezpevnenKrajnice>false</OhumusovaniCeleNezpevnenKrajnice>
+      <OhumusovaniVarianta>1</OhumusovaniVarianta>
+      <PipeSettings />
+      <PrepocetStaniceniPridatZmenuPrislusenstvi>true</PrepocetStaniceniPridatZmenuPrislusenstvi>
+      <PrepocetStaniceniRezPredZmenou>0.01</PrepocetStaniceniRezPredZmenou>
+      <PreskocitVypocetSPR>false</PreskocitVypocetSPR>
+      <SI51useTRIM>true</SI51useTRIM>
+      <SI51v19>false</SI51v19>
+      <SI51v19CommandLineArgs i:nil="true" />
+      <SirkaKoridoruDTM>50</SirkaKoridoruDTM>
+      <SiteObjectDesignation i:nil="true" />
+      <Soubory47 xmlns:a="http://schemas.datacontract.org/2004/07/RoadPAC.RoadpacVXX" />
+      <SouboryBrialu xmlns:a="http://schemas.datacontract.org/2004/07/RoadPAC.RoadpacVXX" />
+      <UseV28>false</UseV28>
+      <UseXData i:nil="true" />
+      <V91_47_TrimRezim>0</V91_47_TrimRezim>
+      <V94StriktniRozsah>false</V94StriktniRozsah>
+    </V91Settings>
+  </V91Settings>
+  <RozsahVypoctu>
+    <ArrayOfRozsahVypoctuItem xmlns="http://schemas.datacontract.org/2004/07/RoadPAC.RoadpacVXX.V94" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+      <RozsahVypoctuItem>
+        <CastObjektu i:nil="true" />
+        <Krok>20</Krok>
+        <Nazev i:nil="true" />
+        <Objekt i:nil="true" />
+        <PodObjekt i:nil="true" />
+        <StaniceniDo>1.9</StaniceniDo>
+        <StaniceniOd>1.5</StaniceniOd>
+      </RozsahVypoctuItem>
+    </ArrayOfRozsahVypoctuItem>
+  </RozsahVypoctu>
+</x940>

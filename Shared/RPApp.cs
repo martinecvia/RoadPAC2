@@ -4,7 +4,9 @@ using System; // Keep for .NET 4.6
 using System.Linq; // Keep for .NET 4.6
 using System.Runtime.InteropServices;
 using Shared.Controllers;
-
+using System.Diagnostics;
+using System.IO;
+using System.Reflection;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -32,14 +34,17 @@ namespace Shared
 
         public static RPConfig Config { get; private set; } = null;
 
-        ~RPApp() => ConfigController.SaveConfig(Config);
         internal RPApp()
         {
+            var stopwatch = new Stopwatch();
+                stopwatch.Start();
+            Document document = Application.DocumentManager.MdiActiveDocument;
             // First we need to find install location of RoadPAC
             Config = ConfigController.LoadConfig<RPConfig>();
             #region FRESH_INSTALATION
             if (string.IsNullOrEmpty(Config.InstallPath))
             {
+                document.Editor.WriteMessage($"Fresh installation !\n");
                 string[] registryKeys =
                 {
                     @"SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall",
@@ -72,26 +77,49 @@ namespace Shared
                 }
             }
             #endregion
-            Document document = Application.DocumentManager.MdiActiveDocument;
+            document.Editor.WriteMessage($"Elapsed: {stopwatch.Elapsed.Milliseconds}ms\n");
             if (string.IsNullOrEmpty(Config.InstallPath))
             {
                 document.Editor.WriteMessage("Installation of RoadPAC was not found or not valid");
                 throw new UnauthorizedAccessException("Installation of RoadPAC was not found or not valid");
             }
             SetDllDirectory(Config.InstallPath);
+            // Make sure that RDPFile.dll is present,
+            // if not try to load it from InstallDirectory
+            if (!File.Exists(Path.Combine(Path.GetDirectoryName(Config.InstallPath), "RDPFILELib.dll")))
+                throw new ArgumentNullException("RoadPAC install location does not contain RDP library");
+            /*
+            try
+            {
+                Assembly.LoadFrom(Path.Combine(Path.GetDirectoryName(Config.InstallPath), "RDPFILELib.dll"));
+            } catch(Exception)
+            { throw new ArgumentNullException("RoadPAC RDP library is malformed or have changed during process"); }
+            */
+            RDPFileHelper rdp = new RDPFileHelper(); // Safe-thread for working with RDP files
             document.Editor.WriteMessage("\n" +
-                "ANetRoadPAC2: Loaded successfully !\n" +
                 $"RpInstallPath: {Config.InstallPath}\n" +
                 $"RpDisplayName: {Config.DisplayName}\n" +
-                $"RpEnvironment: {(Environment.Is64BitProcess ? "64bit" : "32bit")}");
+                $"RpEnvironment: {(Environment.Is64BitProcess ? "64bit" : "32bit")}\n" +
+                $"RpCurrentWorkingDirectory: {rdp.CurrentWorkingDirectory}\n" +
+                $"RpCurrentRoute: {rdp.CurrentRoute}\n");
             ConfigController.SaveConfig(Config);
-            ResourceController.LoadEmbeddedResources();
-            RibbonController.CreateTab("rp_RoadPAC");
+            stopwatch.Stop();
+            document.Editor.WriteMessage($"Elapsed: {stopwatch.Elapsed.Milliseconds}ms\n");
+            using (var service = new FileWatcherController())
+            {
+                service.FileCreated += (dir, file) => document.Editor.WriteMessage($"\n[+] Created in {dir}: {file}");
+                service.FileDeleted += (dir, file) => document.Editor.WriteMessage($"\n[-] Deleted from {dir}: {file}");
+                service.FileRenamed += (dir, oldFile, newFile) => document.Editor.WriteMessage($"\n[~] Renamed in {dir}: {oldFile} -> {newFile}");
+                service.AddDirectory(rdp.CurrentWorkingDirectory);
+            }
         }
 
         public object GetService(Type serviceType) => this;
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool SetDllDirectory(string lpPathName);
-        
+
+        [DllImport("kernel32", CharSet = CharSet.Ansi, SetLastError = true)]
+        public static extern int GetCurrentProcessId();
+
     }
 }

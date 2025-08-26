@@ -1,0 +1,129 @@
+ -------------------------------------------------------------------------------
+ PRAGOPROJEKT PRAHA, a. s. OBO CAD,       14754  Praha 4,  K Rysance 16         
+                PROGRAMOVİ SYSTÉM  R O A D P A C- program  RP48
+
+              SESTAVENÍ POKRYTÍ DLE ÈSN 73 6101 záøí' 2018
+
+ Verze:   2018  Datum zadání:   19.04.2023  Datum vıpoètu:  19. 4.2023  21:44:56
+ datum a èas kompilace:  03.01.2020  10:45
+ -------------------------------------------------------------------------------
+
+ Projekt:VUT_FAST                                                                                
+ Trasa:  TRO.V48                                                                                 
+
+ V programu je zapracována zmìna normy  z roku 2018
+
+ *     Pouit vstupní soubor Hlavní body smìru s názvem TRO.SHB
+ *     Akce:                                                                                
+ *     Trasa:                                                                               
+ *     Datum vzniku        19.04.2023  programem  ISHB5 
+ *     Datum posl. zápisu  19.04.2023  programem  ISHB5 
+ *     Soubor .SHB nového typu
+
+ *     Pouit vstupní soubor Niveleta s názvem TRO.SNI
+ *     Akce:                                                                                
+ *     Trasa:                                                                               
+ *     Datum vzniku        19.04.2023  programem  HNIV21
+ *     Datum posl. zápisu  19.04.2023  programem  HNIV21
+ *     Soubor .SNI nového typu
+
+    Kontroly vstupních dat: 
+    Zadané zmenšení návrhové rychlosti     0 Km/h
+
+ --------------------------------------------------------------------------------
+ A     Zadané údaje
+ --------------------------------------------------------------------------------
+ Rozsah trasy v souboru SHB (osa):          od km   .000000 do km  2.820693
+ Rozsah trasy v souboru SNI (niveleta):     od km   .000000 do km  2.820693
+ Vıslednı rozsah trasy pro pokrytí:         od km   .000000 do km  2.820693
+ Délka trasy:                                          2.820693 km
+ Kategorie:             S 9.50 /  90
+ Tøída silnice:         2
+ Území:                 rovinaté            
+ Základní sklon vozovky:  2.50%
+ Základni sklon plánì  :  3.00%
+ Tlouška vozovky      :   .60m
+ Základní metoda klopení: 9
+ Šíøka svodidla ve støedním pruhu:    .50m
+   
+Poadované vıpoèty:             kontrola    korekce
+ sklon vzestupnice               ne          ne
+ vıslednı sklon                  ne
+ polomìry vıškovıch obloukù      ne
+ Rozhled ve smìrovém oblouku     ne
+ kapacitní vıpoèty a ZDJP        ne          ne
+   
+Odlišné metody klopení a zajištìní boèního rozhledu:
+ nezadáno
+
+ --------------------------------------------------------------------------------
+ B     Odvozené údaje a informace o trase
+ --------------------------------------------------------------------------------
+
+ Vysledky diagnostiky oblouku na trase: 
+ Rozsah trasy od km     .000000 do km    2.820693
+ Celkovı poèet obloukù =  3
+
+ èís  polomìr(m)  toè         ZAC          PK          KP         KON  n.délka   úh.zmìna
+   1    1200.000    P     .019780     .119780     .662438     .762438  642.659   34.094 gr.
+ Mezní rychlost v oblouku = 204. km/hod pøi pø.sklonu =  2.4% 
+   2    1072.273    L     .919221    1.019221    1.902822    2.002822  983.600   58.397 gr.
+ Mezní rychlost v oblouku = 194. km/hod pøi pø.sklonu =  2.7% 
+   3     800.000    P    2.002822    2.072822    2.737801    2.807801  734.979   58.488 gr.
+ Mezní rychlost v oblouku = 171. km/hod pøi pø.sklonu =  3.6% 
+
+Vısledky diagnostiky nivelety:
+ Rozsah trasy od km     .000000 do km    2.820693
+ Celkovı poèet obloukù =  4
+
+ èís         ZAC       KON  polomìr(m)  typ
+   1     .288802   .580178     5500.0   vydutı    
+   2    1.352782  1.468668     5500.0   vydutı    
+   3    1.629564  1.812906    -5500.0   vypuklı   
+   4    2.391479  2.477793     5500.0   vydutı    
+
+ --------------------------------------------------------------------------------
+ C     Základní rozmìry pøíèného øezu (obsah souboru V43)
+ --------------------------------------------------------------------------------
+
+ Základní šíøky v pøíèném øezu: 
+
+ zakladní šíøka j. pruhu             3.50
+ šíøka vnìjšího vod. prouku          .00
+ šíøka zpevn. krajnice                .75
+ šíøka nezp. krajnice po svodidlo     .50
+
+ Pøehled rozšíøení ve smìrovıch obloucích dle tab 16: 
+
+ Oblouk     polomìr v ose                 rozšíøení
+                             vnitøního pruhu   vnìjšího pruhu
+   1            1200.000             .000             .000
+   2            1072.273             .000             .000
+   3             800.000             .000             .000
+
+ --------------------------------------------------------------------------------
+ D     Posouzení vzestupnic, korekce vzestupnic
+ --------------------------------------------------------------------------------
+Klopení Dle tab 9 a vzestupnice dle tab 11
+
+ 1. návrh klopení a vzestupnic
+
+  è. sklon     polomìr  typ               délka                               stanièení
+                    vzest sest    vzest. oblouku sest.         ZVZ         KVZ         ZS          KS
+   1   .00    1200.000          100.000  542.659  100.000     .019780     .119780     .662438     .762438
+   2 -2.50    1072.273  A  C    100.000  883.600  100.000     .919221    1.019221    1.902822    2.002822
+   3  2.50     800.000  C  A     70.000  664.979   70.000    2.002822    2.072822    2.737801    2.807801
+
+ --------------------------------------------------------------------------------
+ E0     Posouzení podélného sklonu
+ --------------------------------------------------------------------------------
+
+ Podélné sklony vozovky podle èl. 8.13 ÈSN
+ pro prostøedí rovinaté
+
+ -----------------------------------------------------
+ E1 Posouzení odvodnìní krytu dle èl. 8.10.3 viz obr.8 
+ ------------------------------------------------------
+ Nezjištìn ádnı úsek nevyhovujícího odvodnìní krytu.
+
+ *** VİPOÈET UKONÈEN BEZ CHYB ***
