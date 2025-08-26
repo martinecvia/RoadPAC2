@@ -44,6 +44,12 @@
       <HintPath>..\..\Libraries\AutoCAD\2025\Autodesk.AutoCAD.Interop.Common.dll</HintPath>
       <Private>False</Private>
     </Reference>
+    <Reference Include="RDPFILELib">
+      <HintPath>..\..\Libraries\RDPFILELib.dll</HintPath>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+      <Private>False</Private>
+      <SpecificVersion>False</SpecificVersion>
+    </Reference>
   </ItemGroup>
 
 </Project>

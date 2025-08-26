@@ -45,14 +45,13 @@ namespace Shared
             RibbonController.CreateContextualTab("rp_Contextual_SelectView", selection => { return true; });
             #endregion
             Document document = Application.DocumentManager.MdiActiveDocument;
-            #region O_PROGRAM_HANDLE_ROADPAC \n#define RP_INSTALLED
             // Hacky way hot to trick C# compiler to make sure RP_INSTALLED definition is on
             SetDllDirectory(Config.InstallPath);
             // Check Assemblies if RDPFILELib is present
             if (IsRdpPresent)
                 return;
             Assembly.LoadFrom(Path.Combine(Config.InstallPath, "RDPFILELib.dll"));
-            #endregion
+
         }
 
         #region O_INSTALLATION"HKEY_LOCAL_MACHINE"
