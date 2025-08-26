@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\ConfigController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\BaseRibbonControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\Ribbon\RibbonButton_Close_ContextualTab.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)madr_class.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\FileWatcherController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RDPFileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RPConfig.cs" />
