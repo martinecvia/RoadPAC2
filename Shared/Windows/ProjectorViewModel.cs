@@ -24,12 +24,12 @@ namespace Shared.Windows
                     {
                         new TreeItem
                         {
-                            Name = "Trasa A",
+                            Name = "XHB 1",
                             Children =
                             {
                                 new TreeItem
                                 {
-                                    Name = "Koridor A1",
+                                    Name = "V43",
                                     Children =
                                     {
                                         new TreeItem
@@ -37,8 +37,8 @@ namespace Shared.Windows
                                             Name = "Vytyčení",
                                             Children =
                                             {
-                                                new TreeItem { Name = "Vytyčení1: \"Test\"" },
-                                                new TreeItem { Name = "Vytyčení2: \"Test2\"" }
+                                                new TreeItem { Name = "V47x: \"Test\"" },
+                                                new TreeItem { Name = "V47x: \"Test2\"" }
                                             }
                                         },
                                         new TreeItem
@@ -46,8 +46,8 @@ namespace Shared.Windows
                                             Name = "Spojené příčné řezy",
                                             Children =
                                             {
-                                                new TreeItem { Name = "SPR1: \"Test\"" },
-                                                new TreeItem { Name = "SPR2: \"Test2\"" }
+                                                new TreeItem { Name = "V91: \"Test\"" },
+                                                new TreeItem { Name = "V91: \"Test2\"" }
                                             }
                                         },
                                                                             new TreeItem
@@ -55,30 +55,30 @@ namespace Shared.Windows
                                             Name = "Podklady pro IFC",
                                             Children =
                                             {
-                                                new TreeItem { Name = "IFC1: \"Test\"" },
-                                                new TreeItem { Name = "IFC2: \"Test2\"" }
+                                                new TreeItem { Name = "V94: \"Test\"" },
+                                                new TreeItem { Name = "V94: \"Test2\"" }
                                             }
                                         }
                                     }
                                 },
                                 new TreeItem
                                 {
-                                    Name = "Příčné řezy"
+                                    Name = "V51"
                                 },
                                 new TreeItem
                                 {
-                                    Name = "Niveleta"
+                                    Name = "XNI"
                                 },
                             }
                         },
                         new TreeItem
                         {
-                            Name = "Trasa B",
+                            Name = "XHB 2",
                             Children =
                             {
                                 new TreeItem
                                 {
-                                    Name = "Koridor B1",
+                                    Name = "V43",
                                     Children =
                                     {
                                         new TreeItem
@@ -86,8 +86,8 @@ namespace Shared.Windows
                                             Name = "Vytyčení",
                                             Children =
                                             {
-                                                new TreeItem { Name = "Vytyčení1: \"Foo\"" },
-                                                new TreeItem { Name = "Vytyčení2: \"Bar\"" }
+                                                new TreeItem { Name = "V47x: \"Test\"" },
+                                                new TreeItem { Name = "V47x: \"Test2\"" }
                                             }
                                         },
                                         new TreeItem
@@ -95,28 +95,28 @@ namespace Shared.Windows
                                             Name = "Spojené příčné řezy",
                                             Children =
                                             {
-                                                new TreeItem { Name = "SPR1: \"Test\"" },
-                                                new TreeItem { Name = "SPR2: \"Test2\"" }
+                                                new TreeItem { Name = "V91: \"Test\"" },
+                                                new TreeItem { Name = "V91: \"Test2\"" }
                                             }
                                         },
-                                        new TreeItem
+                                                                            new TreeItem
                                         {
                                             Name = "Podklady pro IFC",
                                             Children =
                                             {
-                                                new TreeItem { Name = "IFC1: \"Test\"" },
-                                                new TreeItem { Name = "IFC2: \"Test2\"" }
+                                                new TreeItem { Name = "V94: \"Test\"" },
+                                                new TreeItem { Name = "V94: \"Test2\"" }
                                             }
                                         }
                                     }
                                 },
                                 new TreeItem
                                 {
-                                    Name = "Příčné řezy"
+                                    Name = "V51"
                                 },
                                 new TreeItem
                                 {
-                                    Name = "Niveleta"
+                                    Name = "XNI"
                                 },
                             }
                         }
