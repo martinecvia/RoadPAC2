@@ -50,13 +50,18 @@ namespace Shared
             #endregion
             void BeginInit()
             {
-                var rpfile = new RDPFileHelper();
-                document.Editor.WriteMessage(
-                    $"\nRpCurrentWorkingDirectory: {rpfile.CurrentWorkingDirectory ?? "None"}\n" +
-                    $"RpCurrentRoute: {rpfile.CurrentRoute ?? "None"}\n");
-                if (FileWatcher == null)
-                    return;
-                FileWatcher.AddDirectory(rpfile.CurrentWorkingDirectory);
+                try
+                {
+                    var rpfile = new RDPFileHelper();
+                    document.Editor.WriteMessage(
+                        $"\nRpCurrentWorkingDirectory: {rpfile.CurrentWorkingDirectory ?? "None"}\n" +
+                        $"RpCurrentRoute: {rpfile.CurrentRoute ?? "None"}\n");
+                    if (FileWatcher == null)
+                        return;
+                    FileWatcher.AddDirectory(rpfile.CurrentWorkingDirectory);
+                }
+                catch (COMException) // User don't have valid license for RoadPAC
+                { }
             }
 #if ZWCAD || NET8_0_OR_GREATER
             Task.Run(BeginInit);
