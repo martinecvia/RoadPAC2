@@ -3,6 +3,7 @@ using ZwSoft.ZwCAD.ApplicationServices;
 using ZwSoft.ZwCAD.Runtime;
 
 using Shared;
+using Shared.Windows;
 
 [assembly: CommandClass(typeof(ZWC_47_TEST.TestEx))]
 namespace ZWC_47_TEST
@@ -19,6 +20,14 @@ namespace ZWC_47_TEST
         {
             var Ribbons = ComponentManager.Ribbon;
         }
+
+        [CommandMethod("WINDOW_TEST")]
+        public void WindowTest()
+        {
+            var window = new Projector();
+            window.Show();
+        }
+
         public void Terminate()
         { }
     }

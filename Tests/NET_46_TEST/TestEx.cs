@@ -3,6 +3,7 @@ using Autodesk.AutoCAD.Runtime;
 using Autodesk.Windows;
 
 using Shared;
+using Shared.Windows;
 
 // https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-4E1AAFA9-740E-4097-800C-CAED09CDFF12
 // https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-C3F3C736-40CF-44A0-9210-55F6A939B6F2
@@ -20,6 +21,13 @@ namespace NET_46_TEST
         {
             var Ribbons = ComponentManager.Ribbon;
         }
+
+        [CommandMethod("WINDOW_TEST")]
+        public void WindowTest()
+        {
+            var window = new Projector();
+        }
+
         public void Terminate()
         { }
     }

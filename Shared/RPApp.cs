@@ -18,7 +18,6 @@ using Microsoft.Win32;
 
 using Shared.Controllers;
 using Shared.Models;
-using System.Diagnostics;
 
 namespace Shared
 {
@@ -26,6 +25,7 @@ namespace Shared
     {
         public static bool IsAcad => AppDomain.CurrentDomain.GetAssemblies()
             .Any(assembly => assembly.FullName?.StartsWith("acdbmgd", StringComparison.OrdinalIgnoreCase) ?? false);
+        public static bool IsLicensed { get; private set; } = false;
 
         private Document document = Application.DocumentManager.MdiActiveDocument;
 
@@ -42,7 +42,6 @@ namespace Shared
             if (Config.InstallPath == null)
                 throw new UnauthorizedAccessException("RoadPAC is not installed or installation is malformed!");
             SetDllDirectory(Config.InstallPath);
-            document.Editor.WriteMessage($"RpInstallPath: {Config?.InstallPath}");
             FileWatcher = new FileWatcherController(context);
             #region RIBBON_REGISTRY
             RibbonController.CreateTab("rp_RoadPAC");
@@ -53,12 +52,8 @@ namespace Shared
                 try
                 {
                     var rpfile = new RDPFileHelper();
-                    document.Editor.WriteMessage(
-                        $"\nRpCurrentWorkingDirectory: {rpfile.CurrentWorkingDirectory ?? "None"}\n" +
-                        $"RpCurrentRoute: {rpfile.CurrentRoute ?? "None"}\n");
-                    if (FileWatcher == null)
-                        return;
                     FileWatcher.AddDirectory(rpfile.CurrentWorkingDirectory);
+                    IsLicensed = true;
                 }
                 catch (COMException) // User don't have valid license for RoadPAC
                 { }
@@ -70,7 +65,6 @@ namespace Shared
                          // hence we are sacrificing a little bit of performance here,
                          // but at init it does not really matter;
 #endif
-            FileWatcher.FileCreated += (a, b) => Debug.WriteLine($"FileCreated: {a}, {b}");
             document.Editor.WriteMessage("^C");
         }
 

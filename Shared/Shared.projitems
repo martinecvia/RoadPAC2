@@ -46,6 +46,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)RPApp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RPUseOnlyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\RibbonController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Windows\ProjectorViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Windows\Projector.xaml.cs">
+      <DependentUpon>Projector.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Windows\Tree\TreeItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Windows\Tree\TreeViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_default_16.ico" />
@@ -78,5 +84,11 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\Civil3D\rp_project_explorer_16.bmp" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_open_sidebar_32.ico" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_open_sidebar_16.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Windows\Projector.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
 </Project>
