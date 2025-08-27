@@ -65,7 +65,6 @@ namespace Shared
                          // hence we are sacrificing a little bit of performance here,
                          // but at init it does not really matter;
 #endif
-            document.Editor.WriteMessage("^C");
         }
 
         #region O_INSTALLATION"HKEY_LOCAL_MACHINE"

@@ -1,8 +1,15 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 
+#region O_PROGRAM_DETERMINE_CAD_PLATFORM 
+#if ZWCAD
 using ApplicationServices = ZwSoft.ZwCAD.ApplicationServices;
 using ZwSoft.ZwCAD.EditorInput;
+#else
+using ApplicationServices = Autodesk.AutoCAD.ApplicationServices;
+using Autodesk.AutoCAD.EditorInput;
+#endif
+#endregion
 
 using Shared.Windows.Tree;
 

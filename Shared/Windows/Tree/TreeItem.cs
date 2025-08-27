@@ -6,7 +6,7 @@ namespace Shared.Windows.Tree
 {
     public class TreeItem
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
         public List<TreeItem> Children { get; set; } = new List<TreeItem>();
     }
 }

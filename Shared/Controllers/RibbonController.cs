@@ -17,7 +17,9 @@ using ZwSoft.Windows;
 #else
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.EditorInput;
-using Autodesk.Internal.Windows; // For ACAD Theme
+#if !NET8_0_OR_GREATER
+using Autodesk.Internal.Windows;
+#endif
 using Autodesk.Windows;
 #endif
 #endregion
@@ -37,9 +39,9 @@ namespace Shared.Controllers
                                                             // This also prevents using the same name from different applications.
 
         private static RibbonControl Ribbon => ComponentManager.Ribbon;
-
+        private static bool _hasContextual = false;
         private static readonly Dictionary<string, object> _registeredControls = new Dictionary<string, object>();
-        private static readonly Dictionary<string, RibbonTab> _activeContextualTabs = new Dictionary<string, RibbonTab>();
+        private static readonly Dictionary<string, ContextualRibbonTab> _activeContextualTabs = new Dictionary<string, ContextualRibbonTab>();
         private static readonly Dictionary<string, Func<SelectionSet, bool>> _contextualTabConditions 
             = new Dictionary<string, Func<SelectionSet, bool>>();
 
@@ -72,12 +74,14 @@ namespace Shared.Controllers
             AssertInitialized();
 #endif
             Assert.IsNotNull(tabId, nameof(tabId));
+            if (Ribbon == null)
+                return new T();
             RibbonTabDef tabDef = ResourceController.LoadResourceRibbon<RibbonTabDef>(tabId);
             T tab = tabDef?.Transform(new T()) ?? new T();
             if (Ribbon.Tabs.Contains(tab))
                 return tab; // We really don't want to process same tab multiple times,
                             // there is no point in that
-            Ribbon.Tabs.Add(tab);
+            Ribbon?.Tabs.Add(tab);
             tab.Id = RibbonTab__Prefix + tabId;       // We want to mark these tabs as RoadPAC ones.
                                                       // For further compatibility and to prevent being overriden.
             if (tabDef != null)
@@ -119,49 +123,40 @@ namespace Shared.Controllers
             return tab;
         }
 
-        public static RibbonTab CreateContextualTab(string tabId, Func<SelectionSet, bool> onSelectionMatch)
+        public static ContextualRibbonTab CreateContextualTab(string tabId)
         {
 #if NON_VOLATILE_MEMORY
             AssertInitialized();
 #endif
             Assert.IsNotNull(tabId, nameof(tabId));
-            RibbonTab tab = CreateTab(tabId);
+            if (_activeContextualTabs.ContainsKey(RibbonTab__Prefix + tabId))
+                return _activeContextualTabs[RibbonTab__Prefix + tabId];
+            ContextualRibbonTab tab = (ContextualRibbonTab) Ribbon?.Tabs?
+                .FirstOrDefault(t => t is ContextualRibbonTab _contextualTab && t.Id == RibbonTab__Prefix + tabId);
+            if (tab != null)
+                return tab;
+            tab = CreateTab<ContextualRibbonTab>(tabId);
             tab.IsVisible = false;
             tab.IsContextualTab = true;
-#if !NET8_0_OR_GREATER && !ZWCAD
-            // Older AutoCAD versions have bug with template,
-            // so it will just pick random template in the current list and apply it to context
-            // My fix is that I'll copy Theme from a Hatch tab
-            RibbonTab slave = Ribbon.Tabs.FirstOrDefault(t => t.IsContextualTab
-                && (t.Name == "Hatch Editor" || t.Id == "ACAD.RBN_01738148"
-                || t.Name == "Vytváøení šraf"));
-            if (tab.Theme == null
-                && slave?.Theme is TabTheme theme)
+            tab.IsSelectionTab = false;
+            ApplyOlderTheme(tab);
+            // This protects stack agains multiple instances of Idle event registration
+            if (!_hasContextual)
             {
-                tab.Theme = new TabTheme
-                {
-                    InnerBorder = CloneBrush(theme.InnerBorder),
-                    OuterBorder = CloneBrush(theme.OuterBorder),
-                    PanelBackground = CloneBrush(theme.PanelBackground),
-                    PanelBackgroundVerticalLeft = CloneBrush(theme.PanelBackgroundVerticalLeft),
-                    PanelBackgroundVerticalRight = CloneBrush(theme.PanelBackgroundVerticalRight),
-                    PanelBorder = CloneBrush(theme.PanelBorder),
-                    PanelDialogBoxLauncherBrush = CloneBrush(theme.PanelDialogBoxLauncherBrush),
-                    PanelSeparatorBrush = CloneBrush(theme.PanelSeparatorBrush),
-                    PanelTitleBackground = CloneBrush(theme.PanelTitleBackground),
-                    PanelTitleBorderBrushVertical = CloneBrush(theme.PanelTitleBorderBrushVertical),
-                    PanelTitleForeground = CloneBrush(theme.PanelTitleForeground),
-                    RolloverTabHeaderForeground = CloneBrush(theme.RolloverTabHeaderForeground),
-                    SelectedTabHeaderBackground = CloneBrush(theme.SelectedTabHeaderBackground),
-                    SelectedTabHeaderForeground = CloneBrush(theme.SelectedTabHeaderForeground),
-                    SlideoutPanelBorder = CloneBrush(theme.SlideoutPanelBorder),
-                    TabHeaderBackground = CloneBrush(theme.TabHeaderBackground)
-                };
+                Application.Idle += OnApplicationIdle;
+                _hasContextual = true;
             }
-#endif
+            return tab;
+        }
+
+        public static ContextualRibbonTab CreateContextualTab(string tabId, Func<SelectionSet, bool> onSelectionMatch)
+        {
+            ContextualRibbonTab tab = CreateContextualTab(tabId);
+            tab.IsSelectionTab = true;
             if (_contextualTabConditions.Count == 0)
                 Application.DocumentManager.MdiActiveDocument.ImpliedSelectionChanged += OnSelectionChanged;
-            _contextualTabConditions.Add(tab.Id, onSelectionMatch);
+            if (!_contextualTabConditions.ContainsKey(tab.Id))
+                _contextualTabConditions.Add(tab.Id, onSelectionMatch);
             return tab;
         }
 
@@ -171,28 +166,26 @@ namespace Shared.Controllers
             if (_activeContextualTabs.ContainsKey(_contextualId))
             {
                 var _contextualTab = _activeContextualTabs[_contextualId];
-                Ribbon.HideContextualTab(_contextualTab);
-                _contextualTab.IsVisible = false;
-                _activeContextualTabs.Remove(_contextualTab.Id);
-                if (_activeContextualTabs.Count == 0)
-                    Application.Idle -= OnSelectionIdle;
+                if (_contextualTab is ContextualRibbonTab)
+                {
+                    Ribbon?.HideContextualTab(_contextualTab);
+                    _contextualTab.IsVisible = false;
+                    _activeContextualTabs.Remove(_contextualTab.Id);
+                }
             }
         }
 
         [RPInternalUseOnly]
-        internal static void HideContextualTab(RibbonTab _contextualTab)
+        internal static void HideContextualTab(ContextualRibbonTab _contextualTab)
             => HideContextualTab(_contextualTab.Id);
 
         [RPPrivateUseOnly]
-        private static void OnSelectionIdle(object sender, EventArgs eventArgs)
+        private static void OnApplicationIdle(object sender, EventArgs eventArgs)
         {
             if (eventArgs == null)  // Case that happens when AutoCAD's main thread is occupied
                                     // and event was fired in the middle of cleaning up databases
                                     // [bug at: Autodesk AutoCAD 2017 #11387]
                 return;
-#if NON_VOLATILE_MEMORY
-            AssertInitialized();
-#endif
             foreach (var _contextualTab in _activeContextualTabs.Values)
             {
                 if (!_contextualTab.IsContextualTab)
@@ -202,7 +195,7 @@ namespace Shared.Controllers
                 }
                 if (!_contextualTab.IsVisible)
                 {
-                    Ribbon.ShowContextualTab(_contextualTab, false, true);
+                    Ribbon?.ShowContextualTab(_contextualTab, false, true);
                     _contextualTab.IsActive = true;
                 }
             }
@@ -221,16 +214,14 @@ namespace Shared.Controllers
             {
                 foreach (var Id in _contextualTabConditions.Keys)
                 {
-                    var _contextualTab = Ribbon.Tabs.FirstOrDefault(t => t.Id == Id);
+                    var _contextualTab = Ribbon?.Tabs?.FirstOrDefault(t => t.Id == Id);
                     if (_contextualTab != null)
                     {
-                        Ribbon.HideContextualTab(_contextualTab);
+                        Ribbon?.HideContextualTab(_contextualTab);
                         _contextualTab.IsVisible = false;
                         _activeContextualTabs.Remove(Id);
                     }
                 }
-                if (_activeContextualTabs.Count == 0)
-                    Application.Idle -= OnSelectionIdle;
                 return;
             }
             SelectionSet selection = result.Value;
@@ -241,9 +232,9 @@ namespace Shared.Controllers
                     if (pair.Value == null)
                         continue; // If for some reason Func<SelectionSet, bool>> will be null during tab creation
                                   // we will just skip handling this tab and treat it as normal one
-                    RibbonTab _contextualTab;
+                    ContextualRibbonTab _contextualTab;
                     if (_activeContextualTabs.ContainsKey(pair.Key)) _contextualTab = _activeContextualTabs[pair.Key];
-                    else _contextualTab = Ribbon.Tabs.FirstOrDefault(t => t.Id == pair.Key);
+                    else _contextualTab = (ContextualRibbonTab) Ribbon?.Tabs?.FirstOrDefault(t => t.Id == pair.Key && t is ContextualRibbonTab);
                     if (_contextualTab == null) // We dont need to draw or loop for tabs that does not exists anymore
                         continue;
                     if (pair.Value.Invoke(selection))
@@ -253,16 +244,11 @@ namespace Shared.Controllers
                     } 
                     else
                     {
-                        Ribbon.HideContextualTab(_contextualTab);
+                        Ribbon?.HideContextualTab(_contextualTab);
                         _contextualTab.IsVisible = false;
                         _activeContextualTabs.Remove(pair.Key);
-
                     }
                 }
-#pragma warning disable IDE0004
-                (_activeContextualTabs.Count == 0 // Decides if Idle event handler should be handled or not
-                    ? (Action)(() => Application.Idle -= OnSelectionIdle)
-                    : (Action)(() => Application.Idle += OnSelectionIdle))();
             }
         }
 
@@ -376,10 +362,48 @@ namespace Shared.Controllers
             }
             return null;
         }
-#if !NET8_0_OR_GREATER && !ZWCAD
+
         [RPPrivateUseOnly]
-        private static T CloneBrush<T>(T brush) where T : class
+        private static void ApplyOlderTheme(ContextualRibbonTab tab)
+        {
+#if !NET8_0_OR_GREATER && !ZWCAD
+            T CloneBrush<T>(T brush) where T : class
             => brush == null ? null : (brush as dynamic).Clone();
+            // Older AutoCAD versions have bug with template,
+            // so it will just pick random template in the current list and apply it to context
+            // My fix is that I'll copy Theme from a Hatch tab
+            RibbonTab slave = Ribbon?.Tabs?.FirstOrDefault(t => t.IsContextualTab
+                && (t.Name == "Hatch Editor" || t.Id == "ACAD.RBN_01738148"
+                || t.Name == "Vytváøení šraf"));
+            if (tab.Theme == null
+                && slave?.Theme is TabTheme theme)
+            {
+                tab.Theme = new TabTheme
+                {
+                    InnerBorder = CloneBrush(theme.InnerBorder),
+                    OuterBorder = CloneBrush(theme.OuterBorder),
+                    PanelBackground = CloneBrush(theme.PanelBackground),
+                    PanelBackgroundVerticalLeft = CloneBrush(theme.PanelBackgroundVerticalLeft),
+                    PanelBackgroundVerticalRight = CloneBrush(theme.PanelBackgroundVerticalRight),
+                    PanelBorder = CloneBrush(theme.PanelBorder),
+                    PanelDialogBoxLauncherBrush = CloneBrush(theme.PanelDialogBoxLauncherBrush),
+                    PanelSeparatorBrush = CloneBrush(theme.PanelSeparatorBrush),
+                    PanelTitleBackground = CloneBrush(theme.PanelTitleBackground),
+                    PanelTitleBorderBrushVertical = CloneBrush(theme.PanelTitleBorderBrushVertical),
+                    PanelTitleForeground = CloneBrush(theme.PanelTitleForeground),
+                    RolloverTabHeaderForeground = CloneBrush(theme.RolloverTabHeaderForeground),
+                    SelectedTabHeaderBackground = CloneBrush(theme.SelectedTabHeaderBackground),
+                    SelectedTabHeaderForeground = CloneBrush(theme.SelectedTabHeaderForeground),
+                    SlideoutPanelBorder = CloneBrush(theme.SlideoutPanelBorder),
+                    TabHeaderBackground = CloneBrush(theme.TabHeaderBackground)
+                };
+            }
 #endif
+        }
+
+        public class ContextualRibbonTab : RibbonTab
+        {
+            public bool IsSelectionTab { get; set; } = false;
+        }
     }
 }

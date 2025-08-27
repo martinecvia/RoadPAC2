@@ -27,9 +27,11 @@ namespace Shared.Controllers
             = new ConcurrentDictionary<string, FileSystemWatcher>();
         private readonly ConcurrentDictionary<string, HashSet<string>> _files
             = new ConcurrentDictionary<string, HashSet<string>>();
+
         public event Action<string, string> FileCreated;
         public event Action<string, string> FileDeleted;
         public event Action<string, string, string> FileRenamed;
+
         public IReadOnlyDictionary<string, HashSet<string>> Files
         {
             get

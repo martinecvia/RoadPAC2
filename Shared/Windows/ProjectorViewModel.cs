@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Text;
 
-using ZwSoft.ZwCAD.Windows;
-
 using System.Windows;
 using Shared.Windows.Tree;
 

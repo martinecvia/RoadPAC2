@@ -8,14 +8,12 @@
     <Grid>
         <TabControl ItemsSource="{Binding Tabs}">
             <TabControl.ItemTemplate>
-                <!-- Tab header -->
                 <DataTemplate>
                     <TextBlock Text="{Binding Header}" />
                 </DataTemplate>
             </TabControl.ItemTemplate>
 
             <TabControl.ContentTemplate>
-                <!-- Each tab contains a TreeView -->
                 <DataTemplate>
                     <TreeView ItemsSource="{Binding Items}">
                         <TreeView.Resources>

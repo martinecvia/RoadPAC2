@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<ProgramMappings xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<!-- Niveleta -->
+	<Profiles>
+		<FileExtension Extension=".XNI" />
+	</Profiles>
+	<!-- Trasa / Směrové řešení -->
+	<Routes>
+		<FileExtension Extension=".XHB" />
+		<!--<FileExtension Extension=".SHB" />-->
+	</Routes>
+	<!-- Koridor -->
+	<Corridor>
+		<FileExtension Extension=".V43" />
+		<FileExtension Extension=".L43" Type="Listing" />
+	</Corridor>
+	<!-- Vytyčení -->
+	<Surveys>
+		<!-- 
+		Line1:<x47>
+		Line2:  <Nastaveni UseSklonNivelety="0" UseSPR="0" 
+					CalcSKR="1" DTMFileName="" UseStaryStav="0" StaryStavFileName="" 
+					SI51v19="0" SI51v19CommandLineArgs="" SI51useTRIM="0" 
+					SmeryCompatabilni2018="0" PrazdneHodnoty="0" TechnickeBody="0" 
+					adresarOcekavany="" adresar="D:\_roadpac\data\RDP_VUT\Data" 
+					shb="ctvrtek 
+					sni="ctvrtek" skr="ctvrtek" sss="" 
+					v43="ctvrtek" vystup="" filter="" useSSS="0" useInterval="1" 
+					generujXLS="1" generujSOU="0" generujDWG="0" generujTXT="0" 
+					nepocitatSKR="0" trasaName="ctvrtek" />
+		Line3:	...
+		-->
+		<FileExtension Extension=".V47X" XmlType="True" />
+	</Surveys>
+	<!-- Příčné řezy -->
+	<CrossSections>
+		<FileExtension Extension=".V51" />
+		<FileExtension Extension=".L51" Type="Listing" />
+	</CrossSections>
+	<!-- Spojené příčné řezy -->
+	<CombinedCrossSections>
+		<!-- 
+		Line1:<x910 HlavniTrasa="tro" MainStyle="100" 
+					DtmFile="TRO.dt4" 
+					AutoAddFiles="1">
+		Line2:	...
+		-->
+		<FileExtension Extension=".V91" XmlType="True" />
+	</CombinedCrossSections>
+	<!-- IFC Podklady -->
+	<IFCReferences>
+		<!-- 
+		Line1:<x940 HlavniTrasa="tro" MainStyle="100" 
+					DtmFile="TRO.dt4" 
+					AutoAddFiles="0">
+		Line2:	...
+		-->
+		<FileExtension Extension=".V94" XmlType="True" />
+	</IFCReferences>
+</ProgramMappings>

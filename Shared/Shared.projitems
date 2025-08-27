@@ -10,10 +10,12 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Assert.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\ProjectController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\ConfigController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\BaseRibbonControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\Ribbon\RibbonButton_Close_ContextualTab.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\FileWatcherController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\ProgramMappingsXml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\DocumentEditorExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TaskExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\RDPFileHelper.cs" />
@@ -73,14 +75,19 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_RoadPAC.xml">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\rp_ProgramMappings.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\RoadPAC\rp_DTM.bmp" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_excel_16.ico" />
     <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_icon.jpg" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_Contextual_SelectView.xml" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_Contextual_SelectView.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\Civil3D\rp_project_explorer_16.bmp" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_open_sidebar_32.ico" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_open_sidebar_16.ico" />

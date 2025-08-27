@@ -9,6 +9,7 @@ using Autodesk.Windows;
 #endregion
 
 using Shared.Controllers.Models.RibbonXml;
+using static Shared.Controllers.RibbonController;
 
 [assembly: CommandClass(typeof(Shared.Controllers.Controls.Ribbon.
     RibbonButton_Close_ContextualTab.RibbonButton_Close_ContextualTab_Commander))]
@@ -24,8 +25,7 @@ namespace Shared.Controllers.Controls.Ribbon
             [CommandMethod("RP_AECCLCTX")]
             public static void CloseContextualTab()
             {
-                if (ComponentManager.Ribbon.ActiveTab is RibbonTab selected
-                    && selected.Id.StartsWith(RibbonController.RibbonTab__Prefix))
+                if (ComponentManager.Ribbon.ActiveTab is ContextualRibbonTab selected)
                     RibbonController.HideContextualTab(selected);
             }
         }

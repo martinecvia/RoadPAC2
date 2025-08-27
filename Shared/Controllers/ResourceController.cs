@@ -89,6 +89,31 @@ namespace Shared.Controllers
             => _cachedBitMaps.TryGetValue(resourceName, out BitmapImage bitMap) 
             ? bitMap : (_cachedBitMaps.TryGetValue("rp_img_default_32.ico", out BitmapImage defaultBitMap) ? defaultBitMap : null);
 
+        /// <summary>
+        /// Loads an embedded XML resource and deserializes it into an object of type <typeparamref name="T"/>.
+        /// Returns null if the resource is not found or deserialization fails.
+        /// </summary>
+        /// <typeparam name="T">The type to deserialize the XML into.</typeparam>
+        /// <param name="resourceName">Full name of the embedded resource, including namespace and folder path.</param>
+        /// <returns>An instance of <typeparamref name="T"/> or null if unsuccessful.</returns>
+        public static T GetXmlSource<T>(string resourceName) 
+            where T : class
+        {
+            try
+            {
+                Assembly assembly = Assembly.GetExecutingAssembly();
+                using (Stream stream = assembly.GetManifestResourceStream(resourceName))
+                {
+                    if (stream == null) 
+                        return default(T);
+                    XmlSerializer serializer = new XmlSerializer(typeof(T));
+                    return serializer.Deserialize(stream) as T;
+                }
+            }
+            catch (Exception)
+            { return default(T); }
+        }
+        
         [RPPrivateUseOnly]
         private static bool IsImage(string resourceName)
         {

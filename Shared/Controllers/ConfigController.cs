@@ -36,7 +36,6 @@ namespace Shared.Controllers
             }
         }
 
-        
         public static T LoadConfig<T>(string lsFileName = "ANetRoadPAC2.config.xml") where T : class, new()
         {
             if (_cache.TryGetValue(lsFileName, out object cached) && cached is T hwConfig)
