@@ -19,6 +19,7 @@ using ZwSoft.ZwCAD.ApplicationServices;
 namespace Shared.Controllers
 {
     // https://www.keanw.com/2015/03/autocad-2016-calling-commands-from-external-events-using-net.html
+    // https://adndevblog.typepad.com/autocad/2012/06/use-thread-for-background-processing.html
     internal class FileWatcherController : IDisposable
     {
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
