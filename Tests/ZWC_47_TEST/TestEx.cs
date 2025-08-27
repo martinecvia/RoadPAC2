@@ -1,4 +1,5 @@
 ﻿using ZwSoft.Windows;
+using ZwSoft.ZwCAD.ApplicationServices;
 using ZwSoft.ZwCAD.Runtime;
 
 using Shared;
@@ -10,7 +11,7 @@ namespace ZWC_47_TEST
     {
         public void Initialize()
         {
-            var application = new RPApp();
+            RPApp _ = new RPApp(Application.DocumentManager);
         }
 
         [CommandMethod("HIT_BREAKPOINT")]

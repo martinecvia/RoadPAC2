@@ -1,4 +1,5 @@
-﻿using Autodesk.AutoCAD.Runtime;
+﻿using Autodesk.AutoCAD.ApplicationServices;
+using Autodesk.AutoCAD.Runtime;
 using Autodesk.Windows;
 
 using Shared;
@@ -10,7 +11,7 @@ namespace NET_80_TEST
     {
         public void Initialize()
         {
-            using (var application = new RPApp()) ;
+            RPApp _ = new RPApp(Application.DocumentManager);
         }
 
         [CommandMethod("HIT_BREAKPOINT")]

@@ -1,5 +1,7 @@
-﻿using Autodesk.AutoCAD.Runtime;
+﻿using Autodesk.AutoCAD.ApplicationServices;
+using Autodesk.AutoCAD.Runtime;
 using Autodesk.Windows;
+
 using Shared;
 
 // https://help.autodesk.com/view/ACD/2017/ENU/?guid=GUID-4E1AAFA9-740E-4097-800C-CAED09CDFF12
@@ -10,7 +12,7 @@ namespace NET_46_TEST
     public class TestEx : IExtensionApplication
     {
         public void Initialize() {
-            using (var application = new RPApp()) ;
+            RPApp _ = new RPApp(Application.DocumentManager);
         }
 
         [CommandMethod("HIT_BREAKPOINT")]

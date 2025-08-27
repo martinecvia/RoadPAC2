@@ -1,4 +1,4 @@
-#pragma warning disable CS8600, CS8604, CS8625
+#pragma warning disable CS1998, CS8600, CS8604, CS8618, CS8625
 
 using System; // Keep for .NET 4.6
 using System.Linq; // Keep for .NET 4.6
@@ -30,10 +30,12 @@ namespace Shared
         private Document document = Application.DocumentManager.MdiActiveDocument;
 
         public static RPConfig Config { get; private set; } = null;
-        public static FileWatcherController FileWatcher { get; private set; } = new FileWatcherController();
+        public static FileWatcherController FileWatcher { get; private set; }
+        public static DocumentCollection AsyncCommandContext { get; private set; }
 
-        internal RPApp()
+        internal RPApp(DocumentCollection context)
         {
+            AsyncCommandContext = context;
             ResourceController.LoadEmbeddedResources();
             Config = ConfigController.LoadConfig<RPConfig>();
             CheckForInstallationRegistry();
@@ -41,11 +43,12 @@ namespace Shared
                 throw new UnauthorizedAccessException("RoadPAC is not installed or installation is malformed!");
             SetDllDirectory(Config.InstallPath);
             document.Editor.WriteMessage($"RpInstallPath: {Config?.InstallPath}");
+            FileWatcher = new FileWatcherController(context);
             #region RIBBON_REGISTRY
             RibbonController.CreateTab("rp_RoadPAC");
             RibbonController.CreateContextualTab("rp_Contextual_SelectView", selection => { return true; });
             #endregion
-            Action BeginInit = () =>
+            void BeginInit()
             {
                 var rpfile = new RDPFileHelper();
                 document.Editor.WriteMessage(
@@ -54,15 +57,15 @@ namespace Shared
                 if (FileWatcher == null)
                     return;
                 FileWatcher.AddDirectory(rpfile.CurrentWorkingDirectory);
-            };
-#if ZWCAD
+            }
+#if ZWCAD || NET8_0_OR_GREATER
             Task.Run(BeginInit);
 #else
             BeginInit(); // AutoCAD does not support multi-threading,
                          // hence we are sacrificing a little bit of performance here,
-                         // but at init it does not really matter
+                         // but at init it does not really matter;
 #endif
-            FileWatcher.FileCreated += (a, b) => Debug.WriteLine($"\nFileCreated: {a}, {b}\n");
+            FileWatcher.FileCreated += (a, b) => Debug.WriteLine($"FileCreated: {a}, {b}");
             document.Editor.WriteMessage("^C");
         }
 
