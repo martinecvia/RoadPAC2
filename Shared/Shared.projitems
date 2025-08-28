@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Assert.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\Ribbon\MojeOvladaciId.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\Project\BaseProjectXml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\Project\CombinedCrossSectionsFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\Project\IFCFile.cs" />
@@ -83,6 +84,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_Test.xml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\RoadPAC\rp_DTM.bmp" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_excel_16.ico" />
     <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_icon.jpg" />

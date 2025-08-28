@@ -44,7 +44,11 @@ namespace Shared
             Projector = new ProjectController();
             #region RIBBON_REGISTRY
             RibbonController.CreateTab("rp_RoadPAC");
-            RibbonController.CreateContextualTab("rp_Contextual_SelectView");
+            RibbonController.CreateTab("rp_Test");
+            RibbonController.CreateContextualTab("rp_Contextual_SelectView", selection =>
+            {
+                return true;
+            });
             #endregion
             void BeginInit()
             {
