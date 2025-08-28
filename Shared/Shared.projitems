@@ -10,14 +10,17 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Assert.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\Project\CombinedCrossSectionsFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\Project\IFCFile.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\Project\SurveyFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\ProjectController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\ConfigController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\BaseRibbonControl.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\Ribbon\RibbonButton_Close_ContextualTab.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\FileWatcherController.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\ProgramMappingsXml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\DocumentEditorExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TaskExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\FilePeekHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\RDPFileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\RPConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\BaseRibbonXml.cs" />
@@ -79,9 +82,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\rp_ProgramMappings.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\RoadPAC\rp_DTM.bmp" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_excel_16.ico" />
     <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_icon.jpg" />

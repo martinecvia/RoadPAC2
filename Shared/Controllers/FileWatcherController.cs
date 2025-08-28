@@ -3,7 +3,6 @@
 using System;  // Keep for .NET 4.6
 using System.Collections.Concurrent;
 using System.Collections.Generic; // Keep for .NET 4.6
-using System.Diagnostics;
 using System.IO;
 using System.Linq; // Keep for .NET 4.6
 using System.Threading;
@@ -49,7 +48,6 @@ namespace Shared.Controllers
             }
         }
 
-
         private DocumentCollection _context;
         internal FileWatcherController(DocumentCollection context)
             => _context = context
@@ -66,7 +64,6 @@ namespace Shared.Controllers
             if (_watchers.ContainsKey(lsPath)) return;
             HashSet<string> files = new HashSet<string>(Directory.GetFiles(lsPath)
                 .Select(System.IO.Path.GetFileName));
-            UpdateFiles(lsPath, files);
             _lock.EnterWriteLock();
             try
             {
@@ -129,8 +126,6 @@ namespace Shared.Controllers
 #endif
         }
 
-        private readonly ConcurrentDictionary<string, System.Timers.Timer> _timers 
-            = new ConcurrentDictionary<string, System.Timers.Timer>();
         private async void OnFileChanged(string lsPath, string fileName, WatcherChangeTypes change)
         {
             if (change != WatcherChangeTypes.Changed)
@@ -186,15 +181,6 @@ namespace Shared.Controllers
 #else
             ThreadPool.QueueUserWorkItem(_ => FileRenamed?.Invoke(lsPath, fileName, oldName));
 #endif
-        }
-
-        private void UpdateFiles(string lsPath, HashSet<string> newFiles)
-        {
-            _lock.EnterWriteLock();
-            try
-            {
-                _files[lsPath] = newFiles;
-            } finally { _lock.ExitWriteLock(); }
         }
 
         public void Dispose()

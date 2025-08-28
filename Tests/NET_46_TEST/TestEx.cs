@@ -26,6 +26,7 @@ namespace NET_46_TEST
         public void WindowTest()
         {
             var window = new Projector();
+            window.Show();
         }
 
         public void Terminate()

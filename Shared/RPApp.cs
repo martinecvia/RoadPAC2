@@ -1,6 +1,7 @@
 #pragma warning disable CS1998, CS8600, CS8604, CS8618, CS8625
 
 using System; // Keep for .NET 4.6
+using System.Diagnostics;
 using System.Linq; // Keep for .NET 4.6
 using System.Runtime.InteropServices;
 
@@ -27,10 +28,9 @@ namespace Shared
             .Any(assembly => assembly.FullName?.StartsWith("acdbmgd", StringComparison.OrdinalIgnoreCase) ?? false);
         public static bool IsLicensed { get; private set; } = false;
 
-        private Document document = Application.DocumentManager.MdiActiveDocument;
-
         public static RPConfig Config { get; private set; } = null;
         public static FileWatcherController FileWatcher { get; private set; }
+        public static ProjectController Projector { get; private set; }
         public static DocumentCollection AsyncCommandContext { get; private set; }
 
         internal RPApp(DocumentCollection context)
@@ -43,6 +43,7 @@ namespace Shared
                 throw new UnauthorizedAccessException("RoadPAC is not installed or installation is malformed!");
             SetDllDirectory(Config.InstallPath);
             FileWatcher = new FileWatcherController(context);
+            Projector = new ProjectController();
             #region RIBBON_REGISTRY
             RibbonController.CreateTab("rp_RoadPAC");
             RibbonController.CreateContextualTab("rp_Contextual_SelectView", selection => { return true; });
@@ -53,6 +54,7 @@ namespace Shared
                 {
                     var rpfile = new RDPFileHelper();
                     FileWatcher.AddDirectory(rpfile.CurrentWorkingDirectory);
+                    Projector.RefreshProject(FileWatcher.Files);
                     IsLicensed = true;
                 }
                 catch (COMException) // User don't have valid license for RoadPAC
@@ -65,6 +67,7 @@ namespace Shared
                          // hence we are sacrificing a little bit of performance here,
                          // but at init it does not really matter;
 #endif
+            Projector.BeginInit();
         }
 
         #region O_INSTALLATION"HKEY_LOCAL_MACHINE"
@@ -114,6 +117,8 @@ namespace Shared
                 ConfigController.SaveConfig(Config);
             FileWatcher.Dispose();
             FileWatcher = null;
+            Projector.Dispose();
+            Projector = null;
         }
 
         #region WIN32_API
