@@ -3,6 +3,7 @@
 using System;  // Keep for .NET 4.6
 using System.Collections.Concurrent;
 using System.Collections.Generic; // Keep for .NET 4.6
+using System.Diagnostics;
 using System.IO;
 using System.Linq; // Keep for .NET 4.6
 using System.Threading;
@@ -19,7 +20,6 @@ using ZwSoft.ZwCAD.ApplicationServices;
 namespace Shared.Controllers
 {
     // https://www.keanw.com/2015/03/autocad-2016-calling-commands-from-external-events-using-net.html
-    // https://adndevblog.typepad.com/autocad/2012/06/use-thread-for-background-processing.html
     internal class FileWatcherController : IDisposable
     {
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
@@ -30,6 +30,7 @@ namespace Shared.Controllers
             = new ConcurrentDictionary<string, HashSet<string>>();
 
         public event Action<string, string> FileCreated;
+        public event Action<string, string> FileChanged;
         public event Action<string, string> FileDeleted;
         public event Action<string, string, string> FileRenamed;
 
@@ -80,6 +81,7 @@ namespace Shared.Controllers
             //    watcher.Filters.Add(filter);
 #endif
             watcher.Created += (o, s) => OnFileCreated(lsPath, s.Name);
+            watcher.Changed += (o, s) => OnFileChanged(lsPath, s.Name, s.ChangeType);
             watcher.Deleted += (o, s) => OnFileDeleted(lsPath, s.Name);
             watcher.Renamed += (o, s) => OnFileRenamed(lsPath, s.Name, s.OldName);
             watcher.NotifyFilter = NotifyFilters.FileName | NotifyFilters.LastWrite;
@@ -124,6 +126,22 @@ namespace Shared.Controllers
                 => FileCreated?.Invoke(lsPath, fileName), null);
 #else
             ThreadPool.QueueUserWorkItem(_ => FileCreated?.Invoke(lsPath, fileName));
+#endif
+        }
+
+        private readonly ConcurrentDictionary<string, System.Timers.Timer> _timers 
+            = new ConcurrentDictionary<string, System.Timers.Timer>();
+        private async void OnFileChanged(string lsPath, string fileName, WatcherChangeTypes change)
+        {
+            if (change != WatcherChangeTypes.Changed)
+                return;
+#if !ZWCAD && !NET8_0_OR_GREATER
+            if (_context == null)
+                _context = Application.DocumentManager;
+            await _context?.ExecuteInCommandContextAsync(async (_) 
+                => FileChanged?.Invoke(lsPath, fileName), null);
+#else
+            ThreadPool.QueueUserWorkItem(_ => FileChanged?.Invoke(lsPath, fileName));
 #endif
         }
 

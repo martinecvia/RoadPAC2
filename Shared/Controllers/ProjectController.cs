@@ -4,7 +4,11 @@ using System.Text;
 
 namespace Shared.Controllers
 {
-    class ProjectController
+    // https://adndevblog.typepad.com/autocad/2012/06/use-thread-for-background-processing.html
+    internal class ProjectController : IDisposable
     {
+
+        public void Dispose()
+        { }
     }
 }
