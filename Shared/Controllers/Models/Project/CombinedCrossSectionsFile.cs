@@ -1,15 +1,33 @@
-﻿using System.Diagnostics;
+﻿using System.IO;
 using System.Threading.Tasks;
+using System.Xml;
+
+using Shared.Helpers;
 
 namespace Shared.Controllers.Models.Project
 {
-    internal class CombinedCrossSectionsFile : ProjectController.ProjectFile
+    public class CombinedCrossSectionsFile : BaseProjectXml
     {
         public async override Task BeginInit()
         {
-            if (string.IsNullOrEmpty(Path) || string.IsNullOrEmpty(Name))
+            if (string.IsNullOrEmpty(Path) || string.IsNullOrEmpty(File))
                 return;
-            Debug.WriteLine($"Processing Xml: {Path}{Name}");
+            string[] lines = await FilePeekHelper.PeekFileAsync(System.IO.Path.Combine(Path, File), 1);
+            if (lines.Length > 0)
+            {
+                string xmlLine = lines[0].Trim();
+                if (!xmlLine.EndsWith("/>") && !xmlLine.EndsWith(">"))
+                    xmlLine += " />";
+                using (var reader = XmlReader.Create(new StringReader(xmlLine)))
+                {
+                    if (reader.ReadToFollowing("x910"))
+                    {
+                        // For some reason this is lowercased
+                        Route = reader?.GetAttribute("HlavniTrasa")?.ToUpper();
+                        TerrainModelFile = reader.GetAttribute("DtmFile");
+                    }
+                }
+            }
         }
     }
 }

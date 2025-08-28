@@ -1,7 +1,6 @@
 #pragma warning disable CS1998, CS8600, CS8604, CS8618, CS8625
 
 using System; // Keep for .NET 4.6
-using System.Diagnostics;
 using System.Linq; // Keep for .NET 4.6
 using System.Runtime.InteropServices;
 
@@ -27,7 +26,6 @@ namespace Shared
         public static bool IsAcad => AppDomain.CurrentDomain.GetAssemblies()
             .Any(assembly => assembly.FullName?.StartsWith("acdbmgd", StringComparison.OrdinalIgnoreCase) ?? false);
         public static bool IsLicensed { get; private set; } = false;
-
         public static RPConfig Config { get; private set; } = null;
         public static FileWatcherController FileWatcher { get; private set; }
         public static ProjectController Projector { get; private set; }
@@ -46,7 +44,7 @@ namespace Shared
             Projector = new ProjectController();
             #region RIBBON_REGISTRY
             RibbonController.CreateTab("rp_RoadPAC");
-            RibbonController.CreateContextualTab("rp_Contextual_SelectView", selection => { return true; });
+            RibbonController.CreateContextualTab("rp_Contextual_SelectView");
             #endregion
             void BeginInit()
             {
@@ -54,6 +52,7 @@ namespace Shared
                 {
                     var rpfile = new RDPFileHelper();
                     FileWatcher.AddDirectory(rpfile.CurrentWorkingDirectory);
+                    Projector.CurrentWorkingDirectory = rpfile.CurrentWorkingDirectory;
                     Projector.RefreshProject(FileWatcher.Files);
                     IsLicensed = true;
                 }

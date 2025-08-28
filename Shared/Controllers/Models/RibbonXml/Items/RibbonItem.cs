@@ -119,22 +119,14 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         /// <example>
         /// Example: <c>Image="icon_button_save"</c> (resolved as icon_button_save.png or .ico from resources)
         /// </example>
-        public ImageSource LargeImage { get; set; } = null;
+        public ImageSource LargeImage { get; set; } = ResourceController.GetImageSource("rp_img_default_32");
 
         [RPInternalUseOnly]
         [XmlAttribute("LargeImage")]
         public string LargeImageDef
         {
             get => LargeImage?.ToString() ?? "";
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    LargeImage = null;
-                    return;
-                }
-                LargeImage = ResourceController.GetImageSource(value);
-            }
+            set => LargeImage = ResourceController.GetImageSource(value ?? "rp_img_default_32");
         }
 
         [RPInfoOut]
@@ -171,22 +163,14 @@ namespace Shared.Controllers.Models.RibbonXml.Items
         /// <example>
         /// Example: <c>Image="icon_button_save"</c> (resolved as icon_button_save.png or .ico from resources)
         /// </example>
-        public ImageSource Image { get; set; } = null;
+        public ImageSource Image { get; set; } = ResourceController.GetImageSource("rp_img_default_16");
 
         [RPInternalUseOnly]
         [XmlAttribute("Image")]
         public string ImageDef
         {
             get => Image?.ToString() ?? "";
-            set
-            {
-                if (string.IsNullOrEmpty(value))
-                {
-                    Image = null;
-                    return;
-                }
-                Image = ResourceController.GetImageSource(value);
-            }
+            set => Image = ResourceController.GetImageSource(value ?? "rp_img_default_16");
         }
 
         [RPInfoOut]

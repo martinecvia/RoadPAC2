@@ -31,10 +31,10 @@
 				<RibbonSeparator Id="AcRibbonSeparator" SeparatorStyle="Spacer" AllowInToolBar="False"/>
 				<RibbonButton Text="Přidat trasu" Image="rp_img_default_16" Id="RibbonButton_AddNewAxis" />
 				<RibbonRowBreak />
-				<RibbonButton Text="Nastav složku pro projekty" Image="rp_img_default_16" Id="RibbonButton_SetupProjectDir" />
-				<RibbonButton Text="Info o projektu" Image="rp_img_default_16" Id="RibbonButton_InfoProject" />
-				<RibbonButton Text="Kopírovat trasu" Image="rp_img_default_16" Id="RibbonButton_CopyAxis" />
-				<RibbonButton Text="Nápověda" Image="rp_img_default_16" Id="RibbonButton_ProjectManager_Help" />
+				<RibbonButton Text="Nastav složku pro projekty" Id="RibbonButton_SetupProjectDir" />
+				<RibbonButton Text="Info o projektu" Id="RibbonButton_InfoProject" />
+				<RibbonButton Text="Kopírovat trasu" Id="RibbonButton_CopyAxis" />
+				<RibbonButton Text="Nápověda" Id="RibbonButton_ProjectManager_Help" />
 			</RibbonRowPanel>
 			<RibbonPanelBreak />
 		</RibbonPanelSource>

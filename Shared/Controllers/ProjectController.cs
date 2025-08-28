@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -13,7 +14,7 @@ using Shared.Controllers.Models.Project;
 namespace Shared.Controllers
 {
     // https://adndevblog.typepad.com/autocad/2012/06/use-thread-for-background-processing.html
-    internal class ProjectController : IDisposable
+    public class ProjectController : IDisposable
     {
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
 
@@ -26,9 +27,10 @@ namespace Shared.Controllers
         // Project related
         private readonly ConcurrentDictionary<string, HashSet<ProjectFile>> _project 
             = new ConcurrentDictionary<string, HashSet<ProjectFile>>();
-        public event Action<string, ProjectFile> ProjectChanged;
+        public event Action<string> ProjectChanged;
+        public string CurrentWorkingDirectory { get; set; }
 
-        public IReadOnlyDictionary<string, HashSet<ProjectFile>> Projects
+        public IReadOnlyDictionary<string, HashSet<ProjectFile>> ProjectFiles
         {
             get
             {
@@ -43,46 +45,44 @@ namespace Shared.Controllers
             }
         }
 
-        // We don't really want to expose our contructor,
-        // it's supposed to be initialized during app build process
-        internal ProjectController()
+        [RPInfoOut]
+        public HashSet<ProjectFile> GetRoutes() => GetRoutes(CurrentWorkingDirectory);
+
+        [RPInfoOut]
+        public HashSet<ProjectFile> GetRoutes(string lsPath)
         {
-            if (RPApp.FileWatcher != null)
-            {
-                RPApp.FileWatcher.FileCreated += ProcessFileChanged;
-                RPApp.FileWatcher.FileChanged += ProcessFileChanged;
-                RPApp.FileWatcher.FileDeleted += ProcessFileChanged;
-                RPApp.FileWatcher.FileRenamed += ProcessFileRenamed;
-                RefreshProject(RPApp.FileWatcher.Files);
-            }
+            if (string.IsNullOrEmpty(lsPath))
+                return new HashSet<ProjectFile>();
+            if (!ProjectFiles.TryGetValue(lsPath, out var files))
+                return new HashSet<ProjectFile>();
+            return new HashSet<ProjectFile>(files.Where(f => f != null 
+                && !string.IsNullOrEmpty(f.File)
+                && f.Flag == FClass.Route));
         }
 
-        public void RefreshProject(IReadOnlyDictionary<string, HashSet<string>> files)
+        [RPInfoOut]
+        public HashSet<ProjectFile> GetRoute(string lsPath, string routeName)
         {
-            foreach (KeyValuePair<string, HashSet<string>> pair in RPApp.FileWatcher.Files)
-            {
-                _changes.AddOrUpdate(pair.Key,
-                    _ => new HashSet<string>(pair.Value),
-                    (_, set) =>
-                    {
-                        lock (set)
-                        {
-                            foreach (var item in pair.Value)
-                                set.Add(item);
-                        }
-                        return set;
-                    });
-            }
+            if (string.IsNullOrEmpty(lsPath) || string.IsNullOrEmpty(routeName))
+                return new HashSet<ProjectFile>();
+            if (!ProjectFiles.TryGetValue(lsPath, out var files))
+                return new HashSet<ProjectFile>();
+            routeName = Path.GetFileNameWithoutExtension(routeName);
+            var result = new HashSet<ProjectFile>(files.Where(f => f != null
+                && !string.IsNullOrEmpty(f.File)
+                && f.File.StartsWith(routeName, StringComparison.OrdinalIgnoreCase)
+                && !(f is BaseProjectXml)));
+            var awaits = files.Where(f => f != null
+                && !string.IsNullOrEmpty(f.File)
+                && f is BaseProjectXml xml && string.Equals(xml.Route, routeName, StringComparison.OrdinalIgnoreCase));
+            foreach (var xml in awaits)
+                result.Add(xml);
+            return result;
         }
 
-        [RPInternalUseOnly]
-        internal void BeginInit()
-            => Task.Run(ProcessChangesInBackground, _cts.Token);
-
-        [RPInternalUseOnly]
-        internal class ProjectFile
+        public class ProjectFile
         {
-            public string Name { get; internal set; }
+            public string File { get; internal set; }
             public string Path { get; internal set; }
             public FClass Flag { get; internal set; } = FClass.None;
             /// <summary>
@@ -90,13 +90,13 @@ namespace Shared.Controllers
             /// Derived classes can override to provide async initialization logic.
             /// </summary>
             public virtual Task BeginInit() => Task.CompletedTask;
-            public override string ToString() 
-                => $"{nameof(ProjectFile)}(Name={Name}, Path={Path}, Flag={Flag})";
+            public override string ToString()
+                => $"{nameof(ProjectFile)}(File={File}, Path={Path}, Flag={Flag})";
         }
 
         [Flags]
         [RPInternalUseOnly]
-        internal enum FClass : int
+        public enum FClass : int
         {
             None = 0,
             // Mappings
@@ -116,9 +116,66 @@ namespace Shared.Controllers
             Multi = 1 << 11,
         }
 
+        // We don't really want to expose our contructor,
+        // it's supposed to be initialized during app build process
+        internal ProjectController()
+        {
+            if (RPApp.FileWatcher != null)
+            {
+                RPApp.FileWatcher.FileCreated += ProcessFileChanged;
+                RPApp.FileWatcher.FileChanged += ProcessFileChanged;
+                RPApp.FileWatcher.FileDeleted += ProcessFileChanged;
+                RPApp.FileWatcher.FileRenamed += ProcessFileRenamed;
+                RefreshProject(RPApp.FileWatcher.Files);
+            }
+        }
+
+        [RPInfoOut]
+        public void RefreshProject(IReadOnlyDictionary<string, HashSet<string>> files)
+        {
+            if (RPApp.FileWatcher == null) return;
+            foreach (KeyValuePair<string, HashSet<string>> pair in RPApp.FileWatcher?.Files)
+            {
+                _changes.AddOrUpdate(pair.Key,
+                    _ => new HashSet<string>(pair.Value),
+                    (_, set) =>
+                    {
+                        lock (set)
+                        {
+                            foreach (var item in pair.Value)
+                                set.Add(item);
+                        }
+                        return set;
+                    });
+            }
+        }
+
+        [RPInternalUseOnly]
+        internal void BeginInit()
+            => Task.Run(ProcessChangesInBackground, _cts.Token);
+
+        [RPPrivateUseOnly]
+        private void ProcessFileChanged(string lsPath, string fileName)
+        {
+            _changes.AddOrUpdate(
+                lsPath,
+                _ => new HashSet<string> { fileName },
+                (_, set) => { lock (set) set.Add(fileName); return set; });
+        }
+
+        [RPPrivateUseOnly]
+        private void ProcessFileRenamed(string lsPath, string fileName, string oldName)
+        {
+            _changes.AddOrUpdate(
+                lsPath,
+                _ => new HashSet<string> { fileName },
+                (_, set) => { lock (set) set.Add(fileName); return set; });
+        }
+
         // Just one processor at a time
         private volatile bool _isProcessing;
 
+        [RPPrivateUseOnly]
         private async Task ProcessChangesInBackground()
         {
             while (!_cts.Token.IsCancellationRequested)
@@ -133,41 +190,72 @@ namespace Shared.Controllers
                         kvp => kvp.Key,
                         kvp => { lock (kvp.Value) return kvp.Value; });
                     _changes.Clear();
-                    foreach (KeyValuePair<string, HashSet<string>> pair in snapshot)
-                    {
-                        foreach (string fileName in pair.Value)
-                        {
-                            string extension = Path.GetExtension(fileName)?.TrimStart('.').ToUpper() ?? "";
-                            var recognizedFile = ProjectFileFactory.TryGetValue(extension, out var factory) ? factory() : null;
-                            if (recognizedFile == null)
-                            {
-                                //Debug.WriteLine($"{fileName} was not mapped");
-                                continue;
-                            };
-                            _lock.EnterWriteLock();
-                            try
-                            {
-                                if (_project.TryGetValue(pair.Key, out HashSet<ProjectFile> files))
-                                    files.Add(recognizedFile);
-                            }
-                            finally { _lock.ExitWriteLock(); }
-                            recognizedFile.Path = pair.Key;
-                            recognizedFile.Name = fileName;
-                            // If it had some logic -> xml reading, instantiating etc.
-                            await recognizedFile.BeginInit();
-#if !ZWCAD && !NET8_0_OR_GREATER
-                            ProjectChanged?.Invoke(pair.Key, recognizedFile);
-#else
-                            ThreadPool.QueueUserWorkItem(_ => ProjectChanged?.Invoke(pair.Key, recognizedFile));
-#endif
-                        }
-                    }
+                    var InitTasks = snapshot.SelectMany(pair
+                        => pair.Value.Select(fileName => ProcessFile(pair.Key, fileName)));
+                    await Task.WhenAll(InitTasks);
                 }
                 finally
                 {
                     _isProcessing = false;
                 }
             }
+        }
+
+        [RPPrivateUseOnly]
+        private async Task ProcessFile(string lsPath, string fileName)
+        {
+            var fullPath = Path.Combine(lsPath, fileName);
+            _lock.EnterWriteLock();
+            try
+            {
+                if (!_project.TryGetValue(lsPath, out HashSet<ProjectFile> files))
+                    files = _project[lsPath] = new HashSet<ProjectFile>();
+                var existing = files.FirstOrDefault(f => f.File.Equals(fileName, StringComparison.OrdinalIgnoreCase));
+                if (File.Exists(fullPath))
+                {
+                    string extension = Path.GetExtension(fileName)?.TrimStart('.').ToUpper() ?? "";
+                    if (existing != null)
+                    {
+                        // Just update it's values
+                        await existing.BeginInit();
+                    }
+                    else if (ProjectFileFactory.TryGetValue(extension, out var factory))
+                    {
+                        var newFactory = factory();
+                        newFactory.Path = lsPath;
+                        newFactory.File = fileName;
+                        // BeginInit must happen before adding to set
+                        await newFactory.BeginInit();
+                        files.Add(newFactory);
+                    }
+                    else
+                    {
+                        // File does not have Factory
+                        // Presumably unmapped file, ignoring it
+                    }
+                } 
+                else
+                {
+                    if (existing != null)
+                        files.Remove(existing);
+                }
+            }
+            finally
+            {
+                _lock.ExitWriteLock();
+            }
+            // Signalize event that something in project changed
+#if !ZWCAD && !NET8_0_OR_GREATER
+            ProjectChanged?.Invoke(pair.Key, recognizedFile);
+#else
+            ThreadPool.QueueUserWorkItem(_ => ProjectChanged?.Invoke(lsPath));
+#endif
+        }
+
+        public void Dispose()
+        {
+            _cts.Cancel();
+            _cts.Dispose();
         }
 
         [RPPrivateUseOnly]
@@ -181,9 +269,9 @@ namespace Shared.Controllers
             { "V47", () => new SurveyFile() { Flag = FClass.Survey | FClass.Xml | FClass.Multi } },
             { "V47X", () => new SurveyFile() { Flag = FClass.Survey | FClass.Xml | FClass.Multi } },
             // Příčné řezy
-            { "V51", () => new ProjectFile() { Flag = FClass.CrossSection } },
-            { "L51", () => new ProjectFile() { Flag = FClass.CrossSection | FClass.Listing } },
-            { "L51A", () => new ProjectFile() { Flag = FClass.CrossSection | FClass.Listing } },
+            { "V51", () => new ProjectFile() { Flag = FClass.Corridor | FClass.CrossSection } },
+            { "L51", () => new ProjectFile() { Flag = FClass.Corridor | FClass.CrossSection | FClass.Listing } },
+            { "L51A", () => new ProjectFile() { Flag = FClass.Corridor | FClass.CrossSection | FClass.Listing } },
             // Spojené příčné řezy
             { "V91", () => new CombinedCrossSectionsFile() { Flag = FClass.CombinedCrossSections | FClass.Xml | FClass.Multi } },
             // IFC Podklady
@@ -193,27 +281,5 @@ namespace Shared.Controllers
             // Trasa / Směrové řešení
             { "XHB", () => new ProjectFile() { Flag = FClass.Route } },
         };
-
-        private void ProcessFileChanged(string lsPath, string fileName)
-        {
-            _changes.AddOrUpdate(
-                lsPath,
-                _ => new HashSet<string> { fileName },
-                (_, set) => { lock (set) set.Add(fileName); return set; });
-        }
-
-        private void ProcessFileRenamed(string lsPath, string fileName, string oldName)
-        {
-            _changes.AddOrUpdate(
-                lsPath,
-                _ => new HashSet<string> { fileName },
-                (_, set) => { lock (set) set.Add(fileName); return set; });
-        }
-
-        public void Dispose()
-        {
-            _cts.Cancel();
-            _cts.Dispose();
-        }
     }
 }

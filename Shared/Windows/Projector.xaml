@@ -9,15 +9,15 @@
         <TabControl ItemsSource="{Binding Tabs}">
             <TabControl.ItemTemplate>
                 <DataTemplate>
-                    <TextBlock Text="{Binding Header}" />
+                    <TextBlock Text="{Binding Name}" />
                 </DataTemplate>
             </TabControl.ItemTemplate>
 
             <TabControl.ContentTemplate>
                 <DataTemplate>
-                    <TreeView ItemsSource="{Binding Items}">
+                    <TreeView ItemsSource="{Binding Item}">
                         <TreeView.Resources>
-                            <HierarchicalDataTemplate DataType="{x:Type tree:TreeItem}" ItemsSource="{Binding Children}">
+                            <HierarchicalDataTemplate DataType="{x:Type tree:TreeItem}" ItemsSource="{Binding Item}">
                                 <TextBlock Text="{Binding Name}">
                                     <TextBlock.ContextMenu>
                                         <ContextMenu>

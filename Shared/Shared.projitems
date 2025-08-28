@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Assert.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\Project\BaseProjectXml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\Project\CombinedCrossSectionsFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\Project\IFCFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\Project\SurveyFile.cs" />
@@ -56,7 +57,7 @@
       <DependentUpon>Projector.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Tree\TreeItem.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Windows\Tree\TreeViewModel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Windows\Tree\TreeTabViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_default_16.ico" />
@@ -78,7 +79,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_RoadPAC.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -86,7 +87,7 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_excel_16.ico" />
     <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_icon.jpg" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_Contextual_SelectView.xml">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\Civil3D\rp_project_explorer_16.bmp" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_open_sidebar_32.ico" />

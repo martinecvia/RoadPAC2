@@ -176,8 +176,28 @@ namespace Shared.Controllers
         }
 
         [RPInternalUseOnly]
+        internal static void ShowContextualTab(string _contextualId)
+        {
+            if (_activeContextualTabs.ContainsKey(_contextualId) 
+                && _activeContextualTabs[_contextualId] is ContextualRibbonTab _contextualTab)
+            {
+                Ribbon?.ShowContextualTab(_contextualTab, false, true);
+                _contextualTab.IsActive = true;
+                return;
+            }
+            _contextualTab = (ContextualRibbonTab) Ribbon?.Tabs?
+                .FirstOrDefault(t => t.Id == _contextualId && t is ContextualRibbonTab);
+            if (_contextualTab != null)
+                _activeContextualTabs.Add(_contextualId, _contextualTab);
+        }
+
+        [RPInternalUseOnly]
         internal static void HideContextualTab(ContextualRibbonTab _contextualTab)
             => HideContextualTab(_contextualTab.Id);
+
+        [RPInternalUseOnly]
+        internal static void ShowContextualTab(ContextualRibbonTab _contextualTab)
+            => ShowContextualTab(_contextualTab.Id);
 
         [RPPrivateUseOnly]
         private static void OnApplicationIdle(object sender, EventArgs eventArgs)
