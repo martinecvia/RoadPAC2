@@ -22,7 +22,8 @@ namespace Shared.Controllers
         [RPPrivateUseOnly]
         private static readonly Dictionary<string, BitmapImage> _cachedBitMaps
             = new Dictionary<string, BitmapImage>();
-
+        [RPPrivateUseOnly]
+        private static readonly Dictionary<string, string> _cachedURI = new Dictionary<string, string>();
         [RPPrivateUseOnly]
         private static readonly List<string> _cachedXml = new List<string>();
 
@@ -89,6 +90,10 @@ namespace Shared.Controllers
             => _cachedBitMaps.TryGetValue(resourceName, out BitmapImage bitMap) 
             ? bitMap : (_cachedBitMaps.TryGetValue("rp_img_default_32.ico", out BitmapImage defaultBitMap) ? defaultBitMap : null);
 
+        public static string GetImageURI(string resourceName)
+            => _cachedURI.TryGetValue(resourceName, out string URI)
+            ? URI : (_cachedURI.TryGetValue("rp_img_default_32.ico", out string defaultURI) ? defaultURI : null);
+
         /// <summary>
         /// Loads an embedded XML resource and deserializes it into an object of type <typeparamref name="T"/>.
         /// Returns null if the resource is not found or deserialization fails.
@@ -149,9 +154,14 @@ namespace Shared.Controllers
             try
             {
                 Assembly assembly = Assembly.GetExecutingAssembly();
-                using (Stream stream = assembly.GetManifestResourceStream(resourceName)
-                    ?? assembly.GetManifestResourceStream(assembly.GetManifestResourceNames()
-                        .FirstOrDefault(resource => resource.EndsWith("Icons.rp_img_default_32.ico", StringComparison.OrdinalIgnoreCase))))
+                string peekURI = assembly.GetManifestResourceNames()
+                    .FirstOrDefault(r => r.EndsWith(resourceName, StringComparison.OrdinalIgnoreCase))
+                    ?? assembly.GetManifestResourceNames()
+                        .FirstOrDefault(r => r.EndsWith("Icons.rp_img_default_32.ico", StringComparison.OrdinalIgnoreCase));
+                Debug.WriteLine(peekURI);
+                if (peekURI == null)
+                    throw new FileNotFoundException("Resource not found", resourceName);
+                using (Stream stream = assembly.GetManifestResourceStream(peekURI))
                 {
                     Assert.IsNotNull(stream, nameof(stream));      // This is a no-no, if default file was not found
                                                                    // then something must happend during build process
@@ -164,6 +174,13 @@ namespace Shared.Controllers
                     bitMap.EndInit();
                     // To make it thread safe and immutable
                     bitMap.Freeze();
+                    string key = resourceName.Split('.').Reverse().Skip(1).FirstOrDefault();
+                    int index = resourceName.IndexOf(key, StringComparison.OrdinalIgnoreCase);
+                    if (index < 0) throw new FileNotFoundException("Resource key not found", resourceName);
+                    string packURI = string.Format("pack://application:,,,/{0}{1}",
+                        peekURI.Substring(0, index).Replace('.', '/'),
+                        peekURI.Substring(index));
+                    _cachedURI[key] = packURI;
                     return bitMap;
                 }
             }

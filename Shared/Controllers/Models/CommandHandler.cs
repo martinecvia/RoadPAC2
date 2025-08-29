@@ -1,8 +1,4 @@
-#pragma warning disable CS0067
-#pragma warning disable CS8600
-#pragma warning disable CS8612
-#pragma warning disable CS8618
-#pragma warning disable CS8767
+#pragma warning disable CS0067, CS8600, CS8612, CS8618, CS8767
 
 using System; // Keep for .NET 4.6
 
@@ -49,6 +45,13 @@ namespace Shared
         /// <param name="parameter">Unused parameter.</param>
         public void Execute(object parameter)
         {
+            if (_command.StartsWith("XX:"))
+            {
+                // RP_RUN()
+
+                return;
+            }
+
             Document document = Application.DocumentManager.MdiActiveDocument;
             // Sends the command to AutoCAD for execution in the command line
             document?.SendStringToExecute(_command + " ", true, false, false);

@@ -1,11 +1,15 @@
-﻿using ZwSoft.Windows;
+﻿using System.Diagnostics;
+using System.Linq;
+
+using ZwSoft.Windows;
 using ZwSoft.ZwCAD.ApplicationServices;
 using ZwSoft.ZwCAD.Runtime;
+using ZwSoft.ZwCAD.Windows;
 
 using Shared;
 using Shared.Windows;
-using System.Linq;
-using System.Diagnostics;
+
+using System.Drawing;
 
 [assembly: CommandClass(typeof(ZWC_47_TEST.TestEx))]
 namespace ZWC_47_TEST
@@ -22,12 +26,24 @@ namespace ZWC_47_TEST
         {
             var Ribbons = ComponentManager.Ribbon;
         }
-
-        [CommandMethod("WINDOW_TEST")]
-        public void WindowTest()
+        private PaletteSet _paletteSet;
+        [CommandMethod("RP_PROSPECTOR")]
+        public void RPProspector()
         {
-            var window = new Projector();
-            window.Show();
+            if (_paletteSet == null)
+            {
+                var control = new Projector();
+                _paletteSet = new PaletteSet("RoadPAC2")
+                {
+                    Size = new Size((int)control.Width, (int)control.Height),
+                    DockEnabled = DockSides.Left | DockSides.Right,
+                    KeepFocus = true
+                };
+
+                _paletteSet.AddVisual("Prospector", control);
+            }
+            _paletteSet.KeepFocus = true;
+            _paletteSet.Visible = true;
         }
 
         public void Terminate()

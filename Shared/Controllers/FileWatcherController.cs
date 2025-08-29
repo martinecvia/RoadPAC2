@@ -126,8 +126,12 @@ namespace Shared.Controllers
 #endif
         }
 
+        int x = 0;
         private async void OnFileChanged(string lsPath, string fileName, WatcherChangeTypes change)
         {
+            x++;
+            //Interlocked.Increment(ref x);
+
             if (change != WatcherChangeTypes.Changed)
                 return;
 #if !ZWCAD && !NET8_0_OR_GREATER

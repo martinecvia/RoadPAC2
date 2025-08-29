@@ -1,5 +1,7 @@
-﻿using Autodesk.AutoCAD.ApplicationServices;
+﻿using System.Drawing;
+using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.Runtime;
+using Autodesk.AutoCAD.Windows;
 using Autodesk.Windows;
 
 using Shared;
@@ -21,10 +23,24 @@ namespace NET_48_TEST
             var Ribbons = ComponentManager.Ribbon;
         }
 
-        [CommandMethod("WINDOW_TEST")]
-        public void WindowTest()
+        private PaletteSet _paletteSet;
+        [CommandMethod("RP_PROSPECTOR")]
+        public void RPProspector()
         {
-            var window = new Projector();
+            if (_paletteSet == null)
+            {
+                var control = new Projector();
+                _paletteSet = new PaletteSet("RoadPAC2")
+                {
+                    Size = new Size((int)control.Width, (int)control.Height),
+                    DockEnabled = DockSides.Left | DockSides.Right,
+                    KeepFocus = true
+                };
+
+                _paletteSet.AddVisual("Prospector", control);
+            }
+            _paletteSet.KeepFocus = true;
+            _paletteSet.Visible = true;
         }
 
         public void Terminate()

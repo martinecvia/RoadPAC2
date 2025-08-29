@@ -246,7 +246,7 @@ namespace Shared.Controllers
             }
             // Signalize event that something in project changed
 #if !ZWCAD && !NET8_0_OR_GREATER
-            ProjectChanged?.Invoke(pair.Key, recognizedFile);
+            ProjectChanged?.Invoke(lsPath);
 #else
             ThreadPool.QueueUserWorkItem(_ => ProjectChanged?.Invoke(lsPath));
 #endif
@@ -280,6 +280,25 @@ namespace Shared.Controllers
             { "XNI", () => new ProjectFile() { Flag = FClass.Profile } },
             // Trasa / Směrové řešení
             { "XHB", () => new ProjectFile() { Flag = FClass.Route } },
+
+            // Unmapped
+            { "L13", () => new ProjectFile() { Flag = FClass.None } },
+            { "L48", () => new ProjectFile() { Flag = FClass.None } },
+            { "SHB", () => new ProjectFile() { Flag = FClass.None } },
+            { "SKR", () => new ProjectFile() { Flag = FClass.None } },
+            { "SNI", () => new ProjectFile() { Flag = FClass.None } },
+            { "SPP", () => new ProjectFile() { Flag = FClass.None } },
+            { "SPR", () => new ProjectFile() { Flag = FClass.None } },
+            { "STR", () => new ProjectFile() { Flag = FClass.None } },
+            { "TRSX", () => new ProjectFile() { Flag = FClass.None } },
+            { "V48", () => new ProjectFile() { Flag = FClass.None } },
+            { "V514", () => new ProjectFile() { Flag = FClass.None } },
+            { "V51EXT", () => new ProjectFile() { Flag = FClass.None } },
+            { "V51X", () => new ProjectFile() { Flag = FClass.None } },
+            { "V56", () => new ProjectFile() { Flag = FClass.None } },
+            { "VPP", () => new ProjectFile() { Flag = FClass.None } },
+            { "XKR", () => new ProjectFile() { Flag = FClass.None } },
+            { "XTR", () => new ProjectFile() { Flag = FClass.None } },
         };
     }
 }

@@ -1,4 +1,5 @@
-﻿namespace Shared.Controllers.Models.Project
+﻿#pragma warning disable CS8618
+namespace Shared.Controllers.Models.Project
 {
     public abstract class BaseProjectXml : Shared.Controllers.ProjectController.ProjectFile
     {

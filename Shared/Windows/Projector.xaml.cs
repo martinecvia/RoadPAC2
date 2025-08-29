@@ -1,43 +1,26 @@
-﻿using System.Windows;
-using System.Windows.Controls;
-using ZwSoft.Windows;
-using System.Linq;
-using static Shared.Controllers.RibbonController;
-
-
-
+﻿using WPF = System.Windows.Controls;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
 using ApplicationServices = ZwSoft.ZwCAD.ApplicationServices;
-using ZwSoft.ZwCAD.EditorInput;
+using ZwSoft.ZwCAD.Windows;
 #else
 using ApplicationServices = Autodesk.AutoCAD.ApplicationServices;
-using Autodesk.AutoCAD.EditorInput;
+using Autodesk.AutoCAD.Windows;
 #endif
 #endregion
 
-using Shared.Windows.Tree;
-
 namespace Shared.Windows
 {
-    public partial class Projector : Window
+    // https://stackoverflow.com/questions/15681352/transitioning-from-windows-forms-to-wpf/15684569#15684569
+    // https://through-the-interface.typepad.com/through_the_interface/2009/08/hosting-wpf-content-inside-an-autocad-palette.html
+    public partial class Projector : WPF.UserControl
     {
+        public ProjectorViewModel ViewModel => DataContext as ProjectorViewModel;
         public Projector()
         {
             InitializeComponent();
             DataContext = new ProjectorViewModel();
-        }
-
-        private void MenuItem_Report_Click(object sender, RoutedEventArgs e)
-        {
-            Editor ed = ApplicationServices.Application.DocumentManager.MdiActiveDocument.Editor;
-            if (sender is MenuItem menuItem && menuItem.DataContext is TreeItem treeItem)
-            {
-                var a = ComponentManager.Ribbon.Tabs.Where(t => t.Id.StartsWith("RP_TAB_")).FirstOrDefault();
-                var b = a.Panels[3];
-                b.IsVisible = false;
-            }
         }
     }
 }

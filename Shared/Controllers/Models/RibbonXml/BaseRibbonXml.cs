@@ -1,11 +1,8 @@
-﻿#pragma warning disable CS8600
-#pragma warning disable CS8602
-#pragma warning disable CS8603
+﻿#pragma warning disable CS8600, CS8602, CS8603
 #pragma warning disable CS8604  // Compiler thinks that object can be null, even tho in higher scope we have checked object is not null
 
 #pragma warning disable IDE0001 // Collision with *CAD.Runtime.Exception & System.Exception
-#pragma warning disable IDE0083 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
-#pragma warning disable IDE0305 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
+#pragma warning disable IDE0083, IDE0305 // Simplifications cannot be made because of multiversion between .NET 4 and .NET 8
 
 using System; // Keep for .NET 4.6
 using System.Collections;

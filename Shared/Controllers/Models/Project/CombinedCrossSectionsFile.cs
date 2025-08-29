@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using System.Threading.Tasks;
+using System.Threading.Tasks; // Keep for .NET 4.6
 using System.Xml;
 
 using Shared.Helpers;

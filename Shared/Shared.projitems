@@ -58,7 +58,6 @@
       <DependentUpon>Projector.xaml</DependentUpon>
     </Compile>
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Tree\TreeItem.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Windows\Tree\TreeTabViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_default_16.ico" />
@@ -84,6 +83,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Windows\Assets\road.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Windows\Assets\route.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Windows\Assets\warning.png" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_Test.xml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\RoadPAC\rp_DTM.bmp" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_excel_16.ico" />
