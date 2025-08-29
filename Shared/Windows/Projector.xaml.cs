@@ -2,9 +2,11 @@
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
+using ZwSoft.Windows;
 using ApplicationServices = ZwSoft.ZwCAD.ApplicationServices;
 using ZwSoft.ZwCAD.Windows;
 #else
+using Autodesk.Windows;
 using ApplicationServices = Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.Windows;
 #endif
