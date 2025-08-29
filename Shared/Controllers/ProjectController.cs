@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -10,26 +11,66 @@ using System.Threading;
 using System.Threading.Tasks;
 
 using Shared.Controllers.Models.Project;
+using Shared.Helpers;
+using Shared.Windows;
 
 namespace Shared.Controllers
 {
     // https://adndevblog.typepad.com/autocad/2012/06/use-thread-for-background-processing.html
     public class ProjectController : IDisposable
     {
+        private const int INTERVAL_CHECK_TIME = 10; // In seconds
+        private const int RPUPDATE_CHECK_TIME = 10; // In seconds
+
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
 
         private readonly ConcurrentDictionary<string, HashSet<string>> _changes
             = new ConcurrentDictionary<string, HashSet<string>>();
 
-        private readonly TimeSpan _interval = TimeSpan.FromSeconds(1);
+        private readonly TimeSpan _interval = TimeSpan.FromSeconds(INTERVAL_CHECK_TIME);
+        private readonly TimeSpan _rpupdate = TimeSpan.FromSeconds(RPUPDATE_CHECK_TIME);
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
+        private readonly CancellationTokenSource _rdp = new CancellationTokenSource();
 
         // Project related
-        private readonly ConcurrentDictionary<string, HashSet<ProjectFile>> _project 
+        private readonly ConcurrentDictionary<string, HashSet<ProjectFile>> _project
             = new ConcurrentDictionary<string, HashSet<ProjectFile>>();
+        private volatile string _currentWorkingDirectory;
+        private volatile string _currentRoute;
+        
+        public event Action<string> CurrentWorkingDirectoryChanged;
+        public event Action<string> CurrentRouteChanged;
         public event Action<string, ProjectFile, WatcherChangeTypes> ProjectChanged;
-        public string CurrentWorkingDirectory { get; set; }
 
+        [RPInfoOut]
+        public string CurrentWorkingDirectory
+        {
+            get => _currentWorkingDirectory;
+            set
+            {
+                if (_currentWorkingDirectory != value)
+                {
+                    _currentWorkingDirectory = value;
+                    CurrentWorkingDirectoryChanged?.Invoke(value);
+                }
+            }
+        }
+
+        [RPInfoOut]
+        public string CurrentRoute
+        {
+            get => _currentRoute;
+            set
+            {
+                if (_currentRoute != value)
+                {
+                    _currentRoute = value;
+                    CurrentRouteChanged?.Invoke(value);
+                }
+            }
+        }
+
+        [RPInfoOut]
         public IReadOnlyDictionary<string, HashSet<ProjectFile>> ProjectFiles
         {
             get
@@ -45,6 +86,7 @@ namespace Shared.Controllers
             }
         }
 
+        // I'm not very happy with this
         [RPInfoOut]
         public HashSet<ProjectFile> GetRoutes() => GetRoutes(CurrentWorkingDirectory);
 
@@ -55,7 +97,7 @@ namespace Shared.Controllers
                 return new HashSet<ProjectFile>();
             if (!ProjectFiles.TryGetValue(lsPath, out var files))
                 return new HashSet<ProjectFile>();
-            return new HashSet<ProjectFile>(files.Where(f => f != null 
+            return new HashSet<ProjectFile>(files.Where(f => f != null
                 && !string.IsNullOrEmpty(f.File)
                 && f.Flag == FClass.Route));
         }
@@ -80,19 +122,24 @@ namespace Shared.Controllers
             return result;
         }
 
+        [RPInternalUseOnly]
         public class ProjectFile
         {
+            // Root extends to RootNode - main RouteId
+            public ProjectFile Root { get; internal set; } = null;
+
             public string File { get; internal set; }
             public string Path { get; internal set; }
             public FClass Flag { get; internal set; } = FClass.None;
-            public DateTime LastUpdatedAt { get; internal set; }
+            public DateTime CreatedAt { get; internal set; }
+            public DateTime UpdatedAt { get; internal set; }
             /// <summary>
             /// Base initialization. Does nothing by default.
             /// Derived classes can override to provide async initialization logic.
             /// </summary>
             public virtual Task BeginInit() => Task.CompletedTask;
             public override string ToString()
-                => $"{nameof(ProjectFile)}(File={File}, Path={Path}, Flag={Flag})";
+                => $"{nameof(ProjectFile)}(File={File}, Path={Path}, Flag={Flag}, CreatedAt={CreatedAt}, UpdatedAt={UpdatedAt})";
         }
 
         [Flags]
@@ -123,6 +170,11 @@ namespace Shared.Controllers
         {
             if (RPApp.FileWatcher != null)
             {
+                CurrentWorkingDirectoryChanged += (s) =>
+                {
+                    RPApp.FileWatcher?.AddDirectory(s);
+                    RefreshProject(RPApp.FileWatcher?.Files);
+                };
                 RPApp.FileWatcher.FileCreated += ProcessFileChanged;
                 RPApp.FileWatcher.FileChanged += ProcessFileChanged;
                 RPApp.FileWatcher.FileDeleted += ProcessFileChanged;
@@ -131,10 +183,17 @@ namespace Shared.Controllers
             }
         }
 
-        [RPInfoOut]
-        public void RefreshProject(IReadOnlyDictionary<string, HashSet<string>> files)
+        [RPInternalUseOnly]
+        internal void BeginInit()
         {
-            if (RPApp.FileWatcher == null) return;
+            Task.Run(ProcessChangesInBackground, _cts.Token); // Used to process changes in CurrentWorkingDirectory
+            Task.Run(ProcessRoadPacInBackground, _rdp.Token); // Used to check agains RDPFILELib
+        }
+        #region PRIVATE
+        [RPPrivateUseOnly]
+        private void RefreshProject(IReadOnlyDictionary<string, HashSet<string>> files)
+        {
+            if (RPApp.FileWatcher == null || files == null) return;
             foreach (KeyValuePair<string, HashSet<string>> pair in RPApp.FileWatcher?.Files)
             {
                 _changes.AddOrUpdate(pair.Key,
@@ -150,10 +209,6 @@ namespace Shared.Controllers
                     });
             }
         }
-
-        [RPInternalUseOnly]
-        internal void BeginInit()
-            => Task.Run(ProcessChangesInBackground, _cts.Token);
 
         [RPPrivateUseOnly]
         private void ProcessFileChanged(string lsPath, string fileName)
@@ -174,7 +229,31 @@ namespace Shared.Controllers
         }
 
         // Just one processor at a time
-        private volatile bool _isProcessing;
+        private volatile bool _generalOperationActive;
+        private volatile bool _roadPacOperationActive;
+
+        [RPPrivateUseOnly]
+        private async Task ProcessRoadPacInBackground()
+        {
+            while (!_rdp.Token.IsCancellationRequested)
+            {
+                await Task.Delay(_rpupdate, _rdp.Token);
+                if (_roadPacOperationActive)
+                    continue;
+                try
+                {
+                    _roadPacOperationActive = true;
+                    if (RPApp.RDPHelper == null)
+                        RPApp.RDPHelper = new RDPFileHelper();
+                    CurrentWorkingDirectory = await RPApp.RDPHelper.GetCurrentWorkingDirectory();
+                    CurrentRoute            = await RPApp.RDPHelper.GetCurrentRoute();
+                }
+                finally
+                {
+                    _roadPacOperationActive = false;
+                }
+            }
+        }
 
         [RPPrivateUseOnly]
         private async Task ProcessChangesInBackground()
@@ -182,11 +261,11 @@ namespace Shared.Controllers
             while (!_cts.Token.IsCancellationRequested)
             {
                 await Task.Delay(_interval, _cts.Token);
-                if (_changes.IsEmpty || _isProcessing)
+                if (_changes.IsEmpty || _generalOperationActive)
                     continue;
                 try
                 {
-                    _isProcessing = true;
+                    _generalOperationActive = true;
                     var snapshot = _changes.ToDictionary(
                         kvp => kvp.Key,
                         kvp => { lock (kvp.Value) return kvp.Value; });
@@ -197,7 +276,7 @@ namespace Shared.Controllers
                 }
                 finally
                 {
-                    _isProcessing = false;
+                    _generalOperationActive = false;
                 }
             }
         }
@@ -217,12 +296,12 @@ namespace Shared.Controllers
                 if (File.Exists(fullPath))
                 {
                     // We fetch updated date early, as change can happen anytime dureing fetch process
-                    DateTime lastUpdatedAt = File.GetLastWriteTimeUtc(fullPath);
+                    DateTime updatedAt = File.GetLastWriteTimeUtc(fullPath);
                     string extension = Path.GetExtension(fileName)?.TrimStart('.').ToUpper() ?? "";
                     if (existing != null)
                     {
                         // Just update it's values
-                        existing.LastUpdatedAt = lastUpdatedAt;
+                        existing.UpdatedAt = updatedAt;
                         result = existing;
                         change = WatcherChangeTypes.Changed;
                         await existing.BeginInit();
@@ -232,7 +311,8 @@ namespace Shared.Controllers
                         var newFactory = factory();
                         newFactory.Path = lsPath;
                         newFactory.File = fileName;
-                        newFactory.LastUpdatedAt = lastUpdatedAt;
+                        newFactory.CreatedAt = File.GetCreationTimeUtc(fullPath);
+                        newFactory.UpdatedAt = updatedAt;
                         // BeginInit must happen before adding to set
                         await newFactory.BeginInit();
                         result = newFactory;
@@ -252,6 +332,7 @@ namespace Shared.Controllers
                     {
                         result = existing;
                         change = WatcherChangeTypes.Deleted;
+                        result.UpdatedAt = DateTime.UtcNow;
                         files.Remove(existing);
                     }
                 }
@@ -267,7 +348,7 @@ namespace Shared.Controllers
             ThreadPool.QueueUserWorkItem(_ => ProjectChanged?.Invoke(lsPath, result, change));
 #endif
         }
-
+        #endregion
         public void Dispose()
         {
             _cts.Cancel();

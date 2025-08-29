@@ -18,6 +18,7 @@ using Microsoft.Win32;
 
 using Shared.Controllers;
 using Shared.Models;
+using Shared.Helpers;
 
 namespace Shared
 {
@@ -29,6 +30,7 @@ namespace Shared
         public static RPConfig Config { get; private set; } = null;
         public static FileWatcherController FileWatcher { get; private set; }
         public static ProjectController Projector { get; private set; }
+        public static RDPFileHelper RDPHelper { get; internal set; }
         public static DocumentCollection AsyncCommandContext { get; private set; }
 
         internal RPApp(DocumentCollection context)
@@ -54,9 +56,10 @@ namespace Shared
             {
                 try
                 {
-                    var rpfile = new RDPFileHelper();
-                    FileWatcher.AddDirectory(rpfile.CurrentWorkingDirectory);
-                    Projector.CurrentWorkingDirectory = rpfile.CurrentWorkingDirectory;
+                    if (RDPHelper == null)
+                        RDPHelper = new RDPFileHelper();
+                    FileWatcher.AddDirectory(RDPHelper.CurrentWorkingDirectory);
+                    Projector.CurrentWorkingDirectory = RDPHelper.CurrentWorkingDirectory;
                     Projector.RefreshProject(FileWatcher.Files);
                     IsLicensed = true;
                 }

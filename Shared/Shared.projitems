@@ -23,7 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\DocumentEditorExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TaskExtensions.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\FilePeekHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\RDPFileHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\RDPFileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\RPConfig.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\BaseRibbonXml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\Items\CommandItems\ProgressBarSource.cs" />

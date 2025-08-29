@@ -3,6 +3,7 @@
 using System;  // Keep for .NET 4.6
 using System.Collections.Concurrent;
 using System.Collections.Generic; // Keep for .NET 4.6
+using System.Diagnostics;
 using System.IO;
 using System.Linq; // Keep for .NET 4.6
 using System.Threading;
@@ -59,9 +60,9 @@ namespace Shared.Controllers
         public void AddDirectory(string lsPath)
         {
             if (lsPath == null) return;
+            if (_watchers.ContainsKey(lsPath)) return;
             if (!Directory.Exists(lsPath))
                 throw new DirectoryNotFoundException(lsPath);
-            if (_watchers.ContainsKey(lsPath)) return;
             HashSet<string> files = new HashSet<string>(Directory.GetFiles(lsPath)
                 .Select(System.IO.Path.GetFileName));
             _lock.EnterWriteLock();

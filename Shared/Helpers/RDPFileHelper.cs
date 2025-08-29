@@ -5,7 +5,7 @@ using System.Threading.Tasks; // Keep for .NET 4.6
 
 using RDPFILELib;
 
-namespace Shared.Models
+namespace Shared.Helpers
 {
     // Purpose of this class is to keep thread safe if RDPFile.dll was not found,
     // so we can safely exit program without cad platform crashing
