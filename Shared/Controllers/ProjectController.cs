@@ -27,7 +27,7 @@ namespace Shared.Controllers
         // Project related
         private readonly ConcurrentDictionary<string, HashSet<ProjectFile>> _project 
             = new ConcurrentDictionary<string, HashSet<ProjectFile>>();
-        public event Action<string> ProjectChanged;
+        public event Action<string, ProjectFile, WatcherChangeTypes> ProjectChanged;
         public string CurrentWorkingDirectory { get; set; }
 
         public IReadOnlyDictionary<string, HashSet<ProjectFile>> ProjectFiles
@@ -85,6 +85,7 @@ namespace Shared.Controllers
             public string File { get; internal set; }
             public string Path { get; internal set; }
             public FClass Flag { get; internal set; } = FClass.None;
+            public DateTime LastUpdatedAt { get; internal set; }
             /// <summary>
             /// Base initialization. Does nothing by default.
             /// Derived classes can override to provide async initialization logic.
@@ -204,6 +205,8 @@ namespace Shared.Controllers
         [RPPrivateUseOnly]
         private async Task ProcessFile(string lsPath, string fileName)
         {
+            ProjectFile result = null;
+            WatcherChangeTypes change = WatcherChangeTypes.Changed;
             var fullPath = Path.Combine(lsPath, fileName);
             _lock.EnterWriteLock();
             try
@@ -213,10 +216,15 @@ namespace Shared.Controllers
                 var existing = files.FirstOrDefault(f => f.File.Equals(fileName, StringComparison.OrdinalIgnoreCase));
                 if (File.Exists(fullPath))
                 {
+                    // We fetch updated date early, as change can happen anytime dureing fetch process
+                    DateTime lastUpdatedAt = File.GetLastWriteTimeUtc(fullPath);
                     string extension = Path.GetExtension(fileName)?.TrimStart('.').ToUpper() ?? "";
                     if (existing != null)
                     {
                         // Just update it's values
+                        existing.LastUpdatedAt = lastUpdatedAt;
+                        result = existing;
+                        change = WatcherChangeTypes.Changed;
                         await existing.BeginInit();
                     }
                     else if (ProjectFileFactory.TryGetValue(extension, out var factory))
@@ -224,8 +232,11 @@ namespace Shared.Controllers
                         var newFactory = factory();
                         newFactory.Path = lsPath;
                         newFactory.File = fileName;
+                        newFactory.LastUpdatedAt = lastUpdatedAt;
                         // BeginInit must happen before adding to set
                         await newFactory.BeginInit();
+                        result = newFactory;
+                        change = WatcherChangeTypes.Created;
                         files.Add(newFactory);
                     }
                     else
@@ -236,8 +247,13 @@ namespace Shared.Controllers
                 } 
                 else
                 {
+                    // File have been removed
                     if (existing != null)
+                    {
+                        result = existing;
+                        change = WatcherChangeTypes.Deleted;
                         files.Remove(existing);
+                    }
                 }
             }
             finally
@@ -246,9 +262,9 @@ namespace Shared.Controllers
             }
             // Signalize event that something in project changed
 #if !ZWCAD && !NET8_0_OR_GREATER
-            ProjectChanged?.Invoke(lsPath);
+            ProjectChanged?.Invoke(lsPath, result, change);
 #else
-            ThreadPool.QueueUserWorkItem(_ => ProjectChanged?.Invoke(lsPath));
+            ThreadPool.QueueUserWorkItem(_ => ProjectChanged?.Invoke(lsPath, result, change));
 #endif
         }
 
@@ -280,25 +296,6 @@ namespace Shared.Controllers
             { "XNI", () => new ProjectFile() { Flag = FClass.Profile } },
             // Trasa / Směrové řešení
             { "XHB", () => new ProjectFile() { Flag = FClass.Route } },
-
-            // Unmapped
-            { "L13", () => new ProjectFile() { Flag = FClass.None } },
-            { "L48", () => new ProjectFile() { Flag = FClass.None } },
-            { "SHB", () => new ProjectFile() { Flag = FClass.None } },
-            { "SKR", () => new ProjectFile() { Flag = FClass.None } },
-            { "SNI", () => new ProjectFile() { Flag = FClass.None } },
-            { "SPP", () => new ProjectFile() { Flag = FClass.None } },
-            { "SPR", () => new ProjectFile() { Flag = FClass.None } },
-            { "STR", () => new ProjectFile() { Flag = FClass.None } },
-            { "TRSX", () => new ProjectFile() { Flag = FClass.None } },
-            { "V48", () => new ProjectFile() { Flag = FClass.None } },
-            { "V514", () => new ProjectFile() { Flag = FClass.None } },
-            { "V51EXT", () => new ProjectFile() { Flag = FClass.None } },
-            { "V51X", () => new ProjectFile() { Flag = FClass.None } },
-            { "V56", () => new ProjectFile() { Flag = FClass.None } },
-            { "VPP", () => new ProjectFile() { Flag = FClass.None } },
-            { "XKR", () => new ProjectFile() { Flag = FClass.None } },
-            { "XTR", () => new ProjectFile() { Flag = FClass.None } },
         };
     }
 }
