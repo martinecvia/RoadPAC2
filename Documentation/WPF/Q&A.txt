@@ -1,0 +1,13 @@
+Question: Did you use Expression to build your custom ribbon button?
+Answer: No, I did it by hand... :-)
+
+Question: To what extent is Autodesk adopting WPF?
+Answer: We are using it more and more. If you want to program the CUI using contextual tabs, or creating custom controls then you will need to use WPF exclusively.
+
+Question: What are Autodesk's plans for WPF going forward? Will there be things that we cannot do unless we use WPF or do you see it as a purely optional technology at the moment?
+
+Private Answer: The Ribbon uses it, so you may need to use WPF (but not explicit as most of the functionality is exposed inside our API). On other parts, such as Palettes, you can choose
+
+Question: Is possible to download the examples and the presentation? If yes, from where?
+Answer: yes, it will be available in the next week or so, you will be emailed the location, if you need it before that you can email me and I will send it to you. wayne.brill@autodesk.com
+

@@ -1,0 +1,29 @@
+﻿<ResourceDictionary x:Uid="ResourceDictionary_1" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:s="clr-namespace:System;assembly=mscorlib"
+    >
+  
+    <BitmapImage x:Key="Image1" UriSource="Resources/Image1.gif" />
+    <BitmapImage x:Key="Image2" UriSource="Resources/Image2.gif" />
+    <BitmapImage x:Key="Image3" UriSource="Resources/Image3.gif" />
+    <BitmapImage x:Key="Image4" UriSource="Resources/Image4.gif" />
+    <BitmapImage x:Key="Image5" UriSource="Resources/Image5.gif" />
+
+    <BitmapImage x:Key="Image1Selected" UriSource="Resources/Option1Selected.jpg" />
+    <BitmapImage x:Key="Image2Selected" UriSource="Resources/Option2Selected.jpg" />
+    <BitmapImage x:Key="Image3Selected" UriSource="Resources/Option3Selected.jpg" />
+    <BitmapImage x:Key="Image4Selected" UriSource="Resources/Option4Selected.jpg" />
+    <BitmapImage x:Key="Image5Selected" UriSource="Resources/Option5Selected.jpg" />
+
+    <s:String x:Key="MyRibbonItemText">My Items</s:String>
+    <s:String x:Key="MyRibbonItemTooltipText">My Items Tooltip. Click arrow to display drop-down list.</s:String>
+    <s:String x:Key="MyRibbonItemTooltipTextTitle">My Tooltip Title</s:String>
+
+    <s:String x:Key="MyOption1">Option1 Selected</s:String>
+    <s:String x:Key="MyOption2">Option2 Selected</s:String>
+    <s:String x:Key="MyOption3">Option3 Selected</s:String>
+    <s:String x:Key="MyOption4">Option4 Selected</s:String>
+    <s:String x:Key="MyOption5">Option5 Selected</s:String>
+
+    <s:String x:Key="MyOptionsCommand">MyOptionsCommand</s:String>
+</ResourceDictionary>

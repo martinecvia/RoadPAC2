@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1 - VerySimpleDatabinding", "Very Simple Databinding\1 - VerySimpleDatabinding.csproj", "{56A3817A-2F9A-44D3-AB2F-0BCFDAD9EAEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "2 - DataBindingToAcadCLR", "DataBinding to AutoCAD CLR\2 - DataBindingToAcadCLR.csproj", "{7C2AF2D1-D531-4C17-9BA0-BCF7EA837795}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "3 - DataBindingToAcadClrUIBindings", "DataBinding to AutoCAD CLR UIBindings\3 - DataBindingToAcadClrUIBindings.csproj", "{E20BF9B7-9C48-42EA-BEE9-8843499410B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4 - RibbonCustomControl", "Ribbon Custom Control using Databinding\4 - RibbonCustomControl.csproj", "{9814D161-9A57-4666-8F3B-E40A47AF2034}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{56A3817A-2F9A-44D3-AB2F-0BCFDAD9EAEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{56A3817A-2F9A-44D3-AB2F-0BCFDAD9EAEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{56A3817A-2F9A-44D3-AB2F-0BCFDAD9EAEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{56A3817A-2F9A-44D3-AB2F-0BCFDAD9EAEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7C2AF2D1-D531-4C17-9BA0-BCF7EA837795}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7C2AF2D1-D531-4C17-9BA0-BCF7EA837795}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7C2AF2D1-D531-4C17-9BA0-BCF7EA837795}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7C2AF2D1-D531-4C17-9BA0-BCF7EA837795}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E20BF9B7-9C48-42EA-BEE9-8843499410B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E20BF9B7-9C48-42EA-BEE9-8843499410B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E20BF9B7-9C48-42EA-BEE9-8843499410B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E20BF9B7-9C48-42EA-BEE9-8843499410B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9814D161-9A57-4666-8F3B-E40A47AF2034}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9814D161-9A57-4666-8F3B-E40A47AF2034}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9814D161-9A57-4666-8F3B-E40A47AF2034}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9814D161-9A57-4666-8F3B-E40A47AF2034}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
