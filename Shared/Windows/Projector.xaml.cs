@@ -1,6 +1,5 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
-using ZwSoft.Windows;
 using System.Linq;
 using static Shared.Controllers.RibbonController;
 
@@ -9,9 +8,11 @@ using static Shared.Controllers.RibbonController;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
+using ZwSoft.Windows;
 using ApplicationServices = ZwSoft.ZwCAD.ApplicationServices;
 using ZwSoft.ZwCAD.EditorInput;
 #else
+using Autodesk.Windows;
 using ApplicationServices = Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.EditorInput;
 #endif
