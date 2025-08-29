@@ -158,7 +158,6 @@ namespace Shared.Controllers
                     .FirstOrDefault(r => r.EndsWith(resourceName, StringComparison.OrdinalIgnoreCase))
                     ?? assembly.GetManifestResourceNames()
                         .FirstOrDefault(r => r.EndsWith("Icons.rp_img_default_32.ico", StringComparison.OrdinalIgnoreCase));
-                Debug.WriteLine(peekURI);
                 if (peekURI == null)
                     throw new FileNotFoundException("Resource not found", resourceName);
                 using (Stream stream = assembly.GetManifestResourceStream(peekURI))

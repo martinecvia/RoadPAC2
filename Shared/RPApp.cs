@@ -58,8 +58,9 @@ namespace Shared
                 {
                     if (RDPHelper == null)
                         RDPHelper = new RDPFileHelper();
-                    FileWatcher.AddDirectory(RDPHelper.CurrentWorkingDirectory);
-                    Projector.CurrentWorkingDirectory = RDPHelper.CurrentWorkingDirectory;
+                    var CurrentWorkingDirectory = RDPHelper.CurrentWorkingDirectory;
+                    FileWatcher.AddDirectory(CurrentWorkingDirectory);
+                    Projector.CurrentWorkingDirectory = CurrentWorkingDirectory;
                     Projector.RefreshProject(FileWatcher.Files);
                     IsLicensed = true;
                 }

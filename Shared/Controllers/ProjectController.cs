@@ -3,7 +3,6 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
@@ -12,7 +11,6 @@ using System.Threading.Tasks;
 
 using Shared.Controllers.Models.Project;
 using Shared.Helpers;
-using Shared.Windows;
 
 namespace Shared.Controllers
 {
@@ -40,7 +38,7 @@ namespace Shared.Controllers
         
         public event Action<string> CurrentWorkingDirectoryChanged;
         public event Action<string> CurrentRouteChanged;
-        public event Action<string, ProjectFile, WatcherChangeTypes> ProjectChanged;
+        public event Action<string> ProjectChanged;
 
         [RPInfoOut]
         public string CurrentWorkingDirectory
@@ -170,16 +168,16 @@ namespace Shared.Controllers
         {
             if (RPApp.FileWatcher != null)
             {
-                CurrentWorkingDirectoryChanged += (s) =>
-                {
-                    RPApp.FileWatcher?.AddDirectory(s);
-                    RefreshProject(RPApp.FileWatcher?.Files);
-                };
                 RPApp.FileWatcher.FileCreated += ProcessFileChanged;
                 RPApp.FileWatcher.FileChanged += ProcessFileChanged;
                 RPApp.FileWatcher.FileDeleted += ProcessFileChanged;
                 RPApp.FileWatcher.FileRenamed += ProcessFileRenamed;
                 RefreshProject(RPApp.FileWatcher.Files);
+                CurrentWorkingDirectoryChanged += (s) =>
+                {
+                    RPApp.FileWatcher?.AddDirectory(s);
+                    RefreshProject(RPApp.FileWatcher?.Files);
+                };
             }
         }
 
@@ -189,9 +187,9 @@ namespace Shared.Controllers
             Task.Run(ProcessChangesInBackground, _cts.Token); // Used to process changes in CurrentWorkingDirectory
             Task.Run(ProcessRoadPacInBackground, _rdp.Token); // Used to check agains RDPFILELib
         }
-        #region PRIVATE
-        [RPPrivateUseOnly]
-        private void RefreshProject(IReadOnlyDictionary<string, HashSet<string>> files)
+
+        [RPInternalUseOnly]
+        internal void RefreshProject(IReadOnlyDictionary<string, HashSet<string>> files)
         {
             if (RPApp.FileWatcher == null || files == null) return;
             foreach (KeyValuePair<string, HashSet<string>> pair in RPApp.FileWatcher?.Files)
@@ -209,7 +207,7 @@ namespace Shared.Controllers
                     });
             }
         }
-
+        #region PRIVATE
         [RPPrivateUseOnly]
         private void ProcessFileChanged(string lsPath, string fileName)
         {
@@ -263,6 +261,7 @@ namespace Shared.Controllers
                 await Task.Delay(_interval, _cts.Token);
                 if (_changes.IsEmpty || _generalOperationActive)
                     continue;
+                List<string> projects = new List<string>();
                 try
                 {
                     _generalOperationActive = true;
@@ -270,12 +269,21 @@ namespace Shared.Controllers
                         kvp => kvp.Key,
                         kvp => { lock (kvp.Value) return kvp.Value; });
                     _changes.Clear();
+                    foreach (var kvp in snapshot)
+                        if (!projects.Contains(kvp.Key))
+                            projects.Add(kvp.Key);
                     var InitTasks = snapshot.SelectMany(pair
                         => pair.Value.Select(fileName => ProcessFile(pair.Key, fileName)));
                     await Task.WhenAll(InitTasks);
                 }
                 finally
                 {
+                    foreach(var lsPath in projects)
+#if !ZWCAD && !NET8_0_OR_GREATER
+                        ProjectChanged?.Invoke(lsPath);
+#else
+                        ThreadPool.QueueUserWorkItem(_ => ProjectChanged?.Invoke(lsPath));
+#endif
                     _generalOperationActive = false;
                 }
             }
@@ -284,8 +292,6 @@ namespace Shared.Controllers
         [RPPrivateUseOnly]
         private async Task ProcessFile(string lsPath, string fileName)
         {
-            ProjectFile result = null;
-            WatcherChangeTypes change = WatcherChangeTypes.Changed;
             var fullPath = Path.Combine(lsPath, fileName);
             _lock.EnterWriteLock();
             try
@@ -302,8 +308,6 @@ namespace Shared.Controllers
                     {
                         // Just update it's values
                         existing.UpdatedAt = updatedAt;
-                        result = existing;
-                        change = WatcherChangeTypes.Changed;
                         await existing.BeginInit();
                     }
                     else if (ProjectFileFactory.TryGetValue(extension, out var factory))
@@ -315,8 +319,6 @@ namespace Shared.Controllers
                         newFactory.UpdatedAt = updatedAt;
                         // BeginInit must happen before adding to set
                         await newFactory.BeginInit();
-                        result = newFactory;
-                        change = WatcherChangeTypes.Created;
                         files.Add(newFactory);
                     }
                     else
@@ -330,9 +332,7 @@ namespace Shared.Controllers
                     // File have been removed
                     if (existing != null)
                     {
-                        result = existing;
-                        change = WatcherChangeTypes.Deleted;
-                        result.UpdatedAt = DateTime.UtcNow;
+                        existing.UpdatedAt = DateTime.UtcNow;
                         files.Remove(existing);
                     }
                 }
@@ -341,12 +341,6 @@ namespace Shared.Controllers
             {
                 _lock.ExitWriteLock();
             }
-            // Signalize event that something in project changed
-#if !ZWCAD && !NET8_0_OR_GREATER
-            ProjectChanged?.Invoke(lsPath, result, change);
-#else
-            ThreadPool.QueueUserWorkItem(_ => ProjectChanged?.Invoke(lsPath, result, change));
-#endif
         }
         #endregion
         public void Dispose()
