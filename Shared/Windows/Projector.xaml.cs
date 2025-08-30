@@ -1,4 +1,6 @@
 ﻿using WPF = System.Windows.Controls;
+using System.Diagnostics;
+
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -22,7 +24,15 @@ namespace Shared.Windows
         public Projector()
         {
             InitializeComponent();
-            DataContext = new ProjectorViewModel();
+            if (ViewModel == null)
+                DataContext = new ProjectorViewModel();
+            RPApp.FileWatcher.FileCreated += (s, o) => Debug.WriteLine("FileCreated");
+            RPApp.FileWatcher.FileDeleted += (s, o) => Debug.WriteLine("FileDeleted");
+            RPApp.FileWatcher.FileRenamed += (s, o, l) => Debug.WriteLine("FileRenamed");
+            RPApp.Projector.ProjectChanged += (s) => Debug.WriteLine("ProjectChanged");
         }
+
+        public void Show() =>
+            DataContext = new ProjectorViewModel();
     }
 }

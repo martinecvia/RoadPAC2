@@ -1,6 +1,10 @@
 #pragma warning disable CS0067, CS8600, CS8612, CS8618, CS8767
 
 using System; // Keep for .NET 4.6
+using System.IO;
+using System.Text.RegularExpressions;
+using System.Linq;
+using System.Diagnostics;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -37,18 +41,25 @@ namespace Shared.Models
         /// </summary>
         /// <param name="parameter">Unused parameter.</param>
         /// <returns><c>true</c> to indicate the command can always execute.</returns>
-        public bool CanExecute(object parameter) => true;
+        public bool CanExecute(object _) => true;
 
         /// <summary>
         /// Executes the stored AutoCAD command by sending it to the active document.
         /// </summary>
-        /// <param name="parameter">Unused parameter.</param>
-        public void Execute(object parameter)
+        /// <param name="_">Unused parameter.</param>
+        public void Execute(object _)
         {
             if (_command.StartsWith("XX:"))
             {
-                // RP_RUN()
-
+                if (string.IsNullOrEmpty(RPApp.Config.InstallPath) ||
+                    !Directory.Exists(RPApp.Config.InstallPath))
+                    return;
+                string CurrentWorkingDirectory = RPApp.Projector.CurrentWorkingDirectory;
+                string CurrentRoute = RPApp.Projector.CurrentRoute;
+                if (string.IsNullOrEmpty(CurrentWorkingDirectory) 
+                    || !Directory.Exists(CurrentWorkingDirectory))
+                    return;
+                string command = _command.Substring(3);
                 return;
             }
 
@@ -56,5 +67,10 @@ namespace Shared.Models
             // Sends the command to AutoCAD for execution in the command line
             document?.SendStringToExecute(_command + " ", true, false, false);
         }
+
+        private readonly Regex _tokenRegex =
+            new Regex(@"[\""].+?[\""]|[^ ]+", RegexOptions.Compiled);
+        private string[] ParseArgs(string tokens) => _tokenRegex.Matches(tokens)
+            .Cast<Match>().Select(match => match.Value.Trim('"')).ToArray();
     }
 }

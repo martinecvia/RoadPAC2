@@ -53,11 +53,13 @@
     <Compile Include="$(MSBuildThisFileDirectory)RPApp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RPUseOnlyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\RibbonController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)windows\models\BooleanToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)windows\models\StringToSolidColorBrushConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\ProjectorViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Projector.xaml.cs">
       <DependentUpon>Projector.xaml</DependentUpon>
     </Compile>
-    <Compile Include="$(MSBuildThisFileDirectory)Windows\Tree\TreeItem.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Windows\Models\TreeItem.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_default_16.ico" />
@@ -75,7 +77,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Resources\Icons\Civil3D\" />
+    <Folder Include="$(MSBuildThisFileDirectory)Windows\Models\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_RoadPAC.xml">
@@ -83,9 +85,31 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)Windows\Assets\road.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Windows\Assets\route.png" />
-    <Content Include="$(MSBuildThisFileDirectory)Windows\Assets\warning.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\Segoe UI Semibold.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\arrow-right.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\list-item.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\survey.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\ifc.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\Civil3D\rp_project_explorer_32.bmp" />
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\road.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\route.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\warning.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_Test.xml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\RoadPAC\rp_DTM.bmp" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_excel_16.ico" />

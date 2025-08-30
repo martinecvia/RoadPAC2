@@ -1,0 +1,90 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Reflection;
+using System.Text;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+
+using Shared.Controllers;
+
+namespace Shared.Windows.Models
+{
+    public class TreeItem : ObservableCollection<TreeItem>
+    {
+        public bool IsRouteNode { get; set; } = false;
+        public bool IsGroupNode { get; set; } = false;
+
+        public ProjectController.ProjectFile File { get; set; }
+
+        // DisplayName
+        public string DisplayName { get; set; } = string.Empty;
+        public FontFamily FontFamily
+        {
+            get
+            {
+                string assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
+                if (IsRouteNode)
+                    return new FontFamily($"pack://application:,,,/{assemblyName};component/Windows/Assets/#Segoe UI Semibold");
+                return new FontFamily("Segoe UI");
+            }
+        }
+
+        // Image
+        private static readonly BitmapImage DefaultImage =
+            new BitmapImage(new Uri("./Assets/arrow-right.png", UriKind.Relative));
+        private BitmapImage _image = DefaultImage;
+        public string ImageSource => _image?.UriSource.ToString();
+        public string Image
+        {
+            get => ImageSource;
+            set
+            {
+                if (value == null)
+                {
+                    _image = DefaultImage;
+                    return;
+                }
+                try
+                { _image = new BitmapImage(new Uri(value, UriKind.RelativeOrAbsolute)); }
+                catch
+                {  _image = DefaultImage; }
+            }
+        }
+
+        // ItemCount
+        public int ItemCount => IsGroupNode ? this.Count : 0;
+        private string _itemCountColor;
+        public string ItemCountColor
+        {
+            get => _itemCountColor ?? (ItemCount < 3 ? "Green" : ItemCount <= 10 ? "Orange" : "Red");
+            set => _itemCountColor = value;
+        }
+
+
+        // Warning
+        public bool DisplayWarning { get; set; } = false;
+        public string WarningToolTip = string.Empty;
+        private static readonly BitmapImage DefaultWarningImage =
+            new BitmapImage(new Uri("./Assets/warning.png", UriKind.Relative));
+        private BitmapImage _warningImage = DefaultWarningImage;
+        public string WarningImageSource => _warningImage?.UriSource.ToString();
+        public string WarningImage
+        {
+            get => WarningImageSource;
+            set
+            {
+                if (value == null)
+                {
+                    _warningImage = DefaultWarningImage;
+                    return;
+                }
+                try
+                { _image = new BitmapImage(new Uri(value, UriKind.RelativeOrAbsolute)); }
+                catch
+                { _image = DefaultImage; }
+            }
+        }
+    }
+}

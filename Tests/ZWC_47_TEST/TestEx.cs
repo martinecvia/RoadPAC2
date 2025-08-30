@@ -29,21 +29,23 @@ namespace ZWC_47_TEST
             var Ribbons = ComponentManager.Ribbon;
         }
         private PaletteSet _paletteSet;
+        private Projector _projector;
         [CommandMethod("RP_PROSPECTOR")]
         public void RPProspector()
         {
             if (_paletteSet == null)
             {
-                var control = new Projector();
+                _projector = new Projector();
                 _paletteSet = new PaletteSet("RoadPAC2")
                 {
-                    Size = new Size((int)control.Width, (int)control.Height),
+                    Size = new Size((int)_projector.Width, (int)_projector.Height),
                     DockEnabled = DockSides.Left | DockSides.Right,
                     KeepFocus = true
                 };
 
-                _paletteSet.AddVisual("Prospector", control);
+                _paletteSet.AddVisual("Prospector", _projector);
             }
+            _projector.Show();
             _paletteSet.KeepFocus = true;
             _paletteSet.Visible = true;
         }

@@ -10,7 +10,7 @@ using System.Text;
 using System.Windows;
 using System.Windows.Data;
 using Shared.Controllers;
-using Shared.Windows.Tree;
+using Shared.Windows.Models;
 
 using static Shared.Controllers.ProjectController;
 
@@ -18,8 +18,7 @@ namespace Shared.Windows
 {
     public class ProjectorViewModel
     {
-        public ObservableCollection<TreeItem> Items { get; }
-            = new ObservableCollection<TreeItem>();
+        public ObservableCollection<TreeItem> Items => new ObservableCollection<TreeItem>(BuildProjectTree(RPApp.Projector?.CurrentWorkingDirectory));
         public ICollectionView FilteredItems { get; }
 
         private string _searchText;
@@ -45,7 +44,6 @@ namespace Shared.Windows
 
         public ProjectorViewModel()
         {
-            Items = new ObservableCollection<TreeItem>(BuildProjectTree(RPApp.Projector?.CurrentWorkingDirectory));
             FilteredItems = CollectionViewSource.GetDefaultView(Items);
             FilteredItems.Filter = RootFilter;
         }
@@ -66,20 +64,55 @@ namespace Shared.Windows
         {
             var routes = RPApp.Projector?.GetRoutes(lsPath);
             if (routes == null)
-                return new List<TreeItem>();
-            var tree = new List<TreeItem>();
+                return new ObservableCollection<TreeItem>();
+            var tree = new ObservableCollection<TreeItem>();
             foreach (var route in routes)
             {
-                var routeNode = new TreeItem { DisplayName = Path.GetFileNameWithoutExtension(route.File).ToUpperInvariant() };
-                routeNode.Children.Add(new TreeItem { DisplayName = $"Směrové řešení: {route.File}" });
-
+                var routeNode = new TreeItem
+                {
+                    DisplayName = Path.GetFileNameWithoutExtension(route.File).ToUpperInvariant(),
+                    IsRouteNode = true,
+                    Image = "./Assets/route.png",
+                    File = route
+                };
+                routeNode.Add(new TreeItem { DisplayName = $"Směrové řešení: {route.File}", File = route });
                 var related = RPApp.Projector?.GetRoute(lsPath, route.File) ?? new HashSet<ProjectFile>();
+                void MarkOutdated(TreeItem node, DateTime? parentUpdatedAt)
+                {
+                    if (node.File?.UpdatedAt != null && parentUpdatedAt != null)
+                    {
+                        var tolerance = TimeSpan.FromSeconds(10);
+                        var diff = parentUpdatedAt - node.File.UpdatedAt;
+                        node.DisplayWarning = diff > tolerance;
+                    }
+                    else if (parentUpdatedAt.HasValue)
+                        node.DisplayWarning = true;
+                        var currentUpdatedAt = node.File?.UpdatedAt ?? parentUpdatedAt;
+                    foreach (var child in node)
+                        MarkOutdated(child, currentUpdatedAt);
+                    if (node.File == null || node.IsRouteNode)
+                    {
+                        // We don't want to display Route or empty filed nodes
+                        node.DisplayWarning = false;
+                        return;
+                    }
+                    Debug.WriteLine($"{node.File?.File}, DisplayWarning = {node.DisplayWarning}, because: {node.File?.UpdatedAt} < {parentUpdatedAt}");
+                }
 
-                AddFirst(routeNode, related, FClass.Profile, "Niveleta");
+                var profile = related.FirstOrDefault(r => r.Flag.HasFlag(FClass.Profile) && !r.Flag.HasFlag(FClass.Listing));
+                routeNode.Add(new TreeItem
+                {
+                    DisplayName = profile != null
+                        ? $"Niveleta: {profile.File}"
+                        : "Niveleta",
+                    File = profile,
+                });
+
                 AddCorridor(routeNode, related);
-                AddGroup(routeNode, related, FClass.Survey, "Vytyčení:");
-                AddGroup(routeNode, related, FClass.IFC, "Podklady pro IFC:");
-                AddGroup(routeNode, related, FClass.CombinedCrossSections, "Kreslení příčných řezů:");
+                AddGroup(routeNode, related, FClass.Survey, "Vytyčení", "./Assets/survey.png", "./Assets/list-item.png");
+                AddGroup(routeNode, related, FClass.IFC, "Podklady pro IFC", "./Assets/ifc.png", "./Assets/list-item.png");
+                AddGroup(routeNode, related, FClass.CombinedCrossSections, "Kreslení příčných řezů", null, "./Assets/list-item.png");
+                MarkOutdated(routeNode, route.UpdatedAt);
                 tree.Add(routeNode);
             }
             return tree;
@@ -90,38 +123,33 @@ namespace Shared.Windows
             => related.Where(f => f.Flag == flag);
 
         [RPPrivateUseOnly]
-        private void AddFirst(TreeItem parent, IEnumerable<ProjectFile> related, FClass flag, string label)
+        private void AddGroup(TreeItem parent, IEnumerable<ProjectFile> related, FClass flag, string label,
+            string groupNodeImage = null, string itemNodeImage = null)
         {
-            var match = related.FirstOrDefault(r => r.Flag.HasFlag(flag) && !r.Flag.HasFlag(FClass.Listing));
-            if (match != null)
-                parent.Children.Add(new TreeItem { DisplayName = $"{label}: {match.File}" });
-        }
-
-        [RPPrivateUseOnly]
-        private void AddGroup(TreeItem parent, IEnumerable<ProjectFile> related, FClass flag, string label)
-        {
+            var groupNode = new TreeItem { DisplayName = label, IsGroupNode = true, Image = groupNodeImage };
             var matches = related.Where(r => r.Flag.HasFlag(flag)).ToList();
             if (matches.Any())
             {
-                var groupNode = new TreeItem { DisplayName = label, ItemCount = matches.Count(f => !f.Flag.HasFlag(FClass.Listing))};
                 foreach (var file in matches)
                     if (!file.Flag.HasFlag(FClass.Listing))
-                        groupNode.Children.Add(new TreeItem { DisplayName = file.File });
-                parent.Children.Add(groupNode);
+                        groupNode.Add(new TreeItem { DisplayName = file.File, Image = itemNodeImage, File = file });
             }
+            parent.Add(groupNode);
         }
 
         [RPPrivateUseOnly]
         private void AddCorridor(TreeItem parent, IEnumerable<ProjectFile> related)
         {
             var corridor = related.FirstOrDefault(r => r.Flag == FClass.Corridor);
-            if (corridor == null) return;
-            var node = new TreeItem { DisplayName = "Koridor" };
-            node.Children.Add(new TreeItem { DisplayName = $"Pokrytí: {corridor.File}" });
-            var crossSection = related.FirstOrDefault(r => r.Flag == (FClass.Corridor | FClass.CrossSection));
-            if (crossSection != null)
-                node.Children.Add(new TreeItem { DisplayName = $"Příčné řezy: {crossSection.File}" });
-            parent.Children.Add(node);
+            var node = new TreeItem { DisplayName = "Koridor", IsGroupNode = true, Image = "./Assets/road.png" };
+            if (corridor != null)
+            {
+                node.Add(new TreeItem { DisplayName = $"Pokrytí: {corridor.File}", Image = "./Assets/list-item.png", File = corridor });
+                var crossSection = related.FirstOrDefault(r => r.Flag == (FClass.Corridor | FClass.CrossSection));
+                if (crossSection != null)
+                    node.Add(new TreeItem { DisplayName = $"Příčné řezy: {crossSection.File}", Image = "./Assets/list-item.png", File = crossSection });
+            }
+            parent.Add(node);
         }
     }
 }

@@ -3,16 +3,20 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:system="clr-namespace:System;assembly=mscorlib"
-        xmlns:tree="clr-namespace:Shared.Windows.Tree"
+             
+        xmlns:models="clr-namespace:Shared.Windows.Models"
         xmlns:shared="clr-namespace:Shared.Windows" 
+             
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=shared:ProjectorViewModel, IsDesignTimeCreatable=True}"
         Height="600" Width="400">
+    <UserControl.Resources>
+        <models:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+        <models:StringToSolidColorBrushConverter x:Key="StringToSolidColorBrushConverter" />
+    </UserControl.Resources>
     <DockPanel>
         <!-- Search bar -->
-        <TextBox DockPanel.Dock="Top"
-             Height="25"
+        <TextBox DockPanel.Dock="Top"  Height="25" VerticalAlignment="Center"
              Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" 
              ToolTip="Search in routes ...">
             <TextBox.Style>
@@ -30,37 +34,50 @@
         <!-- TreeView -->
         <TreeView ItemsSource="{Binding FilteredItems}">
             <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type tree:TreeItem}"
-                                      ItemsSource="{Binding Children}">
+                <HierarchicalDataTemplate DataType="{x:Type models:TreeItem}" ItemsSource="{Binding}">
                     <DockPanel>
-                        <!-- Context Menu -->
-                        <DockPanel.ContextMenu>
-                            <ContextMenu>
-                                <MenuItem Header="Write to CAD" />
-                            </ContextMenu>
-                        </DockPanel.ContextMenu>
-
-                        <!-- Icon -->
-                        <Image Width="16" Height="16"
-                           Source="{Binding ImageSource}"
-                           DockPanel.Dock="Left"
-                           Margin="2"/>
-
+                         <!-- Icon -->
+                        <Image Width="16" Height="16" Source="{Binding ImageSource}" DockPanel.Dock="Left" Margin="2" />
                         <!-- DisplayName -->
-                        <TextBlock Text="{Binding DisplayName}"
-                               VerticalAlignment="Center"
-                               x:Name="DisplayName"
-                               Margin="2"/>
+                        <TextBlock x:Name="DisplayName" Margin="2"
+                               Text="{Binding DisplayName}" VerticalAlignment="Center"
+                               FontFamily="{Binding FontFamily}">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="FontStyle" Value="Normal"/>
+                                    <Style.Triggers>
+                                        <!-- IsRouteNode=true -->
+                                        <DataTrigger Binding="{Binding IsRouteNode}" Value="True">
+                                            <Setter Property="FontWeight" Value="Bold"/>
+                                        </DataTrigger>
+                                        <!-- GroupNodes without items should be grayied out-->
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding IsRouteNode}" Value="False"/>
+                                                <Condition Binding="{Binding IsGroupNode}" Value="True"/>
+                                                <Condition Binding="{Binding ItemCount}" Value="0"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Foreground" Value="Gray"/>
+                                            <Setter Property="FontStyle" Value="Italic"/>
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
 
                         <!-- ItemCount -->
-                        <TextBlock Text="{Binding ItemCount, StringFormat='({0})'}"
-                               VerticalAlignment="Center"
-                               Margin="2"
-                               x:Name="ItemCount">
-                            <TextBlock.Foreground>
-                                <SolidColorBrush Color="{Binding ItemCountColor}"/>
-                            </TextBlock.Foreground>
-                        </TextBlock>
+                        <TextBlock VerticalAlignment="Center" Margin="2" x:Name="ItemCount"
+                                   Text="{Binding ItemCount, StringFormat='({0})'}"
+                                   Foreground="{Binding ItemCountColor, Converter={StaticResource StringToSolidColorBrushConverter}}"/>
+
+                        <Image Width="16" Height="16" DockPanel.Dock="Right" Margin="2"
+                           Source="{Binding WarningImageSource}"
+                           Visibility="{Binding DisplayWarning, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <Image.ToolTip>
+                                <TextBlock Text="{Binding WarningToolTip}" TextWrapping="Wrap"/>
+                            </Image.ToolTip>
+                        </Image>
                     </DockPanel>
 
                     <!-- Triggers -->

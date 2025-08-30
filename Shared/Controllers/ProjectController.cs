@@ -47,9 +47,12 @@ namespace Shared.Controllers
             {
                 if (_currentWorkingDirectory != value)
                 {
-                    _currentWorkingDirectory = value;
-                    Debug.WriteLine($"Changing active directory to: {_currentWorkingDirectory}");
-                    CurrentWorkingDirectoryChanged?.Invoke(value);
+                    if (Directory.Exists(value))
+                    {
+                        _currentWorkingDirectory = value;
+                        Debug.WriteLine($"Changing active directory to: {_currentWorkingDirectory}");
+                        CurrentWorkingDirectoryChanged?.Invoke(value);
+                    }
                 }
             }
         }
@@ -273,7 +276,10 @@ namespace Shared.Controllers
                         if (!projects.Contains(kvp.Key))
                             projects.Add(kvp.Key);
                     var InitTasks = snapshot.SelectMany(pair
-                        => pair.Value.Select(fileName => ProcessFile(pair.Key, fileName)));
+                        => pair.Value
+                        // We want to load Route files first
+                        .OrderBy(f => f.EndsWith(".xhb", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".shb", StringComparison.OrdinalIgnoreCase) ? 0 : 1)
+                        .Select(fileName => ProcessFile(pair.Key, fileName)));
                     await Task.WhenAll(InitTasks);
                 }
                 finally
@@ -298,28 +304,43 @@ namespace Shared.Controllers
             {
                 if (!_project.TryGetValue(lsPath, out HashSet<ProjectFile> files))
                     files = _project[lsPath] = new HashSet<ProjectFile>();
-                var existing = files.FirstOrDefault(f => f.File.Equals(fileName, StringComparison.OrdinalIgnoreCase));
+                var projectFile = files.FirstOrDefault(f => f.File.Equals(fileName, StringComparison.OrdinalIgnoreCase));
                 if (File.Exists(fullPath))
                 {
                     // We fetch updated date early, as change can happen anytime dureing fetch process
                     DateTime updatedAt = File.GetLastWriteTimeUtc(fullPath);
+                    DateTime createdAt = File.GetCreationTimeUtc(fullPath);
+                    if (createdAt > updatedAt)
+                    {
+                        // Attempt to fix datetimes when file was copied from another source,
+                        // and lost track of their creation date & time
+                        try
+                        {
+                            File.SetCreationTimeUtc(fullPath, updatedAt);   // Set the creation time
+                            File.SetLastWriteTimeUtc(fullPath, updatedAt);  // Restore the original last write time
+                        }
+                        finally
+                        {
+                            createdAt = updatedAt; // Weird thing when copying files from network,
+                                                   // then their creation date is newer than update date
+                        }
+                    }
                     string extension = Path.GetExtension(fileName)?.TrimStart('.').ToUpper() ?? "";
-                    if (existing != null)
+                    if (projectFile != null)
                     {
                         // Just update it's values
-                        existing.UpdatedAt = updatedAt;
-                        await existing.BeginInit();
+                        projectFile.UpdatedAt = updatedAt;
+                        await projectFile.BeginInit();
                     }
                     else if (ProjectFileFactory.TryGetValue(extension, out var factory))
                     {
-                        var newFactory = factory();
-                        newFactory.Path = lsPath;
-                        newFactory.File = fileName;
-                        newFactory.CreatedAt = File.GetCreationTimeUtc(fullPath);
-                        newFactory.UpdatedAt = updatedAt;
-                        // BeginInit must happen before adding to set
-                        await newFactory.BeginInit();
-                        files.Add(newFactory);
+                        projectFile = factory();
+                        projectFile.Path = lsPath;
+                        projectFile.File = fileName;
+                        projectFile.CreatedAt = createdAt;
+                        projectFile.UpdatedAt = updatedAt;
+                        await projectFile.BeginInit();
+                        files.Add(projectFile);
                     }
                     else
                     {
@@ -330,10 +351,10 @@ namespace Shared.Controllers
                 else
                 {
                     // File have been removed
-                    if (existing != null)
+                    if (projectFile != null)
                     {
-                        existing.UpdatedAt = DateTime.UtcNow;
-                        files.Remove(existing);
+                        projectFile.UpdatedAt = DateTime.UtcNow;
+                        files.Remove(projectFile);
                     }
                 }
             }
