@@ -14,6 +14,8 @@ using Autodesk.Windows;
 #endif
 #endregion
 
+using Shared.Models;
+
 namespace Shared.Controllers.Models.RibbonXml.Items
 {
     // https://help.autodesk.com/view/OARX/2026/CSY/?guid=OARX-ManagedRefGuide-Autodesk_Windows_RibbonTextBox

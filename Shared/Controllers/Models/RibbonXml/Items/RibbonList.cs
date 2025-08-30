@@ -13,6 +13,7 @@ using Autodesk.Windows;
 #endif
 #endregion
 
+using Shared.Models;
 using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
 
 namespace Shared.Controllers.Models.RibbonXml.Items

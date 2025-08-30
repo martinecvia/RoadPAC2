@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Xml.Serialization;
 
+using Shared.Models;
 using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
 
 namespace Shared.Controllers.Models.RibbonXml.Items

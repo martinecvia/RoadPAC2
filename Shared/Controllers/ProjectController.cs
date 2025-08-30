@@ -1,5 +1,7 @@
 ﻿#pragma warning disable CS1998
 
+using Shared.Controllers.Models.Project;
+using Shared.Helpers;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -8,9 +10,6 @@ using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-
-using Shared.Controllers.Models.Project;
-using Shared.Helpers;
 
 namespace Shared.Controllers
 {
@@ -49,6 +48,7 @@ namespace Shared.Controllers
                 if (_currentWorkingDirectory != value)
                 {
                     _currentWorkingDirectory = value;
+                    Debug.WriteLine($"Changing active directory to: {_currentWorkingDirectory}");
                     CurrentWorkingDirectoryChanged?.Invoke(value);
                 }
             }

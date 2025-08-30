@@ -18,7 +18,9 @@ namespace ZWC_47_TEST
     {
         public void Initialize()
         {
-            RPApp _ = new RPApp(Application.DocumentManager);
+            RPApp app = new RPApp(Application.DocumentManager);
+            if (RPApp.Projector.CurrentWorkingDirectory == null)
+                RPApp.Projector.CurrentWorkingDirectory = @"C:\TEMP";
         }
 
         [CommandMethod("HIT_BREAKPOINT")]

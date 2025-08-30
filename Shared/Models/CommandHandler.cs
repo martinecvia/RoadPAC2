@@ -10,7 +10,7 @@ using Autodesk.AutoCAD.ApplicationServices;
 #endif
 #endregion
 
-namespace Shared
+namespace Shared.Models
 {
     /// <summary>
     /// A simple implementation of the <see cref="System.Windows.Input.ICommand"/> interface

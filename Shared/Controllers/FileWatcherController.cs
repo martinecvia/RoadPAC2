@@ -3,10 +3,9 @@
 using System;  // Keep for .NET 4.6
 using System.Collections.Concurrent;
 using System.Collections.Generic; // Keep for .NET 4.6
-using System.Diagnostics;
 using System.IO;
 using System.Linq; // Keep for .NET 4.6
-using System.Threading;
+using System.Threading; // Keep for .NET 4.6
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if !ZWCAD
