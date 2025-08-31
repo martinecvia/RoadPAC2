@@ -29,5 +29,7 @@ namespace Shared.Controllers.Models.Project
                 }
             }
         }
+        public override string ToString()
+            => $"{nameof(IFCFile)}(File={File}, Path={Path}, Flag={Flag}, Route={Route}, TerrainModelFile={TerrainModelFile})";
     }
 }

@@ -1,24 +1,19 @@
 ﻿using WPF = System.Windows.Controls;
+
 using System.Diagnostics;
 using System.Windows.Input;
-
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
 using Shared.Windows.Models;
-using static Shared.Controllers.ProjectController;
-
+using Shared.Controllers;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
-using ZwSoft.Windows;
 using ApplicationServices = ZwSoft.ZwCAD.ApplicationServices;
-using ZwSoft.ZwCAD.Windows;
 #else
-using Autodesk.Windows;
 using ApplicationServices = Autodesk.AutoCAD.ApplicationServices;
-using Autodesk.AutoCAD.Windows;
 #endif
 #endregion
 
@@ -34,35 +29,50 @@ namespace Shared.Windows
             InitializeComponent();
             if (ViewModel == null)
                 DataContext = new ProjectorViewModel();
-            RPApp.FileWatcher.FileCreated += (o, s) => Debug.WriteLine(s);
+            this.PreviewMouseDown += Projector_PreviewMouseDown;
         }
 
         public void RefreshItems() =>
             DataContext = new ProjectorViewModel();
-
-        private void TreeViewItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        #region PRIVATE
+        #region EVENTS
+        [RPPrivateUseOnly]
+        private void Projector_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
-            Debug.WriteLine("Clicked !");
-            TreeViewItem item = (TreeViewItem)sender;
-            var treeViewItem = FindAncestor<TreeViewItem>((DependencyObject)e.OriginalSource);
-            if (treeViewItem != null)
+            if (e.ChangedButton == MouseButton.Left)
             {
-                // Get the data context (your TreeItem object)
-                var treeItem = treeViewItem.DataContext as TreeItem;
-
-                if (treeItem != null)
-                {
-                    ProjectFile file = treeItem.File;
-                    string displayName = treeItem.DisplayName;
-                    MessageBox.Show($"Clicked: {displayName} (ID: {file})");
-                }
+                var target = FindAncestor<TreeViewItem>(Mouse.DirectlyOver as DependencyObject);
+                RPApp.Projector?.PublishProjectFileSelected(
+                    target?.DataContext is TreeItem treeItem ? treeItem.File : null
+                );
             }
-            item.Focusable = true;
-            item.Focus();
-            item.Focusable = false;
-            e.Handled = true;
         }
 
+        [RPPrivateUseOnly]
+        private void MenuTest_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender is MenuItem menuItem
+                && (menuItem.CommandParameter as ContextMenu ?? menuItem.Parent as ContextMenu) is ContextMenu ctx
+                && ctx.PlacementTarget is TreeViewItem tvi
+                && tvi.DataContext is TreeItem treeItem)
+            {
+                RPApp.Projector?.PublishProjectFileSelected(treeItem.File);
+            }
+        }
+        #endregion
+        [RPPrivateUseOnly]
+        private bool IsAncestorOf<T>(DependencyObject current) where T : DependencyObject
+        {
+            while (current != null)
+            {
+                if (current is T ancestor)
+                    return true;
+                current = VisualTreeHelper.GetParent(current);
+            }
+            return false;
+        }
+
+        [RPPrivateUseOnly]
         private static T FindAncestor<T>(DependencyObject current) where T : DependencyObject
         {
             while (current != null)
@@ -73,5 +83,6 @@ namespace Shared.Windows
             }
             return null;
         }
+        #endregion
     }
 }

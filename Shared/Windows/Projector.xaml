@@ -50,13 +50,18 @@
             </Button>
         </Grid>
         <!-- TreeView -->
-        <TreeView ItemsSource="{Binding FilteredItems}" ScrollViewer.VerticalScrollBarVisibility="Auto">
-            <TreeView.ItemContainerStyle>
-                <Style TargetType="{x:Type TreeViewItem}">
-                    <Setter Property="Focusable" Value="False"/>
-                    <EventSetter Event="TreeViewItem.MouseLeftButtonDown" Handler="TreeViewItem_MouseLeftButtonDown"/>
+        <TreeView x:Name="ProjectTree" 
+                  ItemsSource="{Binding FilteredItems}" ScrollViewer.VerticalScrollBarVisibility="Auto">
+            <TreeView.Resources>
+                <ContextMenu x:Key="ItemContextMenu">
+                    <MenuItem Header="Debug test" CommandParameter="{Binding}" Click="MenuTest_Click"/>
+                </ContextMenu>
+
+                <Style TargetType="TreeViewItem">
+                    <Setter Property="ContextMenu"
+                    Value="{StaticResource ItemContextMenu}" />
                 </Style>
-            </TreeView.ItemContainerStyle>
+            </TreeView.Resources>
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type models:TreeItem}" ItemsSource="{Binding}">
                     <DockPanel>

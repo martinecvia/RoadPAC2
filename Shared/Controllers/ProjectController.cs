@@ -36,6 +36,10 @@ namespace Shared.Controllers
         public event Action<string> CurrentRouteChanged;
         public event Action<string> ProjectChanged;
 
+        public event Action<ProjectFile> ProjectFileSelected;
+        public void PublishProjectFileSelected(ProjectFile file) 
+            => ProjectFileSelected?.Invoke(file);
+
         [RPInfoOut]
         public string CurrentWorkingDirectory
         {
