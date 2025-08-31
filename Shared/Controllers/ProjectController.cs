@@ -155,11 +155,9 @@ namespace Shared.Controllers
             IFC = 1 << 6,  // IFC Podklady
             // Types
             Listing = 1 << 7,
-            Calculation = 1 << 8,
-            Result = 1 << 9,
-            Xml = 1 << 10,
+            Xml = 1 << 8,
             // Should be expanded
-            Multi = 1 << 11,
+            Multi = 1 << 9,
         }
 
         private Timer _roadPacTimer;

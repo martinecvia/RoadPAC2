@@ -6,6 +6,6 @@ namespace Shared.Controllers.Models.Project
         public string Route { get; protected set; }
         public string TerrainModelFile { get; protected set; }
         public override string ToString()
-            => $"{nameof(BaseProjectXml)}(File={File}, Path={Path}, Flag={Flag}, Route={Route}, TerrainModelFile={TerrainModelFile})";
+            => $"{base.ToString()}(File={File}, Path={Path}, Flag={Flag}, Route={Route}, TerrainModelFile={TerrainModelFile})";
     }
 }
