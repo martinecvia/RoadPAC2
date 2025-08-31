@@ -3,6 +3,7 @@
 using System; // Keep for .NET 4.6
 using System.Linq; // Keep for .NET 4.6
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -26,7 +27,7 @@ namespace Shared
     {
         public static bool IsAcad => AppDomain.CurrentDomain.GetAssemblies()
             .Any(assembly => assembly.FullName?.StartsWith("acdbmgd", StringComparison.OrdinalIgnoreCase) ?? false);
-        public static bool IsLicensed { get; private set; } = false;
+        public static bool IsLicensed { get; internal set; } = false;
         public static RPConfig Config { get; private set; } = null;
         public static FileWatcherController FileWatcher { get; private set; }
         public static ProjectController Projector { get; private set; }

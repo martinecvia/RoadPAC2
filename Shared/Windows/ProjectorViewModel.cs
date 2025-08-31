@@ -75,35 +75,37 @@ namespace Shared.Windows
                     Image = "./Assets/route.png",
                     File = route
                 };
-                routeNode.Add(new TreeItem { DisplayName = $"Směrové řešení: {route.File}", File = route });
+                routeNode.Add(new TreeItem { DisplayName = $"Směrové řešení: {route.UpdatedAt.ToString()}", File = route });
                 var related = RPApp.Projector?.GetRoute(lsPath, route.File) ?? new HashSet<ProjectFile>();
-                void MarkOutdated(TreeItem node, DateTime? parentUpdatedAt)
+                // Not a great implementaton but it works at least a little
+                void MarkOutdated(TreeItem node, ProjectFile parent)
                 {
-                    if (node.File?.UpdatedAt != null && parentUpdatedAt != null)
-                    {
-                        var tolerance = TimeSpan.FromSeconds(10);
-                        var diff = parentUpdatedAt - node.File.UpdatedAt;
-                        node.DisplayWarning = diff > tolerance;
-                    }
-                    else if (parentUpdatedAt.HasValue)
-                        node.DisplayWarning = true;
-                        var currentUpdatedAt = node.File?.UpdatedAt ?? parentUpdatedAt;
-                    foreach (var child in node)
-                        MarkOutdated(child, currentUpdatedAt);
+                    // Falling shit system,
+                    // from the oldest to the newest record, and if anything is older, then it's outdated
+                    if (node.File?.UpdatedAt != null && parent != null)
+                        node.DisplayWarning = node.File.UpdatedAt < parent.UpdatedAt - TimeSpan.FromSeconds(10);
+                    else if (parent != null && node.File == null)
+                        node.DisplayWarning = true; // If file that should be there before is not there
+
+                    // We don't want to display Route or empty filed nodes
                     if (node.File == null || node.IsRouteNode)
-                    {
-                        // We don't want to display Route or empty filed nodes
                         node.DisplayWarning = false;
-                        return;
+                    if (node.DisplayWarning == true)
+                        node.WarningToolTip = $"Soubor je zastaralý, vůči: {parent.File}";
+                    foreach (var child in node)
+                    {
+                        MarkOutdated(child, parent);
+                        if (child.DisplayWarning == true)
+                            child.WarningToolTip = $"Soubor je zastaralý, vůči: {parent.File}";
+                        parent = child.File ?? parent;
                     }
-                    Debug.WriteLine($"{node.File?.File}, DisplayWarning = {node.DisplayWarning}, because: {node.File?.UpdatedAt} < {parentUpdatedAt}");
                 }
 
                 var profile = related.FirstOrDefault(r => r.Flag.HasFlag(FClass.Profile) && !r.Flag.HasFlag(FClass.Listing));
                 routeNode.Add(new TreeItem
                 {
                     DisplayName = profile != null
-                        ? $"Niveleta: {profile.File}"
+                        ? $"Niveleta: {profile.UpdatedAt.ToString()}"
                         : "Niveleta",
                     File = profile,
                 });
@@ -112,7 +114,7 @@ namespace Shared.Windows
                 AddGroup(routeNode, related, FClass.Survey, "Vytyčení", "./Assets/survey.png", "./Assets/list-item.png");
                 AddGroup(routeNode, related, FClass.IFC, "Podklady pro IFC", "./Assets/ifc.png", "./Assets/list-item.png");
                 AddGroup(routeNode, related, FClass.CombinedCrossSections, "Kreslení příčných řezů", null, "./Assets/list-item.png");
-                MarkOutdated(routeNode, route.UpdatedAt);
+                MarkOutdated(routeNode, route);
                 tree.Add(routeNode);
             }
             return tree;
@@ -132,7 +134,7 @@ namespace Shared.Windows
             {
                 foreach (var file in matches)
                     if (!file.Flag.HasFlag(FClass.Listing))
-                        groupNode.Add(new TreeItem { DisplayName = file.File, Image = itemNodeImage, File = file });
+                        groupNode.Add(new TreeItem { DisplayName = file.UpdatedAt.ToString(), Image = itemNodeImage, File = file });
             }
             parent.Add(groupNode);
         }
@@ -144,10 +146,10 @@ namespace Shared.Windows
             var node = new TreeItem { DisplayName = "Koridor", IsGroupNode = true, Image = "./Assets/road.png" };
             if (corridor != null)
             {
-                node.Add(new TreeItem { DisplayName = $"Pokrytí: {corridor.File}", Image = "./Assets/list-item.png", File = corridor });
+                node.Add(new TreeItem { DisplayName = $"Pokrytí: {corridor.UpdatedAt.ToString()}", Image = "./Assets/list-item.png", File = corridor });
                 var crossSection = related.FirstOrDefault(r => r.Flag == (FClass.Corridor | FClass.CrossSection));
                 if (crossSection != null)
-                    node.Add(new TreeItem { DisplayName = $"Příčné řezy: {crossSection.File}", Image = "./Assets/list-item.png", File = crossSection });
+                    node.Add(new TreeItem { DisplayName = $"Příčné řezy: {crossSection.UpdatedAt.ToString()}", Image = "./Assets/list-item.png", File = crossSection });
             }
             parent.Add(node);
         }
