@@ -18,8 +18,13 @@ namespace Shared.Windows.Models
 
         public ProjectController.ProjectFile File { get; set; }
 
-        // DisplayName
-        public string DisplayName { get; set; } = string.Empty;
+        // Label
+        public string Label { get; set; } = string.Empty;
+        public string LabelColor { get; set; } = "Black";
+
+        // Value
+        public string Value { get; set; } = string.Empty;
+        public string ValueColor { get; set; } = "Black";
 
         // Image
         private static readonly BitmapImage DefaultImage =

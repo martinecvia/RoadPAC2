@@ -76,6 +76,7 @@ namespace Shared
                          // but at init it does not really matter;
 #endif
             Projector.BeginInit();
+            bool _ = false;
         }
 
         #region O_INSTALLATION"HKEY_LOCAL_MACHINE"

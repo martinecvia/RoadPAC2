@@ -68,11 +68,11 @@
                          <!-- Icon -->
                         <Image Width="16" Height="16" Source="{Binding ImageSource}" DockPanel.Dock="Left" Margin="2" />
                         <!-- DisplayName -->
-                        <TextBlock x:Name="DisplayName" Margin="2"
-                               Text="{Binding DisplayName}" VerticalAlignment="Center">
+                        <TextBlock x:Name="Label" Margin="2"
+                               Text="{Binding Label}" VerticalAlignment="Center">
                             <TextBlock.Style>
                                 <Style TargetType="TextBlock">
-                                    <Setter Property="Foreground" Value="Black"/>
+                                    <Setter Property="Foreground" Value="{Binding LabelColor}"/>
                                     <Setter Property="FontStyle" Value="Normal"/>
                                     <Style.Triggers>
                                         <!-- IsRouteNode=true -->
@@ -90,6 +90,15 @@
                                             <Setter Property="FontStyle" Value="Italic"/>
                                         </MultiDataTrigger>
                                     </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+
+                        <TextBlock x:Name="Value" Margin="2"
+                            Text="{Binding Value}" VerticalAlignment="Center">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="{Binding ValueColor}"/>
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>

@@ -9,10 +9,9 @@ using System.Text;
 
 using System.Windows;
 using System.Windows.Data;
+
 using Shared.Controllers;
 using Shared.Windows.Models;
-
-using static Shared.Controllers.ProjectController;
 
 namespace Shared.Windows
 {
@@ -54,7 +53,7 @@ namespace Shared.Windows
             {
                 if (string.IsNullOrWhiteSpace(SearchText))
                     return true;
-                return item.DisplayName?.IndexOf(SearchText, System.StringComparison.OrdinalIgnoreCase) >= 0;
+                return item.Label?.IndexOf(SearchText, System.StringComparison.OrdinalIgnoreCase) >= 0;
             }
             return false;
         }
@@ -70,15 +69,15 @@ namespace Shared.Windows
             {
                 var routeNode = new TreeItem
                 {
-                    DisplayName = Path.GetFileNameWithoutExtension(route.File).ToUpperInvariant(),
+                    Label = Path.GetFileNameWithoutExtension(route.File).ToUpperInvariant(),
                     IsRouteNode = true,
                     Image = "./Assets/route.png",
                     File = route
                 };
-                routeNode.Add(new TreeItem { DisplayName = $"Směrové řešení: {route.UpdatedAt.ToString()}", File = route });
-                var related = RPApp.Projector?.GetRoute(lsPath, route.File) ?? new HashSet<ProjectFile>();
+                routeNode.Add(new TreeItem { Label = $"Směrové řešení:", Value= route.File, File = route });
+                var related = RPApp.Projector?.GetRoute(lsPath, route.File) ?? new HashSet<ProjectController.ProjectFile>();
                 // Not a great implementaton but it works at least a little
-                void MarkOutdated(TreeItem node, ProjectFile parent)
+                void MarkOutdated(TreeItem node, ProjectController.ProjectFile parent)
                 {
                     // Falling shit system,
                     // from the oldest to the newest record, and if anything is older, then it's outdated
@@ -101,19 +100,20 @@ namespace Shared.Windows
                     }
                 }
 
-                var profile = related.FirstOrDefault(r => r.Flag.HasFlag(FClass.Profile) && !r.Flag.HasFlag(FClass.Listing));
+                var profile = related.FirstOrDefault(r => r.Flag.HasFlag(ProjectController.FClass.Profile) && !r.Flag.HasFlag(ProjectController.FClass.Listing));
                 routeNode.Add(new TreeItem
                 {
-                    DisplayName = profile != null
-                        ? $"Niveleta: {profile.UpdatedAt.ToString()}"
+                    Label = profile != null
+                        ? $"Niveleta:"
                         : "Niveleta",
                     File = profile,
+                    Value = profile?.File
                 });
 
                 AddCorridor(routeNode, related);
-                AddGroup(routeNode, related, FClass.Survey, "Vytyčení", "./Assets/survey.png", "./Assets/list-item.png");
-                AddGroup(routeNode, related, FClass.IFC, "Podklady pro IFC", "./Assets/ifc.png", "./Assets/list-item.png");
-                AddGroup(routeNode, related, FClass.CombinedCrossSections, "Kreslení příčných řezů", null, "./Assets/list-item.png");
+                AddGroup(routeNode, related, ProjectController.FClass.Survey, "Vytyčení", "./Assets/survey.png", "./Assets/list-item.png");
+                AddGroup(routeNode, related, ProjectController.FClass.IFC, "Podklady pro IFC", "./Assets/ifc.png", "./Assets/list-item.png");
+                AddGroup(routeNode, related, ProjectController.FClass.CombinedCrossSections, "Kreslení příčných řezů", null, "./Assets/list-item.png");
                 MarkOutdated(routeNode, route);
                 tree.Add(routeNode);
             }
@@ -121,35 +121,42 @@ namespace Shared.Windows
         }
 
         [RPPrivateUseOnly]
-        private IEnumerable<ProjectFile> GetByFlag(HashSet<ProjectFile> related, FClass flag) 
+        private IEnumerable<ProjectController.ProjectFile> GetByFlag(HashSet<ProjectController.ProjectFile> related, ProjectController.FClass flag) 
             => related.Where(f => f.Flag == flag);
 
         [RPPrivateUseOnly]
-        private void AddGroup(TreeItem parent, IEnumerable<ProjectFile> related, FClass flag, string label,
+        private void AddGroup(TreeItem parent, IEnumerable<ProjectController.ProjectFile> related, ProjectController.FClass flag, string label,
             string groupNodeImage = null, string itemNodeImage = null)
         {
-            var groupNode = new TreeItem { DisplayName = label, IsGroupNode = true, Image = groupNodeImage };
+            var groupNode = new TreeItem { Label = label, IsGroupNode = true, Image = groupNodeImage };
             var matches = related.Where(r => r.Flag.HasFlag(flag)).ToList();
             if (matches.Any())
             {
                 foreach (var file in matches)
-                    if (!file.Flag.HasFlag(FClass.Listing))
-                        groupNode.Add(new TreeItem { DisplayName = file.UpdatedAt.ToString(), Image = itemNodeImage, File = file });
+                    if (!file.Flag.HasFlag(ProjectController.FClass.Listing))
+                        groupNode.Add(new TreeItem { Value = file.File, Image = itemNodeImage, File = file });
             }
             parent.Add(groupNode);
         }
 
         [RPPrivateUseOnly]
-        private void AddCorridor(TreeItem parent, IEnumerable<ProjectFile> related)
+        private void AddCorridor(TreeItem parent, IEnumerable<ProjectController.ProjectFile> related)
         {
-            var corridor = related.FirstOrDefault(r => r.Flag == FClass.Corridor);
-            var node = new TreeItem { DisplayName = "Koridor", IsGroupNode = true, Image = "./Assets/road.png" };
+            var corridor = related.FirstOrDefault(r => r.Flag == ProjectController.FClass.Corridor);
+            var node = new TreeItem { Label = "Koridor", IsGroupNode = true, Image = "./Assets/road.png" };
             if (corridor != null)
             {
-                node.Add(new TreeItem { DisplayName = $"Pokrytí: {corridor.UpdatedAt.ToString()}", Image = "./Assets/list-item.png", File = corridor });
-                var crossSection = related.FirstOrDefault(r => r.Flag == (FClass.Corridor | FClass.CrossSection));
-                if (crossSection != null)
-                    node.Add(new TreeItem { DisplayName = $"Příčné řezy: {crossSection.UpdatedAt.ToString()}", Image = "./Assets/list-item.png", File = crossSection });
+                node.Add(new TreeItem { Label = $"Pokrytí:", Value = corridor.File, Image = "./Assets/list-item.png", File = corridor });
+                var crossSection = related.FirstOrDefault(r => r.Flag == (ProjectController.FClass.Corridor | ProjectController.FClass.CrossSection));
+                node.Add(new TreeItem
+                {
+                    Label = crossSection != null
+                        ? $"Příčné řezy:"
+                        : "Příčné řezy",
+                    File = crossSection,
+                    Value = crossSection?.File,
+                    Image = "./Assets/list-item.png"
+                });
             }
             parent.Add(node);
         }
