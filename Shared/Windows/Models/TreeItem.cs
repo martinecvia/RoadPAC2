@@ -20,16 +20,6 @@ namespace Shared.Windows.Models
 
         // DisplayName
         public string DisplayName { get; set; } = string.Empty;
-        public FontFamily FontFamily
-        {
-            get
-            {
-                string assemblyName = Assembly.GetExecutingAssembly().GetName().Name;
-                if (IsRouteNode)
-                    return new FontFamily($"pack://application:,,,/{assemblyName};component/Windows/Assets/#Segoe UI Semibold");
-                return new FontFamily("Segoe UI");
-            }
-        }
 
         // Image
         private static readonly BitmapImage DefaultImage =

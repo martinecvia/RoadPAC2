@@ -1,33 +1,30 @@
 ﻿#pragma warning disable CS1998
 
-using Shared.Controllers.Models.Project;
-using Shared.Helpers;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
+
+using Shared.Controllers.Models.Project;
+using Shared.Helpers;
 
 namespace Shared.Controllers
 {
     // https://adndevblog.typepad.com/autocad/2012/06/use-thread-for-background-processing.html
     public class ProjectController : IDisposable
     {
-        private const int INTERVAL_CHECK_TIME = 10; // In seconds
-        private const int RPUPDATE_CHECK_TIME = 10; // In seconds
+        private const int INTERVAL_CHECK_TIME = 5; // In seconds
+        private const int RPUPDATE_CHECK_TIME = 5; // In seconds
 
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
 
         private readonly ConcurrentDictionary<string, HashSet<string>> _changes
             = new ConcurrentDictionary<string, HashSet<string>>();
-
-        private readonly TimeSpan _interval = TimeSpan.FromSeconds(INTERVAL_CHECK_TIME);
-        private readonly TimeSpan _rpupdate = TimeSpan.FromSeconds(RPUPDATE_CHECK_TIME);
-        private readonly CancellationTokenSource _cts = new CancellationTokenSource();
-        private readonly CancellationTokenSource _rdp = new CancellationTokenSource();
 
         // Project related
         private readonly ConcurrentDictionary<string, HashSet<ProjectFile>> _project
@@ -165,6 +162,10 @@ namespace Shared.Controllers
             Multi = 1 << 11,
         }
 
+        private Timer _roadPacTimer;
+        private Timer _changesTimer;
+
+
         // We don't really want to expose our contructor,
         // it's supposed to be initialized during app build process
         internal ProjectController()
@@ -182,13 +183,16 @@ namespace Shared.Controllers
                     RefreshProject(RPApp.FileWatcher?.Files);
                 };
             }
+            // This should be reworked to be handled asynchrounously
+            _roadPacTimer = new Timer(_ => _ = ProcessRoadPacInBackground(), null, Timeout.Infinite, Timeout.Infinite);
+            _changesTimer = new Timer(_ => _ = ProcessChangesInBackground(), null, Timeout.Infinite, Timeout.Infinite);
         }
 
         [RPInternalUseOnly]
         internal void BeginInit()
         {
-            Task.Run(ProcessChangesInBackground, _cts.Token); // Used to process changes in CurrentWorkingDirectory
-            Task.Run(ProcessRoadPacInBackground, _rdp.Token); // Used to check agains RDPFILELib
+            _roadPacTimer.Change(TimeSpan.Zero, TimeSpan.FromSeconds(RPUPDATE_CHECK_TIME));
+            _changesTimer.Change(TimeSpan.Zero, TimeSpan.FromSeconds(INTERVAL_CHECK_TIME));
         }
 
         [RPInternalUseOnly]
@@ -236,62 +240,54 @@ namespace Shared.Controllers
         [RPPrivateUseOnly]
         private async Task ProcessRoadPacInBackground()
         {
-            while (!_rdp.Token.IsCancellationRequested)
-            {
-                await Task.Delay(_rpupdate, _rdp.Token);
+            try
+            { 
                 if (_roadPacOperationActive)
-                    continue;
-                try
-                {
-                    _roadPacOperationActive = true;
-                    if (RPApp.RDPHelper == null)
-                        RPApp.RDPHelper = new RDPFileHelper();
-                    CurrentWorkingDirectory = await RPApp.RDPHelper.GetCurrentWorkingDirectory();
-                    CurrentRoute            = await RPApp.RDPHelper.GetCurrentRoute();
-                }
-                finally
-                {
-                    _roadPacOperationActive = false;
-                }
+                    return;
+                _roadPacOperationActive = true;
+                if (RPApp.RDPHelper == null)
+                    RPApp.RDPHelper = new RDPFileHelper();
+                CurrentWorkingDirectory = await RPApp.RDPHelper.GetCurrentWorkingDirectory();
+                CurrentRoute            = await RPApp.RDPHelper.GetCurrentRoute();
+            }
+            catch (COMException)
+            { RPApp.IsLicensed = false; }
+            finally
+            {
+                if (RPApp.IsLicensed)
+                    _roadPacOperationActive = false; // We want to halt this task from updating,
+                                                     // since user don't have valid RoadPAC license
             }
         }
 
         [RPPrivateUseOnly]
         private async Task ProcessChangesInBackground()
         {
-            while (!_cts.Token.IsCancellationRequested)
+            if (_changes.IsEmpty || _generalOperationActive)
+                return;
+            List<string> projects = new List<string>();
+            try
             {
-                await Task.Delay(_interval, _cts.Token);
-                if (_changes.IsEmpty || _generalOperationActive)
-                    continue;
-                List<string> projects = new List<string>();
-                try
-                {
-                    _generalOperationActive = true;
-                    var snapshot = _changes.ToDictionary(
-                        kvp => kvp.Key,
-                        kvp => { lock (kvp.Value) return kvp.Value; });
-                    _changes.Clear();
-                    foreach (var kvp in snapshot)
-                        if (!projects.Contains(kvp.Key))
-                            projects.Add(kvp.Key);
-                    var InitTasks = snapshot.SelectMany(pair
-                        => pair.Value
-                        // We want to load Route files first
-                        .OrderBy(f => f.EndsWith(".xhb", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".shb", StringComparison.OrdinalIgnoreCase) ? 0 : 1)
-                        .Select(fileName => ProcessFile(pair.Key, fileName)));
-                    await Task.WhenAll(InitTasks);
-                }
-                finally
-                {
-                    foreach(var lsPath in projects)
-#if !ZWCAD && !NET8_0_OR_GREATER
-                        ProjectChanged?.Invoke(lsPath);
-#else
-                        ThreadPool.QueueUserWorkItem(_ => ProjectChanged?.Invoke(lsPath));
-#endif
-                    _generalOperationActive = false;
-                }
+                _generalOperationActive = true;
+                var snapshot = _changes.ToDictionary(
+                    kvp => kvp.Key,
+                    kvp => { lock (kvp.Value) return kvp.Value; });
+                _changes.Clear();
+                foreach (var kvp in snapshot)
+                    if (!projects.Contains(kvp.Key))
+                        projects.Add(kvp.Key);
+                var InitTasks = snapshot.SelectMany(pair
+                    => pair.Value
+                    // We want to load Route files first
+                    .OrderBy(f => f.EndsWith(".xhb", StringComparison.OrdinalIgnoreCase) || f.EndsWith(".shb", StringComparison.OrdinalIgnoreCase) ? 0 : 1)
+                    .Select(fileName => ProcessFile(pair.Key, fileName)));
+                await Task.WhenAll(InitTasks);
+            }
+            finally
+            {
+                foreach (var lsPath in projects)
+                    ProjectChanged?.Invoke(lsPath);
+                _generalOperationActive = false;
             }
         }
 
@@ -366,8 +362,13 @@ namespace Shared.Controllers
         #endregion
         public void Dispose()
         {
-            _cts.Cancel();
-            _cts.Dispose();
+            _roadPacTimer?.Dispose();
+            _changesTimer?.Dispose();
+            _roadPacTimer = null;
+            _changesTimer = null;
+            _project.Clear();
+            _changes.Clear();
+            _lock?.Dispose();
         }
 
         [RPPrivateUseOnly]

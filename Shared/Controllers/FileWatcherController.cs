@@ -3,6 +3,7 @@
 using System;  // Keep for .NET 4.6
 using System.Collections.Concurrent;
 using System.Collections.Generic; // Keep for .NET 4.6
+using System.Diagnostics;
 using System.IO;
 using System.Linq; // Keep for .NET 4.6
 using System.Threading; // Keep for .NET 4.6
@@ -106,6 +107,7 @@ namespace Shared.Controllers
             } finally { _lock.ExitWriteLock(); }
         }
 
+        [RPPrivateUseOnly]
         private async void OnFileCreated(string lsPath, string fileName)
         {
             if (fileName == null) 
@@ -122,28 +124,48 @@ namespace Shared.Controllers
             await _context?.ExecuteInCommandContextAsync(async (_) 
                 => FileCreated?.Invoke(lsPath, fileName), null);
 #else
-            ThreadPool.QueueUserWorkItem(_ => FileCreated?.Invoke(lsPath, fileName));
+            FileCreated?.Invoke(lsPath, fileName);
 #endif
         }
 
-        int x = 0;
+        [RPPrivateUseOnly]
+        private volatile bool IsChangeHandled = false;
+
+        [RPPrivateUseOnly]
         private async void OnFileChanged(string lsPath, string fileName, WatcherChangeTypes change)
         {
-            x++;
-            //Interlocked.Increment(ref x);
-
-            if (change != WatcherChangeTypes.Changed)
+            if (fileName == null || change != WatcherChangeTypes.Changed)
                 return;
+            // This also happens when file was created,
+            // however all we need to do is to lookup the table for this name,
+            // and if not found then file was created
+            bool IsFileCreated = false;
+            _lock.EnterReadLock();
+            try
+            {
+                if (_files.TryGetValue(lsPath, out HashSet<string> files))
+                    if (!files.Contains(fileName))
+                        IsFileCreated = true; // File was definitely created
+            }
+            finally { _lock.ExitReadLock(); }
+            if (!IsFileCreated && !IsChangeHandled)
+            {
+                // We don't want to handle same event twice,
+                // this happens because size and/or last write time have changed
+                IsChangeHandled = true;
 #if !ZWCAD && !NET8_0_OR_GREATER
-            if (_context == null)
-                _context = Application.DocumentManager;
-            await _context?.ExecuteInCommandContextAsync(async (_) 
-                => FileChanged?.Invoke(lsPath, fileName), null);
+                if (_context == null)
+                    _context = Application.DocumentManager;
+                await _context?.ExecuteInCommandContextAsync(async (_) 
+                    => FileChanged?.Invoke(lsPath, fileName), null);
 #else
-            ThreadPool.QueueUserWorkItem(_ => FileChanged?.Invoke(lsPath, fileName));
+                FileChanged?.Invoke(lsPath, fileName);
 #endif
+                IsChangeHandled = false;
+            }
         }
 
+        [RPPrivateUseOnly]
         private async void OnFileDeleted(string lsPath, string fileName)
         {
             if (fileName == null) 
@@ -160,10 +182,11 @@ namespace Shared.Controllers
             await _context?.ExecuteInCommandContextAsync(async (_) 
                 => FileDeleted?.Invoke(lsPath, fileName), null);
 #else
-            ThreadPool.QueueUserWorkItem(_ => FileDeleted?.Invoke(lsPath, fileName));
+            FileDeleted?.Invoke(lsPath, fileName);
 #endif
         }
 
+        [RPPrivateUseOnly]
         private async void OnFileRenamed(string lsPath, string fileName, string oldName)
         {
             if (fileName == null || oldName == null) 
@@ -183,7 +206,7 @@ namespace Shared.Controllers
             await _context?.ExecuteInCommandContextAsync(async (_) 
                 => FileRenamed?.Invoke(lsPath, fileName, oldName), null);
 #else
-            ThreadPool.QueueUserWorkItem(_ => FileRenamed?.Invoke(lsPath, fileName, oldName));
+            FileRenamed?.Invoke(lsPath, fileName, oldName);
 #endif
         }
 
@@ -199,7 +222,7 @@ namespace Shared.Controllers
             }
             _watchers.Clear();
             _files.Clear();
-            _lock.Dispose();
+            _lock?.Dispose();
         }
     }
 }

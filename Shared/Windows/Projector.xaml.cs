@@ -1,5 +1,13 @@
 ﻿using WPF = System.Windows.Controls;
 using System.Diagnostics;
+using System.Windows.Input;
+
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+
+using Shared.Windows.Models;
+using static Shared.Controllers.ProjectController;
 
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
@@ -26,13 +34,44 @@ namespace Shared.Windows
             InitializeComponent();
             if (ViewModel == null)
                 DataContext = new ProjectorViewModel();
-            RPApp.FileWatcher.FileCreated += (s, o) => Debug.WriteLine("FileCreated");
-            RPApp.FileWatcher.FileDeleted += (s, o) => Debug.WriteLine("FileDeleted");
-            RPApp.FileWatcher.FileRenamed += (s, o, l) => Debug.WriteLine("FileRenamed");
-            RPApp.Projector.ProjectChanged += (s) => Debug.WriteLine("ProjectChanged");
+            RPApp.FileWatcher.FileCreated += (o, s) => Debug.WriteLine(s);
         }
 
-        public void Show() =>
+        public void RefreshItems() =>
             DataContext = new ProjectorViewModel();
+
+        private void TreeViewItem_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            Debug.WriteLine("Clicked !");
+            TreeViewItem item = (TreeViewItem)sender;
+            var treeViewItem = FindAncestor<TreeViewItem>((DependencyObject)e.OriginalSource);
+            if (treeViewItem != null)
+            {
+                // Get the data context (your TreeItem object)
+                var treeItem = treeViewItem.DataContext as TreeItem;
+
+                if (treeItem != null)
+                {
+                    ProjectFile file = treeItem.File;
+                    string displayName = treeItem.DisplayName;
+                    MessageBox.Show($"Clicked: {displayName} (ID: {file})");
+                }
+            }
+            item.Focusable = true;
+            item.Focus();
+            item.Focusable = false;
+            e.Handled = true;
+        }
+
+        private static T FindAncestor<T>(DependencyObject current) where T : DependencyObject
+        {
+            while (current != null)
+            {
+                if (current is T ancestor)
+                    return ancestor;
+                current = VisualTreeHelper.GetParent(current);
+            }
+            return null;
+        }
     }
 }

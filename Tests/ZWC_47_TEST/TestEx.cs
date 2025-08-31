@@ -36,7 +36,7 @@ namespace ZWC_47_TEST
             if (_paletteSet == null)
             {
                 _projector = new Projector();
-                _paletteSet = new PaletteSet("RoadPAC2")
+                _paletteSet = new PaletteSet($"RoadPAC2 / {RPApp.Projector.CurrentWorkingDirectory}")
                 {
                     Size = new Size((int)_projector.Width, (int)_projector.Height),
                     DockEnabled = DockSides.Left | DockSides.Right,
@@ -45,7 +45,8 @@ namespace ZWC_47_TEST
 
                 _paletteSet.AddVisual("Prospector", _projector);
             }
-            _projector.Show();
+            _paletteSet.Name = $"RoadPAC2 / {RPApp.Projector.CurrentWorkingDirectory}";
+            _projector.RefreshItems();
             _paletteSet.KeepFocus = true;
             _paletteSet.Visible = true;
         }

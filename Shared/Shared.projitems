@@ -85,9 +85,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\Segoe UI Semibold.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\arrow-right.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

@@ -14,8 +14,11 @@ namespace NET_46_TEST
 {
     public class TestEx : IExtensionApplication
     {
-        public void Initialize() {
-            RPApp _ = new RPApp(Application.DocumentManager);
+        public void Initialize()
+        {
+            RPApp app = new RPApp(Application.DocumentManager);
+            if (RPApp.Projector.CurrentWorkingDirectory == null)
+                RPApp.Projector.CurrentWorkingDirectory = @"C:\TEMP";
         }
 
         [CommandMethod("HIT_BREAKPOINT")]
@@ -23,23 +26,25 @@ namespace NET_46_TEST
         {
             var Ribbons = ComponentManager.Ribbon;
         }
-
         private PaletteSet _paletteSet;
+        private Projector _projector;
         [CommandMethod("RP_PROSPECTOR")]
         public void RPProspector()
         {
             if (_paletteSet == null)
             {
-                var control = new Projector();
-                _paletteSet = new PaletteSet("RoadPAC2")
+                _projector = new Projector();
+                _paletteSet = new PaletteSet($"RoadPAC2 / {RPApp.Projector.CurrentWorkingDirectory}")
                 {
-                    Size = new Size((int)control.Width, (int)control.Height),
+                    Size = new Size((int)_projector.Width, (int)_projector.Height),
                     DockEnabled = DockSides.Left | DockSides.Right,
                     KeepFocus = true
                 };
 
-                _paletteSet.AddVisual("Prospector", control);
+                _paletteSet.AddVisual("Prospector", _projector);
             }
+            _paletteSet.Name = $"RoadPAC2 / {RPApp.Projector.CurrentWorkingDirectory}";
+            _projector.RefreshItems();
             _paletteSet.KeepFocus = true;
             _paletteSet.Visible = true;
         }
