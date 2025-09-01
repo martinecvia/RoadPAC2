@@ -1,6 +1,7 @@
 ﻿#pragma warning disable CS8618
 namespace Shared.Controllers.Models.Project
 {
+    [RPInternalUseOnly]
     public abstract class BaseProjectXml : Shared.Controllers.ProjectController.ProjectFile
     {
         public string Route { get; protected set; }

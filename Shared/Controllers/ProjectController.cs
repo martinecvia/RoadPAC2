@@ -147,13 +147,13 @@ namespace Shared.Controllers
         {
             None = 0,
             // Mappings
-            Profile = 1 << 0,  // Niveleta
-            Route = 1 << 1,  // Trasa / Směrové řešení
+            Route = 1 << 0,  // Trasa / Směrové řešení
+            Profile = 1 << 1,  // Niveleta
             Corridor = 1 << 2,  // Koridor
-            Survey = 1 << 3,  // Vytyčení
-            CrossSection = 1 << 4,  // Příčné řezy
-            CombinedCrossSections = 1 << 5,  // Spojené příčné řezy
-            IFC = 1 << 6,  // IFC Podklady
+            CrossSection = 1 << 3,  // Příčné řezy
+            Survey = 1 << 4,  // Vytyčení
+            IFC = 1 << 5,  // IFC Podklady
+            CombinedCrossSections = 1 << 6,  // Spojené příčné řezy
             // Types
             Listing = 1 << 7,
             Xml = 1 << 8,
@@ -251,7 +251,6 @@ namespace Shared.Controllers
             { RPApp.IsLicensed = false; }
             finally
             {
-                Debug.WriteLine($"RoadPAC licensed = {RPApp.IsLicensed}!");
                 if (RPApp.IsLicensed)
                     _roadPacOperationActive = false; // We want to halt this task from updating,
                                                      // since user don't have valid RoadPAC license

@@ -10,6 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Assert.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\Ribbon\PanelTagControllVisibility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\Ribbon\TagControllVisibility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\Project\BaseProjectXml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\Project\CombinedCrossSectionsFile.cs" />
@@ -77,9 +78,6 @@
     <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\CollapseAll.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\CollapseUpGroup.png">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
     <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\dt4.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -113,11 +111,7 @@
     <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\warning.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_Test.xml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_excel_16.ico" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_Contextual_SelectView.xml">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)Windows\Projector.xaml">
@@ -128,7 +122,6 @@
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_AbstractClass.png" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_logo_blue.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_logo_orange.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_AddEntity.png" />

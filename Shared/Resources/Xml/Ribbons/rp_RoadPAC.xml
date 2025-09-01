@@ -3,12 +3,12 @@
 		   IsVisible="True" KeyTip="RP" 
 		   Name="RoadPAC2" Title="RoadPAC2" IsEnabled="True" IsPanelEnabled="True" AllowTearOffContextualPanels="False">
 	<!-- Panel: RoadPAC -->
-	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="True" IsEnabled="True">
+	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True">
 		<RibbonPanelSource Title="RoadPAC">
 			<!-- Sole purpose of this dialog launcher is to let user more options from where he can load project -->
 			<DialogLauncher Text="Načti složku projektu" CommandHandler="RP_PROSPECTOR_NEW" />
 			<RibbonButton Text="Spusti&#13;RoadPAC" Name="Spusti&#13;RoadPAC" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True"
-						  Image="rp_logo" LargeImage="rp_logo_orange"
+						  Image="rp_logo" LargeImage="rp_logo_blue"
 						  CommandHandler="XX:RoadpacNET7.exe" />
 			<!-- Projector -->
 			<RibbonSplitButton Text="Projektor" SynchronizeOption="Image" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True">
@@ -36,62 +36,76 @@
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: Směrové vedení trasy -->
+	<!-- Panel: Required tags: [] -->
 	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False">
 		<RibbonPanelSource>
 			<Title><![CDATA[Směrové vedení]]></Title>
-			<RibbonButton Text="Tags:[]" Size="Large" />
-			<RibbonButton Text="Tags:[]" Size="Large" 
-						  IsVisible="False" Tags="Route" Id="TagControllVisibility" />
+			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" />
+			<RibbonButton Text="Tags:[Route]" Size="Large" ShowText="True" Orientation="Vertical"
+						  IsVisible="False" Tag="Route" Id="TagControllVisibility" />
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: Výškové vedení trasy -->
-	<RibbonPanel Id="RP_RBN_0005" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
-			 IsEnabled="True" IsContextualTabThemeIgnored="False"
-			 UID="ID_WSR_0005_07CS5">
-		<RibbonPanelSource Id="RP_RBN_0005_07CS5">
+	<!-- Panel: Required tags: [Profile] -->
+	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True"
+				 IsVisible="False" Tag="Profile" Id="PanelTagControllVisibility">
+		<RibbonPanelSource>
 			<Title><![CDATA[Výškové vedení]]></Title>
+			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" />
+			<RibbonButton Text="Tags:[Profile]" Size="Large" ShowText="True" Orientation="Vertical"
+						  IsVisible="False" Tag="Profile" Id="TagControllVisibility" />
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: Koridor & přičné úspořádání -->
-	<RibbonPanel Id="RP_RBN_0006" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
-			 IsEnabled="True" IsContextualTabThemeIgnored="False"
-			 UID="ID_WSR_0006_6614C">
-		<RibbonPanelSource Id="RP_RBN_0006_6614C">
+	<!-- Panel: Required tags: [Corridor] -->
+	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True"
+				 IsVisible="False" Tag="Corridor" Id="PanelTagControllVisibility">
+		<RibbonPanelSource>
 			<Title><![CDATA[Koridor & příčné uspořádání]]></Title>
+			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" />
+			<RibbonButton Text="Tags:[Corridor]" Size="Large" ShowText="True" Orientation="Vertical"
+						  IsVisible="False" Tag="Corridor" Id="TagControllVisibility" />
+			<RibbonButton Text="Tags:[Corridor, CrossSection]" Size="Large" ShowText="True" Orientation="Vertical"
+						  IsVisible="False" Tag="Corridor, CrossSection" Id="TagControllVisibility" />
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: Vytyčení -->
-	<RibbonPanel Id="RP_RBN_0007" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
-			 IsEnabled="True" IsContextualTabThemeIgnored="False"
-			 UID="ID_WSR_0007_67FFV">
-		<RibbonPanelSource Id="RP_RBN_0007_67FFV">
+	<!-- Panel: Required tags: [Survey] -->
+	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True"
+				 IsVisible="False" Tag="Survey" Id="PanelTagControllVisibility">
+		<RibbonPanelSource>
 			<Title><![CDATA[Vytyčení]]></Title>
-			<RibbonSplitButton AllowInStatusBar="True" AllowInToolBar="True" AllowOrientation="True" SynchronizeOption="Image"
-							Orientation="Vertical" ResizeStyle="HideText" ShowImage="True" ShowText="True" 
-							Size="Large" Image="rp_img_default_16" LargeImage="rp_img_default_32" UID="AcRibbonSplitButton">
-				<Text><![CDATA[Vytyčení]]></Text>
-				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Vozovky" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
-				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Koridoru" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
-				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Vozovky a koridoru" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
-				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Prostorové osy" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
-				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Trvalého záboru" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
-			</RibbonSplitButton>
-			<RibbonSeparator Id="AcRibbonSeparator" SeparatorStyle="Spacer" UID="AcRibbonSeparator" />
-			<RibbonRowPanel IsTopJustified="True">
-				<RibbonButton Text="Body vytyčení" Image="rp_img_default_16" />
-				<RibbonRowBreak />
-				<RibbonButton Text="Body vytyčení z Excelu" Image="rp_excel_16" />
-				<RibbonRowBreak />
-				<RibbonButton Text="Tabulka vytyčení" Image="rp_img_default_16" />
-			</RibbonRowPanel>
+			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" />
+			<RibbonButton Text="Tags:[Corridor]" Size="Large" ShowText="True" Orientation="Vertical"
+						  IsVisible="False" Tag="Corridor" Id="TagControllVisibility" />
+			<RibbonButton Text="Tags:[Survey]" Size="Large" ShowText="True" Orientation="Vertical"
+						  IsVisible="False" Tag="Survey" Id="TagControllVisibility" />
 		</RibbonPanelSource>
 	</RibbonPanel>
-	<!-- Panel: Nastavení -->
-	<RibbonPanel Id="RP_RBN_0008" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
-			 IsEnabled="True" IsContextualTabThemeIgnored="False"
-			 UID="ID_WSR_0008_11IIH">
-		<RibbonPanelSource Id="RP_RBN_0008_11IIH">
-			<Title><![CDATA[Nastavení]]></Title>
+	<!-- Panel: IFC -->
+	<!-- Panel: Required tags: [IFC] -->
+	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True"
+				 IsVisible="False" Tag="IFC" Id="PanelTagControllVisibility">
+		<RibbonPanelSource>
+			<Title><![CDATA[IFC]]></Title>
+			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" />
+			<RibbonButton Text="Tags:[Corridor]" Size="Large" ShowText="True" Orientation="Vertical"
+						  IsVisible="False" Tag="Corridor" Id="TagControllVisibility" />
+			<RibbonButton Text="Tags:[IFC]" Size="Large" ShowText="True" Orientation="Vertical"
+						  IsVisible="False" Tag="IFC" Id="TagControllVisibility" />
+		</RibbonPanelSource>
+	</RibbonPanel>
+	<!-- Panel: Kreslení spojených řezů -->
+	<!-- Panel: Required tags: [CombinedCrossSections] -->
+	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True"
+				 IsVisible="False" Tag="CombinedCrossSections" Id="PanelTagControllVisibility">
+		<RibbonPanelSource>
+			<Title><![CDATA[Kreslení spojených řezů]]></Title>
+			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" />
+			<RibbonButton Text="Tags:[Corridor]" Size="Large" ShowText="True" Orientation="Vertical"
+						  IsVisible="False" Tag="Corridor" Id="TagControllVisibility" />
+			<RibbonButton Text="Tags:[CombinedCrossSections]" Size="Large" ShowText="True" Orientation="Vertical"
+						  IsVisible="False" Tag="CombinedCrossSections" Id="TagControllVisibility" />
 		</RibbonPanelSource>
 	</RibbonPanel>
 </RibbonTab>

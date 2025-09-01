@@ -8,13 +8,13 @@ using Autodesk.Windows;
 #endif
 #endregion
 
-using Shared.Controllers.Models.RibbonXml.Items;
+using Shared.Controllers.Models.RibbonXml;
 
 namespace Shared.Controllers.Controls.Ribbon
 {
-    internal class TagControllVisibility : BaseRibbonControl<RibbonItem>
+    internal class PanelTagControllVisibility : BaseRibbonControl<RibbonPanel>
     {
-        public TagControllVisibility(RibbonItem target, RibbonItemDef source) : base(target, source)
+        public PanelTagControllVisibility(RibbonPanel target, RibbonPanelDef source) : base(target, source)
         {
             if (!string.IsNullOrEmpty(source.Tag?.ToString()))
             {
@@ -23,8 +23,8 @@ namespace Shared.Controllers.Controls.Ribbon
                 {
                     try
                     {
+                        Enum.TryParse<ProjectController.FClass>(source.Tag?.ToString(), out var flags);
                         target.IsVisible = selected?.Flag != null
-                            && Enum.TryParse<ProjectController.FClass>(source.Tag?.ToString(), out var flags)
                             && selected.Flag.HasFlag(flags);
                     }
                     catch

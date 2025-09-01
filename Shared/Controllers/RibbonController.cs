@@ -6,6 +6,7 @@
 
 using System; // Keep for .NET 4.6
 using System.Collections.Generic; // Keep for .NET 4.6
+using System.Diagnostics;
 using System.Linq; // Keep for .NET 4.6
 using System.Reflection;
 
@@ -93,13 +94,15 @@ namespace Shared.Controllers
                     panelDef.Cookie = panelDef.Cookie.Replace("%Parent", cookie);
                     cookie += $";{panelDef.Id}";
                     var panelRef = panelDef.Transform(new RibbonPanel());
+                    panelRef.UID = panelDef.Id; // For some reason panel can't have Id
+                    RegisterControl(panelDef, panelRef);
                     if (panelDef.SourceDef == null)
                         continue;
-                    panelRef.UID = panelDef.Id; // For some reason panel can't have Id
                     tab.Panels.Add(panelRef);
                     panelDef.SourceDef.Cookie = panelDef.SourceDef.Cookie.Replace("%Parent", cookie);
                     cookie += $";{panelDef.SourceDef.Id}";
                     panelRef.Source = panelDef.SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[panelDef.SourceDef.GetType()]());
+                    RegisterControl(panelDef.SourceDef, panelRef.Source);
                     foreach (var itemDef in panelDef.SourceDef.ItemsDef)
                     {
                         itemDef.Cookie = itemDef.Cookie.Replace("%Parent", cookie);
@@ -118,6 +121,8 @@ namespace Shared.Controllers
             if (!string.IsNullOrEmpty(tabDescription))
                 tab.Description = tabDescription;
             tab.UID = tab.Id;
+            if (tabDef != null)
+                RegisterControl(tabDef, tab);
             return tab;
         }
 
@@ -358,27 +363,33 @@ namespace Shared.Controllers
                         break;
                         { } // Little C# hack for better memory management
                 }
-                if (!string.IsNullOrEmpty(itemDef.UUID) && !_registeredControls.ContainsKey(itemDef.UUID))
-                {
-                    Type wrapperType = Assembly.GetExecutingAssembly()
-                        .GetType($"{RibbonController.ControlsNamespace}.{itemDef.Id}", false, true);
-                    if (wrapperType != null)
-                    {
-                        try
-                        {
-                            // We'll try to invoke our Id, and our target so we can individualy control each control
-                            var invoke = wrapperType.GetConstructors()
-                                .FirstOrDefault()?.Invoke(new object[] { itemRef, itemDef });
-                            if (invoke != null)
-                                _registeredControls.Add(itemDef.UUID, invoke);
-                        }
-                        catch (System.Exception)
-                        { }
-                    }
-                }
+                RegisterControl(itemDef, itemRef);
                 return itemRef;
             }
             return null;
+        }
+
+        [RPPrivateUseOnly]
+        private static void RegisterControl(BaseRibbonXml itemDef, object itemRef)
+        {
+            if (!string.IsNullOrEmpty(itemDef.UUID) && !_registeredControls.ContainsKey(itemDef.UUID))
+            {
+                Type wrapperType = Assembly.GetExecutingAssembly()
+                    .GetType($"{RibbonController.ControlsNamespace}.{itemDef.Id}", false, true);
+                if (wrapperType != null)
+                {
+                    try
+                    {
+                        // We'll try to invoke our Id, and our target so we can individualy control each control
+                        var invoke = wrapperType.GetConstructors()
+                            .FirstOrDefault()?.Invoke(new object[] { itemRef, itemDef });
+                        if (invoke != null)
+                            _registeredControls.Add(itemDef.UUID, invoke);
+                    }
+                    catch (System.Exception)
+                    { }
+                }
+            }
         }
 
         [RPPrivateUseOnly]

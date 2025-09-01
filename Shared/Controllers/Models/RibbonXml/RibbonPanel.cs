@@ -43,6 +43,11 @@ namespace Shared.Controllers.Models.RibbonXml
             ? SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[SourceDef.GetType()]()) : null;
 
         [RPInternalUseOnly]
+        [XmlAttribute("Tag")]
+        [DefaultValue(null)]
+        public string Tag { get; set; } = null;
+
+        [RPInternalUseOnly]
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Content)]
         [XmlElement("RibbonPanelSource", typeof(RibbonPanelSourceDef))]
         [XmlElement("RibbonPanelSpacer", typeof(RibbonPanelSourceDef.RibbonPanelSpacerDef))]
