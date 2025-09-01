@@ -1,13 +1,11 @@
 ﻿using WPF = System.Windows.Controls;
 
-using System.Diagnostics;
 using System.Windows.Input;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
 using Shared.Windows.Models;
-using Shared.Controllers;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -29,7 +27,7 @@ namespace Shared.Windows
             InitializeComponent();
             if (ViewModel == null)
                 DataContext = new ProjectorViewModel();
-            this.PreviewMouseDown += Projector_PreviewMouseDown;
+            PreviewMouseDown += Projector_PreviewMouseDown;
         }
 
         public void RefreshItems() =>

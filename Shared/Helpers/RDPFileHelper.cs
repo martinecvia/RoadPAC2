@@ -49,5 +49,15 @@ namespace Shared.Helpers
                 return null;
             return await Task.Run(() => CurrentRoute);
         }
+
+        public bool CreateConfigRDP(string _workingDirectory, string _route)
+        {
+            if (string.IsNullOrEmpty(_workingDirectory) || string.IsNullOrEmpty(_route))
+                return false;
+            if (!_workingDirectory.EndsWith("\\"))
+                _workingDirectory = string.Concat(_workingDirectory, "\\");
+            new RDPInfoClass().RoadPacUtilita("MAKECFG", "", _workingDirectory, _route);
+            return true;
+        }
     }
 }

@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Reflection;
-using System.Text;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 using Shared.Controllers;
@@ -49,7 +44,7 @@ namespace Shared.Windows.Models
         }
 
         // ItemCount
-        public int ItemCount => IsGroupNode ? this.Count : 0;
+        public int ItemCount => IsGroupNode ? Count : 0;
         private string _itemCountColor;
         public string ItemCountColor
         {

@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
-using System.Text;
-
-using System.Windows;
 using System.Windows.Data;
 
 using Shared.Controllers;
@@ -67,34 +63,36 @@ namespace Shared.Windows
             var tree = new ObservableCollection<TreeItem>();
             foreach (var route in routes)
             {
+                // If for whatever reason our route will be null
+                if (route == null) continue;
                 var routeNode = new TreeItem
                 {
                     Label = Path.GetFileNameWithoutExtension(route.File).ToUpperInvariant(),
                     IsRouteNode = true,
                     Image = "./Assets/route.png",
-                    File = route
+                    File = route,
                 };
-                routeNode.Add(new TreeItem { Label = $"Směrové řešení:", Value= route.File, File = route });
+                routeNode.Add(new TreeItem { Label = $"Směrové řešení:", Value= route.File, File = route, Image = "./Assets/shb.ico" });
                 var related = RPApp.Projector?.GetRoute(lsPath, route.File) ?? new HashSet<ProjectController.ProjectFile>();
                 // Not a great implementaton but it works at least a little
                 void MarkOutdated(TreeItem node, ProjectController.ProjectFile parent)
                 {
                     // Falling shit system,
                     // from the oldest to the newest record, and if anything is older, then it's outdated
-                    if (node.File?.UpdatedAt != null && parent != null)
+                    if (node.File?.UpdatedAt != null && parent != null && !string.IsNullOrEmpty(parent.File))
                         node.DisplayWarning = node.File.UpdatedAt < parent.UpdatedAt - TimeSpan.FromSeconds(10);
-                    else if (parent != null && node.File == null)
+                    else if ((parent != null || parent?.UpdatedAt != null) && node.File == null)
                         node.DisplayWarning = true; // If file that should be there before is not there
 
-                    // We don't want to display Route or empty filed nodes
-                    if (node.File == null || node.IsRouteNode)
+                    // We don't want to display warning for Route or empty filed nodes
+                    if (node.File == null || node.IsRouteNode || node.IsGroupNode)
                         node.DisplayWarning = false;
-                    if (node.DisplayWarning == true)
+                    if (node.DisplayWarning)
                         node.WarningToolTip = $"Soubor je zastaralý, vůči: {parent.File}";
                     foreach (var child in node)
                     {
                         MarkOutdated(child, parent);
-                        if (child.DisplayWarning == true)
+                        if (child.DisplayWarning)
                             child.WarningToolTip = $"Soubor je zastaralý, vůči: {parent.File}";
                         parent = child.File ?? parent;
                     }
@@ -106,14 +104,15 @@ namespace Shared.Windows
                     Label = profile != null
                         ? $"Niveleta:"
                         : "Niveleta",
-                    File = profile,
+                    // Default put in place just so we can know from ribbon that we have selected this node
+                    File = profile ?? new ProjectController.ProjectFile() { Flag = ProjectController.FClass.Profile },
                     Value = profile?.File
                 });
 
                 AddCorridor(routeNode, related);
                 AddGroup(routeNode, related, ProjectController.FClass.Survey, "Vytyčení", "./Assets/survey.png", "./Assets/list-item.png");
                 AddGroup(routeNode, related, ProjectController.FClass.IFC, "Podklady pro IFC", "./Assets/ifc.png", "./Assets/list-item.png");
-                AddGroup(routeNode, related, ProjectController.FClass.CombinedCrossSections, "Kreslení příčných řezů", null, "./Assets/list-item.png");
+                AddGroup(routeNode, related, ProjectController.FClass.CombinedCrossSections, "Kreslení příčných řezů", "./Assets/shb.ico", "./Assets/list-item.png");
                 MarkOutdated(routeNode, route);
                 tree.Add(routeNode);
             }
@@ -121,14 +120,11 @@ namespace Shared.Windows
         }
 
         [RPPrivateUseOnly]
-        private IEnumerable<ProjectController.ProjectFile> GetByFlag(HashSet<ProjectController.ProjectFile> related, ProjectController.FClass flag) 
-            => related.Where(f => f.Flag == flag);
-
-        [RPPrivateUseOnly]
         private void AddGroup(TreeItem parent, IEnumerable<ProjectController.ProjectFile> related, ProjectController.FClass flag, string label,
             string groupNodeImage = null, string itemNodeImage = null)
         {
-            var groupNode = new TreeItem { Label = label, IsGroupNode = true, Image = groupNodeImage };
+            var groupNode = new TreeItem { Label = label, IsGroupNode = true, Image = groupNodeImage, 
+                File = new ProjectController.ProjectFile() { Flag = flag } };
             var matches = related.Where(r => r.Flag.HasFlag(flag)).ToList();
             if (matches.Any())
             {
@@ -143,19 +139,21 @@ namespace Shared.Windows
         private void AddCorridor(TreeItem parent, IEnumerable<ProjectController.ProjectFile> related)
         {
             var corridor = related.FirstOrDefault(r => r.Flag == ProjectController.FClass.Corridor);
-            var node = new TreeItem { Label = "Koridor", IsGroupNode = true, Image = "./Assets/road.png" };
+            var node = new TreeItem { Label = "Koridor", IsGroupNode = true, Image = "./Assets/road.png", 
+                File = new ProjectController.ProjectFile() { Flag = ProjectController.FClass.Corridor } };
             if (corridor != null)
             {
                 node.Add(new TreeItem { Label = $"Pokrytí:", Value = corridor.File, Image = "./Assets/list-item.png", File = corridor });
                 var crossSection = related.FirstOrDefault(r => r.Flag == (ProjectController.FClass.Corridor | ProjectController.FClass.CrossSection));
                 node.Add(new TreeItem
                 {
-                    Label = crossSection != null
+                    Label = crossSection != null 
                         ? $"Příčné řezy:"
                         : "Příčné řezy",
-                    File = crossSection,
+                    File = crossSection ?? new ProjectController.ProjectFile() // Default put in place just so we can know from ribbon that we have selected this node
+                    { Flag = ProjectController.FClass.Corridor | ProjectController.FClass.CrossSection },
                     Value = crossSection?.File,
-                    Image = "./Assets/list-item.png"
+                    Image = "./Assets/v91.ico"
                 });
             }
             parent.Add(node);

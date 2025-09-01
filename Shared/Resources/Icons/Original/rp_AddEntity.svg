@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32px" height="32px" viewBox="0 0 32 32" version="1.1">
+<defs>
+<filter id="alpha" filterUnits="objectBoundingBox" x="0%" y="0%" width="100%" height="100%">
+  <feColorMatrix type="matrix" in="SourceGraphic" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+</filter>
+<mask id="mask0">
+  <g filter="url(#alpha)">
+<rect x="0" y="0" width="32" height="32" style="fill:rgb(0%,0%,0%);fill-opacity:0.1;stroke:none;"/>
+  </g>
+</mask>
+<clipPath id="clip1">
+  <rect x="0" y="0" width="32" height="32"/>
+</clipPath>
+<g id="surface7" clip-path="url(#clip1)">
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(60.000002%,43.529412%,0%);fill-opacity:1;" d="M 30 16 L 26 20 L 23 17 L 27 13 Z M 30 26 L 26 30 L 23 27 L 27 23 Z M 16 8 L 16 10 L 12 10 L 10 12 L 10 16 L 8 16 L 11 19 L 19 11 Z M 16 8 "/>
+</g>
+</defs>
+<g id="surface1">
+<use xlink:href="#surface7" mask="url(#mask0)"/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(60.000002%,43.529412%,0%);fill-opacity:1;" d="M 22.292969 17.707031 L 25.292969 20.707031 L 26.707031 20.707031 L 30.707031 16.707031 L 30.707031 15.292969 L 27.707031 12.292969 L 26.292969 12.292969 L 24.585938 14 L 17.414062 14 L 19.707031 11.707031 L 19.707031 10.292969 L 16 6.585938 L 16 9.414062 L 17.585938 11 L 11 17.585938 L 9.414062 16 L 6.585938 16 L 10.292969 19.707031 L 11.707031 19.707031 L 15.414062 16 L 18 16 L 18 25 L 19 26 L 22.585938 26 L 22.292969 26.292969 L 22.292969 27.707031 L 25.292969 30.707031 L 26.707031 30.707031 L 30.707031 26.707031 L 30.707031 25.292969 L 27.707031 22.292969 L 26.292969 22.292969 L 24.585938 24 L 20 24 L 20 16 L 22.585938 16 L 22.292969 16.292969 Z M 27 24.414062 L 28.585938 26 L 26 28.585938 L 24.414062 27 Z M 27 14.414062 L 28.585938 16 L 26 18.585938 L 24.414062 17 Z M 13.414062 10 L 10 13.414062 L 10 10.585938 L 10.585938 10 Z M 13.414062 10 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(12.156863%,50.196081%,12.156863%);fill-opacity:1;" d="M 14 8 L 8 8 L 8 14 L 6 14 L 6 8 L 0 8 L 0 6 L 6 6 L 6 0 L 8 0 L 8 6 L 14 6 Z M 14 8 "/>
+</g>
+</svg>

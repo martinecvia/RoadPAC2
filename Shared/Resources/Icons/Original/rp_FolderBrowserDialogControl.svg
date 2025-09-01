@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32px" height="32px" viewBox="0 0 32 32" version="1.1">
+<defs>
+<filter id="alpha" filterUnits="objectBoundingBox" x="0%" y="0%" width="100%" height="100%">
+  <feColorMatrix type="matrix" in="SourceGraphic" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+</filter>
+<mask id="mask0">
+  <g filter="url(#alpha)">
+<rect x="0" y="0" width="32" height="32" style="fill:rgb(0%,0%,0%);fill-opacity:0.1;stroke:none;"/>
+  </g>
+</mask>
+<clipPath id="clip1">
+  <rect x="0" y="0" width="32" height="32"/>
+</clipPath>
+<g id="surface7" clip-path="url(#clip1)">
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(12.941177%,12.941177%,12.941177%);fill-opacity:1;" d="M 29 5 L 29 23 L 24 23 L 24 14.171875 L 21.828125 12 L 14.242188 12 L 12.84375 10.601562 L 11.398438 10 L 7 10 L 7 5 Z M 29 5 "/>
+</g>
+<mask id="mask1">
+  <g filter="url(#alpha)">
+<rect x="0" y="0" width="32" height="32" style="fill:rgb(0%,0%,0%);fill-opacity:0.1;stroke:none;"/>
+  </g>
+</mask>
+<clipPath id="clip2">
+  <rect x="0" y="0" width="32" height="32"/>
+</clipPath>
+<g id="surface10" clip-path="url(#clip2)">
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(60.000002%,43.529412%,0%);fill-opacity:1;" d="M 21 15 L 21 27 L 3 27 L 3 13 L 11 13 L 13 15 Z M 21 15 "/>
+</g>
+</defs>
+<g id="surface1">
+<use xlink:href="#surface7" mask="url(#mask0)"/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(12.941177%,12.941177%,12.941177%);fill-opacity:1;" d="M 29 4 L 7 4 L 6 5 L 6 10 L 28 10 L 28 22 L 24 22 L 24 24 L 29 24 L 30 23 L 30 5 Z M 28 8 L 8 8 L 8 6 L 28 6 Z M 28 8 "/>
+<use xlink:href="#surface10" mask="url(#mask1)"/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(60.000002%,43.529412%,0%);fill-opacity:1;" d="M 21 14 L 13.414062 14 L 11.707031 12.292969 L 11 12 L 3 12 L 2 13 L 2 27 L 3 28 L 21 28 L 22 27 L 22 15 Z M 10.585938 14 L 11.5625 14.976562 L 10.535156 16 L 4 16 L 4 14 Z M 20 26 L 4 26 L 4 18 L 10.949219 18 L 11.65625 17.707031 L 13.363281 16 L 20 16 Z M 20 26 "/>
+</g>
+</svg>

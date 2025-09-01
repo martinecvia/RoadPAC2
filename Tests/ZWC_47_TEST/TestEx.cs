@@ -21,6 +21,15 @@ namespace ZWC_47_TEST
             RPApp app = new RPApp(Application.DocumentManager);
             if (RPApp.Projector.CurrentWorkingDirectory == null)
                 RPApp.Projector.CurrentWorkingDirectory = @"C:\TEMP";
+            RPApp.Projector.CurrentWorkingDirectoryChanged += (o) => Debug.WriteLine($"CurrentWorkingDirectoryChanged: {o}");
+            RPApp.Projector.CurrentRouteChanged += (o) => Debug.WriteLine($"CurrentRouteChanged: {o}");
+            RPApp.Projector.ProjectChanged += (o) => Debug.WriteLine($"ProjectChanged: {o}");
+            RPApp.Projector.ProjectFileSelected += (o) => Debug.WriteLine($"ProjectFileSelected: {o}");
+
+            RPApp.FileWatcher.FileChanged += (s, o) => Debug.WriteLine($"FileChanged: {s}{o}");
+            RPApp.FileWatcher.FileRenamed += (s, o, l) => Debug.WriteLine($"FileRenamed: {s}{o}->{l}");
+            RPApp.FileWatcher.FileCreated += (s, o) => Debug.WriteLine($"FileCreated: {s}{o}");
+            RPApp.FileWatcher.FileDeleted += (s, o) => Debug.WriteLine($"FileDeleted: {s}{o}");
         }
 
         [CommandMethod("HIT_BREAKPOINT")]

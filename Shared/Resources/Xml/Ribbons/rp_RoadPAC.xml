@@ -1,78 +1,47 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <RibbonTab xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-		   Id="RP_ACAD.ID_TabRoadPAC" IsContextualTab="False" IsVisible="True" 
-		   KeyTip="RP" Name="RoadPAC2" Title="RoadPAC2" IsEnabled="True" IsPanelEnabled="True" AllowTearOffContextualPanels="False"
-		   UID="ID_WSR_001_62AEA">
-	<!-- Panel: Run RoadPAC -->
-	<RibbonPanel Id="RP_RBN_0001" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
-				 IsEnabled="True" IsContextualTabThemeIgnored="False">
-		<RibbonPanelSource Id="RP_RBN_0001_2303A" Title="RoadPAC">
-			<RibbonButton Text="Spusti&#13;RoadPAC" Name="XX:RoadpacNET7.exe" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True"
-						  Image="rp_img_default_16" LargeImage="rp_img_default_32" CommandHandler="XX:RoadpacNET7.exe" />
-			<RibbonButton Text="Projektor" Name="RP_PROSPECTOR" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True"
-							Image="rp_project_explorer_16" LargeImage="rp_project_explorer_32" CommandHandler="RP_PROSPECTOR" />
-		</RibbonPanelSource>
-	</RibbonPanel>
-	<!-- Panel: ProjectManager -->
-	<RibbonPanel Id="RP_RBN_0002" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
-				 IsEnabled="True" IsContextualTabThemeIgnored="False">
-		<RibbonPanelSource Id="RP_RBN_0002_54DGD">
-			<Title><![CDATA[Projekt manažér]]></Title>
-			<DialogLauncher Orientation="Horizontal" IsCheckable="False" ShowImage="True" IsEnabled="True" Size="Standard" GroupLocation="Middle"
-							AllowInToolBar="True" AllowInStatusBar="True" ResizeStyle="HideText"
-							Text="Otevři složku aktuálního projektu" ShowText="False" CommandHandler="RP_COMMAND(OPEN_ACTIVE_DIRECTORY)" />
-			<RibbonButton Text="Project&#13;Explorer" Name="RP_RUN_PROJECT_EXPLORER" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True" 
-						  Image="rp_img_default_16" LargeImage="rp_img_default_32" CommandHandler="RP_RUN_PROJECT_EXPLORER" />
-			<RibbonSeparator Id="AcRibbonSeparator" SeparatorStyle="Spacer" />
-			<RibbonRowPanel IsTopJustified="True">
-				<RibbonCombo Id="RibbonCombo_SelectProject" />
-				<RibbonSeparator Id="AcRibbonSeparator" SeparatorStyle="Spacer" AllowInToolBar="False"/>
-				<RibbonRowBreak />
-				<RibbonCombo Id="RibbonCombo_SelectAxis" />
-				<RibbonSeparator Id="AcRibbonSeparator" SeparatorStyle="Spacer" AllowInToolBar="False"/>
-				<RibbonButton Text="Přidat trasu" Image="rp_img_default_16" Id="RibbonButton_AddNewAxis" />
-				<RibbonRowBreak />
-				<RibbonButton Text="Nastav složku pro projekty" Id="RibbonButton_SetupProjectDir" />
-				<RibbonButton Text="Info o projektu" Id="RibbonButton_InfoProject" />
-				<RibbonButton Text="Kopírovat trasu" Id="RibbonButton_CopyAxis" />
-				<RibbonButton Text="Nápověda" Id="RibbonButton_ProjectManager_Help" />
-			</RibbonRowPanel>
-			<RibbonPanelBreak />
+		   IsVisible="True" KeyTip="RP" 
+		   Name="RoadPAC2" Title="RoadPAC2" IsEnabled="True" IsPanelEnabled="True" AllowTearOffContextualPanels="False">
+	<!-- Panel: RoadPAC -->
+	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="True" IsEnabled="True">
+		<RibbonPanelSource Title="RoadPAC">
+			<!-- Sole purpose of this dialog launcher is to let user more options from where he can load project -->
+			<DialogLauncher Text="Načti složku projektu" CommandHandler="RP_PROSPECTOR_NEW" />
+			<RibbonButton Text="Spusti&#13;RoadPAC" Name="Spusti&#13;RoadPAC" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True"
+						  Image="rp_logo" LargeImage="rp_logo_orange"
+						  CommandHandler="XX:RoadpacNET7.exe" />
+			<!-- Projector -->
+			<RibbonSplitButton Text="Projektor" SynchronizeOption="Image" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True">
+				<RibbonToggleButton Text="Prohlížeč projektu" ShowText="True" Image="rp_AbstractClass" LargeImage="rp_AbstractClass" CommandHandler="RP_PROSPECTOR" />
+				<RibbonToggleButton Text="Načti (.solution)" ShowText="True" Image="rp_AddEntity" LargeImage="rp_AddEntity" CommandHandler="RP_PROSPECTOR_SOLUTION" />
+				<RibbonToggleButton Text="Načti složku projektu" ShowText="True" Image="rp_FolderBrowserDialogControl" LargeImage="rp_FolderBrowserDialogControl" CommandHandler="RP_PROSPECTOR_NEW" />
+			</RibbonSplitButton>
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: DTM -->
-	<RibbonPanel Id="RP_RBN_0003" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
-				 IsEnabled="True" IsContextualTabThemeIgnored="False"
-				 UID="ID_WSR_0003_87DJJ">
-		<RibbonPanelSource Id="RP_RBN_0003_87DJJ">
+	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False" IsEnabled="True">
+		<RibbonPanelSource>
 			<Title><![CDATA[Terén]]></Title>
 			<DialogLauncher Orientation="Horizontal" IsCheckable="False" ShowImage="True" IsEnabled="True" Size="Standard" GroupLocation="Middle"
 							AllowInToolBar="True" AllowInStatusBar="True" ResizeStyle="HideText"
 							Text="Otevři složku s terénními modely" ShowText="False" CommandHandler="RP_COMMAND(OPEN_ACTIVE_DTM_DIRECTORY)" />
 			<RibbonSplitButton Text="Terénní&#13;práce" Name="RP_RUN_DTM" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True"
 							   Image="rp_img_default_16" LargeImage="rp_img_default_32" CommandHandler="RP_RUN(DTM)" SynchronizeOption="Image">
-				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Spusti DTM" ShowText="True" Image="rp_DTM" LargeImage="rp_DTM" />
-				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text=">Příčné řezy" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
-				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Podélné řezy" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
-				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Ornice" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
-				<RibbonToggleButton Id="RibbonToggleButton_KeepSplitButtonName" Text="Geologie" ShowText="True" Image="rp_img_default_16" LargeImage="rp_img_default_32" />
+				<RibbonToggleButton Text="Spusti DTM" ShowText="True" Image="rp_DTM_32" LargeImage="rp_DTM_32" />
+				<RibbonToggleButton Text="Sejmi řez: Podélný" ShowText="True" Image="rp_CaptureFrame" LargeImage="rp_CaptureFrame" />
+				<RibbonToggleButton Text="Sejmi řez: Příčný" ShowText="True" Image="rp_CaptureFrame" LargeImage="rp_CaptureFrame" />
+				<RibbonToggleButton Text="Ornice" ShowText="True" Image="rp_Ornice_32" LargeImage="rp_Ornice_32" />
+				<RibbonToggleButton Text="Geologie" ShowText="True" Image="rp_Geologie_32" LargeImage="rp_Geologie_32" />
 			</RibbonSplitButton>
-			<RibbonSeparator Id="AcRibbonSeparator" SeparatorStyle="Spacer" UID="AcRibbonSeparator" />
-			<RibbonRowPanel IsTopJustified="True">
-				<RibbonButton Image="rp_img_default_16" />
-				<RibbonRowBreak />
-				<RibbonButton Image="rp_img_default_16" />
-				<RibbonRowBreak />
-				<RibbonButton Image="rp_img_default_16" />
-			</RibbonRowPanel>
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: Směrové vedení trasy -->
-	<RibbonPanel Id="RP_RBN_0004" FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False"
-				 IsEnabled="True" IsContextualTabThemeIgnored="False"
-				 UID="ID_WSR_0004_14CHC">
-		<RibbonPanelSource Id="RP_RBN_0004_14CHC">
+	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False">
+		<RibbonPanelSource>
 			<Title><![CDATA[Směrové vedení]]></Title>
+			<RibbonButton Text="Tags:[]" Size="Large" />
+			<RibbonButton Text="Tags:[]" Size="Large" 
+						  IsVisible="False" Tags="Route" Id="TagControllVisibility" />
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: Výškové vedení trasy -->

@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Assert.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\Ribbon\MojeOvladaciId.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\Ribbon\TagControllVisibility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\Project\BaseProjectXml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\Project\CombinedCrossSectionsFile.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\Project\IFCFile.cs" />
@@ -18,7 +18,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\ProjectController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\ConfigController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\BaseRibbonControl.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\Ribbon\RibbonButton_Close_ContextualTab.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\FileWatcherController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\DocumentEditorExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TaskExtensions.cs" />
@@ -64,16 +63,6 @@
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_default_16.ico" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_default_32.ico" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_btn_folder_16.ico" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_btn_folder_32.ico" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_btn_manual_16.ico" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_btn_manual_32.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_roadpac_32.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_roadpac_16.ico" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
@@ -85,6 +74,24 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\CollapseAll.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\CollapseUpGroup.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\dt4.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\shb.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\v91.ico">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\Zoom.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
     <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\arrow-right.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -97,7 +104,6 @@
     <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\ifc.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\Civil3D\rp_project_explorer_32.bmp" />
     <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\road.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
@@ -108,20 +114,34 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_Test.xml" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\RoadPAC\rp_DTM.bmp" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_excel_16.ico" />
-    <Content Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_icon.jpg" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_Contextual_SelectView.xml">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\Civil3D\rp_project_explorer_16.bmp" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_open_sidebar_32.ico" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_open_sidebar_16.ico" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)Windows\Projector.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_AbstractClass.png" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_logo_blue.png" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_logo_orange.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_AddEntity.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_FolderBrowserDialogControl.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_CaptureFrame.png" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_DTM_32.png" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_Ornice_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_Geologie_32.png" />
   </ItemGroup>
 </Project>

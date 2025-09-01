@@ -9,20 +9,20 @@
              
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=shared:ProjectorViewModel, IsDesignTimeCreatable=True}"
-        Height="800" MaxHeight="800" Width="350">
+        Height="800" MaxHeight="800" Width="350" Background="#FFCCD5F0">
     <UserControl.Resources>
         <models:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
         <models:StringToSolidColorBrushConverter x:Key="StringToSolidColorBrushConverter" />
     </UserControl.Resources>
     <DockPanel>
-        <Grid DockPanel.Dock="Top" Height="30" Margin="0,0,0,2">
+        <Grid DockPanel.Dock="Top" Height="24" Background="#FFCCD5F0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <!-- Search bar -->
-            <TextBox Grid.Column="0" Height="30" VerticalAlignment="Center" Margin="0,0,1,0"
+            <TextBox Grid.Column="0" Height="24" VerticalAlignment="Center"
                  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" 
                  ToolTip="Search in routes ...">
                 <TextBox.Style>
@@ -38,19 +38,19 @@
                 </TextBox.Style>
             </TextBox>
             <!-- Refresh Button -->
-            <Button Grid.Column="1" Width="30" Margin="0,0,1,0"
+            <Button Grid.Column="1" Width="22" Margin="1,0,1,0"
                     ToolTip="Clear search">
                 <Image Source="./Assets/arrow-right.png" Width="16" Height="16"/>
             </Button>
 
             <!-- Settings Button -->
-            <Button Grid.Column="2" Width="30"
+            <Button Grid.Column="2" Width="22"
                     ToolTip="Collaps routes">
-                <Image Source="./Assets/arrow-right.png" Width="16" Height="16"/>
+                <Image Source="./Assets/CollapseAll.png" Width="16" Height="16"/>
             </Button>
         </Grid>
         <!-- TreeView -->
-        <TreeView x:Name="ProjectTree" 
+        <TreeView x:Name="ProjectTree" Background="#F7F9FE"
                   ItemsSource="{Binding FilteredItems}" ScrollViewer.VerticalScrollBarVisibility="Auto">
             <TreeView.Resources>
                 <ContextMenu x:Key="ItemContextMenu">
@@ -112,7 +112,8 @@
                            Source="{Binding WarningImageSource}"
                            Visibility="{Binding DisplayWarning, Converter={StaticResource BoolToVisibilityConverter}}">
                             <Image.ToolTip>
-                                <TextBlock Text="{Binding WarningToolTip}" TextWrapping="Wrap"/>
+                                <ToolTip Content="{Binding Path=WarningToolTip}" ToolTipService.InitialShowDelay="0" 
+                                         ToolTipService.ShowDuration="60000" ContentStringFormat="Chyba: {0}" />
                             </Image.ToolTip>
                         </Image>
                     </DockPanel>

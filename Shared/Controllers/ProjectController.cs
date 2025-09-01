@@ -127,9 +127,6 @@ namespace Shared.Controllers
         [RPInternalUseOnly]
         public class ProjectFile
         {
-            // Root extends to RootNode - main RouteId
-            public ProjectFile Root { get; internal set; } = null;
-
             public string File { get; internal set; }
             public string Path { get; internal set; }
             public FClass Flag { get; internal set; } = FClass.None;
@@ -160,8 +157,6 @@ namespace Shared.Controllers
             // Types
             Listing = 1 << 7,
             Xml = 1 << 8,
-            // Should be expanded
-            Multi = 1 << 9,
         }
 
         private Timer _roadPacTimer;
@@ -256,6 +251,7 @@ namespace Shared.Controllers
             { RPApp.IsLicensed = false; }
             finally
             {
+                Debug.WriteLine($"RoadPAC licensed = {RPApp.IsLicensed}!");
                 if (RPApp.IsLicensed)
                     _roadPacOperationActive = false; // We want to halt this task from updating,
                                                      // since user don't have valid RoadPAC license
@@ -381,18 +377,19 @@ namespace Shared.Controllers
             { "L43", () => new ProjectFile() { Flag = FClass.Corridor | FClass.Listing } },
             { "L43A", () => new ProjectFile() { Flag = FClass.Corridor | FClass.Listing } },
             // Vytyčení
-            { "V47", () => new SurveyFile() { Flag = FClass.Survey | FClass.Xml | FClass.Multi } },
-            { "V47X", () => new SurveyFile() { Flag = FClass.Survey | FClass.Xml | FClass.Multi } },
+            { "V47", () => new SurveyFile() { Flag = FClass.Survey | FClass.Xml } },
+            { "V47X", () => new SurveyFile() { Flag = FClass.Survey | FClass.Xml } },
             // Příčné řezy
             { "V51", () => new ProjectFile() { Flag = FClass.Corridor | FClass.CrossSection } },
             { "L51", () => new ProjectFile() { Flag = FClass.Corridor | FClass.CrossSection | FClass.Listing } },
             { "L51A", () => new ProjectFile() { Flag = FClass.Corridor | FClass.CrossSection | FClass.Listing } },
             // Spojené příčné řezy
-            { "V91", () => new CombinedCrossSectionsFile() { Flag = FClass.CombinedCrossSections | FClass.Xml | FClass.Multi } },
+            { "V91", () => new CombinedCrossSectionsFile() { Flag = FClass.CombinedCrossSections | FClass.Xml } },
             // IFC Podklady
-            { "V94", () => new IFCFile() { Flag = FClass.IFC | FClass.Xml | FClass.Multi } },
+            { "V94", () => new IFCFile() { Flag = FClass.IFC | FClass.Xml } },
             // Niveleta
             { "XNI", () => new ProjectFile() { Flag = FClass.Profile } },
+            { "SNI", () => new ProjectFile() { Flag = FClass.Profile } },
             // Trasa / Směrové řešení
             { "XHB", () => new ProjectFile() { Flag = FClass.Route } },
         };

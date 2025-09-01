@@ -3,7 +3,6 @@
 using System; // Keep for .NET 4.6
 using System.Linq; // Keep for .NET 4.6
 using System.Runtime.InteropServices;
-using System.Diagnostics;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -76,7 +75,6 @@ namespace Shared
                          // but at init it does not really matter;
 #endif
             Projector.BeginInit();
-            bool _ = false;
         }
 
         #region O_INSTALLATION"HKEY_LOCAL_MACHINE"
