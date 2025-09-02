@@ -7,15 +7,20 @@
 		<RibbonPanelSource Title="RoadPAC">
 			<!-- Sole purpose of this dialog launcher is to let user more options from where he can load project -->
 			<DialogLauncher Text="Načti složku projektu" CommandHandler="RP_PROSPECTOR_NEW" />
-			<RibbonButton Text="Spusti&#13;RoadPAC" Name="Spusti&#13;RoadPAC" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True"
+			<RibbonButton Text="Spusť&#13;RoadPAC" Name="Spusť&#13;RoadPAC" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True"
 						  Image="rp_logo" LargeImage="rp_logo_blue"
 						  CommandHandler="XX:RoadpacNET7.exe" />
 			<!-- Projector -->
-			<RibbonSplitButton Text="Projektor" SynchronizeOption="Image" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True">
-				<RibbonToggleButton Text="Prohlížeč projektu" ShowText="True" Image="rp_AbstractClass" LargeImage="rp_AbstractClass" CommandHandler="RP_PROSPECTOR" />
-				<RibbonToggleButton Text="Načti (.solution)" ShowText="True" Image="rp_AddEntity" LargeImage="rp_AddEntity" CommandHandler="RP_PROSPECTOR_SOLUTION" />
-				<RibbonToggleButton Text="Načti složku projektu" ShowText="True" Image="rp_FolderBrowserDialogControl" LargeImage="rp_FolderBrowserDialogControl" CommandHandler="RP_PROSPECTOR_NEW" />
-			</RibbonSplitButton>
+			<RibbonButton Text="Projektor" Size="Large" Orientation="Vertical" ShowText="True" 
+						  Image="rp_AbstractClass" LargeImage="rp_AbstractClass" CommandHandler="RP_PROSPECTOR" />
+			<RibbonSeparator Id="AcRibbonSeparator" SeparatorStyle="Spacer" />
+			<RibbonRowPanel>
+				<RibbonButton Text="Otevři (.solution)" ShowText="False" Image="rp_AddEntity" LargeImage="rp_AddEntity" CommandHandler="RP_PROSPECTOR_SOLUTION" />
+				<RibbonRowBreak />
+				<RibbonButton Text="Otevři složku projektu" ShowText="False" Image="rp_FolderBrowserDialogControl" LargeImage="rp_FolderBrowserDialogControl" CommandHandler="RP_PROSPECTOR_NEW" />
+				<RibbonRowBreak />
+				<RibbonButton Text="Nový projekt" ShowText="False" CommandHandler="RP_PROSPECTOR_NEW" />
+			</RibbonRowPanel>
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: DTM -->
@@ -36,7 +41,6 @@
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: Směrové vedení trasy -->
-	<!-- Panel: Required tags: [] -->
 	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False">
 		<RibbonPanelSource>
 			<Title><![CDATA[Směrové vedení]]></Title>
@@ -46,9 +50,7 @@
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: Výškové vedení trasy -->
-	<!-- Panel: Required tags: [Profile] -->
-	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True"
-				 IsVisible="False" Tag="Profile" Id="PanelTagControllVisibility">
+	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True">
 		<RibbonPanelSource>
 			<Title><![CDATA[Výškové vedení]]></Title>
 			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" />
@@ -57,9 +59,7 @@
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: Koridor & přičné úspořádání -->
-	<!-- Panel: Required tags: [Corridor] -->
-	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True"
-				 IsVisible="False" Tag="Corridor" Id="PanelTagControllVisibility">
+	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True">
 		<RibbonPanelSource>
 			<Title><![CDATA[Koridor & příčné uspořádání]]></Title>
 			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" />
@@ -70,9 +70,7 @@
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: Vytyčení -->
-	<!-- Panel: Required tags: [Survey] -->
-	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True"
-				 IsVisible="False" Tag="Survey" Id="PanelTagControllVisibility">
+	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True">
 		<RibbonPanelSource>
 			<Title><![CDATA[Vytyčení]]></Title>
 			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" />
@@ -83,9 +81,7 @@
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: IFC -->
-	<!-- Panel: Required tags: [IFC] -->
-	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True"
-				 IsVisible="False" Tag="IFC" Id="PanelTagControllVisibility">
+	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True">
 		<RibbonPanelSource>
 			<Title><![CDATA[IFC]]></Title>
 			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" />
@@ -96,9 +92,7 @@
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: Kreslení spojených řezů -->
-	<!-- Panel: Required tags: [CombinedCrossSections] -->
-	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True"
-				 IsVisible="False" Tag="CombinedCrossSections" Id="PanelTagControllVisibility">
+	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True">
 		<RibbonPanelSource>
 			<Title><![CDATA[Kreslení spojených řezů]]></Title>
 			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" />
