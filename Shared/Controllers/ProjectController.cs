@@ -31,14 +31,13 @@ namespace Shared.Controllers
             = new ConcurrentDictionary<string, HashSet<ProjectFile>>();
         private volatile string _currentWorkingDirectory;
         private volatile string _currentRoute;
+        private volatile ProjectFile _currentProjectFile;
         
         public event Action<string> CurrentWorkingDirectoryChanged;
         public event Action<string> CurrentRouteChanged;
         public event Action<string> ProjectChanged;
 
-        public event Action<ProjectFile> ProjectFileSelected;
-        public void PublishProjectFileSelected(ProjectFile file) 
-            => ProjectFileSelected?.Invoke(file);
+        public event Action<ProjectFile> CurrentProjectFileChanged;
 
         [RPInfoOut]
         public string CurrentWorkingDirectory
@@ -50,8 +49,9 @@ namespace Shared.Controllers
                 {
                     if (Directory.Exists(value))
                     {
+                        if (!value.EndsWith("\\"))
+                            value += "\\";
                         _currentWorkingDirectory = value;
-                        Debug.WriteLine($"Changing active directory to: {_currentWorkingDirectory}");
                         CurrentWorkingDirectoryChanged?.Invoke(value);
                     }
                 }
@@ -68,6 +68,20 @@ namespace Shared.Controllers
                 {
                     _currentRoute = value;
                     CurrentRouteChanged?.Invoke(value);
+                }
+            }
+        }
+
+        [RPInfoOut]
+        public ProjectFile CurrentProjectFile
+        {
+            get => _currentProjectFile;
+            set
+            {
+                if (_currentProjectFile != value)
+                {
+                    _currentProjectFile = value;
+                    CurrentProjectFileChanged?.Invoke(value);
                 }
             }
         }

@@ -55,6 +55,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\RibbonController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)windows\models\BooleanToVisibilityConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)windows\models\StringToSolidColorBrushConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Windows\Models\WatermarkHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\ProjectorViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Projector.xaml.cs">
       <DependentUpon>Projector.xaml</DependentUpon>
@@ -67,7 +68,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Models\" />
-    <Folder Include="$(MSBuildThisFileDirectory)Windows\Models\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_RoadPAC.xml">
@@ -111,7 +111,6 @@
     <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\warning.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_excel_16.ico" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="$(MSBuildThisFileDirectory)Windows\Projector.xaml">
@@ -120,21 +119,27 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_AbstractClass.png" />
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_logo_blue.png" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_AbstractClass_32.png" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_logo_blue_32.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_AddEntity.png" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_AddEntity_16.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_FolderBrowserDialogControl.png" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_FolderBrowserDialogControl_16.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_CaptureFrame.png" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_CaptureFrame_32.png" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_DTM_32.png" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_Ornice_32.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_Geologie_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\rp_SearchContract.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_SearchFolderOpened_16.png" />
   </ItemGroup>
 </Project>

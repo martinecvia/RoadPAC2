@@ -65,12 +65,19 @@ namespace Shared.Windows
             {
                 // If for whatever reason our route will be null
                 if (route == null) continue;
+                var currentRoute = RPApp.Projector?.CurrentRoute?.ToUpperInvariant();
+                var routeName = Path.GetFileNameWithoutExtension(route.File).ToUpperInvariant();
+                var isCurrent = routeName == currentRoute;
+
                 var routeNode = new TreeItem
                 {
-                    Label = Path.GetFileNameWithoutExtension(route.File).ToUpperInvariant(),
+                    Label = routeName,
                     IsRouteNode = true,
+                    IsActiveRoute = isCurrent,
+                    Value = isCurrent ? "(CurrentRoute)" : string.Empty,
+                    ValueColor = isCurrent ? "Green" : "White",
                     Image = "./Assets/route.png",
-                    File = route,
+                    File = route
                 };
                 routeNode.Add(new TreeItem { Label = $"Směrové řešení:", Value= route.File, File = route, Image = "./Assets/shb.ico" });
                 var related = RPApp.Projector?.GetRoute(lsPath, route.File) ?? new HashSet<ProjectController.ProjectFile>();

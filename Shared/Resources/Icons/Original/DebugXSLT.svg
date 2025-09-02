@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="32px" height="32px" viewBox="0 0 32 32" version="1.1">
+<defs>
+<filter id="alpha" filterUnits="objectBoundingBox" x="0%" y="0%" width="100%" height="100%">
+  <feColorMatrix type="matrix" in="SourceGraphic" values="0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 1 0"/>
+</filter>
+<mask id="mask0">
+  <g filter="url(#alpha)">
+<rect x="0" y="0" width="32" height="32" style="fill:rgb(0%,0%,0%);fill-opacity:0.75;stroke:none;"/>
+  </g>
+</mask>
+<clipPath id="clip1">
+  <rect x="0" y="0" width="32" height="32"/>
+</clipPath>
+<g id="surface7" clip-path="url(#clip1)">
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(12.941177%,12.941177%,12.941177%);fill-opacity:1;" d="M 28 17 L 28 22 L 26 22 L 26 18 L 12 18 L 12 22 L 10 22 L 10 17 L 11 16 L 18 16 L 18 12 L 20 12 L 20 16 L 27 16 Z M 28 17 "/>
+</g>
+<mask id="mask1">
+  <g filter="url(#alpha)">
+<rect x="0" y="0" width="32" height="32" style="fill:rgb(0%,0%,0%);fill-opacity:0.1;stroke:none;"/>
+  </g>
+</mask>
+<clipPath id="clip2">
+  <rect x="0" y="0" width="32" height="32"/>
+</clipPath>
+<g id="surface10" clip-path="url(#clip2)">
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(12.941177%,12.941177%,12.941177%);fill-opacity:1;" d="M 23 11 L 15 11 L 15 9.730469 L 18.03125 8 L 15 6.269531 L 15 5 L 23 5 Z M 7 23 L 15 23 L 15 29 L 7 29 Z M 31 23 L 31 29 L 23 29 L 23 23 Z M 31 23 "/>
+</g>
+</defs>
+<g id="surface1">
+<use xlink:href="#surface7" mask="url(#mask0)"/>
+<use xlink:href="#surface10" mask="url(#mask1)"/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(12.941177%,12.941177%,12.941177%);fill-opacity:1;" d="M 31 22 L 23 22 L 22 23 L 22 29 L 23 30 L 31 30 L 32 29 L 32 23 Z M 30 28 L 24 28 L 24 24 L 30 24 Z M 14 5.695312 L 14 5 L 15 4 L 23 4 L 24 5 L 24 11 L 23 12 L 15 12 L 14 11 L 14 10.304688 L 16 9.160156 L 16 10 L 22 10 L 22 6 L 16 6 L 16 6.839844 Z M 7 22 L 6 23 L 6 29 L 7 30 L 15 30 L 16 29 L 16 23 L 15 22 Z M 14 28 L 8 28 L 8 24 L 14 24 Z M 14 28 "/>
+<path style=" stroke:none;fill-rule:nonzero;fill:rgb(12.156863%,50.196081%,12.156863%);fill-opacity:1;" d="M 14 8 L 0 16 L 0 0 Z M 14 8 "/>
+</g>
+</svg>

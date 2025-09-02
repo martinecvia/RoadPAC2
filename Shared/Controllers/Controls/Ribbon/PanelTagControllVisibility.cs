@@ -19,7 +19,7 @@ namespace Shared.Controllers.Controls.Ribbon
             if (!string.IsNullOrEmpty(source.Tag?.ToString()))
             {
                 target.IsVisible = false;
-                RPApp.Projector.ProjectFileSelected += selected =>
+                RPApp.Projector.CurrentProjectFileChanged += selected =>
                 {
                     try
                     {

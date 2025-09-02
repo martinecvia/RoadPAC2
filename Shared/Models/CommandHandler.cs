@@ -5,6 +5,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Linq;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -13,6 +14,8 @@ using ZwSoft.ZwCAD.ApplicationServices;
 using Autodesk.AutoCAD.ApplicationServices;
 #endif
 #endregion
+
+using Shared.Controllers;
 
 namespace Shared.Models
 {
@@ -23,7 +26,6 @@ namespace Shared.Models
     public sealed class CommandHandler : System.Windows.Input.ICommand
     {
         private readonly string _command;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandHandler"/> class with the specified command string.
         /// </summary>
@@ -51,15 +53,32 @@ namespace Shared.Models
         {
             if (_command.StartsWith("XX:"))
             {
-                if (string.IsNullOrEmpty(RPApp.Config.InstallPath) ||
-                    !Directory.Exists(RPApp.Config.InstallPath))
-                    return;
-                string CurrentWorkingDirectory = RPApp.Projector.CurrentWorkingDirectory;
-                string CurrentRoute = RPApp.Projector.CurrentRoute;
-                if (string.IsNullOrEmpty(CurrentWorkingDirectory) 
-                    || !Directory.Exists(CurrentWorkingDirectory))
-                    return;
                 string command = _command.Substring(3);
+                if (string.IsNullOrWhiteSpace(command))
+                    return;
+                var (Executable, Arguments) = Win32Args(command);
+                if (string.IsNullOrWhiteSpace(Executable))
+                    return;
+                string InstallPath = RPApp.Config.InstallPath;
+                if (string.IsNullOrWhiteSpace(InstallPath) || !Directory.Exists(InstallPath))
+                    return;
+                Executable = Path.Combine(InstallPath, Executable);
+                if (!File.Exists(Executable))
+                    return;
+                Arguments = (Arguments
+                    .Replace("{WorkingDirectory}", RPApp.Projector.CurrentWorkingDirectory ?? string.Empty)
+                    .Replace("{Route}", RPApp.Projector.CurrentRoute ?? string.Empty)
+                    .Replace("{SelectedFile}", RPApp.Projector.CurrentProjectFile?.File ?? string.Empty));
+                Arguments = Regex.Replace(Arguments, @"\s+", " ").Trim();
+                ProcessStartInfo detached = new ProcessStartInfo
+                {
+                    FileName = Executable,
+                    Arguments = Arguments,
+                    UseShellExecute = true,
+                    CreateNoWindow = false,
+                    //WorkingDirectory = RPApp.Projector.CurrentWorkingDirectory ?? InstallPath
+                };
+                _ = Process.Start(detached);
                 return;
             }
 
@@ -68,9 +87,37 @@ namespace Shared.Models
             document?.SendStringToExecute(_command + " ", true, false, false);
         }
 
-        private readonly Regex _tokenRegex =
-            new Regex(@"[\""].+?[\""]|[^ ]+", RegexOptions.Compiled);
-        private string[] ParseArgs(string tokens) => _tokenRegex.Matches(tokens)
-            .Cast<Match>().Select(match => match.Value.Trim('"')).ToArray();
+        #region WIN32_API
+        [DllImport("shell32.dll", SetLastError = true)]
+        private static extern IntPtr CommandLineToArgvW(
+            [MarshalAs(UnmanagedType.LPWStr)] string lpCmdLine,
+            out int pNumArgs);
+
+        [DllImport("kernel32.dll", SetLastError = true)]
+        private static extern IntPtr LocalFree(IntPtr hMem);
+        private static (string Executable, string Arguments) Win32Args(string lpCmdLine)
+        {
+            if (string.IsNullOrWhiteSpace(lpCmdLine))
+                return (string.Empty, string.Empty);
+            IntPtr arguments = CommandLineToArgvW(lpCmdLine, out int pNumArgs);
+            if (arguments == IntPtr.Zero)
+                return (string.Empty, string.Empty);
+            try
+            {
+                var result = new string[pNumArgs];
+                for (int i = 0; i < pNumArgs; i++)
+                {
+                    IntPtr pointer = Marshal.ReadIntPtr(arguments, i * IntPtr.Size);
+                    result[i] = Marshal.PtrToStringUni(pointer);
+                }
+                string executable = result.FirstOrDefault() ?? string.Empty;
+                return (executable, string.Join(" ", result.Skip(1)));
+            }
+            finally
+            {
+                LocalFree(arguments);
+            }
+        }
+        #endregion
     }
 }

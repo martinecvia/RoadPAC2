@@ -9,6 +9,28 @@ namespace Shared.Windows.Models
     public class TreeItem : ObservableCollection<TreeItem>
     {
         public bool IsRouteNode { get; set; } = false;
+        public bool IsActiveRoute { get; set; } = false;
+        private static readonly BitmapImage DefaultRouteImage =
+            new BitmapImage(new Uri("./Assets/DebugXSLT.png", UriKind.Relative));
+        private BitmapImage _routeImage = DefaultRouteImage;
+        public string RouteImageSource => _routeImage?.UriSource.ToString();
+        public string RouteImage
+        {
+            get => RouteImageSource;
+            set
+            {
+                if (value == null)
+                {
+                    _routeImage = DefaultRouteImage;
+                    return;
+                }
+                try
+                { _routeImage = new BitmapImage(new Uri(value, UriKind.RelativeOrAbsolute)); }
+                catch
+                { _routeImage = DefaultRouteImage; }
+            }
+        }
+
         public bool IsGroupNode { get; set; } = false;
 
         public ProjectController.ProjectFile File { get; set; }

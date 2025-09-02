@@ -6,20 +6,20 @@
 	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True">
 		<RibbonPanelSource Title="RoadPAC">
 			<!-- Sole purpose of this dialog launcher is to let user more options from where he can load project -->
-			<DialogLauncher Text="Načti složku projektu" CommandHandler="RP_PROSPECTOR_NEW" />
+			<DialogLauncher Text="tevři složku projektu" CommandHandler="RP_PROSPECTOR_NEW" />
 			<RibbonButton Text="Spusť&#13;RoadPAC" Name="Spusť&#13;RoadPAC" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True"
-						  Image="rp_logo" LargeImage="rp_logo_blue"
+						  LargeImage="rp_logo_blue_32"
 						  CommandHandler="XX:RoadpacNET7.exe" />
 			<!-- Projector -->
 			<RibbonButton Text="Projektor" Size="Large" Orientation="Vertical" ShowText="True" 
-						  Image="rp_AbstractClass" LargeImage="rp_AbstractClass" CommandHandler="RP_PROSPECTOR" />
+						  LargeImage="rp_AbstractClass_32" CommandHandler="RP_PROSPECTOR" />
 			<RibbonSeparator Id="AcRibbonSeparator" SeparatorStyle="Spacer" />
 			<RibbonRowPanel>
-				<RibbonButton Text="Otevři (.solution)" ShowText="False" Image="rp_AddEntity" LargeImage="rp_AddEntity" CommandHandler="RP_PROSPECTOR_SOLUTION" />
+				<RibbonButton Text="Otevři (.rpsol)" ShowText="True" Image="rp_FolderBrowserDialogControl_16" CommandHandler="RP_PROSPECTOR_SOLUTION" />
 				<RibbonRowBreak />
-				<RibbonButton Text="Otevři složku projektu" ShowText="False" Image="rp_FolderBrowserDialogControl" LargeImage="rp_FolderBrowserDialogControl" CommandHandler="RP_PROSPECTOR_NEW" />
+				<RibbonButton Text="Otevři projekt" ShowText="True" Image="rp_SearchFolderOpened_16" CommandHandler="RP_PROSPECTOR_NEW" />
 				<RibbonRowBreak />
-				<RibbonButton Text="Nový projekt" ShowText="False" CommandHandler="RP_PROSPECTOR_NEW" />
+				<RibbonButton Text="Nový projekt" ShowText="True" Image="rp_AddEntity_16" CommandHandler="RP_PROSPECTOR_NEW" />
 			</RibbonRowPanel>
 		</RibbonPanelSource>
 	</RibbonPanel>
@@ -64,6 +64,7 @@
 			<Title><![CDATA[Koridor & příčné uspořádání]]></Title>
 			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" />
 			<RibbonButton Text="Tags:[Corridor]" Size="Large" ShowText="True" Orientation="Vertical"
+						  CommandHandler="XX:RDPVFilesUIRT.exe -D43 {WorkingDirectory} {Route}"
 						  IsVisible="False" Tag="Corridor" Id="TagControllVisibility" />
 			<RibbonButton Text="Tags:[Corridor, CrossSection]" Size="Large" ShowText="True" Orientation="Vertical"
 						  IsVisible="False" Tag="Corridor, CrossSection" Id="TagControllVisibility" />

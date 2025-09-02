@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 
 using Shared.Windows.Models;
+using System.Diagnostics;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -27,7 +28,6 @@ namespace Shared.Windows
             InitializeComponent();
             if (ViewModel == null)
                 DataContext = new ProjectorViewModel();
-            PreviewMouseDown += Projector_PreviewMouseDown;
         }
 
         public void RefreshItems() =>
@@ -35,41 +35,39 @@ namespace Shared.Windows
         #region PRIVATE
         #region EVENTS
         [RPPrivateUseOnly]
-        private void Projector_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void ClearSearch_Click(object sender, RoutedEventArgs e)
         {
-            if (e.ChangedButton == MouseButton.Left)
-            {
-                var target = FindAncestor<TreeViewItem>(Mouse.DirectlyOver as DependencyObject);
-                RPApp.Projector?.PublishProjectFileSelected(
-                    target?.DataContext is TreeItem treeItem ? treeItem.File : null
-                );
-            }
+            if (DataContext is ProjectorViewModel viewModel)
+                viewModel.SearchText = string.Empty;
         }
 
         [RPPrivateUseOnly]
-        private void MenuTest_Click(object sender, RoutedEventArgs e)
+        private void CollapseExceptSelected_Click(object sender, RoutedEventArgs e) =>
+            CollapseAllExcept(ProjectTree, ProjectTree.SelectedItem);
+
+        [RPPrivateUseOnly]
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
             if (sender is MenuItem menuItem
-                && (menuItem.CommandParameter as ContextMenu ?? menuItem.Parent as ContextMenu) is ContextMenu ctx
-                && ctx.PlacementTarget is TreeViewItem tvi
-                && tvi.DataContext is TreeItem treeItem)
+                && (menuItem.CommandParameter as ContextMenu ?? menuItem.Parent as ContextMenu) is ContextMenu context
+                && context.PlacementTarget is TreeViewItem treeView
+                && treeView.DataContext is TreeItem treeItem)
             {
-                RPApp.Projector?.PublishProjectFileSelected(treeItem.File);
+                if (RPApp.Projector != null)
+                    RPApp.Projector.CurrentProjectFile = treeItem.File;
             }
-        }
-        #endregion
-        [RPPrivateUseOnly]
-        private bool IsAncestorOf<T>(DependencyObject current) where T : DependencyObject
-        {
-            while (current != null)
-            {
-                if (current is T ancestor)
-                    return true;
-                current = VisualTreeHelper.GetParent(current);
-            }
-            return false;
         }
 
+        [RPPrivateUseOnly]
+        private void TreeView_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            if (RPApp.Projector == null)
+                return;
+            RPApp.Projector.CurrentProjectFile = e.NewValue is TreeItem treeItem 
+                ? treeItem.File 
+                : null;
+        }
+        #endregion
         [RPPrivateUseOnly]
         private static T FindAncestor<T>(DependencyObject current) where T : DependencyObject
         {
@@ -80,6 +78,30 @@ namespace Shared.Windows
                 current = VisualTreeHelper.GetParent(current);
             }
             return null;
+        }
+
+        [RPPrivateUseOnly]
+        private void CollapseAllExcept(ItemsControl parent, object except)
+        {
+            foreach (var item in parent.Items)
+            {
+                if (parent.ItemContainerGenerator.ContainerFromItem(item) is TreeViewItem treeViewItem)
+                {
+                    bool IsExceptItem()
+                    {
+                        if (treeViewItem.DataContext == except)
+                            return true;
+                        if (treeViewItem == except)
+                            return true;
+                        return false;
+                    }
+                    if (!IsExceptItem())
+                        treeViewItem.IsExpanded = false;
+
+                    if (treeViewItem.HasItems)
+                        CollapseAllExcept(treeViewItem, except);
+                }
+            }
         }
         #endregion
     }

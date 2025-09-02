@@ -1,63 +1,106 @@
-﻿#pragma warning disable CS8603
-
-using System; // Keep for .NET 4.6
+﻿using System; // Keep for .NET 4.6
 using System.Threading.Tasks; // Keep for .NET 4.6
 
 using RDPFILELib;
 
 namespace Shared.Helpers
 {
-    // Purpose of this class is to keep thread safe if RDPFile.dll was not found,
-    // so we can safely exit program without cad platform crashing
-    // Added factor is that DLL can change it's structure so it will be harder for us to
-    public class RDPFileHelper
+    /// <summary>
+    /// Safe wrapper for <see cref="RDPConfig"/> and related RDPFILEib.dll components.
+    /// Protects against missing DLLs or unexpected structural changes, so that
+    /// the hosting CAD platform does not crash if the dependency is unavailable.
+    /// </summary>
+    public sealed class RDPFileHelper
     {
         private readonly RDPConfig _config;
-        internal RDPFileHelper()
-        { _config = new RDPConfigClass(); }
+        private readonly object _lock = new object();
 
+        internal RDPFileHelper() 
+        {
+            try
+            { _config = new RDPConfigClass(); }
+            catch
+            { _config = null; }
+        }
+
+        /// <summary>
+        /// Gets or sets the current working directory from RDP configuration.
+        /// </summary>
         public string CurrentWorkingDirectory
-        { 
-            get => _config?.AdresarProjektu;
+        {
+            get
+            {
+                lock (_lock)
+                {
+                    return _config?.AdresarProjektu;
+                }
+            }
             set
             {
-                if (value != null && _config != null)
-                    _config.AdresarProjektu = value;
+                if (string.IsNullOrEmpty(value)) return;
+                lock (_lock)
+                {
+                    if (_config != null)
+                        _config.AdresarProjektu = value;
+                }
             }
         }
 
-        public async Task<string> GetCurrentWorkingDirectory()
+        /// <summary>
+        /// Async version of <see cref="CurrentWorkingDirectory"/>.
+        /// </summary>
+        public Task<string> GetCurrentWorkingDirectory()
         {
-            if (_config == null)
-                return null;
-            return await Task.Run(() => CurrentWorkingDirectory);
+            return Task.FromResult(CurrentWorkingDirectory);
         }
 
+        /// <summary>
+        /// Gets or sets the current route from RDP configuration.
+        /// </summary>
         public string CurrentRoute
         {
-            get => _config?.AktivniTrasa;
+            get
+            {
+                lock (_lock)
+                {
+                    return _config?.AktivniTrasa;
+                }
+            }
             set
             {
-                if (value != null && _config != null)
-                    _config.AktivniTrasa = value;
+                if (string.IsNullOrEmpty(value)) return;
+                lock (_lock)
+                {
+                    if (_config != null)
+                        _config.AktivniTrasa = value;
+                }
             }
         }
 
-        public async Task<string> GetCurrentRoute()
+        /// <summary>
+        /// Async version of <see cref="CurrentRoute"/>.
+        /// </summary>
+        public Task<string> GetCurrentRoute()
         {
-            if (_config == null)
-                return null;
-            return await Task.Run(() => CurrentRoute);
+            return Task.FromResult(CurrentRoute);
         }
 
+        /// <summary>
+        /// Creates an RDP configuration file in the given working directory for the given route.
+        /// Returns true on success, false if parameters are invalid or the call fails.
+        /// </summary>
         public bool CreateConfigRDP(string _workingDirectory, string _route)
         {
             if (string.IsNullOrEmpty(_workingDirectory) || string.IsNullOrEmpty(_route))
                 return false;
-            if (!_workingDirectory.EndsWith("\\"))
-                _workingDirectory = string.Concat(_workingDirectory, "\\");
-            new RDPInfoClass().RoadPacUtilita("MAKECFG", "", _workingDirectory, _route);
-            return true;
+            try
+            {
+                if (!_workingDirectory.EndsWith("\\"))
+                    _workingDirectory += "\\";
+                new RDPInfoClass().RoadPacUtilita("MAKECFG", "", _workingDirectory, _route);
+                return true;
+            }
+            catch { return false; }
         }
     }
 }

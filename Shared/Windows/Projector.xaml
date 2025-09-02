@@ -22,41 +22,32 @@
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <!-- Search bar -->
-            <TextBox Grid.Column="0" Height="24" VerticalAlignment="Center"
-                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" 
-                 ToolTip="Search in routes ...">
-                <TextBox.Style>
-                    <Style TargetType="TextBox">
-                        <Setter Property="Background" Value="LightGoldenrodYellow"/>
-                        <Style.Triggers>
-                            <!-- Override when empty -->
-                            <Trigger Property="Text" Value="">
-                                <Setter Property="Background" Value="White"/>
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBox.Style>
-            </TextBox>
-            <!-- Refresh Button -->
+            <TextBox Grid.Column="0"
+                 Height="24"
+                 VerticalContentAlignment="Center"
+                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                 models:WatermarkHandler.Watermark="Write here to search ..." />
+            <!-- RemoveSearch Button -->
             <Button Grid.Column="1" Width="22" Margin="1,0,1,0"
-                    ToolTip="Clear search">
-                <Image Source="./Assets/arrow-right.png" Width="16" Height="16"/>
+                    ToolTip="Clear search"
+                    Click="ClearSearch_Click">
+                <Image Source="./Assets/rp_SearchContract.png" Width="16" Height="16"/>
             </Button>
-
-            <!-- Settings Button -->
+            <!-- Collapse Button -->
             <Button Grid.Column="2" Width="22"
-                    ToolTip="Collaps routes">
+                    ToolTip="Collapse routes"
+                    Click="CollapseExceptSelected_Click">
                 <Image Source="./Assets/CollapseAll.png" Width="16" Height="16"/>
             </Button>
         </Grid>
         <!-- TreeView -->
         <TreeView x:Name="ProjectTree" Background="#F7F9FE"
-                  ItemsSource="{Binding FilteredItems}" ScrollViewer.VerticalScrollBarVisibility="Auto">
+                  ItemsSource="{Binding FilteredItems}" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  SelectedItemChanged="TreeView_SelectedItemChanged">
             <TreeView.Resources>
                 <ContextMenu x:Key="ItemContextMenu">
-                    <MenuItem Header="Debug test" CommandParameter="{Binding}" Click="MenuTest_Click"/>
+                    <MenuItem Header="Debug test" CommandParameter="{Binding}" Click="MenuItem_Click"/>
                 </ContextMenu>
-
                 <Style TargetType="TreeViewItem">
                     <Setter Property="ContextMenu"
                     Value="{StaticResource ItemContextMenu}" />
@@ -65,7 +56,7 @@
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type models:TreeItem}" ItemsSource="{Binding}">
                     <DockPanel>
-                         <!-- Icon -->
+                        <!-- Icon -->
                         <Image Width="16" Height="16" Source="{Binding ImageSource}" DockPanel.Dock="Left" Margin="2" />
                         <!-- DisplayName -->
                         <TextBlock x:Name="Label" Margin="2"
@@ -93,7 +84,7 @@
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
-
+                        <!-- Value -->
                         <TextBlock x:Name="Value" Margin="2"
                             Text="{Binding Value}" VerticalAlignment="Center">
                             <TextBlock.Style>
@@ -102,12 +93,29 @@
                                 </Style>
                             </TextBlock.Style>
                         </TextBlock>
-
                         <!-- ItemCount -->
-                        <TextBlock VerticalAlignment="Center" Margin="2" x:Name="ItemCount" 
+                        <TextBlock VerticalAlignment="Center" x:Name="ItemCount" 
                                    Text="{Binding ItemCount, StringFormat='({0})'}"
                                    Foreground="{Binding ItemCountColor, Converter={StaticResource StringToSolidColorBrushConverter}}"/>
-
+                        <!-- RouteOnly:RouteImage -->
+                        <Image Width="16" Height="16" DockPanel.Dock="Right" Margin="2" 
+                           Source="{Binding RouteImageSource}">
+                            <Image.Style>
+                                <Style TargetType="Image">
+                                    <Setter Property="Visibility" Value="Collapsed" />
+                                    <Style.Triggers>
+                                        <MultiDataTrigger>
+                                            <MultiDataTrigger.Conditions>
+                                                <Condition Binding="{Binding IsRouteNode}" Value="True"/>
+                                                <Condition Binding="{Binding IsActiveRoute}" Value="True"/>
+                                            </MultiDataTrigger.Conditions>
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </MultiDataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
+                        <!-- DisplayWarning -->
                         <Image Width="16" Height="16" DockPanel.Dock="Right" Margin="2" 
                            Source="{Binding WarningImageSource}"
                            Visibility="{Binding DisplayWarning, Converter={StaticResource BoolToVisibilityConverter}}">
@@ -117,7 +125,6 @@
                             </Image.ToolTip>
                         </Image>
                     </DockPanel>
-
                     <!-- Triggers -->
                     <HierarchicalDataTemplate.Triggers>
                         <DataTrigger Binding="{Binding ItemCount}" Value="0">
