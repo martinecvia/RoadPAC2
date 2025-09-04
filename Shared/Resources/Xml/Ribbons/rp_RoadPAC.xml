@@ -6,7 +6,7 @@
 	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True">
 		<RibbonPanelSource Title="RoadPAC">
 			<!-- Sole purpose of this dialog launcher is to let user more options from where he can load project -->
-			<DialogLauncher Text="tevři složku projektu" CommandHandler="RP_PROSPECTOR_NEW" />
+			<DialogLauncher Text="Otevři složku projektu" CommandHandler="RP_PROSPECTOR_NEW" />
 			<RibbonButton Text="Spusť&#13;RoadPAC" Name="Spusť&#13;RoadPAC" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True"
 						  LargeImage="rp_logo_blue_32"
 						  CommandHandler="XX:RoadpacNET7.exe" />
@@ -23,18 +23,25 @@
 			</RibbonRowPanel>
 		</RibbonPanelSource>
 	</RibbonPanel>
+  <!-- Panel: RoadCAD -->
+  <RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True">
+    <RibbonPanelSource Title="RoadCAD">
+      <RibbonButton Text="Nastavení&#13;menu" Name="RP_CADmenu" ShowText="True" Size="Large" Orientation="Vertical" LargeImage="rp_CAD13_16" CommandHandler="MEN_CHANGE" />
+    </RibbonPanelSource>
+  </RibbonPanel>
 	<!-- Panel: DTM -->
 	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False" IsEnabled="True">
 		<RibbonPanelSource>
 			<Title><![CDATA[Terén]]></Title>
+      
 			<DialogLauncher Orientation="Horizontal" IsCheckable="False" ShowImage="True" IsEnabled="True" Size="Standard" GroupLocation="Middle"
 							AllowInToolBar="True" AllowInStatusBar="True" ResizeStyle="HideText"
 							Text="Otevři složku s terénními modely" ShowText="False" CommandHandler="RP_COMMAND(OPEN_ACTIVE_DTM_DIRECTORY)" />
-			<RibbonSplitButton Text="Terénní&#13;práce" Name="RP_RUN_DTM" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True"
+			<RibbonSplitButton Text="Terénní&#13;model" Name="RP_RUN_DTM" ShowText="True" Size="Large" Orientation="Vertical" ShowImage="True"
 							   Image="rp_img_default_16" LargeImage="rp_img_default_32" CommandHandler="RP_RUN(DTM)" SynchronizeOption="Image">
-				<RibbonToggleButton Text="Spusti DTM" ShowText="True" Image="rp_DTM_32" LargeImage="rp_DTM_32" />
-				<RibbonToggleButton Text="Sejmi řez: Podélný" ShowText="True" Image="rp_CaptureFrame" LargeImage="rp_CaptureFrame" />
-				<RibbonToggleButton Text="Sejmi řez: Příčný" ShowText="True" Image="rp_CaptureFrame" LargeImage="rp_CaptureFrame" />
+				<RibbonToggleButton Text="Spusť DTM" ShowText="True" Image="rp_DTM_32" LargeImage="rp_DTM_32" />
+				<RibbonToggleButton Text="Sejmi podélný řez" ShowText="True" Image="rp_LONGter_32" LargeImage="rp_LONGter_32" />
+				<RibbonToggleButton Text="Sejmi příčný řez" ShowText="True" Image="rp_CROSSEXIST_16" LargeImage="rp_CROSSEXIST_32" />
 				<RibbonToggleButton Text="Ornice" ShowText="True" Image="rp_Ornice_32" LargeImage="rp_Ornice_32" />
 				<RibbonToggleButton Text="Geologie" ShowText="True" Image="rp_Geologie_32" LargeImage="rp_Geologie_32" />
 			</RibbonSplitButton>
@@ -44,16 +51,22 @@
 	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False">
 		<RibbonPanelSource>
 			<Title><![CDATA[Směrové vedení]]></Title>
-			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" />
-			<RibbonButton Text="Tags:[Route]" Size="Large" ShowText="True" Orientation="Vertical"
-						  IsVisible="False" Tag="Route" Id="TagControllVisibility" />
+			<RibbonButton Text="Spusť VIAAXI" Size="Large" ShowText="True" Orientation="Vertical"  Image="rp_Align_16" LargeImage="rp_Align_16" CommandHandler="CHANGE_VIAAXIALL"/>
+			<RibbonRowPanel>
+        <RibbonButton Text="Protokol" Size="Small" ShowText="True" Orientation="Vertical" Image="rp_Listing_32" LargeImage="rp_Listing_32" CommandHandler="XX:Notepad.exe" IsVisible="False" Tag="Route" Id="TagControllVisibility" />
+				<RibbonRowBreak />
+				<RibbonButton Text="Kresli&#13;2D osu" ShowText="True" Orientation="Vertical" Image="rp_Align_16" CommandHandler="testtool RP_SB" IsVisible="False" Tag="Route" Id="TagControllVisibility" />
+				<RibbonRowBreak />
+				
+			</RibbonRowPanel>
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: Výškové vedení trasy -->
 	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True">
 		<RibbonPanelSource>
 			<Title><![CDATA[Výškové vedení]]></Title>
-			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" />
+      rp_veral2_16
+      <RibbonButton Text="Upravit&#13;niveletu" Size="Large" ShowText="True" Orientation="Vertical" ShowImage="True" LargeImage="rp_veral2_16" CommandHandler="XX:NIVW32.exe" />/>
 			<RibbonButton Text="Tags:[Profile]" Size="Large" ShowText="True" Orientation="Vertical"
 						  IsVisible="False" Tag="Profile" Id="TagControllVisibility" />
 		</RibbonPanelSource>
@@ -103,4 +116,10 @@
 						  IsVisible="False" Tag="CombinedCrossSections" Id="TagControllVisibility" />
 		</RibbonPanelSource>
 	</RibbonPanel>
+  <!-- Panel: ExtPanelSměrovka -->
+  <RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True" IsVisible="True" Tag="Route" Id="TagControllVisibility" >
+    <RibbonPanelSource Title="Směrové vedení2">
+      <RibbonButton Text="Kresli osu" Name="RP_KresliOsu" ShowText="True" Size="Large" Orientation="Vertical" LargeImage="rp_CAD13_16" CommandHandler=""/>
+    </RibbonPanelSource>
+  </RibbonPanel>
 </RibbonTab>
