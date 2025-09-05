@@ -53,11 +53,10 @@
 			<Title><![CDATA[Směrové vedení]]></Title>
 			<RibbonButton Text="Spusť VIAAXI" Size="Large" ShowText="True" Orientation="Vertical"  Image="rp_Align_16" LargeImage="rp_Align_16" CommandHandler="CHANGE_VIAAXIALL"/>
 			<RibbonRowPanel>
-        <RibbonButton Text="Protokol" Size="Small" ShowText="True" Orientation="Vertical" Image="rp_Listing_32" LargeImage="rp_Listing_32" CommandHandler="XX:Notepad.exe" IsVisible="False" Tag="Route" Id="TagControllVisibility" />
+        <RibbonButton Text="Protokol" Size="Small" ShowText="True" Orientation="Vertical" Image="rp_Listing_32" LargeImage="rp_Listing_32" CommandHandler="XX:Wordpad.exe {WorkingDirectory}{Route}.L13" IsVisible="False" Tag="Route" Id="TagControllVisibility" />
 				<RibbonRowBreak />
 				<RibbonButton Text="Kresli&#13;2D osu" ShowText="True" Orientation="Vertical" Image="rp_Align_16" CommandHandler="testtool RP_SB" IsVisible="False" Tag="Route" Id="TagControllVisibility" />
 				<RibbonRowBreak />
-				
 			</RibbonRowPanel>
 		</RibbonPanelSource>
 	</RibbonPanel>
@@ -67,20 +66,25 @@
 			<Title><![CDATA[Výškové vedení]]></Title>
       rp_veral2_16
       <RibbonButton Text="Upravit&#13;niveletu" Size="Large" ShowText="True" Orientation="Vertical" ShowImage="True" LargeImage="rp_veral2_16" CommandHandler="XX:NIVW32.exe" />/>
-			<RibbonButton Text="Tags:[Profile]" Size="Large" ShowText="True" Orientation="Vertical"
-						  IsVisible="False" Tag="Profile" Id="TagControllVisibility" />
+      <RibbonRowPanel>
+        <RibbonButton Text="Protokol" Size="Small" ShowText="True" Orientation="Vertical" Image="rp_Listing_32" LargeImage="rp_Listing_32" CommandHandler="XX:Wordpad.exe {WorkingDirectory}{Route}.L32" IsVisible="False" Tag="Profile" Id="TagControllVisibility" />
+        <RibbonRowBreak />
+        <RibbonButton Text="Kresli&#13;niveletu" ShowText="True" Orientation="Vertical" Image="rp_LONG_NEW_16" CommandHandler="testtool RP_SB" IsVisible="False" Tag="Profile" Id="TagControllVisibility" />
+        <RibbonRowBreak />
+				<RibbonButton Text="Tags:[Profile]" Size="Large" ShowText="True" Orientation="Vertical"
+						  IsVisible="False" Tag="Profile" Id="" />
+        </RibbonRowPanel>
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: Koridor & přičné úspořádání -->
 	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True">
 		<RibbonPanelSource>
 			<Title><![CDATA[Koridor & příčné uspořádání]]></Title>
-			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" />
-			<RibbonButton Text="Tags:[Corridor]" Size="Large" ShowText="True" Orientation="Vertical"
-						  CommandHandler="XX:RDPVFilesUIRT.exe -D43 {WorkingDirectory} {Route}"
-						  IsVisible="False" Tag="Corridor" Id="TagControllVisibility" />
-			<RibbonButton Text="Tags:[Corridor, CrossSection]" Size="Large" ShowText="True" Orientation="Vertical"
-						  IsVisible="False" Tag="Corridor, CrossSection" Id="TagControllVisibility" />
+			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" IsVisible="False"/>
+			<RibbonButton Text="Výpočet pokrytí" Size="Large" ShowText="True" Orientation="Vertical" CommandHandler="XX:RDPVFilesUIRT.exe -D43 {WorkingDirectory} {Route}" Image="rp_PAVE_16" LargeImage="rp_PAVE_16"
+              IsVisible="True" Tag="Corridor" />
+			<RibbonButton Text="Výpočet koridoru" Size="Large" ShowText="True" Orientation="Vertical" CommandHandler="XX:RDPVFilesUIRT.exe -D43 {WorkingDirectory} {Route}" Image="rp_corr_16" LargeImage="rp_corr_16"
+						  IsVisible="True" Tag="Corridor, CrossSection" />
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: Vytyčení -->
@@ -117,7 +121,7 @@
 		</RibbonPanelSource>
 	</RibbonPanel>
   <!-- Panel: ExtPanelSměrovka -->
-  <RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True" IsVisible="True" Tag="Route" Id="TagControllVisibility" >
+  <RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True" IsVisible="False" Tag="Route" Id="TagControllVisibility" >
     <RibbonPanelSource Title="Směrové vedení2">
       <RibbonButton Text="Kresli osu" Name="RP_KresliOsu" ShowText="True" Size="Large" Orientation="Vertical" LargeImage="rp_CAD13_16" CommandHandler=""/>
     </RibbonPanelSource>

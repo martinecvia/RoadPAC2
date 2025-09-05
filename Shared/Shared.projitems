@@ -172,4 +172,9 @@
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rpOld\rp_veral2_16.ICO" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rpOld\rp_corr_16.png" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rpOld\rp_LONG_NEW_16.png" />
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rpOld\rp_PAVE_16.png" />
+  </ItemGroup>
 </Project>
