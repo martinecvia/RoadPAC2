@@ -60,6 +60,12 @@ namespace ZWC_47_TEST
             _paletteSet.Visible = true;
         }
 
+        [CommandMethod("RP_RIBBONVIEW")]
+        public void RibbonView()
+        {
+            Shared.Controllers.RibbonController.CreateTab("rp_RoadPAC");
+        }
+
         public void Terminate()
         { }
     }

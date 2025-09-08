@@ -53,9 +53,9 @@
 			<Title><![CDATA[Směrové vedení]]></Title>
 			<RibbonButton Text="Spusť VIAAXI" Size="Large" ShowText="True" Orientation="Vertical"  Image="rp_Align_16" LargeImage="rp_Align_16" CommandHandler="CHANGE_VIAAXIALL"/>
 			<RibbonRowPanel>
-        <RibbonButton Text="Protokol" Size="Small" ShowText="True" Orientation="Vertical" Image="rp_Listing_32" LargeImage="rp_Listing_32" CommandHandler="XX:Wordpad.exe {WorkingDirectory}{Route}.L13" IsVisible="False" Tag="Route" Id="TagControllVisibility" />
+        <RibbonButton Text="Protokol" Size="Small" ShowText="True" Orientation="Horizontal" Image="rp_Listing_32" LargeImage="rp_Listing_32" CommandHandler="XX:Wordpad.exe {WorkingDirectory}{Route}.L13" IsVisible="False" Tag="Route" Id="TagControllVisibility" />
 				<RibbonRowBreak />
-				<RibbonButton Text="Kresli&#13;2D osu" ShowText="True" Orientation="Vertical" Image="rp_Align_16" CommandHandler="testtool RP_SB" IsVisible="False" Tag="Route" Id="TagControllVisibility" />
+				<RibbonButton Text="Kresli&#13;2D osu" ShowText="True" Orientation="Horizontal" Image="rp_Align_16" CommandHandler="testtool RP_SB" IsVisible="False" Tag="Route" Id="TagControllVisibility" />
 				<RibbonRowBreak />
 			</RibbonRowPanel>
 		</RibbonPanelSource>
@@ -67,13 +67,13 @@
       rp_veral2_16
       <RibbonButton Text="Upravit&#13;niveletu" Size="Large" ShowText="True" Orientation="Vertical" ShowImage="True" LargeImage="rp_veral2_16" CommandHandler="XX:NIVW32.exe" />/>
       <RibbonRowPanel>
-        <RibbonButton Text="Protokol" Size="Small" ShowText="True" Orientation="Vertical" Image="rp_Listing_32" LargeImage="rp_Listing_32" CommandHandler="XX:Wordpad.exe {WorkingDirectory}{Route}.L32" IsVisible="False" Tag="Profile" Id="TagControllVisibility" />
+        <RibbonButton Text="Protokol" Size="Small" ShowText="True" Orientation="Horizontal" Image="rp_Listing_32" LargeImage="rp_Listing_32" CommandHandler="XX:Wordpad.exe {WorkingDirectory}{Route}.L32" IsVisible="False" Tag="Profile" Id="TagControllVisibility" />
         <RibbonRowBreak />
-        <RibbonButton Text="Kresli&#13;niveletu" ShowText="True" Orientation="Vertical" Image="rp_LONG_NEW_16" CommandHandler="testtool RP_SB" IsVisible="False" Tag="Profile" Id="TagControllVisibility" />
+        <RibbonButton Text="Kresli&#13;niveletu" ShowText="True" Orientation="Horizontal" Image="rp_LONG_NEW_16" CommandHandler="testtool RP_SB" IsVisible="False" Tag="Profile" Id="TagControllVisibility" />
         <RibbonRowBreak />
-				<RibbonButton Text="Tags:[Profile]" Size="Large" ShowText="True" Orientation="Vertical"
+				<RibbonButton Text="Tags:[Profile]" Size="Large" ShowText="True" Orientation="Horizontal"
 						  IsVisible="False" Tag="Profile" Id="" />
-        </RibbonRowPanel>
+      </RibbonRowPanel>
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: Koridor & přičné úspořádání -->
@@ -85,41 +85,55 @@
               IsVisible="True" Tag="Corridor" />
 			<RibbonButton Text="Výpočet koridoru" Size="Large" ShowText="True" Orientation="Vertical" CommandHandler="XX:RDPVFilesUIRT.exe -D43 {WorkingDirectory} {Route}" Image="rp_corr_16" LargeImage="rp_corr_16"
 						  IsVisible="True" Tag="Corridor, CrossSection" />
+      <RibbonRowPanel>
+        <RibbonButton Text="Protokol" Size="Small" ShowText="True" Orientation="Horizontal" Image="rp_Listing_32" LargeImage="rp_Listing_32" CommandHandler="XX:Wordpad.exe {WorkingDirectory}{Route}.L51" IsVisible="False" Tag="Corridor, CrossSection" Id="TagControllVisibility" />
+        <RibbonRowBreak />
+        <RibbonButton Text="Náhled&#13;příčných řezů" ShowText="True" Orientation="Horizontal" Image="rp_t91" CommandHandler="XX:T91VIEWER.EXE {WorkingDirectory}{Route}.spr" IsVisible="False" Tag="Corridor, CrossSection" Id="TagControllVisibility" />
+        <RibbonRowBreak />
+        <RibbonButton Text="Kreslení řezů&#13;ze SPR" ShowText="True" Orientation="Horizontal" Image="rp_CROSS_NEWKRI_16" CommandHandler="" IsVisible="False" Tag="Corridor, CrossSection" Id="TagControllVisibility" />
+      </RibbonRowPanel>
 		</RibbonPanelSource>
 	</RibbonPanel>
 	<!-- Panel: Vytyčení -->
 	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True">
 		<RibbonPanelSource>
 			<Title><![CDATA[Vytyčení]]></Title>
-			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" />
-			<RibbonButton Text="Tags:[Corridor]" Size="Large" ShowText="True" Orientation="Vertical"
-						  IsVisible="False" Tag="Corridor" Id="TagControllVisibility" />
-			<RibbonButton Text="Tags:[Survey]" Size="Large" ShowText="True" Orientation="Vertical"
-						  IsVisible="False" Tag="Survey" Id="TagControllVisibility" />
-		</RibbonPanelSource>
+			<RibbonButton Text="Výpočet vytyčení" Size="Large" ShowText="True" Orientation="Vertical" Image="rp_47_32" LargeImage="rp_47_32" CommandHandler="XX:SI47D.exe"/>
+      <RibbonRowPanel>
+        <RibbonButton Text="Protokol" Size="Small" ShowText="True" Orientation="Horizontal" Image="rp_Listing_32" LargeImage="rp_Listing_32" CommandHandler="XX:Wordpad.exe {WorkingDirectory}{Route}.L51" IsVisible="False" Tag="Survey" Id="TagControllVisibility" />
+        <RibbonRowBreak />
+        <RibbonButton Text="Zobrazit&#13;výsledky" ShowText="True" Orientation="Horizontal" Image="rp_excel_32" CommandHandler="" IsVisible="False" Tag="Survey" Id="TagControllVisibility" />
+      </RibbonRowPanel>
+
+    </RibbonPanelSource>
 	</RibbonPanel>
+ 
+  <!-- Panel: Kreslení spojených řezů -->
+  <RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True">
+    <RibbonPanelSource>
+      <Title><![CDATA[Kreslení spojených řezů]]></Title>
+      <RibbonButton Text="Kreslení spojených&#13;řezů" Size="Large" ShowText="True" Orientation="Vertical" Image="rp_spojrezy_16" LargeImage="rp_spojrezy_16" CommandHandler="XX:MCXEDIT2016.exe"/>
+      <RibbonRowPanel>
+        <RibbonButton Text="Protokol" Size="Small" ShowText="True" Orientation="Horizontal" Image="rp_Listing_32" LargeImage="rp_Listing_32" CommandHandler="XX:Wordpad.exe {WorkingDirectory}{Route}.lt91" IsVisible="False" Tag="Corridor, CrossSection" Id="TagControllVisibility" />
+        <RibbonRowBreak />
+        <RibbonButton Text="Kreslení řezů" ShowText="True" Orientation="Horizontal" Image="rp_CROSS_NEWKRI_16" CommandHandler="XX:T91VIEWER.EXE {WorkingDirectory}{Route}.t91" IsVisible="False" Tag="Corridor, CrossSection" Id="TagControllVisibility" />
+      </RibbonRowPanel>
+      
+      <!--<RibbonButton Text="Tags:[Corridor]" Size="Large" ShowText="True" Orientation="Vertical"
+						  IsVisible="False" Tag="Corridor" Id="TagControllVisibility" />
+      <RibbonButton Text="Tags:[CombinedCrossSections]" Size="Large" ShowText="True" Orientation="Vertical"
+						  IsVisible="False" Tag="CombinedCrossSections" Id="TagControllVisibility" />-->
+    </RibbonPanelSource>
+  </RibbonPanel>
+  
 	<!-- Panel: IFC -->
 	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True">
 		<RibbonPanelSource>
 			<Title><![CDATA[IFC]]></Title>
-			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" />
-			<RibbonButton Text="Tags:[Corridor]" Size="Large" ShowText="True" Orientation="Vertical"
-						  IsVisible="False" Tag="Corridor" Id="TagControllVisibility" />
-			<RibbonButton Text="Tags:[IFC]" Size="Large" ShowText="True" Orientation="Vertical"
-						  IsVisible="False" Tag="IFC" Id="TagControllVisibility" />
+			<RibbonButton Text="Informační model&#13;BIM" Size="Large" ShowText="True" Orientation="Vertical" />
 		</RibbonPanelSource>
 	</RibbonPanel>
-	<!-- Panel: Kreslení spojených řezů -->
-	<RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True">
-		<RibbonPanelSource>
-			<Title><![CDATA[Kreslení spojených řezů]]></Title>
-			<RibbonButton Text="Tags:[]" Size="Large" ShowText="True" Orientation="Vertical" />
-			<RibbonButton Text="Tags:[Corridor]" Size="Large" ShowText="True" Orientation="Vertical"
-						  IsVisible="False" Tag="Corridor" Id="TagControllVisibility" />
-			<RibbonButton Text="Tags:[CombinedCrossSections]" Size="Large" ShowText="True" Orientation="Vertical"
-						  IsVisible="False" Tag="CombinedCrossSections" Id="TagControllVisibility" />
-		</RibbonPanelSource>
-	</RibbonPanel>
+	
   <!-- Panel: ExtPanelSměrovka -->
   <RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True" IsVisible="False" Tag="Route" Id="TagControllVisibility" >
     <RibbonPanelSource Title="Směrové vedení2">
