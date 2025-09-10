@@ -135,7 +135,7 @@
 	</RibbonPanel>
 	
   <!-- Panel: ExtPanelSměrovka -->
-  <RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True" IsVisible="False" Tag="Route" Id="TagControllVisibility" >
+  <RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" IsEnabled="True" IsVisible="False" Tag="Route" Id="TagControllVisibility">
     <RibbonPanelSource Title="Směrové vedení2">
       <RibbonButton Text="Kresli osu" Name="RP_KresliOsu" ShowText="True" Size="Large" Orientation="Vertical" LargeImage="rp_CAD13_16" CommandHandler=""/>
     </RibbonPanelSource>

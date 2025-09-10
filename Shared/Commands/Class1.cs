@@ -18,6 +18,5 @@ namespace Shared.Commands
         {
             Shared.Controllers.RibbonController.CreateTab("rp_RoadPAC");
         }
-
     }
 }

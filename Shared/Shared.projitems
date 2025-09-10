@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Assert.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Commands\Class1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\Ribbon\PanelTagControllVisibility.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\Ribbon\TabTagControllVisibility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\Ribbon\TagControllVisibility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\Project\BaseProjectXml.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\Project\CombinedCrossSectionsFile.cs" />
@@ -188,5 +189,8 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rpOld\rp_spojrezy_16.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_TestFlags.xml" />
   </ItemGroup>
 </Project>

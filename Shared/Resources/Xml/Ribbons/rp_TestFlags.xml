@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<RibbonTab xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		   IsVisible="True" KeyTip="RPX" Tag="Route" Id="TabTagControllVisibility"
+		   Name="RoadPAC2X" Title="RoadPAC2X" IsEnabled="True" IsPanelEnabled="True" AllowTearOffContextualPanels="False">
+</RibbonTab>

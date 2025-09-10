@@ -6,6 +6,8 @@
 
 using System; // Keep for .NET 4.6
 using System.Collections.Generic; // Keep for .NET 4.6
+using System.Collections.Specialized;
+using System.Diagnostics;
 using System.Linq; // Keep for .NET 4.6
 using System.Reflection;
 
@@ -39,11 +41,14 @@ namespace Shared.Controllers
                                                             // This also prevents using the same name from different applications.
 
         private static RibbonControl Ribbon => ComponentManager.Ribbon;
+        private static bool _hasTab = false;
         private static bool _hasContextual = false;
         private static readonly Dictionary<string, object> _registeredControls = new Dictionary<string, object>();
         private static readonly Dictionary<string, ContextualRibbonTab> _activeContextualTabs = new Dictionary<string, ContextualRibbonTab>();
         private static readonly Dictionary<string, Func<SelectionSet, bool>> _contextualTabConditions 
             = new Dictionary<string, Func<SelectionSet, bool>>();
+
+        private static List<RibbonTab> _Tabs = new List<RibbonTab>();
 
         /// <summary>
         /// Ensures that the ribbon system has been properly initialized before use.
@@ -76,11 +81,12 @@ namespace Shared.Controllers
             Assert.IsNotNull(tabId, nameof(tabId));
             if (Ribbon == null)
                 return new T();
-            RibbonTabDef tabDef = ResourceController.LoadResourceRibbon<RibbonTabDef>(tabId);
-            T tab = tabDef?.Transform(new T()) ?? new T();
-            if (Ribbon.Tabs.Contains(tab))
+            T tab = (T) Ribbon.Tabs.FirstOrDefault(t => t.Id == RibbonTab__Prefix + tabId);
+            if (tab != null)
                 return tab; // We really don't want to process same tab multiple times,
                             // there is no point in that
+            RibbonTabDef tabDef = ResourceController.LoadResourceRibbon<RibbonTabDef>(tabId);
+            tab = tabDef?.Transform(new T()) ?? new T();
             Ribbon?.Tabs.Add(tab);
             tab.Id = RibbonTab__Prefix + tabId;       // We want to mark these tabs as RoadPAC ones.
                                                       // For further compatibility and to prevent being overriden.
@@ -122,6 +128,35 @@ namespace Shared.Controllers
             tab.UID = tab.Id;
             if (tabDef != null)
                 RegisterControl(tabDef, tab);
+            if (!_hasTab)
+            {
+                // We want to keep our tabs displayed at all costs
+                Ribbon.Tabs.CollectionChanged += (s, e) =>
+                {
+                    // The contents of the collection changed dramatically
+                    if (e.Action != NotifyCollectionChangedAction.Reset)
+                        return;
+                    if (_Tabs.Count == 0 || Ribbon == null)
+                        return;
+                    // Defer to avoid reentrancy
+                    Ribbon?.Dispatcher?.BeginInvoke(new Action(() => 
+                    {
+                        if (Ribbon == null) return;
+                        foreach (var reAdd in _Tabs)
+                        {
+                            bool wasActive = reAdd.IsActive;
+                            Ribbon.Tabs.Add(reAdd); 
+                            // Adding ribbon to tab deactivates it,
+                            // so we check if it was active before,
+                            // and make it active again
+                            reAdd.IsActive = wasActive;
+                            Debug.WriteLine($"[&] Re-added: {reAdd.Id} with IsActive={wasActive}");
+                        }
+                    }));
+                };
+                _hasTab = true;
+            }
+            _Tabs.Add(tab);
             return tab;
         }
 
@@ -162,18 +197,23 @@ namespace Shared.Controllers
             return tab;
         }
 
+        public static ContextualRibbonTab CreateContextualTab(string tabId, ProjectController.FClass flags)
+        {
+            ContextualRibbonTab tab = CreateContextualTab(tabId);
+            tab.Flags = flags;
+            return tab;
+        }
+
         [RPInternalUseOnly]
         internal static void HideContextualTab(string _contextualId)
         {
-            if (_activeContextualTabs.ContainsKey(_contextualId))
+            if (_activeContextualTabs.ContainsKey(_contextualId)
+                && _activeContextualTabs[_contextualId] is ContextualRibbonTab _contextualTab)
             {
-                var _contextualTab = _activeContextualTabs[_contextualId];
-                if (_contextualTab is ContextualRibbonTab)
-                {
-                    Ribbon?.HideContextualTab(_contextualTab);
-                    _contextualTab.IsVisible = false;
+                Ribbon?.HideContextualTab(_contextualTab);
+                _contextualTab.IsVisible = false;
+                if (_contextualTab.Flags == ProjectController.FClass.None)
                     _activeContextualTabs.Remove(_contextualTab.Id);
-                }
             }
         }
 
@@ -432,6 +472,7 @@ namespace Shared.Controllers
         public class ContextualRibbonTab : RibbonTab
         {
             public bool IsSelectionTab { get; set; } = false;
+            public ProjectController.FClass Flags { get; set; } = ProjectController.FClass.None;
         }
     }
 }

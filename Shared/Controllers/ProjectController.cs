@@ -8,7 +8,7 @@ using System.IO;
 using System.Linq; // Keep for .NET 4.6
 using System.Runtime.InteropServices;
 using System.Threading; // Keep for .NET 4.6
-using System.Threading.Tasks; // Keep for .NET 4.6
+using System.Threading.Tasks;
 
 using Shared.Controllers.Models.Project;
 using Shared.Helpers;
