@@ -37,7 +37,7 @@ namespace Shared.Controllers.Controls.Ribbon
                     catch
                     {
                         if (target is RibbonController.ContextualRibbonTab _contextualTab)
-                            RibbonController.HideContextualTab(_contextualTab);
+                             RibbonController.HideContextualTab(_contextualTab);
                         else target.IsVisible = false;
                     }
                 };

@@ -212,25 +212,20 @@ namespace Shared.Controllers
             {
                 Ribbon?.HideContextualTab(_contextualTab);
                 _contextualTab.IsVisible = false;
-                if (_contextualTab.Flags == ProjectController.FClass.None)
-                    _activeContextualTabs.Remove(_contextualTab.Id);
+                _activeContextualTabs.Remove(_contextualId);
             }
         }
 
         [RPInternalUseOnly]
         internal static void ShowContextualTab(string _contextualId)
         {
-            if (_activeContextualTabs.ContainsKey(_contextualId) 
-                && _activeContextualTabs[_contextualId] is ContextualRibbonTab _contextualTab)
+            if (!_activeContextualTabs.ContainsKey(_contextualId))
             {
-                Ribbon?.ShowContextualTab(_contextualTab, false, true);
-                _contextualTab.IsActive = true;
-                return;
-            }
-            _contextualTab = (ContextualRibbonTab) Ribbon?.Tabs?
-                .FirstOrDefault(t => t.Id == _contextualId && t is ContextualRibbonTab);
-            if (_contextualTab != null)
+                ContextualRibbonTab _contextualTab = (ContextualRibbonTab)Ribbon?.Tabs?.FirstOrDefault(t => t.Id == _contextualId && t is ContextualRibbonTab);
+                if (_contextualTab == null) // We dont need to draw or loop for tabs that does not exists anymore
+                    return;
                 _activeContextualTabs.Add(_contextualId, _contextualTab);
+            }
         }
 
         [RPInternalUseOnly]

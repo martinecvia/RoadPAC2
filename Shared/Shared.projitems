@@ -193,4 +193,9 @@
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_TestFlags.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\DebugXSLT.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+  </ItemGroup>
 </Project>

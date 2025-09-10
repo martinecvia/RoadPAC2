@@ -46,7 +46,9 @@ namespace Shared
             Projector = new ProjectController();
             #region RIBBON_REGISTRY
             RibbonController.CreateTab("rp_RoadPAC");
-            RibbonController.CreateContextualTab("rp_TestFlags", ProjectController.FClass.Route);
+            var _testSelFlags = RibbonController.CreateContextualTab("rp_TestFlags", 
+                (_) => { return true; });
+            _testSelFlags.Flags = ProjectController.FClass.Route;
             #endregion
             void BeginInit()
             {
