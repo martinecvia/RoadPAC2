@@ -57,8 +57,8 @@
     <Compile Include="$(MSBuildThisFileDirectory)RPApp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RPUseOnlyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\RibbonController.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)windows\models\BooleanToVisibilityConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)windows\models\StringToSolidColorBrushConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Windows\Models\BooleanToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Windows\Models\StringToSolidColorBrushConverter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Models\WatermarkHandler.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\ProjectorViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Projector.xaml.cs">
