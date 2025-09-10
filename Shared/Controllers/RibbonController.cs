@@ -144,13 +144,16 @@ namespace Shared.Controllers
                         if (Ribbon == null) return;
                         foreach (var reAdd in _Tabs)
                         {
+                            // If for some reason tab still exists, ignore it
+                            if (Ribbon.Tabs.Contains(reAdd))
+                                continue;
                             bool wasActive = reAdd.IsActive;
                             Ribbon.Tabs.Add(reAdd); 
                             // Adding ribbon to tab deactivates it,
                             // so we check if it was active before,
                             // and make it active again
                             reAdd.IsActive = wasActive;
-                            Debug.WriteLine($"[&] Re-added: {reAdd.Id} with IsActive={wasActive}");
+                            Debug.WriteLine($"[&] Re-added: {reAdd.Id}");
                         }
                     }));
                 };
