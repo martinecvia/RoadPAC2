@@ -1,14 +1,14 @@
 ﻿#pragma warning disable CS1998
 
-using System;
+using System; // Keep for .NET 4.6
 using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Diagnostics;
+using System.Collections.Generic; // Keep for .NET 4.6
+using System.Diagnostics; // Keep for .NET 4.6
 using System.IO;
-using System.Linq;
+using System.Linq; // Keep for .NET 4.6
 using System.Runtime.InteropServices;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Threading; // Keep for .NET 4.6
+using System.Threading.Tasks; // Keep for .NET 4.6
 
 using Shared.Controllers.Models.Project;
 using Shared.Helpers;

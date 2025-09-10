@@ -1,4 +1,4 @@
-﻿using System.Threading;
+﻿using System.Threading; // Keep for .NET 4.6
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD

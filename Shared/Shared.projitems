@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\FileWatcherController.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\DocumentEditorExtension.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extensions\TaskExtensions.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Helpers\CoordinateHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\FilePeekHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Helpers\RDPFileHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Models\RPConfig.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\Items\RibbonTextBox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonToolTip.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)controllers\ResourceController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Models\ValueTuple2.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RPApp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RPUseOnlyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\RibbonController.cs" />
@@ -66,9 +68,6 @@
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_default_16.ico" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_default_32.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Models\" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_RoadPAC.xml">

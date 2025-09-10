@@ -6,7 +6,6 @@
 
 using System; // Keep for .NET 4.6
 using System.Collections.Generic; // Keep for .NET 4.6
-using System.Diagnostics;
 using System.Linq; // Keep for .NET 4.6
 using System.Reflection;
 

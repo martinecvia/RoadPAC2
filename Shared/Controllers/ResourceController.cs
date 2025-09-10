@@ -1,7 +1,4 @@
-#pragma warning disable CS8600
-#pragma warning disable CS8603
-#pragma warning disable CS8604
-#pragma warning disable CS8634
+#pragma warning disable CS8600, CS8603, CS8604, CS8634
 
 using System; // Keep for .NET 4.6
 using System.Collections.Generic; // Keep for .NET 4.6

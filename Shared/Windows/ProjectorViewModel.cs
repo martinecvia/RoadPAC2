@@ -1,9 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿#pragma warning disable CS8625
+
+using System; // Keep for .NET 4.6
+using System.Collections.Generic; // Keep for .NET 4.6
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
-using System.Linq;
+using System.Linq; // Keep for .NET 4.6
 using System.Windows.Data;
 
 using Shared.Controllers;

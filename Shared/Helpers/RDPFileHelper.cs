@@ -1,4 +1,6 @@
-﻿using System; // Keep for .NET 4.6
+﻿#pragma warning disable CS8603, CS8618, CS8625
+
+using System; // Keep for .NET 4.6
 using System.Threading.Tasks; // Keep for .NET 4.6
 
 using RDPFILELib;

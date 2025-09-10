@@ -12,11 +12,10 @@ namespace Shared
         /// <summary>
         /// Throws ArgumentNullException if the object is null.
         /// </summary>
-        /// <typeparam name="T">Type of the object.</typeparam>
         /// <param name="obj">The instance to which the assertion applies.</param>
         /// <param name="paramName">Name of the parameter.</param>
         /// <exception cref="ArgumentNullException">Throws ArgumentNullException if <paramref name="obj"/> is null.</exception>
-        public static void IsNotNull<T>(T obj, string paramName) where T : class
+        public static void IsNotNull(object obj, string paramName)
         {
             if (obj == null)
                 throw new ArgumentNullException(paramName);

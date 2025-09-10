@@ -3,7 +3,7 @@
 using System; // Keep for .NET 4.6
 using System.IO;
 using System.Text.RegularExpressions;
-using System.Linq;
+using System.Linq; // Keep for .NET 4.6
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -14,8 +14,6 @@ using ZwSoft.ZwCAD.ApplicationServices;
 using Autodesk.AutoCAD.ApplicationServices;
 #endif
 #endregion
-
-using Shared.Controllers;
 
 namespace Shared.Models
 {
@@ -30,7 +28,7 @@ namespace Shared.Models
         /// Initializes a new instance of the <see cref="CommandHandler"/> class with the specified command string.
         /// </summary>
         /// <param name="command">The AutoCAD command string to be executed.</param>
-        public CommandHandler(string command) => _command = command;
+        public CommandHandler(string command) => _command = command; // Keep for .NET 4.6
 
         public string Command => _command;
 
@@ -56,27 +54,27 @@ namespace Shared.Models
                 string command = _command.Substring(3);
                 if (string.IsNullOrWhiteSpace(command))
                     return;
-                var (Executable, Arguments) = Win32Args(command);
-                if (string.IsNullOrWhiteSpace(Executable))
+                var (Exec, Args) = Win32Args(command);
+                if (string.IsNullOrWhiteSpace(Exec))
                     return;
                 string InstallPath = RPApp.Config.InstallPath;
                 if (string.IsNullOrWhiteSpace(InstallPath) || !Directory.Exists(InstallPath))
                     return;
-                Executable = Path.Combine(InstallPath, Executable);
-                if (!File.Exists(Executable))
+                Exec = Path.Combine(InstallPath, Exec);
+                if (!File.Exists(Exec))
                     return;
-                Arguments = (Arguments
+                Args = Args
                     .Replace("{WorkingDirectory}", RPApp.Projector.CurrentWorkingDirectory ?? string.Empty)
                     .Replace("{Route}", RPApp.Projector.CurrentRoute ?? string.Empty)
-                    .Replace("{SelectedFile}", RPApp.Projector.CurrentProjectFile?.File ?? string.Empty));
-                Arguments = Regex.Replace(Arguments, @"\s+", " ").Trim();
+                    .Replace("{SelectedFile}", RPApp.Projector.CurrentProjectFile?.File ?? string.Empty);
+                Args = Regex.Replace(Args, @"\s+", " ").Trim();
                 ProcessStartInfo detached = new ProcessStartInfo
                 {
-                    FileName = Executable,
-                    Arguments = Arguments,
+                    FileName = Exec,
+                    Arguments = Args,
                     UseShellExecute = true,
                     CreateNoWindow = false,
-                    //WorkingDirectory = RPApp.Projector.CurrentWorkingDirectory ?? InstallPath
+                    WorkingDirectory = InstallPath,
                 };
                 _ = Process.Start(detached);
                 return;
@@ -95,13 +93,33 @@ namespace Shared.Models
 
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern IntPtr LocalFree(IntPtr hMem);
-        private static (string Executable, string Arguments) Win32Args(string lpCmdLine)
+
+        private readonly struct Win32ArgsResult
+        {
+            public string Exec { get; }
+            public string Args { get; }
+
+            public Win32ArgsResult(string exec, string args)
+            {
+                Exec = exec;
+                Args = args;
+            }
+
+            public void Deconstruct(out string exec, out string args)
+            {
+                exec = Exec;
+                args = Args;
+            }
+
+            public override string ToString() => $"{Exec} {Args}";
+        }
+        private static Win32ArgsResult Win32Args(string lpCmdLine)
         {
             if (string.IsNullOrWhiteSpace(lpCmdLine))
-                return (string.Empty, string.Empty);
+                return new Win32ArgsResult(string.Empty, string.Empty);
             IntPtr arguments = CommandLineToArgvW(lpCmdLine, out int pNumArgs);
             if (arguments == IntPtr.Zero)
-                return (string.Empty, string.Empty);
+                return new Win32ArgsResult(string.Empty, string.Empty);
             try
             {
                 var result = new string[pNumArgs];
@@ -111,7 +129,7 @@ namespace Shared.Models
                     result[i] = Marshal.PtrToStringUni(pointer);
                 }
                 string executable = result.FirstOrDefault() ?? string.Empty;
-                return (executable, string.Join(" ", result.Skip(1)));
+                return new Win32ArgsResult(executable, string.Join(" ", result.Skip(1)));
             }
             finally
             {
