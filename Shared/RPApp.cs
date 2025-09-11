@@ -46,9 +46,20 @@ namespace Shared
             Projector = new ProjectController();
             #region RIBBON_REGISTRY
             RibbonController.CreateTab("rp_RoadPAC");
-            var _testSelFlags = RibbonController.CreateContextualTab("rp_TestFlags", 
-                (_) => { return true; });
-            _testSelFlags.Flags = ProjectController.FClass.Route;
+
+            /*            var _testSelFlags = RibbonController.CreateContextualTab("rp_TestFlags", 
+                            (_) => { return true; });
+                        _testSelFlags.Flags = ProjectController.FClass.Route; */
+
+
+            var _routSelFlags = RibbonController.CreateContextualTab("rp_RouteFlag",
+                (_) => { return false; });
+            _routSelFlags.Flags = ProjectController.FClass.Route;
+
+            var _profileSelFlags = RibbonController.CreateContextualTab("rp_ProfileFlag",
+                (_) => { return false; });
+            _routSelFlags.Flags = ProjectController.FClass.Profile;
+
             #endregion
             void BeginInit()
             {

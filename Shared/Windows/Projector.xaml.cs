@@ -75,9 +75,23 @@ namespace Shared.Windows
         {
             if (RPApp.Projector == null)
                 return;
-            RPApp.Projector.CurrentProjectFile = e.NewValue is TreeItem treeItem 
-                ? treeItem.File 
-                : null;
+
+            if (e.NewValue is TreeItem treeItem)
+            {
+                if (treeItem.IsRouteNode)
+                {
+                    // tohle je jen rychlej fix, chci aby se při kliknutí na název trasy nezobrazoval kontextový panel pro směr
+                    // pokud jde zařídit lépe, udělej jinak
+                    RPApp.Projector.CurrentProjectFile = null;
+                    return;
+                }
+                
+                RPApp.Projector.CurrentProjectFile = treeItem.File;
+            }
+            else
+            {
+                RPApp.Projector.CurrentProjectFile = null;
+            }
         }
         #endregion
         [RPPrivateUseOnly]
