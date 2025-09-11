@@ -7,7 +7,6 @@
 using System; // Keep for .NET 4.6
 using System.Collections.Generic; // Keep for .NET 4.6
 using System.Collections.Specialized;
-using System.Diagnostics;
 using System.Linq; // Keep for .NET 4.6
 using System.Reflection;
 
@@ -41,14 +40,49 @@ namespace Shared.Controllers
                                                             // This also prevents using the same name from different applications.
 
         private static RibbonControl Ribbon => ComponentManager.Ribbon;
-        private static bool _hasTab = false;
-        private static bool _hasContextual = false;
+
+        // Used to avoid multiple instances of event registration 
+        private static volatile bool _hasTab = false;
+        private static volatile bool _hasContextual = false;
+
         private static readonly Dictionary<string, object> _registeredControls = new Dictionary<string, object>();
         private static readonly Dictionary<string, ContextualRibbonTab> _activeContextualTabs = new Dictionary<string, ContextualRibbonTab>();
         private static readonly Dictionary<string, Func<SelectionSet, bool>> _contextualTabConditions 
             = new Dictionary<string, Func<SelectionSet, bool>>();
 
         private static List<RibbonTab> _Tabs = new List<RibbonTab>();
+
+        [RPInfoOut]
+        public static RibbonTab CreateTab(string tabId, string tabName = null, string tabDescription = null) 
+            => CreateTab<RibbonTab>(tabId, tabName, tabDescription);
+
+        [RPInfoOut]
+        public static ContextualRibbonTab CreateContextualTab(string tabId, Func<SelectionSet, bool> onSelectionMatch)
+        {
+            ContextualRibbonTab tab = CreateContextualTab(tabId);
+            tab.IsSelectionTab = true;
+            if (_contextualTabConditions.Count == 0)
+                Application.DocumentManager.MdiActiveDocument.ImpliedSelectionChanged += OnSelectionChanged;
+            if (!_contextualTabConditions.ContainsKey(tab.Id))
+                _contextualTabConditions.Add(tab.Id, onSelectionMatch);
+            return tab;
+        }
+
+        [RPInfoOut]
+        public static ContextualRibbonTab CreateContextualTab(string tabId, ProjectController.FClass flags)
+        {
+            ContextualRibbonTab tab = CreateContextualTab(tabId);
+            tab.Flags = flags;
+            return tab;
+        }
+
+        [RPInternalUseOnly]
+        internal static void HideContextualTab(ContextualRibbonTab _contextualTab)
+            => HideContextualTab(_contextualTab.Id);
+
+        [RPInternalUseOnly]
+        internal static void ShowContextualTab(ContextualRibbonTab _contextualTab)
+            => ShowContextualTab(_contextualTab.Id);
 
         /// <summary>
         /// Ensures that the ribbon system has been properly initialized before use.
@@ -66,9 +100,6 @@ namespace Shared.Controllers
             if (Ribbon == null)
                 throw new InvalidOperationException("Ribbon can't be loaded using reflection or before application initializes properly.");
         }
-
-        public static RibbonTab CreateTab(string tabId, string tabName = null, string tabDescription = null) 
-            => CreateTab<RibbonTab>(tabId, tabName, tabDescription);
 
         [RPPrivateUseOnly]
         private static T CreateTab<T>(string tabId,
@@ -92,13 +123,13 @@ namespace Shared.Controllers
                                                       // For further compatibility and to prevent being overriden.
             if (tabDef != null)
             {
-                foreach (var panelDef in tabDef.PanelsDef)
+                foreach (RibbonPanelDef panelDef in tabDef.PanelsDef)
                 {
                     // Setting up cookie must happend before transforming to reference item
                     string cookie = tab.Id;
                     panelDef.Cookie = panelDef.Cookie.Replace("%Parent", cookie);
                     cookie += $";{panelDef.Id}";
-                    var panelRef = panelDef.Transform(new RibbonPanel());
+                    RibbonPanel panelRef = panelDef.Transform(new RibbonPanel());
                     panelRef.UID = panelDef.Id; // For some reason panel can't have Id
                     RegisterControl(panelDef, panelRef);
                     if (panelDef.SourceDef == null)
@@ -108,11 +139,11 @@ namespace Shared.Controllers
                     cookie += $";{panelDef.SourceDef.Id}";
                     panelRef.Source = panelDef.SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[panelDef.SourceDef.GetType()]());
                     RegisterControl(panelDef.SourceDef, panelRef.Source);
-                    foreach (var itemDef in panelDef.SourceDef.ItemsDef)
+                    foreach (RibbonItemDef itemDef in panelDef.SourceDef.ItemsDef)
                     {
                         itemDef.Cookie = itemDef.Cookie.Replace("%Parent", cookie);
                         cookie += $";{itemDef.Id}";
-                        var itemRef = ProcessRibbonItem(itemDef, panelDef, cookie, currentDepth: 0); // Directly setting currentDepth to zero here,
+                        RibbonItem itemRef = ProcessRibbonItem(itemDef, panelDef, cookie, currentDepth: 0); // Directly setting currentDepth to zero here,
                                                                                                      // because sometimes C# keeps refference to previous currentDepth, which is odd 
                                                                                                      // even tho function has default value defined,
                                                                                                      // so some might think it will take the default value.
@@ -142,18 +173,18 @@ namespace Shared.Controllers
                     Ribbon?.Dispatcher?.BeginInvoke(new Action(() => 
                     {
                         if (Ribbon == null) return;
-                        foreach (var reAdd in _Tabs)
+                        foreach (RibbonTab reAdd in _Tabs)
                         {
                             // If for some reason tab still exists, ignore it
                             if (Ribbon.Tabs.Contains(reAdd))
                                 continue;
                             bool wasActive = reAdd.IsActive;
                             Ribbon.Tabs.Add(reAdd); 
-                            // Adding ribbon to tab deactivates it,
+                            // Adding ribbon to tab deactivates its IsActive state to default,
                             // so we check if it was active before,
                             // and make it active again
                             reAdd.IsActive = wasActive;
-                            Debug.WriteLine($"[&] Re-added: {reAdd.Id}");
+                            System.Diagnostics.Debug.WriteLine($"[&] Re-added: {reAdd.Id}");
                         }
                     }));
                 };
@@ -163,7 +194,8 @@ namespace Shared.Controllers
             return tab;
         }
 
-        public static ContextualRibbonTab CreateContextualTab(string tabId)
+        [RPPrivateUseOnly]
+        private static ContextualRibbonTab CreateContextualTab(string tabId)
         {
 #if NON_VOLATILE_MEMORY
             AssertInitialized();
@@ -178,7 +210,6 @@ namespace Shared.Controllers
             tab = CreateTab<ContextualRibbonTab>(tabId);
             tab.IsVisible = false;
             tab.IsContextualTab = true;
-            tab.IsSelectionTab = false;
             ApplyOlderTheme(tab);
             // This protects stack agains multiple instances of Idle event registration
             if (!_hasContextual)
@@ -189,26 +220,8 @@ namespace Shared.Controllers
             return tab;
         }
 
-        public static ContextualRibbonTab CreateContextualTab(string tabId, Func<SelectionSet, bool> onSelectionMatch)
-        {
-            ContextualRibbonTab tab = CreateContextualTab(tabId);
-            tab.IsSelectionTab = true;
-            if (_contextualTabConditions.Count == 0)
-                Application.DocumentManager.MdiActiveDocument.ImpliedSelectionChanged += OnSelectionChanged;
-            if (!_contextualTabConditions.ContainsKey(tab.Id))
-                _contextualTabConditions.Add(tab.Id, onSelectionMatch);
-            return tab;
-        }
-
-        public static ContextualRibbonTab CreateContextualTab(string tabId, ProjectController.FClass flags)
-        {
-            ContextualRibbonTab tab = CreateContextualTab(tabId);
-            tab.Flags = flags;
-            return tab;
-        }
-
-        [RPInternalUseOnly]
-        internal static void HideContextualTab(string _contextualId)
+        [RPPrivateUseOnly]
+        private static void HideContextualTab(string _contextualId)
         {
             if (_activeContextualTabs.ContainsKey(_contextualId)
                 && _activeContextualTabs[_contextualId] is ContextualRibbonTab _contextualTab)
@@ -219,8 +232,8 @@ namespace Shared.Controllers
             }
         }
 
-        [RPInternalUseOnly]
-        internal static void ShowContextualTab(string _contextualId)
+        [RPPrivateUseOnly]
+        private static void ShowContextualTab(string _contextualId)
         {
             if (!_activeContextualTabs.ContainsKey(_contextualId))
             {
@@ -231,14 +244,6 @@ namespace Shared.Controllers
             }
         }
 
-        [RPInternalUseOnly]
-        internal static void HideContextualTab(ContextualRibbonTab _contextualTab)
-            => HideContextualTab(_contextualTab.Id);
-
-        [RPInternalUseOnly]
-        internal static void ShowContextualTab(ContextualRibbonTab _contextualTab)
-            => ShowContextualTab(_contextualTab.Id);
-
         [RPPrivateUseOnly]
         private static void OnApplicationIdle(object sender, EventArgs eventArgs)
         {
@@ -246,7 +251,7 @@ namespace Shared.Controllers
                                     // and event was fired in the middle of cleaning up databases
                                     // [bug at: Autodesk AutoCAD 2017 #11387]
                 return;
-            foreach (var _contextualTab in _activeContextualTabs.Values)
+            foreach (ContextualRibbonTab _contextualTab in _activeContextualTabs.Values)
             {
                 if (!_contextualTab.IsContextualTab)
                 {
@@ -272,9 +277,9 @@ namespace Shared.Controllers
             PromptSelectionResult result = document.Editor.SelectImplied();
             if (result.Status != PromptStatus.OK || result.Value == null || result.Value.Count == 0)
             {
-                foreach (var Id in _contextualTabConditions.Keys)
+                foreach (string Id in _contextualTabConditions.Keys)
                 {
-                    var _contextualTab = Ribbon?.Tabs?.FirstOrDefault(t => t.Id == Id);
+                    RibbonTab _contextualTab = Ribbon?.Tabs?.FirstOrDefault(t => t.Id == Id);
                     if (_contextualTab != null)
                     {
                         Ribbon?.HideContextualTab(_contextualTab);
@@ -326,7 +331,7 @@ namespace Shared.Controllers
             if (currentDepth < 4 || RibbonItemDef.ItemsFactory.ContainsKey(itemDef.GetType()))
             {
                 itemDef.Cookie = itemDef.Cookie.Replace("%Parent", cookie);
-                var itemRef = itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]());
+                RibbonItem itemRef = itemDef.Transform(RibbonItemDef.ItemsFactory[itemDef.GetType()]());
                 switch (itemDef)
                 {
                     case RibbonRowPanelDef item:
@@ -342,13 +347,13 @@ namespace Shared.Controllers
                         {
                             children = item.ItemsDef;
                         }
-                        var target = ((RibbonRowPanel)itemRef).Source?.Items ?? ((RibbonRowPanel)itemRef).Items;
-                        foreach (var childDef in children)
+                        RibbonItemCollection target = ((RibbonRowPanel)itemRef).Source?.Items ?? ((RibbonRowPanel)itemRef).Items;
+                        foreach (RibbonItemDef childDef in children)
                         {
                             // The following item types are not supported in this collection: RibbonRowPanel and RibbonPanelBreak
                             if (childDef is RibbonRowPanelDef || childDef is RibbonPanelBreakDef)
                                 continue;
-                            var childRef = ProcessRibbonItem(childDef, panelDef, $"{cookie}", currentDepth + 1);
+                            RibbonItem childRef = ProcessRibbonItem(childDef, panelDef, $"{cookie}", currentDepth + 1);
                             if (childRef != null)
                                 target.Add(childRef);
                         }
@@ -359,23 +364,23 @@ namespace Shared.Controllers
                         if (((RibbonList)itemRef).ItemsBinding == null && item.ItemsDef.Count > 0)
                         {
                             // Either Items or ItemsBinding can be used to manage the collection, but not both
-                            foreach (var childDef in item.ItemsDef)
+                            foreach (RibbonItemDef childDef in item.ItemsDef)
                             {
-                                var childRef = ProcessRibbonItem(childDef, panelDef, $"{cookie}", currentDepth + 1);
+                                RibbonItem childRef = ProcessRibbonItem(childDef, panelDef, $"{cookie}", currentDepth + 1);
                                 if (childRef != null)
                                     ((RibbonList)itemRef).Items.Add(childRef);
                             }
                         }
-                        foreach (var childDef in item.MenuItemsDef)
+                        foreach (RibbonItemDef childDef in item.MenuItemsDef)
                         {
-                            var childRef = (RibbonCommandItem)ProcessRibbonItem(childDef, panelDef, $"{cookie}", currentDepth + 1);
+                            RibbonCommandItem childRef = (RibbonCommandItem)ProcessRibbonItem(childDef, panelDef, $"{cookie}", currentDepth + 1);
                             if (childRef != null)
                                 ((RibbonCombo)itemRef).MenuItems.Add(childRef);
                         }
                         break;
                     case RibbonListButtonDef item:
 
-                        foreach (var childDef in item.ItemsDef)
+                        foreach (RibbonItemDef childDef in item.ItemsDef)
                         {
                             // Set of rules for each implementation of RibbonListButtonDef
                             switch (item)
@@ -393,7 +398,7 @@ namespace Shared.Controllers
                                         continue;
                                     break;
                             }
-                            var childRef = ProcessRibbonItem(childDef, panelDef, $"{cookie}", currentDepth + 1);
+                            RibbonItem childRef = ProcessRibbonItem(childDef, panelDef, $"{cookie}", currentDepth + 1);
                             if (childRef != null)
                                 ((RibbonListButton)itemRef).Items.Add(childRef);
                         }
@@ -418,7 +423,7 @@ namespace Shared.Controllers
                     try
                     {
                         // We'll try to invoke our Id, and our target so we can individualy control each control
-                        var invoke = wrapperType.GetConstructors()
+                        object invoke = wrapperType.GetConstructors()
                             .FirstOrDefault()?.Invoke(new object[] { itemRef, itemDef });
                         if (invoke != null)
                             _registeredControls.Add(itemDef.UUID, invoke);
@@ -469,8 +474,8 @@ namespace Shared.Controllers
 
         public class ContextualRibbonTab : RibbonTab
         {
-            public bool IsSelectionTab { get; set; } = false;
-            public ProjectController.FClass Flags { get; set; } = ProjectController.FClass.None;
+            public bool IsSelectionTab { get; internal set; } = false;
+            public ProjectController.FClass Flags { get; internal set; } = ProjectController.FClass.None;
         }
     }
 }

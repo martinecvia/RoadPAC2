@@ -16,12 +16,9 @@ namespace Shared.Controllers
 {
     public static class ResourceController
     {
-        [RPPrivateUseOnly]
         private static readonly Dictionary<string, BitmapImage> _cachedBitMaps
             = new Dictionary<string, BitmapImage>();
-        [RPPrivateUseOnly]
         private static readonly Dictionary<string, string> _cachedURI = new Dictionary<string, string>();
-        [RPPrivateUseOnly]
         private static readonly List<string> _cachedXml = new List<string>();
 
         /// <summary>
@@ -49,7 +46,8 @@ namespace Shared.Controllers
         /// If a resource fails to load (e.g., due to format errors or corruption), it is skipped.
         /// </para>
         /// </remarks>
-        public static void LoadEmbeddedResources()
+        [RPInternalUseOnly]
+        internal static void LoadEmbeddedResources()
         {
             Assembly assembly = Assembly.GetExecutingAssembly();
             // First we have to filter out files that does not start with prefix rp_

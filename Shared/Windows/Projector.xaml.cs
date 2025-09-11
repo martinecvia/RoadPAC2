@@ -5,6 +5,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 
 using Shared.Windows.Models;
+using System.Windows.Input;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -26,12 +27,25 @@ namespace Shared.Windows
             InitializeComponent();
             if (ViewModel == null)
                 DataContext = new ProjectorViewModel();
+            PreviewMouseDown += Projector_PreviewMouseDown;
         }
 
         public void RefreshItems() =>
             DataContext = new ProjectorViewModel();
         #region PRIVATE
         #region EVENTS
+        [RPPrivateUseOnly]
+        private void Projector_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ChangedButton == MouseButton.Left)
+            {
+                var target = FindAncestor<TreeViewItem>(Mouse.DirectlyOver as DependencyObject);
+                // This means that user have clicked elsewhere
+                if (RPApp.Projector != null && target?.DataContext == null)
+                    RPApp.Projector.CurrentProjectFile = null;
+            }
+        }
+
         [RPPrivateUseOnly]
         private void ClearSearch_Click(object sender, RoutedEventArgs e)
         {

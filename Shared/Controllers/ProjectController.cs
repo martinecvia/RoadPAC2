@@ -52,6 +52,11 @@ namespace Shared.Controllers
                         if (!value.EndsWith("\\"))
                             value += "\\";
                         _currentWorkingDirectory = value;
+                        Task.Run(() =>
+                        {
+                            // Set RDP Config
+                            Debug.WriteLine(value);
+                        });
                         CurrentWorkingDirectoryChanged?.Invoke(value);
                     }
                 }
@@ -67,6 +72,11 @@ namespace Shared.Controllers
                 if (_currentRoute != value)
                 {
                     _currentRoute = value;
+                    Task.Run(() =>
+                    {
+                        // Set RDP Config
+                        Debug.WriteLine(value);
+                    });
                     CurrentRouteChanged?.Invoke(value);
                 }
             }
