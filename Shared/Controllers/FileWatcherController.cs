@@ -3,7 +3,6 @@
 using System;  // Keep for .NET 4.6
 using System.Collections.Concurrent;
 using System.Collections.Generic; // Keep for .NET 4.6
-using System.Diagnostics;
 using System.IO;
 using System.Linq; // Keep for .NET 4.6
 using System.Threading; // Keep for .NET 4.6
@@ -64,7 +63,7 @@ namespace Shared.Controllers
             if (!Directory.Exists(lsPath))
                 throw new DirectoryNotFoundException(lsPath);
             HashSet<string> files = new HashSet<string>(Directory.GetFiles(lsPath)
-                .Select(System.IO.Path.GetFileName));
+            .Select(System.IO.Path.GetFileName));
             _lock.EnterWriteLock();
             try
             {
@@ -72,11 +71,11 @@ namespace Shared.Controllers
             } finally { _lock.ExitWriteLock(); }
             FileSystemWatcher watcher = new FileSystemWatcher(lsPath, "*.*");
 #if NET8_0_OR_GREATER
-            string[] filters = [
-                "*.xhb", "*.shb", // Route 
-            ];
-            //foreach (var filter in filters)
-            //    watcher.Filters.Add(filter);
+        string[] filters = [
+            "*.xhb", "*.shb", // Route 
+        ];
+        //foreach (var filter in filters)
+        //    watcher.Filters.Add(filter);
 #endif
             watcher.Created += (o, s) => OnFileCreated(lsPath, s.Name);
             watcher.Changed += (o, s) => OnFileChanged(lsPath, s.Name, s.ChangeType);

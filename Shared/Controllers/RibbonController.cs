@@ -28,6 +28,7 @@ using Autodesk.Windows;
 using Shared.Controllers.Models.RibbonXml;
 using Shared.Controllers.Models.RibbonXml.Items;
 using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
+using System.Diagnostics;
 
 namespace Shared.Controllers
 {
@@ -47,13 +48,13 @@ namespace Shared.Controllers
 
         private static readonly Dictionary<string, object> _registeredControls = new Dictionary<string, object>();
         private static readonly Dictionary<string, ContextualRibbonTab> _activeContextualTabs = new Dictionary<string, ContextualRibbonTab>();
-        private static readonly Dictionary<string, Func<SelectionSet, bool>> _contextualTabConditions 
+        private static readonly Dictionary<string, Func<SelectionSet, bool>> _contextualTabConditions
             = new Dictionary<string, Func<SelectionSet, bool>>();
 
         private static List<RibbonTab> _Tabs = new List<RibbonTab>();
 
         [RPInfoOut]
-        public static RibbonTab CreateTab(string tabId, string tabName = null, string tabDescription = null) 
+        public static RibbonTab CreateTab(string tabId, string tabName = null, string tabDescription = null)
             => CreateTab<RibbonTab>(tabId, tabName, tabDescription);
 
         [RPInfoOut]
@@ -112,11 +113,11 @@ namespace Shared.Controllers
             Assert.IsNotNull(tabId, nameof(tabId));
             if (Ribbon == null)
                 return new T();
-            T tab = (T) Ribbon.Tabs.FirstOrDefault(t => t.Id == RibbonTab__Prefix + tabId);
+            T tab = (T)Ribbon.Tabs.FirstOrDefault(t => t.Id == RibbonTab__Prefix + tabId);
             if (tab != null)
                 return tab; // We really don't want to process same tab multiple times,
                             // there is no point in that
-            RibbonTabDef tabDef = ResourceController.LoadResourceRibbon<RibbonTabDef>(tabId);
+            RibbonTabDef tabDef = ResourceController.LoadResourceRibbon(tabId);
             tab = tabDef?.Transform(new T()) ?? new T();
             Ribbon?.Tabs.Add(tab);
             tab.Id = RibbonTab__Prefix + tabId;       // We want to mark these tabs as RoadPAC ones.
@@ -131,23 +132,23 @@ namespace Shared.Controllers
                     cookie += $";{panelDef.Id}";
                     RibbonPanel panelRef = panelDef.Transform(new RibbonPanel());
                     panelRef.UID = panelDef.Id; // For some reason panel can't have Id
-                    RegisterControl(panelDef, panelRef);
+                    RegisterControl(panelRef, panelDef);
                     if (panelDef.SourceDef == null)
                         continue;
                     tab.Panels.Add(panelRef);
                     panelDef.SourceDef.Cookie = panelDef.SourceDef.Cookie.Replace("%Parent", cookie);
                     cookie += $";{panelDef.SourceDef.Id}";
                     panelRef.Source = panelDef.SourceDef.Transform(RibbonPanelSourceDef.SourceFactory[panelDef.SourceDef.GetType()]());
-                    RegisterControl(panelDef.SourceDef, panelRef.Source);
+                    RegisterControl(panelRef.Source, panelDef.SourceDef);
                     foreach (RibbonItemDef itemDef in panelDef.SourceDef.ItemsDef)
                     {
                         itemDef.Cookie = itemDef.Cookie.Replace("%Parent", cookie);
                         cookie += $";{itemDef.Id}";
                         RibbonItem itemRef = ProcessRibbonItem(itemDef, panelDef, cookie, currentDepth: 0); // Directly setting currentDepth to zero here,
-                                                                                                     // because sometimes C# keeps refference to previous currentDepth, which is odd 
-                                                                                                     // even tho function has default value defined,
-                                                                                                     // so some might think it will take the default value.
-                                                                                                     // This is a compiler issue with .NET 4.6 NDP46-KB3045557-x86-x64
+                                                                                                            // because sometimes C# keeps refference to previous currentDepth, which is odd 
+                                                                                                            // even tho function has default value defined,
+                                                                                                            // so some might think it will take the default value.
+                                                                                                            // This is a compiler issue with .NET 4.6 NDP46-KB3045557-x86-x64
                         if (itemRef != null) // null RibbonItem definitions will break cad instance
                             panelRef.Source.Items.Add(itemRef);
                     }
@@ -157,8 +158,9 @@ namespace Shared.Controllers
             if (!string.IsNullOrEmpty(tabDescription))
                 tab.Description = tabDescription;
             tab.UID = tab.Id;
+            tab.IsContextualTab = false;
             if (tabDef != null)
-                RegisterControl(tabDef, tab);
+                RegisterControl(tab, tabDef);
             if (!_hasTab)
             {
                 // We want to keep our tabs displayed at all costs
@@ -170,7 +172,7 @@ namespace Shared.Controllers
                     if (_Tabs.Count == 0 || Ribbon == null)
                         return;
                     // Defer to avoid reentrancy
-                    Ribbon?.Dispatcher?.BeginInvoke(new Action(() => 
+                    Ribbon?.Dispatcher?.BeginInvoke(new Action(() =>
                     {
                         if (Ribbon == null) return;
                         foreach (RibbonTab reAdd in _Tabs)
@@ -179,7 +181,7 @@ namespace Shared.Controllers
                             if (Ribbon.Tabs.Contains(reAdd))
                                 continue;
                             bool wasActive = reAdd.IsActive;
-                            Ribbon.Tabs.Add(reAdd); 
+                            Ribbon.Tabs.Add(reAdd);
                             // Adding ribbon to tab deactivates its IsActive state to default,
                             // so we check if it was active before,
                             // and make it active again
@@ -405,31 +407,46 @@ namespace Shared.Controllers
                         break;
                         { } // Little C# hack for better memory management
                 }
-                RegisterControl(itemDef, itemRef);
+                RegisterControl(itemRef, itemDef);
                 return itemRef;
             }
             return null;
         }
 
         [RPPrivateUseOnly]
-        private static void RegisterControl(BaseRibbonXml itemDef, object itemRef)
+        private static void RegisterControl(object itemRef, BaseRibbonXml itemDef)
         {
             if (!string.IsNullOrEmpty(itemDef.UUID) && !_registeredControls.ContainsKey(itemDef.UUID))
             {
+                // We'll try to invoke our Id, and our target so we can individualy control each control
                 Type wrapperType = Assembly.GetExecutingAssembly()
                     .GetType($"{RibbonController.ControlsNamespace}.{itemDef.Id}", false, true);
                 if (wrapperType != null)
                 {
                     try
                     {
-                        // We'll try to invoke our Id, and our target so we can individualy control each control
-                        object invoke = wrapperType.GetConstructors()
-                            .FirstOrDefault()?.Invoke(new object[] { itemRef, itemDef });
-                        if (invoke != null)
-                            _registeredControls.Add(itemDef.UUID, invoke);
+                        ConstructorInfo constructor = wrapperType.GetConstructors()?
+                            .FirstOrDefault(c =>
+                            {
+                                ParameterInfo[] parameters = c.GetParameters();
+                                return parameters.Length == 2
+                                    && parameters[0].ParameterType.IsAssignableFrom(itemRef.GetType())
+                                    && parameters[1].ParameterType.IsAssignableFrom(itemDef.GetType());
+                            });
+                        if (constructor != null)
+                        {
+                            object invoke = constructor.Invoke(new object[] { itemRef, itemDef });
+                            if (invoke != null)
+                                _registeredControls.Add(itemDef.UUID, invoke);
+                        }
                     }
-                    catch (System.Exception)
-                    { }
+                    catch (System.Exception exception)
+                    { 
+                        System.Diagnostics.Debug.WriteLine($"[&] Problem while registering {itemDef.GetType()}/{itemDef.Id}\n" +
+                            $"Control: {RibbonController.ControlsNamespace}.{itemDef.Id}\n" +
+                            $"Message: {exception.Message}\n" +
+                            $"--- END OF STACK"); 
+                    }
                 }
             }
         }

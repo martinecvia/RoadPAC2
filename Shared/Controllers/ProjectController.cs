@@ -324,45 +324,48 @@ namespace Shared.Controllers
                 var projectFile = files.FirstOrDefault(f => f.File.Equals(fileName, StringComparison.OrdinalIgnoreCase));
                 if (File.Exists(fullPath))
                 {
-                    // We fetch updated date early, as change can happen anytime dureing fetch process
-                    DateTime updatedAt = File.GetLastWriteTimeUtc(fullPath);
-                    DateTime createdAt = File.GetCreationTimeUtc(fullPath);
-                    if (createdAt > updatedAt)
+                    FileInfo lsFile = new FileInfo(fullPath);
+                    if (!lsFile.IsReadOnly)
                     {
-                        // Attempt to fix datetimes when file was copied from another source,
-                        // and lost track of their creation date & time
-                        try
+                        // We fetch updated date early, as change can happen anytime dureing fetch process
+                        DateTime updatedAt = File.GetLastWriteTimeUtc(fullPath);
+                        string extension = Path.GetExtension(fileName)?.TrimStart('.').ToUpper() ?? "";
+                        if (projectFile != null)
                         {
-                            File.SetCreationTimeUtc(fullPath, updatedAt);   // Set the creation time
-                            File.SetLastWriteTimeUtc(fullPath, updatedAt);  // Restore the original last write time
+                            // Just update it's values
+                            projectFile.UpdatedAt = updatedAt;
+                            await projectFile.BeginInit();
                         }
-                        finally
+                        else if (ProjectFileFactory.TryGetValue(extension, out var factory))
                         {
-                            createdAt = updatedAt; // Weird thing when copying files from network,
-                                                   // then their creation date is newer than update date
+                            DateTime createdAt = File.GetCreationTimeUtc(fullPath);
+                            projectFile = factory();
+                            projectFile.Path = lsPath;
+                            projectFile.File = fileName;
+                            if (createdAt > updatedAt)
+                            {
+                                // Attempt to fix datetimes when file was copied from another source,
+                                // and lost track of their creation date & time
+                                try
+                                {
+                                    File.SetCreationTimeUtc(fullPath, updatedAt);   // Set the creation time
+                                    File.SetLastWriteTimeUtc(fullPath, updatedAt);  // Restore the original last write time
+                                }
+                                catch (Exception)
+                                { return; }
+                                createdAt = updatedAt; // Weird thing when copying files from network,
+                                                       // then their creation date is newer than update date
+                            }
+                            projectFile.CreatedAt = createdAt;
+                            projectFile.UpdatedAt = updatedAt;
+                            await projectFile.BeginInit();
+                            files.Add(projectFile);
                         }
-                    }
-                    string extension = Path.GetExtension(fileName)?.TrimStart('.').ToUpper() ?? "";
-                    if (projectFile != null)
-                    {
-                        // Just update it's values
-                        projectFile.UpdatedAt = updatedAt;
-                        await projectFile.BeginInit();
-                    }
-                    else if (ProjectFileFactory.TryGetValue(extension, out var factory))
-                    {
-                        projectFile = factory();
-                        projectFile.Path = lsPath;
-                        projectFile.File = fileName;
-                        projectFile.CreatedAt = createdAt;
-                        projectFile.UpdatedAt = updatedAt;
-                        await projectFile.BeginInit();
-                        files.Add(projectFile);
-                    }
-                    else
-                    {
-                        // File does not have Factory
-                        // Presumably unmapped file, ignoring it
+                        else
+                        {
+                            // File does not have Factory
+                            // Presumably unmapped file, ignoring it
+                        }
                     }
                 } 
                 else
@@ -375,6 +378,7 @@ namespace Shared.Controllers
                     }
                 }
             }
+            catch (Exception) { }
             finally
             {
                 _lock.ExitWriteLock();

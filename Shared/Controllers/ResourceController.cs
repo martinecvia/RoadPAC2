@@ -193,10 +193,10 @@ namespace Shared.Controllers
         /// <typeparam name="T">The type to deserialize the XML into.</typeparam>
         /// <param name="resourceName">The logical name (without extension) of the embedded XML resource.</param>
         /// <returns>Deserialized object of type T, or default(T) if the resource is not cached or fails to load.</returns>
-        public static T LoadResourceRibbon<T>(string resourceName) where T : BaseRibbonXml
+        public static RibbonTabDef LoadResourceRibbon(string resourceName)
         {
             if (!_cachedXml.Contains(resourceName))
-                return default;
+                return null;
             Assembly assembly = Assembly.GetExecutingAssembly();
             string manifestResource = assembly.GetManifestResourceNames()
                 .FirstOrDefault(resource => resource.EndsWith($"Ribbons.{resourceName}.xml", StringComparison.OrdinalIgnoreCase));
@@ -206,26 +206,34 @@ namespace Shared.Controllers
                                                                // then something must happend during build process
                 try
                 {
-                    Type type = typeof(T);
+                    Type type = typeof(RibbonTabDef);
                     Assert.IsNotNull(type, nameof(type));
-                    XmlSerializer serializer = new XmlSerializer(type);
-                    return (T) serializer.Deserialize(stream);
+                    XmlSerializer serializer = new XmlSerializer(type, new XmlRootAttribute("RibbonTab"));
+                    return (RibbonTabDef) serializer.Deserialize(stream);
                 }
                 catch (InvalidOperationException exception)
                 {
-                    // Log all nested exceptions
-                    int currentNest = 1;
-                    Exception currentException = exception;
-                    while (currentException != null)
-                    {
-                        Debug.WriteLine($"[&] {currentNest}:LoadResourceRibbon({resourceName}(InvalidOperationException)): {currentException.Message}");
-                        currentException = currentException.InnerException;
-                        currentNest++;
-                    }
-                    return null;
+                    LogException(exception, resourceName);
+                    return default;
                 }
-                catch (Exception)
-                { return default; }
+                catch (Exception exception)
+                {
+                    LogException(exception, resourceName);
+                    return default; 
+                }
+            }
+        }
+
+        private static void LogException(Exception exception, string resourceName)
+        {
+            // Log all nested exceptions
+            int currentNest = 1;
+            Exception currentException = exception;
+            while (currentException != null)
+            {
+                Debug.WriteLine($"[&] {currentNest}:LoadResourceRibbon({resourceName}(InvalidOperationException)): {currentException.Message}");
+                currentException = currentException.InnerException;
+                currentNest++;
             }
         }
 
