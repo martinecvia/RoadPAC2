@@ -4,13 +4,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:Shared.Windows.Models"
-             xmlns:shared="clr-namespace:Shared.Windows"
+             xmlns:shared="clr-namespace:Shared.Windows"       
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=shared:ProjectorViewModel, IsDesignTimeCreatable=True}"
              Height="800" MaxHeight="800" Width="350" Background="#FFCCD5F0">
     <UserControl.Resources>
-        <models:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
-        <models:StringToSolidColorBrushConverter x:Key="StringToSolidColorBrushConverter" />
+        <!-- Converters -->
+        <models:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+        <models:StringToSolidColorBrushConverter x:Key="StringToSolidColorBrushConverter"/>
     </UserControl.Resources>
     <DockPanel>
         <Grid DockPanel.Dock="Top" Height="24" Background="#FFCCD5F0">
@@ -19,12 +20,7 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <!-- Search bar -->
-            <TextBox Grid.Column="0"
-                 Height="24"
-                 VerticalContentAlignment="Center"
-                 Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
-                 models:WatermarkHandler.Watermark="Write here to search ..." />
+            <!-- SeachBar -->
             <!-- RemoveSearch Button -->
             <Button Grid.Column="1" Width="22" Margin="1,0,1,0"
                     ToolTip="Clear search"

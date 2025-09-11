@@ -57,9 +57,12 @@
     <Compile Include="$(MSBuildThisFileDirectory)RPApp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RPUseOnlyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\RibbonController.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Windows\Models\AutoSelectBehavior.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Windows\Models\AutoSelectTextBox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Models\BooleanToVisibilityConverter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Windows\Models\QueryMoveFocusEventArgs.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Models\StringToSolidColorBrushConverter.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Windows\Models\WatermarkHandler.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Windows\Models\WatermarkTextBox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\ProjectorViewModel.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Windows\Projector.xaml.cs">
       <DependentUpon>Projector.xaml</DependentUpon>
@@ -202,5 +205,11 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rpOld\rp_excel_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)Windows\Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Page>
   </ItemGroup>
 </Project>
