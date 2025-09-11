@@ -1,11 +1,10 @@
-﻿using WPF = System.Windows.Controls;
-
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-
 using Shared.Windows.Models;
 using System.Windows.Input;
+using System.Diagnostics;
+
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -19,7 +18,7 @@ namespace Shared.Windows
 {
     // https://stackoverflow.com/questions/15681352/transitioning-from-windows-forms-to-wpf/15684569#15684569
     // https://through-the-interface.typepad.com/through_the_interface/2009/08/hosting-wpf-content-inside-an-autocad-palette.html
-    public partial class Projector : WPF.UserControl
+    public partial class Projector : UserControl
     {
         public ProjectorViewModel ViewModel => DataContext as ProjectorViewModel;
         public Projector()
@@ -42,7 +41,19 @@ namespace Shared.Windows
                 var target = FindAncestor<TreeViewItem>(Mouse.DirectlyOver as DependencyObject);
                 // This means that user have clicked elsewhere
                 if (RPApp.Projector != null && target?.DataContext == null)
+                {
                     RPApp.Projector.CurrentProjectFile = null;
+                    // https://stackoverflow.com/questions/491111/how-to-deselect-all-selected-items-in-a-wpf-treeview-when-clicking-on-some-empty
+                    void DeselectAll(TreeItem item)
+                    {
+                        if (item == null) return;
+                        item.IsSelected = false;
+                        foreach (TreeItem child in item)
+                            DeselectAll(child);
+                    }
+                    foreach (TreeItem item in ViewModel.FilteredItems)
+                        DeselectAll(item);
+                }
             }
         }
 
@@ -54,8 +65,22 @@ namespace Shared.Windows
         }
 
         [RPPrivateUseOnly]
-        private void CollapseExceptSelected_Click(object sender, RoutedEventArgs e) =>
-            CollapseAllExcept(ProjectTree, ProjectTree.SelectedItem);
+        private void Collapse_Click(object sender, RoutedEventArgs e)
+        {
+            void CollapseAll(ItemsControl parent)
+            {
+                foreach (var item in parent.Items)
+                {
+                    if (parent.ItemContainerGenerator.ContainerFromItem(item) is TreeViewItem treeViewItem)
+                    {
+                        treeViewItem.IsExpanded = false;
+                        if (treeViewItem.HasItems)
+                            CollapseAll(treeViewItem);
+                    }
+                }
+            }
+            CollapseAll(ProjectTree);
+        }
 
         [RPPrivateUseOnly]
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -90,30 +115,6 @@ namespace Shared.Windows
                 current = VisualTreeHelper.GetParent(current);
             }
             return null;
-        }
-
-        [RPPrivateUseOnly]
-        private void CollapseAllExcept(ItemsControl parent, object except)
-        {
-            foreach (var item in parent.Items)
-            {
-                if (parent.ItemContainerGenerator.ContainerFromItem(item) is TreeViewItem treeViewItem)
-                {
-                    bool IsExceptItem()
-                    {
-                        if (treeViewItem.DataContext == except)
-                            return true;
-                        if (treeViewItem == except)
-                            return true;
-                        return false;
-                    }
-                    if (!IsExceptItem())
-                        treeViewItem.IsExpanded = false;
-
-                    if (treeViewItem.HasItems)
-                        CollapseAllExcept(treeViewItem, except);
-                }
-            }
         }
         #endregion
     }

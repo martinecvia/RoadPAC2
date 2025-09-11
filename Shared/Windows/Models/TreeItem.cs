@@ -1,13 +1,28 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Windows.Media.Imaging;
 
 using Shared.Controllers;
 
 namespace Shared.Windows.Models
 {
-    public class TreeItem : ObservableCollection<TreeItem>
+    public class TreeItem : ObservableCollection<TreeItem>, INotifyPropertyChanged
     {
+        private bool _selected;
+        public bool IsSelected
+        {
+            get => _selected;
+            set
+            {
+                if (_selected != value)
+                {
+                    _selected = value;
+                    OnPropertyChanged(nameof(IsSelected));
+                }
+            }
+        }
+
         public bool IsRouteNode { get; set; } = false;
         public bool IsActiveRoute { get; set; } = false;
         private static readonly BitmapImage DefaultRouteImage =
@@ -98,5 +113,9 @@ namespace Shared.Windows.Models
                 { _image = DefaultImage; }
             }
         }
+
+        public new event PropertyChangedEventHandler PropertyChanged;
+        protected void OnPropertyChanged(string propertyName)
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

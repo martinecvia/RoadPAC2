@@ -3,7 +3,6 @@
 using System; // Keep for .NET 4.6
 using System.Collections.Concurrent;
 using System.Collections.Generic; // Keep for .NET 4.6
-using System.Diagnostics; // Keep for .NET 4.6
 using System.IO;
 using System.Linq; // Keep for .NET 4.6
 using System.Runtime.InteropServices;
@@ -42,21 +41,25 @@ namespace Shared.Controllers
         [RPInfoOut]
         public string CurrentWorkingDirectory
         {
-            get => _currentWorkingDirectory;
+            get
+            {
+                _lock.EnterReadLock();
+                try
+                {
+                    return _currentWorkingDirectory;
+                }
+                finally
+                { _lock.ExitReadLock(); }
+            }
             set
             {
-                if (_currentWorkingDirectory != value)
+                if (_currentWorkingDirectory != value && value != null)
                 {
                     if (Directory.Exists(value))
                     {
                         if (!value.EndsWith("\\"))
                             value += "\\";
                         _currentWorkingDirectory = value;
-                        Task.Run(() =>
-                        {
-                            // Set RDP Config
-                            Debug.WriteLine(value);
-                        });
                         CurrentWorkingDirectoryChanged?.Invoke(value);
                     }
                 }
@@ -66,17 +69,20 @@ namespace Shared.Controllers
         [RPInfoOut]
         public string CurrentRoute
         {
-            get => _currentRoute;
+            get {
+                _lock.EnterReadLock();
+                try
+                {
+                    return _currentRoute;
+                }
+                finally
+                { _lock.ExitReadLock(); }
+            }
             set
             {
-                if (_currentRoute != value)
+                if (_currentRoute != value && value != null)
                 {
                     _currentRoute = value;
-                    Task.Run(() =>
-                    {
-                        // Set RDP Config
-                        Debug.WriteLine(value);
-                    });
                     CurrentRouteChanged?.Invoke(value);
                 }
             }
