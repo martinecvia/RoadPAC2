@@ -4,6 +4,7 @@ using System; // Keep for .NET 4.6
 using System.Collections.Generic; // Keep for .NET 4.6
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq; // Keep for .NET 4.6
 using System.Windows.Data;
@@ -15,6 +16,8 @@ namespace Shared.Windows
 {
     public class ProjectorViewModel
     {
+        internal static bool IsEventHandled { get; set; } = false;
+
         public ObservableCollection<TreeItem> Items => new ObservableCollection<TreeItem>(BuildProjectTree(RPApp.Projector?.CurrentWorkingDirectory));
         public ICollectionView FilteredItems { get; }
 
@@ -43,6 +46,22 @@ namespace Shared.Windows
         {
             FilteredItems = CollectionViewSource.GetDefaultView(Items);
             FilteredItems.Filter = RootFilter;
+            if (RPApp.Projector != null && !IsEventHandled)
+            {
+                IsEventHandled = true;
+                RPApp.Projector.CurrentRouteChanged += (from, to) => {
+                    TreeItem hwTo = Items.FirstOrDefault(f => f.IsRouteNode && f.File != null
+                                                           && f.Label == to);
+                    if (hwTo != null)
+                    {
+                        TreeItem hwFrom = Items.FirstOrDefault(f => f.IsRouteNode && f.File != null
+                                                                 && f.Label == from);
+                        if (hwFrom != null && hwFrom != hwTo)
+                            hwFrom.IsActiveRoute = false;
+                        hwTo.IsActiveRoute = true;
+                    }
+                };
+            }
         }
 
         private bool RootFilter(object obj)
@@ -76,32 +95,32 @@ namespace Shared.Windows
                     Label = routeName,
                     IsRouteNode = true,
                     IsActiveRoute = isCurrent,
-                    Value = isCurrent ? "(CurrentRoute)" : string.Empty,
-                    ValueColor = isCurrent ? "Green" : "White",
                     Image = "./Assets/route.png",
+                    File = route
                 };
-                routeNode.Add(new TreeItem { Label = $"Směrové řešení:", Value= route.File, File = route, Image = "./Assets/shb.ico" });
+                routeNode.Add(new TreeItem { Label = $"Směrové řešení:", Value = route.File, File = route, Image = "./Assets/shb.ico" });
                 var related = RPApp.Projector?.GetRoute(lsPath, route.File) ?? new HashSet<ProjectController.ProjectFile>();
                 // Not a great implementaton but it works at least a little
                 void MarkOutdated(TreeItem node, ProjectController.ProjectFile parent)
                 {
+                    if (node == null)
+                        return;
                     // Falling shit system,
                     // from the oldest to the newest record, and if anything is older, then it's outdated
                     if (node.File?.UpdatedAt != null && parent != null && !string.IsNullOrEmpty(parent.File))
                         node.DisplayWarning = node.File.UpdatedAt < parent.UpdatedAt - TimeSpan.FromSeconds(10);
                     else if ((parent != null || parent?.UpdatedAt != null) && node.File == null)
                         node.DisplayWarning = true; // If file that should be there before is not there
-
                     // We don't want to display warning for Route or empty filed nodes
-                    if (node.File == null || node.IsRouteNode || node.IsGroupNode)
+                    if ((node.File != null && node.File.File == null) || node.IsRouteNode || node.IsGroupNode || node.File == null)
                         node.DisplayWarning = false;
                     if (node.DisplayWarning)
-                        node.WarningToolTip = $"Soubor je zastaralý, vůči: {parent.File}";
+                        node.WarningToolTip = $"Soubor je zastaralý, vůči: {parent.Flag}";
                     foreach (var child in node)
                     {
                         MarkOutdated(child, parent);
                         if (child.DisplayWarning)
-                            child.WarningToolTip = $"Soubor je zastaralý, vůči: {parent.File}";
+                            child.WarningToolTip = $"Soubor je zastaralý, vůči: {parent.Flag}";
                         parent = child.File ?? parent;
                     }
                 }
@@ -113,8 +132,8 @@ namespace Shared.Windows
                         ? $"Niveleta:"
                         : "Niveleta",
                     // Default put in place just so we can know from ribbon that we have selected this node
-                    File = profile ?? new ProjectController.ProjectFile() { Flag = ProjectController.FClass.Profile },
-                    Value = profile?.File
+                    File = profile ?? new ProjectController.ProjectFile() { Root = route.Root, Flag = ProjectController.FClass.Profile },
+                    Value = profile?.File ?? string.Empty
                 });
 
                 AddCorridor(routeNode, related);
@@ -132,7 +151,7 @@ namespace Shared.Windows
             string groupNodeImage = null, string itemNodeImage = null)
         {
             var groupNode = new TreeItem { Label = label, IsGroupNode = true, Image = groupNodeImage, 
-                File = new ProjectController.ProjectFile() { Flag = flag } };
+                File = new ProjectController.ProjectFile() { Root = parent.File.Root, Flag = flag } };
             var matches = related.Where(r => r.Flag.HasFlag(flag)).ToList();
             if (matches.Any())
             {
@@ -148,7 +167,7 @@ namespace Shared.Windows
         {
             var corridor = related.FirstOrDefault(r => r.Flag == ProjectController.FClass.Corridor);
             var node = new TreeItem { Label = "Koridor", IsGroupNode = true, Image = "./Assets/road.png", 
-                File = new ProjectController.ProjectFile() { Flag = ProjectController.FClass.Corridor } };
+                File = new ProjectController.ProjectFile() { Root = parent.File.Root, Flag = ProjectController.FClass.Corridor } };
             if (corridor != null)
             {
                 node.Add(new TreeItem { Label = $"Pokrytí:", Value = corridor.File, Image = "./Assets/list-item.png", File = corridor });

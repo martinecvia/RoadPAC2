@@ -3,6 +3,7 @@
 using System; // Keep for .NET 4.6
 using System.Collections.Concurrent;
 using System.Collections.Generic; // Keep for .NET 4.6
+using System.ComponentModel;
 using System.IO;
 using System.Linq; // Keep for .NET 4.6
 using System.Runtime.InteropServices;
@@ -17,8 +18,8 @@ namespace Shared.Controllers
     // https://adndevblog.typepad.com/autocad/2012/06/use-thread-for-background-processing.html
     public class ProjectController : IDisposable
     {
-        private const int INTERVAL_CHECK_TIME = 5; // In seconds
-        private const int RPUPDATE_CHECK_TIME = 5; // In seconds
+        private const int INTERVAL_CHECK_TIME = 1; // In seconds
+        private const int RPUPDATE_CHECK_TIME = 1; // In seconds
 
         private readonly ReaderWriterLockSlim _lock = new ReaderWriterLockSlim();
 
@@ -32,8 +33,9 @@ namespace Shared.Controllers
         private volatile string _currentRoute;
         private volatile ProjectFile _currentProjectFile;
         
-        public event Action<string> CurrentWorkingDirectoryChanged;
-        public event Action<string> CurrentRouteChanged;
+        // From, To
+        public event Action<string, string> CurrentWorkingDirectoryChanged;
+        public event Action<string, string> CurrentRouteChanged;
         public event Action<string> ProjectChanged;
 
         public event Action<ProjectFile> CurrentProjectFileChanged;
@@ -59,8 +61,9 @@ namespace Shared.Controllers
                     {
                         if (!value.EndsWith("\\"))
                             value += "\\";
+                        string _tmp = _currentWorkingDirectory;
                         _currentWorkingDirectory = value;
-                        CurrentWorkingDirectoryChanged?.Invoke(value);
+                        CurrentWorkingDirectoryChanged?.Invoke(_tmp, value);
                     }
                 }
             }
@@ -82,8 +85,9 @@ namespace Shared.Controllers
             {
                 if (_currentRoute != value && value != null)
                 {
+                    string _tmp = _currentRoute;
                     _currentRoute = value;
-                    CurrentRouteChanged?.Invoke(value);
+                    CurrentRouteChanged?.Invoke(_tmp, value);
                 }
             }
         }
@@ -129,9 +133,11 @@ namespace Shared.Controllers
                 return new HashSet<ProjectFile>();
             if (!ProjectFiles.TryGetValue(lsPath, out var files))
                 return new HashSet<ProjectFile>();
-            return new HashSet<ProjectFile>(files.Where(f => f != null
-                && !string.IsNullOrEmpty(f.File)
-                && f.Flag == FClass.Route));
+            return new HashSet<ProjectFile>(files.Where(f => f != null && !string.IsNullOrEmpty(f.File))
+                .GroupBy(f => Path.GetFileNameWithoutExtension(f.File).ToUpper())
+                .Select(g => g.FirstOrDefault(f => f.File.EndsWith(".shb", StringComparison.OrdinalIgnoreCase))
+                          ?? g.FirstOrDefault(f => f.File.EndsWith(".xhb", StringComparison.OrdinalIgnoreCase)))
+                .Where(f => f != null));
         }
 
         [RPInfoOut]
@@ -141,34 +147,43 @@ namespace Shared.Controllers
                 return new HashSet<ProjectFile>();
             if (!ProjectFiles.TryGetValue(lsPath, out var files))
                 return new HashSet<ProjectFile>();
-            routeName = Path.GetFileNameWithoutExtension(routeName);
-            var result = new HashSet<ProjectFile>(files.Where(f => f != null
-                && !string.IsNullOrEmpty(f.File)
-                && f.File.StartsWith(routeName, StringComparison.OrdinalIgnoreCase)
-                && !(f is BaseProjectXml)));
-            var awaits = files.Where(f => f != null
-                && !string.IsNullOrEmpty(f.File)
-                && f is BaseProjectXml xml && string.Equals(xml.Route, routeName, StringComparison.OrdinalIgnoreCase));
-            foreach (var xml in awaits)
-                result.Add(xml);
-            return result;
+            return new HashSet<ProjectFile>(files.Where(f => f != null && !string.IsNullOrEmpty(f.File))
+                .Where(f => f.Root != null && f.Root == Path.GetFileNameWithoutExtension(routeName).ToUpper()));
         }
 
         [RPInternalUseOnly]
-        public class ProjectFile
+        public class ProjectFile : INotifyPropertyChanged
         {
             public string File { get; internal set; }
             public string Path { get; internal set; }
+            public string Root { get; internal set; }
             public FClass Flag { get; internal set; } = FClass.None;
-            public DateTime CreatedAt { get; internal set; }
-            public DateTime UpdatedAt { get; internal set; }
+            public DateTime CreatedAt { get; internal set; } = DateTime.UtcNow;
+
+            // UpdatedAt
+            private DateTime _updatedAt;
+            public DateTime UpdatedAt
+            {
+                get => _updatedAt;
+                internal set
+                {
+                    if (_updatedAt != value)
+                    {
+                        _updatedAt = value;
+                        OnPropertyChanged(nameof(UpdatedAt));
+                    }
+                }
+            }
             /// <summary>
             /// Base initialization. Does nothing by default.
             /// Derived classes can override to provide async initialization logic.
             /// </summary>
             public virtual Task BeginInit() => Task.CompletedTask;
+            public event PropertyChangedEventHandler PropertyChanged;
+            protected void OnPropertyChanged(string propertyName)
+                => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             public override string ToString()
-                => $"{nameof(ProjectFile)}(File={File}, Path={Path}, Flag={Flag}, CreatedAt={CreatedAt}, UpdatedAt={UpdatedAt})";
+                => $"{nameof(ProjectFile)}(File={File}, Path={Path}, Root={Root}, Flag={Flag})";
         }
 
         [Flags]
@@ -204,9 +219,9 @@ namespace Shared.Controllers
                 RPApp.FileWatcher.FileDeleted += ProcessFileChanged;
                 RPApp.FileWatcher.FileRenamed += ProcessFileRenamed;
                 RefreshProject(RPApp.FileWatcher.Files);
-                CurrentWorkingDirectoryChanged += (s) =>
+                CurrentWorkingDirectoryChanged += (_, t) =>
                 {
-                    RPApp.FileWatcher?.AddDirectory(s);
+                    RPApp.FileWatcher?.AddDirectory(t);
                     RefreshProject(RPApp.FileWatcher?.Files);
                 };
             }
@@ -267,23 +282,21 @@ namespace Shared.Controllers
         [RPPrivateUseOnly]
         private async Task ProcessRoadPacInBackground()
         {
+            if (_roadPacOperationActive)
+                return;
+            _roadPacOperationActive = true;
             try
-            { 
-                if (_roadPacOperationActive)
-                    return;
-                _roadPacOperationActive = true;
+            {
                 if (RPApp.RDPHelper == null)
                     RPApp.RDPHelper = new RDPFileHelper();
                 CurrentWorkingDirectory = await RPApp.RDPHelper.GetCurrentWorkingDirectory();
                 CurrentRoute            = await RPApp.RDPHelper.GetCurrentRoute();
             }
-            catch (COMException)
-            { RPApp.IsLicensed = false; }
+            catch (COMException) { }
             finally
             {
-                if (RPApp.IsLicensed)
-                    _roadPacOperationActive = false; // We want to halt this task from updating,
-                                                     // since user don't have valid RoadPAC license
+                _roadPacOperationActive = false; // We want to halt this task from updating,
+                                                 // since user don't have valid RoadPAC license
             }
         }
 
@@ -293,9 +306,9 @@ namespace Shared.Controllers
             if (_changes.IsEmpty || _generalOperationActive)
                 return;
             List<string> projects = new List<string>();
+            _generalOperationActive = true;
             try
             {
-                _generalOperationActive = true;
                 var snapshot = _changes.ToDictionary(
                     kvp => kvp.Key,
                     kvp => { lock (kvp.Value) return kvp.Value; });
@@ -347,6 +360,7 @@ namespace Shared.Controllers
                             DateTime createdAt = File.GetCreationTimeUtc(fullPath);
                             projectFile = factory();
                             projectFile.Path = lsPath;
+                            projectFile.Root = Path.GetFileNameWithoutExtension(fileName).ToUpperInvariant();
                             projectFile.File = fileName;
                             if (createdAt > updatedAt)
                             {
@@ -424,6 +438,7 @@ namespace Shared.Controllers
             { "XNI", () => new ProjectFile() { Flag = FClass.Profile } },
             { "SNI", () => new ProjectFile() { Flag = FClass.Profile } },
             // Trasa / Směrové řešení
+            { "SHB", () => new ProjectFile() { Flag = FClass.Route } },
             { "XHB", () => new ProjectFile() { Flag = FClass.Route } },
             { "L13", () => new ProjectFile() { Flag = FClass.Route| FClass.Listing } },
         };

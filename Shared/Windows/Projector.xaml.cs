@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 using Shared.Windows.Models;
+using ZwSoft.ZwCAD.Internal;
+
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -60,11 +62,7 @@ namespace Shared.Windows
         }
 
         [RPPrivateUseOnly]
-        private void ClearSearch_Click(object sender, RoutedEventArgs e)
-        {
-            if (DataContext is ProjectorViewModel viewModel)
-                viewModel.SearchText = string.Empty;
-        }
+        private void ClearSearch_Click(object sender, RoutedEventArgs e) => SearchBar.Text = null;
 
         [RPPrivateUseOnly]
         private void Collapse_Click(object sender, RoutedEventArgs e)
@@ -102,9 +100,14 @@ namespace Shared.Windows
         {
             if (RPApp.Projector == null)
                 return;
-            RPApp.Projector.CurrentProjectFile = e.NewValue is TreeItem treeItem
-                ? treeItem.File
-                : null;
+            if (e.NewValue is TreeItem treeItem && !treeItem.IsRouteNode)
+            {
+                RPApp.Projector.CurrentProjectFile = treeItem.File;
+            }
+            else
+            {
+                RPApp.Projector.CurrentProjectFile = null;
+            }
         }
         #endregion
         [RPPrivateUseOnly]

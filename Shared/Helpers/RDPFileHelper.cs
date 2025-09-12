@@ -1,5 +1,6 @@
 ﻿#pragma warning disable CS8603, CS8618, CS8625
 
+using System.Runtime.InteropServices;
 using System.Threading.Tasks; // Keep for .NET 4.6
 
 using RDPFILELib;
@@ -20,7 +21,7 @@ namespace Shared.Helpers
         {
             try
             { _config = new RDPConfigClass(); }
-            catch
+            catch(COMException)
             { _config = null; }
         }
 

@@ -53,7 +53,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\Items\RibbonTextBox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Models\RibbonXml\RibbonToolTip.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)controllers\ResourceController.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Models\ValueTuple2.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RPApp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)RPUseOnlyAttribute.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\RibbonController.cs" />

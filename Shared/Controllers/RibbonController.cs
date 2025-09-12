@@ -28,7 +28,6 @@ using Autodesk.Windows;
 using Shared.Controllers.Models.RibbonXml;
 using Shared.Controllers.Models.RibbonXml.Items;
 using Shared.Controllers.Models.RibbonXml.Items.CommandItems;
-using System.Diagnostics;
 
 namespace Shared.Controllers
 {

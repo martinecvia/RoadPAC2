@@ -24,12 +24,14 @@ namespace Shared.Controllers.Models.Project
                     {
                         // For some reason this is lowercased
                         Route = reader?.GetAttribute("HlavniTrasa")?.ToUpper();
+                        if (Route != null)
+                            Root = Route;
                         TerrainModelFile = reader.GetAttribute("DtmFile");
                     }
                 }
             }
         }
         public override string ToString()
-            => $"{nameof(IFCFile)}(File={File}, Path={Path}, Flag={Flag}, Route={Route}, TerrainModelFile={TerrainModelFile})";
+            => $"{nameof(IFCFile)}(File={File}, Path={Path}, Root={Root}, Flag={Flag}, Route={Route}, TerrainModelFile={TerrainModelFile})";
     }
 }

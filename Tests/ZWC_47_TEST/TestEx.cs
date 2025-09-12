@@ -21,8 +21,8 @@ namespace ZWC_47_TEST
             RPApp app = new RPApp(Application.DocumentManager);
             if (RPApp.Projector.CurrentWorkingDirectory == null)
                 RPApp.Projector.CurrentWorkingDirectory = @"C:\TEMP";
-            RPApp.Projector.CurrentWorkingDirectoryChanged += (o) => Debug.WriteLine($"CurrentWorkingDirectoryChanged: {o}");
-            RPApp.Projector.CurrentRouteChanged += (o) => Debug.WriteLine($"CurrentRouteChanged: {o}");
+            RPApp.Projector.CurrentWorkingDirectoryChanged += (f, t) => Debug.WriteLine($"CurrentWorkingDirectoryChanged: {f}->{t}");
+            RPApp.Projector.CurrentRouteChanged += (f, t) => Debug.WriteLine($"CurrentRouteChanged: {f}->{t}");
             RPApp.Projector.ProjectChanged += (o) => Debug.WriteLine($"ProjectChanged: {o}");
             RPApp.Projector.CurrentProjectFileChanged += (o) => Debug.WriteLine($"ProjectFileSelected: {o}");
 

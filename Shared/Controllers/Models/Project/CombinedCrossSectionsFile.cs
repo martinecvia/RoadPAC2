@@ -3,6 +3,7 @@ using System.Threading.Tasks; // Keep for .NET 4.6
 using System.Xml;
 
 using Shared.Helpers;
+using static Shared.Controllers.ProjectController;
 
 namespace Shared.Controllers.Models.Project
 {
@@ -24,12 +25,14 @@ namespace Shared.Controllers.Models.Project
                     {
                         // For some reason this is lowercased
                         Route = reader?.GetAttribute("HlavniTrasa")?.ToUpper();
+                        if (Route != null)
+                            Root = Route;
                         TerrainModelFile = reader.GetAttribute("DtmFile");
                     }
                 }
             }
         }
         public override string ToString()
-            => $"{nameof(CombinedCrossSectionsFile)}(File={File}, Path={Path}, Flag={Flag}, Route={Route}, TerrainModelFile={TerrainModelFile})";
+            => $"{nameof(CombinedCrossSectionsFile)}(File={File}, Path={Path}, Root={Root}, Flag={Flag}, Route={Route}, TerrainModelFile={TerrainModelFile})";
     }
 }
