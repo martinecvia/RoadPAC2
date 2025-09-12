@@ -79,7 +79,6 @@ namespace Shared.Windows
                     Value = isCurrent ? "(CurrentRoute)" : string.Empty,
                     ValueColor = isCurrent ? "Green" : "White",
                     Image = "./Assets/route.png",
-                    File = route
                 };
                 routeNode.Add(new TreeItem { Label = $"Směrové řešení:", Value= route.File, File = route, Image = "./Assets/shb.ico" });
                 var related = RPApp.Projector?.GetRoute(lsPath, route.File) ?? new HashSet<ProjectController.ProjectFile>();

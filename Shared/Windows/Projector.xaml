@@ -13,14 +13,13 @@
         <models:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <models:StringToSolidColorBrushConverter x:Key="StringToSolidColorBrushConverter"/>
     </UserControl.Resources>
-    <DockPanel>
+    <DockPanel x:Name="ContentPanel">
         <Grid DockPanel.Dock="Top" Height="24" Background="#FFCCD5F0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <!-- SeachBar -->
             <!-- RemoveSearch Button -->
             <Button Grid.Column="1" Width="22" Margin="1,0,1,0"
                     ToolTip="Clear search"
@@ -35,8 +34,7 @@
             </Button>
         </Grid>
         <!-- TreeView -->
-        <TreeView 
-            x:Name="ProjectTree" 
+        <TreeView x:Name="ProjectTree" 
             Background="#F7F9FE"
             ItemsSource="{Binding FilteredItems}" 
             ScrollViewer.VerticalScrollBarVisibility="Auto"

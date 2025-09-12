@@ -3,7 +3,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using Shared.Windows.Models;
 using System.Windows.Input;
-using System.Diagnostics;
+using System;
 
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
@@ -27,6 +27,7 @@ namespace Shared.Windows
             if (ViewModel == null)
                 DataContext = new ProjectorViewModel();
             PreviewMouseDown += Projector_PreviewMouseDown;
+            InitializeComponent_SearchBar();
         }
 
         public void RefreshItems() =>
@@ -100,27 +101,13 @@ namespace Shared.Windows
         {
             if (RPApp.Projector == null)
                 return;
-
-            if (e.NewValue is TreeItem treeItem)
-            {
-                if (treeItem.IsRouteNode)
-                {
-                    // tohle je jen rychlej fix, chci aby se při kliknutí na název trasy nezobrazoval kontextový panel pro směr
-                    // pokud jde zařídit lépe, udělej jinak
-                    RPApp.Projector.CurrentProjectFile = null;
-                    return;
-                }
-                
-                RPApp.Projector.CurrentProjectFile = treeItem.File;
-            }
-            else
-            {
-                RPApp.Projector.CurrentProjectFile = null;
-            }
+            RPApp.Projector.CurrentProjectFile = e.NewValue is TreeItem treeItem
+                ? treeItem.File
+                : null;
         }
         #endregion
         [RPPrivateUseOnly]
-        private static T FindAncestor<T>(DependencyObject current) where T : DependencyObject
+        private T FindAncestor<T>(DependencyObject current) where T : DependencyObject
         {
             while (current != null)
             {
@@ -129,6 +116,15 @@ namespace Shared.Windows
                 current = VisualTreeHelper.GetParent(current);
             }
             return null;
+        }
+
+        private void InitializeComponent_SearchBar()
+        {
+            WatermarkTextBox searchBar = WatermarkTextBox.Factory();
+            Grid.SetColumn(searchBar, 0);
+            var grid = ContentPanel.Children[0] as Grid;
+            if (grid != null)
+                grid.Children.Add(searchBar);
         }
         #endregion
     }

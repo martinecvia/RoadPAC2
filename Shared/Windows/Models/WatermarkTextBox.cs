@@ -1,4 +1,8 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Shared.Windows.Models
 {
@@ -24,7 +28,28 @@ namespace Shared.Windows.Models
 
         static WatermarkTextBox()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(WatermarkTextBox), new FrameworkPropertyMetadata(typeof(WatermarkTextBox)));
+            DefaultStyleKeyProperty.OverrideMetadata(
+                typeof(WatermarkTextBox),
+                new FrameworkPropertyMetadata(
+                    typeof(WatermarkTextBox)));
+        }
+
+        [RPInfoOut]
+        public static WatermarkTextBox Factory(int height = 24,
+                                               bool keepWatermarkOnGotFocus = false,
+                                               string imagePath = "rp_SearchContract.png", 
+                                               string watermarkText = "Search...")
+        {
+            StackPanel panel = new StackPanel { Orientation = Orientation.Horizontal };
+            panel.Children.Add(new TextBlock { Text = watermarkText, Margin = new Thickness(4, 0, 0, 0) });
+            return new WatermarkTextBox
+            {
+                Height = height,
+                VerticalContentAlignment = VerticalAlignment.Center,
+                KeepWatermarkOnGotFocus = keepWatermarkOnGotFocus,
+                Watermark = panel,
+                Text = "{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+            };
         }
 
         [RPInfoOut]
