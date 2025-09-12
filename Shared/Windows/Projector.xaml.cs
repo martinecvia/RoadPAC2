@@ -1,10 +1,12 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Shared.Windows.Models;
 using System.Windows.Input;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 
+using Shared.Windows.Models;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -27,7 +29,6 @@ namespace Shared.Windows
             if (ViewModel == null)
                 DataContext = new ProjectorViewModel();
             PreviewMouseDown += Projector_PreviewMouseDown;
-            InitializeComponent_SearchBar();
         }
 
         public void RefreshItems() =>
@@ -116,15 +117,6 @@ namespace Shared.Windows
                 current = VisualTreeHelper.GetParent(current);
             }
             return null;
-        }
-
-        private void InitializeComponent_SearchBar()
-        {
-            WatermarkTextBox searchBar = WatermarkTextBox.Factory();
-            Grid.SetColumn(searchBar, 0);
-            var grid = ContentPanel.Children[0] as Grid;
-            if (grid != null)
-                grid.Children.Add(searchBar);
         }
         #endregion
     }

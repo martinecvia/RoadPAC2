@@ -14,12 +14,23 @@
         <models:StringToSolidColorBrushConverter x:Key="StringToSolidColorBrushConverter"/>
     </UserControl.Resources>
     <DockPanel x:Name="ContentPanel">
-        <Grid DockPanel.Dock="Top" Height="24" Background="#FFCCD5F0">
+        <Grid x:Name="ContentPanelGrid" DockPanel.Dock="Top" Height="24" Background="#FFCCD5F0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+            <!-- SearchBar -->
+            <models:WatermarkTextBox Grid.Column="0" 
+                                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" 
+                                     KeepWatermarkOnGotFocus="False">
+                <models:WatermarkTextBox.Watermark>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="./Assets/rp_SearchContract.png" Width="16" Height="16"/>
+                        <TextBlock Text="Search ..." Margin="4,0,0,0" />
+                    </StackPanel>
+                </models:WatermarkTextBox.Watermark>
+            </models:WatermarkTextBox>
             <!-- RemoveSearch Button -->
             <Button Grid.Column="1" Width="22" Margin="1,0,1,0"
                     ToolTip="Clear search"
