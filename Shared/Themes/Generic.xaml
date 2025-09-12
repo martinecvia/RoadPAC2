@@ -104,6 +104,7 @@
                         <!-- Focus Trigger -->
                         <Trigger Property="IsFocused" Value="True">
                             <Setter TargetName="FocusVisual" Property="Opacity" Value="1"/>
+                            <Setter TargetName="Border" Property="Background" Value="LightGoldenrodYellow"/>
                         </Trigger>
                         <!-- Disabled -->
                         <Trigger Property="IsEnabled" Value="False">

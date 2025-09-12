@@ -19,11 +19,6 @@ namespace Shared.Windows.Models
             typeof(bool), 
             typeof(AutoSelectTextBox), 
             new UIPropertyMetadata(false));
-        public static readonly DependencyProperty InputScopeProperty = DependencyProperty.Register(
-            "InputScope",
-            typeof(InputScope),
-            typeof(WatermarkTextBox),
-            new UIPropertyMetadata(null));
         public static readonly RoutedEvent QueryMoveFocusEvent = EventManager.RegisterRoutedEvent(
             "QueryMoveFocus",
             RoutingStrategy.Bubble,
@@ -42,13 +37,6 @@ namespace Shared.Windows.Models
         {
             get => (bool)GetValue(AutoMoveFocusProperty);
             set => SetValue(AutoMoveFocusProperty, value);
-        }
-
-        [RPInfoOut]
-        public InputScope InputScope
-        {
-            get => (InputScope)GetValue(InputScopeProperty);
-            set => SetValue(InputScopeProperty, value);
         }
         #region EVENTS
         protected override void OnPreviewKeyDown(KeyEventArgs e)
