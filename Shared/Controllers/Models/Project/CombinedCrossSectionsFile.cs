@@ -3,7 +3,6 @@ using System.Threading.Tasks; // Keep for .NET 4.6
 using System.Xml;
 
 using Shared.Helpers;
-using static Shared.Controllers.ProjectController;
 
 namespace Shared.Controllers.Models.Project
 {

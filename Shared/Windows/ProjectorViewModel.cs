@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Linq; // Keep for .NET 4.6
+using System.Runtime.CompilerServices;
 using System.Windows.Data;
 
 using Shared.Controllers;
@@ -14,10 +15,8 @@ using Shared.Windows.Models;
 
 namespace Shared.Windows
 {
-    public class ProjectorViewModel
+    public class ProjectorViewModel : INotifyPropertyChanged
     {
-        internal static bool IsEventHandled { get; set; } = false;
-
         public ObservableCollection<TreeItem> Items => new ObservableCollection<TreeItem>(BuildProjectTree(RPApp.Projector?.CurrentWorkingDirectory));
         public ICollectionView FilteredItems { get; }
 
@@ -30,38 +29,26 @@ namespace Shared.Windows
                 if (_searchText != value)
                 {
                     _searchText = value;
-                    OnPropertyChanged(nameof(SearchText));
+                    NotifyPropertyChanged(nameof(SearchText));
                     RefreshFilter();
                 }
             }
         }
 
-        private void RefreshFilter() => FilteredItems.Refresh();
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void OnPropertyChanged(string name)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        private void RefreshFilter()
+        {
+            FilteredItems.Refresh();
+            var _currentRoute = RPApp.Projector.CurrentRoute;
+            if (_currentRoute != null)
+                foreach (TreeItem treeItem in FilteredItems)
+                    if (treeItem.File.Root != null)
+                        treeItem.IsActiveRoute = treeItem.File.Root == RPApp.Projector.CurrentRoute;
+        }
 
         public ProjectorViewModel()
         {
             FilteredItems = CollectionViewSource.GetDefaultView(Items);
             FilteredItems.Filter = RootFilter;
-            if (RPApp.Projector != null && !IsEventHandled)
-            {
-                IsEventHandled = true;
-                RPApp.Projector.CurrentRouteChanged += (from, to) => {
-                    TreeItem hwTo = Items.FirstOrDefault(f => f.IsRouteNode && f.File != null
-                                                           && f.Label == to);
-                    if (hwTo != null)
-                    {
-                        TreeItem hwFrom = Items.FirstOrDefault(f => f.IsRouteNode && f.File != null
-                                                                 && f.Label == from);
-                        if (hwFrom != null && hwFrom != hwTo)
-                            hwFrom.IsActiveRoute = false;
-                        hwTo.IsActiveRoute = true;
-                    }
-                };
-            }
         }
 
         private bool RootFilter(object obj)
@@ -185,5 +172,10 @@ namespace Shared.Windows
             }
             parent.Add(node);
         }
+
+        // INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
     }
 }

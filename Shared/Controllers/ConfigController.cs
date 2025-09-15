@@ -6,7 +6,6 @@ using System.IO;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
-using System.Xml; // Keep for .NET 4.6
 using System.Xml.Serialization;
 
 namespace Shared.Controllers

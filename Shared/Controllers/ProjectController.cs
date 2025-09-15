@@ -6,6 +6,7 @@ using System.Collections.Generic; // Keep for .NET 4.6
 using System.ComponentModel;
 using System.IO;
 using System.Linq; // Keep for .NET 4.6
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading; // Keep for .NET 4.6
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ using Shared.Helpers;
 namespace Shared.Controllers
 {
     // https://adndevblog.typepad.com/autocad/2012/06/use-thread-for-background-processing.html
-    public class ProjectController : IDisposable
+    public class ProjectController : IDisposable, INotifyPropertyChanged
     {
         private const int INTERVAL_CHECK_TIME = 1; // In seconds
         private const int RPUPDATE_CHECK_TIME = 1; // In seconds
@@ -32,7 +33,12 @@ namespace Shared.Controllers
         private volatile string _currentWorkingDirectory;
         private volatile string _currentRoute;
         private volatile ProjectFile _currentProjectFile;
-        
+
+        // INotifyPropertyChanged
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+
         // From, To
         public event Action<string, string> CurrentWorkingDirectoryChanged;
         public event Action<string, string> CurrentRouteChanged;
@@ -55,17 +61,21 @@ namespace Shared.Controllers
             }
             set
             {
-                if (_currentWorkingDirectory != value && value != null)
+                if (value == null) return;
+                if (!value.EndsWith("\\"))
+                    value += "\\";
+                if (_currentWorkingDirectory == value) return;
+                if (!Directory.Exists(value)) return;
+                string _tmp = _currentWorkingDirectory;
+                _lock.EnterWriteLock();
+                try
                 {
-                    if (Directory.Exists(value))
-                    {
-                        if (!value.EndsWith("\\"))
-                            value += "\\";
-                        string _tmp = _currentWorkingDirectory;
-                        _currentWorkingDirectory = value;
-                        CurrentWorkingDirectoryChanged?.Invoke(_tmp, value);
-                    }
+                    _currentWorkingDirectory = value;
                 }
+                finally
+                { _lock.ExitWriteLock(); }
+                CurrentWorkingDirectoryChanged?.Invoke(_tmp, value);
+                NotifyPropertyChanged(nameof(CurrentWorkingDirectory));
             }
         }
 
@@ -83,12 +93,18 @@ namespace Shared.Controllers
             }
             set
             {
-                if (_currentRoute != value && value != null)
+                if (value == null) return;
+                if (_currentRoute == value) return;
+                string _tmp = _currentRoute;
+                _lock.EnterWriteLock();
+                try
                 {
-                    string _tmp = _currentRoute;
                     _currentRoute = value;
-                    CurrentRouteChanged?.Invoke(_tmp, value);
                 }
+                finally
+                { _lock.ExitWriteLock(); }
+                CurrentRouteChanged?.Invoke(_tmp, value);
+                NotifyPropertyChanged(nameof(CurrentRoute));
             }
         }
 
@@ -102,6 +118,7 @@ namespace Shared.Controllers
                 {
                     _currentProjectFile = value;
                     CurrentProjectFileChanged?.Invoke(value);
+                    NotifyPropertyChanged(nameof(CurrentProjectFile));
                 }
             }
         }
@@ -122,7 +139,6 @@ namespace Shared.Controllers
             }
         }
 
-        // I'm not very happy with this
         [RPInfoOut]
         public HashSet<ProjectFile> GetRoutes() => GetRoutes(CurrentWorkingDirectory);
 
@@ -170,7 +186,7 @@ namespace Shared.Controllers
                     if (_updatedAt != value)
                     {
                         _updatedAt = value;
-                        OnPropertyChanged(nameof(UpdatedAt));
+                        NotifyPropertyChanged(nameof(UpdatedAt));
                     }
                 }
             }
@@ -179,8 +195,9 @@ namespace Shared.Controllers
             /// Derived classes can override to provide async initialization logic.
             /// </summary>
             public virtual Task BeginInit() => Task.CompletedTask;
+            // INotifyPropertyChanged
             public event PropertyChangedEventHandler PropertyChanged;
-            protected void OnPropertyChanged(string propertyName)
+            private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
                 => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             public override string ToString()
                 => $"{nameof(ProjectFile)}(File={File}, Path={Path}, Root={Root}, Flag={Flag})";
@@ -326,7 +343,10 @@ namespace Shared.Controllers
             finally
             {
                 foreach (var lsPath in projects)
+                {
                     ProjectChanged?.Invoke(lsPath);
+                    NotifyPropertyChanged(nameof(ProjectFiles));
+                }   
                 _generalOperationActive = false;
             }
         }

@@ -2,16 +2,20 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Input;
-
-using Shared.Windows.Models;
+using System.Runtime.InteropServices;
+using System;
+using System.Windows.Threading;
+using System.Threading;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
-using ApplicationServices = ZwSoft.ZwCAD.ApplicationServices;
+using AcApp = ZwSoft.ZwCAD.ApplicationServices;
 #else
-using ApplicationServices = Autodesk.AutoCAD.ApplicationServices;
+using AcApp = Autodesk.AutoCAD.ApplicationServices;
 #endif
 #endregion
+
+using Shared.Windows.Models;
 
 namespace Shared.Windows
 {
@@ -25,13 +29,40 @@ namespace Shared.Windows
             InitializeComponent();
             if (ViewModel == null)
                 DataContext = new ProjectorViewModel();
+
             PreviewMouseDown += Projector_PreviewMouseDown;
+            // Automatically change currently selected route
+            if (RPApp.Projector != null)
+            {
+                RPApp.Projector.CurrentRouteChanged += (_, to) => {
+                    if (string.IsNullOrEmpty(to)) return;
+                    // Our UI is executed from a different thread
+                    RunSynchronized(() => {
+                        foreach (TreeItem projectItem in ViewModel.FilteredItems)
+                            projectItem.IsActiveRoute = projectItem.File.Root == to;
+                    });
+                };
+            }
         }
 
         public void RefreshItems() =>
             DataContext = new ProjectorViewModel();
         #region PRIVATE
+        [RPPrivateUseOnly]
+        private void RunSynchronized(Action callback)
+        {
+            if (Dispatcher.CheckAccess())
+                callback();
+            else
+                Dispatcher.Invoke(callback);
+        }
         #region EVENTS
+        [RPPrivateUseOnly]
+        private void ClearSearch_Click(object sender, RoutedEventArgs e) => SearchBar.Text = null;
+
+        [RPPrivateUseOnly]
+        private void Collapse_Click(object sender, RoutedEventArgs e) => CollapseAll(ProjectTree);
+
         [RPPrivateUseOnly]
         private void Projector_PreviewMouseDown(object sender, MouseButtonEventArgs e)
         {
@@ -57,30 +88,9 @@ namespace Shared.Windows
         }
 
         [RPPrivateUseOnly]
-        private void ClearSearch_Click(object sender, RoutedEventArgs e) => SearchBar.Text = null;
-
-        [RPPrivateUseOnly]
-        private void Collapse_Click(object sender, RoutedEventArgs e)
-        {
-            void CollapseAll(ItemsControl parent)
-            {
-                foreach (var item in parent.Items)
-                {
-                    if (parent.ItemContainerGenerator.ContainerFromItem(item) is TreeViewItem treeViewItem)
-                    {
-                        treeViewItem.IsExpanded = false;
-                        if (treeViewItem.HasItems)
-                            CollapseAll(treeViewItem);
-                    }
-                }
-            }
-            CollapseAll(ProjectTree);
-        }
-
-        [RPPrivateUseOnly]
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            if (sender is MenuItem menuItem
+            if (sender is System.Windows.Controls.MenuItem menuItem
                 && (menuItem.CommandParameter as ContextMenu ?? menuItem.Parent as ContextMenu) is ContextMenu context
                 && context.PlacementTarget is TreeViewItem treeView
                 && treeView.DataContext is TreeItem treeItem)
@@ -95,13 +105,31 @@ namespace Shared.Windows
         {
             if (RPApp.Projector == null)
                 return;
-            if (e.NewValue is TreeItem treeItem && !treeItem.IsRouteNode)
-            {
-                RPApp.Projector.CurrentProjectFile = treeItem.File;
-            }
-            else
+            if (!(e.NewValue is TreeItem treeItem))
             {
                 RPApp.Projector.CurrentProjectFile = null;
+                return;
+            }
+            if (!treeItem.IsRouteNode)
+                RPApp.Projector.CurrentProjectFile = treeItem.File;
+            if (treeItem.File?.Root != null)
+            {
+                // We don't really want to changed current route if it's the same as before
+                if (RPApp.Projector.CurrentRoute != null && RPApp.Projector.CurrentRoute == treeItem.File.Root)
+                    return;
+                RPApp.Projector.CurrentRoute = treeItem.File.Root;
+                try
+                {
+                    RPApp.RDPHelper.CreateConfigRDP(RPApp.Projector.CurrentWorkingDirectory, treeItem.File.Root);
+                    foreach (TreeItem projectItem in ViewModel.FilteredItems)
+                        projectItem.IsActiveRoute = projectItem.File.Root == treeItem.File.Root;
+                }
+                finally
+                {
+                    var _document = AcApp.Application.DocumentManager.MdiActiveDocument;
+                    if (_document != null && treeItem.File.Root != null)
+                        _document.Editor.WriteMessage(string.Format("Changed current project to: {0}\n", treeItem.File.Root));
+                }
             }
         }
         #endregion
@@ -115,6 +143,20 @@ namespace Shared.Windows
                 current = VisualTreeHelper.GetParent(current);
             }
             return null;
+        }
+
+        [RPPrivateUseOnly]
+        private void CollapseAll(ItemsControl parent)
+        {
+            foreach (var item in parent.Items)
+            {
+                if (parent.ItemContainerGenerator.ContainerFromItem(item) is TreeViewItem treeViewItem)
+                {
+                    treeViewItem.IsExpanded = false;
+                    if (treeViewItem.HasItems)
+                        CollapseAll(treeViewItem);
+                }
+            }
         }
         #endregion
     }

@@ -2,7 +2,7 @@
 namespace Shared.Controllers.Models.Project
 {
     [RPInternalUseOnly]
-    public abstract class BaseProjectXml : Shared.Controllers.ProjectController.ProjectFile
+    public abstract class BaseProjectXml : ProjectController.ProjectFile
     {
         public string Route { get; protected set; }
         public string TerrainModelFile { get; protected set; }

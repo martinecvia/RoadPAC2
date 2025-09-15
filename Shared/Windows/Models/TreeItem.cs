@@ -2,13 +2,14 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Windows.Media.Imaging;
 
 using Shared.Controllers;
 
 namespace Shared.Windows.Models
 {
-    public class TreeItem : ObservableCollection<TreeItem>, INotifyPropertyChanged
+    public class TreeItem : ObservableCollection<TreeItem>
     {
         private bool _selected;
         public bool IsSelected
@@ -19,7 +20,7 @@ namespace Shared.Windows.Models
                 if (_selected != value)
                 {
                     _selected = value;
-                    OnPropertyChanged(nameof(IsSelected));
+                    NotifyPropertyChanged(nameof(IsSelected));
                 }
             }
         }
@@ -36,9 +37,9 @@ namespace Shared.Windows.Models
                 if (_activeRoute != value)
                 {
                     _activeRoute = value;
+                    NotifyPropertyChanged(nameof(IsActiveRoute));
                     Value = (value ? "(CurrentRoute)" : string.Empty);
                     ValueColor = (value ? "Green" : "White");
-                    OnPropertyChanged(nameof(IsActiveRoute));
                 }
             }
         }
@@ -55,14 +56,14 @@ namespace Shared.Windows.Models
                 if (value == null)
                 {
                     _routeImage = DefaultRouteImage;
-                    OnPropertyChanged(nameof(RouteImage));
+                    NotifyPropertyChanged(nameof(RouteImage));
                     return;
                 }
                 try
                 { _routeImage = new BitmapImage(new Uri(value, UriKind.RelativeOrAbsolute)); }
                 catch
                 { _routeImage = DefaultRouteImage; }
-                OnPropertyChanged(nameof(RouteImage));
+                NotifyPropertyChanged(nameof(RouteImage));
             }
         }
 
@@ -71,8 +72,32 @@ namespace Shared.Windows.Models
         public ProjectController.ProjectFile File { get; set; }
 
         // Label
-        public string Label { get; set; } = string.Empty;
-        public string LabelColor { get; set; } = "Black";
+        private string _label = string.Empty;
+        public string Label
+        {
+            get => _label;
+            set
+            {
+                if (_label != value)
+                {
+                    _label = value;
+                    NotifyPropertyChanged(nameof(Label));
+                } 
+            }
+        }
+        private string _labelColor = "Black";
+        public string LabelColor
+        {
+            get => _labelColor;
+            set
+            {
+                if (_labelColor != value)
+                {
+                    _labelColor = value;
+                    NotifyPropertyChanged(nameof(LabelColor));
+                }
+            }
+        }
 
         // Value
         private string _value = string.Empty;
@@ -84,7 +109,7 @@ namespace Shared.Windows.Models
                 if (_value != value)
                 {
                     _value = value;
-                    OnPropertyChanged(nameof(Value));
+                    NotifyPropertyChanged(nameof(Value));
                 }
             }
         }
@@ -97,7 +122,7 @@ namespace Shared.Windows.Models
                 if (_valueColor != value)
                 {
                     _valueColor = value;
-                    OnPropertyChanged(nameof(ValueColor));
+                    NotifyPropertyChanged(nameof(ValueColor));
                 }
             }
         }
@@ -115,14 +140,14 @@ namespace Shared.Windows.Models
                 if (value == null)
                 {
                     _image = DefaultImage;
-                    OnPropertyChanged(nameof(Image));
+                    NotifyPropertyChanged(nameof(Image));
                     return;
                 }
                 try
                 { _image = new BitmapImage(new Uri(value, UriKind.RelativeOrAbsolute)); }
                 catch
                 {  _image = DefaultImage; }
-                OnPropertyChanged(nameof(Image));
+                NotifyPropertyChanged(nameof(Image));
             }
         }
 
@@ -137,7 +162,7 @@ namespace Shared.Windows.Models
                 if (_itemCountColor != value)
                 {
                     _itemCountColor = value;
-                    OnPropertyChanged(nameof(ItemCountColor));
+                    NotifyPropertyChanged(nameof(ItemCountColor));
                 }
             }
         }
@@ -154,7 +179,7 @@ namespace Shared.Windows.Models
                 if (_warningToolTip != value)
                 {
                     _warningToolTip = value;
-                    OnPropertyChanged(nameof(WarningToolTip));
+                    NotifyPropertyChanged(nameof(WarningToolTip));
                 }
             }
         }
@@ -170,19 +195,19 @@ namespace Shared.Windows.Models
                 if (value == null)
                 {
                     _warningImage = DefaultWarningImage;
-                    OnPropertyChanged(nameof(WarningImage));
+                    NotifyPropertyChanged(nameof(WarningImage));
                     return;
                 }
                 try
                 { _image = new BitmapImage(new Uri(value, UriKind.RelativeOrAbsolute)); }
                 catch
                 { _image = DefaultImage; }
-                OnPropertyChanged(nameof(WarningImage));
+                NotifyPropertyChanged(nameof(WarningImage));
             }
         }
 
-        public new event PropertyChangedEventHandler PropertyChanged;
-        protected void OnPropertyChanged(string propertyName)
-            => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        // INotifyPropertyChanged
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+            => base.OnPropertyChanged(new PropertyChangedEventArgs(propertyName));
     }
 }

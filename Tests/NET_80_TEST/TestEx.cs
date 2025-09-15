@@ -1,8 +1,8 @@
 ﻿using System.Drawing;
+
 using Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.Runtime;
 using Autodesk.AutoCAD.Windows;
-using Autodesk.Windows;
 
 using Shared;
 using Shared.Windows;
@@ -12,6 +12,8 @@ namespace NET_80_TEST
 {
     public class TestEx : IExtensionApplication
     {
+        private PaletteSet _paletteSet;
+        private Projector _projector;
         public void Initialize()
         {
             RPApp app = new RPApp(Application.DocumentManager);
@@ -19,13 +21,6 @@ namespace NET_80_TEST
                 RPApp.Projector.CurrentWorkingDirectory = @"C:\TEMP";
         }
 
-        [CommandMethod("HIT_BREAKPOINT")]
-        public void Breakpoint()
-        {
-            var Ribbons = ComponentManager.Ribbon;
-        }
-        private PaletteSet _paletteSet;
-        private Projector _projector;
         [CommandMethod("RP_PROSPECTOR")]
         public void RPProspector()
         {
@@ -45,12 +40,6 @@ namespace NET_80_TEST
             _projector.RefreshItems();
             _paletteSet.KeepFocus = true;
             _paletteSet.Visible = true;
-        }
-
-        [CommandMethod("RP_RIBBONVIEW")]
-        public void RibbonView()
-        {
-            Shared.Controllers.RibbonController.CreateTab("rp_RoadPAC");
         }
 
         public void Terminate()
