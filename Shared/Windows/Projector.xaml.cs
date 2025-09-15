@@ -2,13 +2,8 @@
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Input;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 
 using Shared.Windows.Models;
-using ZwSoft.ZwCAD.Internal;
-
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
