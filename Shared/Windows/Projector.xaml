@@ -13,7 +13,7 @@
         <models:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <models:StringToSolidColorBrushConverter x:Key="StringToSolidColorBrushConverter"/>
     </UserControl.Resources>
-    <DockPanel x:Name="ContentPanel">
+    <DockPanel x:Name="ContentPanel" Background="#F7F9FE">
         <Grid x:Name="ContentPanelGrid" DockPanel.Dock="Top" Height="24" Background="#FFCCD5F0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -45,116 +45,135 @@
                 <Image Source="./Assets/CollapseAll.png" Width="16" Height="16"/>
             </Button>
         </Grid>
-        <!-- TreeView -->
-        <TreeView x:Name="ProjectTree" 
-            Background="#F7F9FE"
-            ItemsSource="{Binding FilteredItems}" 
-            ScrollViewer.VerticalScrollBarVisibility="Auto"
-            SelectedItemChanged="TreeView_SelectedItemChanged">
-            <TreeView.Resources>
-                <ContextMenu x:Key="ItemContextMenu">
-                    <MenuItem Header="Debug test" CommandParameter="{Binding}" Click="MenuItem_Click"/>
-                </ContextMenu>
-                <Style TargetType="TreeViewItem">
-                    <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}" />
-                    <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
-                </Style>
-            </TreeView.Resources>
-            <TreeView.ItemTemplate>
-                <HierarchicalDataTemplate DataType="{x:Type models:TreeItem}" ItemsSource="{Binding}">
-                    <DockPanel>
-                        <!-- Icon -->
-                        <Image Width="16" Height="16" Source="{Binding ImageSource}" DockPanel.Dock="Left" Margin="2" />
-                        <!-- DisplayName -->
-                        <TextBlock x:Name="Label" Margin="2"
-                               Text="{Binding Label}" VerticalAlignment="Center">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Foreground" Value="{Binding LabelColor}"/>
-                                    <Setter Property="FontStyle" Value="Normal"/>
-                                    <Style.Triggers>
-                                        <!-- IsRouteNode=true -->
-                                        <DataTrigger Binding="{Binding IsRouteNode}" Value="True">
-                                            <Setter Property="FontWeight" Value="Bold"/>
-                                        </DataTrigger>
-                                        <!-- GroupNodes without items should be grayied out-->
-                                        <MultiDataTrigger>
-                                            <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding IsRouteNode}" Value="False"/>
-                                                <Condition Binding="{Binding IsGroupNode}" Value="True"/>
-                                                <Condition Binding="{Binding ItemCount}" Value="0"/>
-                                            </MultiDataTrigger.Conditions>
-                                            <Setter Property="Foreground" Value="Gray"/>
-                                            <Setter Property="FontStyle" Value="Italic"/>
-                                        </MultiDataTrigger>
-                                        <!-- Items without file -->
-                                        <MultiDataTrigger>
-                                            <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding IsRouteNode}" Value="False"/>
-                                                <Condition Binding="{Binding IsGroupNode}" Value="False"/>
-                                                <Condition Binding="{Binding Value}" Value=""/>
-                                            </MultiDataTrigger.Conditions>
-                                            <Setter Property="Foreground" Value="Gray"/>
-                                            <Setter Property="FontStyle" Value="Italic"/>
-                                        </MultiDataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                        <!-- Value -->
-                        <TextBlock x:Name="Value" Margin="2"
-                            Text="{Binding Value}" VerticalAlignment="Center">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock">
-                                    <Setter Property="Foreground" Value="{Binding ValueColor, Converter={StaticResource StringToSolidColorBrushConverter}}"/>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
-                        <!-- ItemCount -->
-                        <TextBlock VerticalAlignment="Center" x:Name="ItemCount" 
-                                   Text="{Binding ItemCount, StringFormat='({0})'}"
-                                   Foreground="{Binding ItemCountColor, Converter={StaticResource StringToSolidColorBrushConverter}}"/>
-                        <!-- RouteOnly:RouteImage -->
-                        <Image Width="16" Height="16" DockPanel.Dock="Right" Margin="2" 
-                           Source="{Binding RouteImageSource}">
-                            <Image.Style>
-                                <Style TargetType="Image">
-                                    <Setter Property="Visibility" Value="Collapsed" />
-                                    <Style.Triggers>
-                                        <MultiDataTrigger>
-                                            <MultiDataTrigger.Conditions>
-                                                <Condition Binding="{Binding IsRouteNode}" Value="True"/>
-                                                <Condition Binding="{Binding IsActiveRoute}" Value="True"/>
-                                            </MultiDataTrigger.Conditions>
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                        </MultiDataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Image.Style>
-                        </Image>
-                        <!-- DisplayWarning -->
-                        <Image Width="16" Height="16" DockPanel.Dock="Right" Margin="2" 
-                               Source="{Binding WarningImageSource}"
-                               Visibility="{Binding DisplayWarning, Converter={StaticResource BoolToVisibilityConverter}}">
-                            <Image.ToolTip>
-                                <ToolTip Background="#FFFDE7" Foreground="#333" BorderBrush="#FFCC00"
-                                         ToolTipService.InitialShowDelay="0" 
-                                         ToolTipService.ShowDuration="60000">
-                                    <TextBlock Text="{Binding WarningToolTip, FallbackValue='No tooltip text'}" 
-                                               TextWrapping="Wrap"/>
-                                </ToolTip>
-                            </Image.ToolTip>
-                        </Image>
-                    </DockPanel>
-                    <!-- Triggers -->
-                    <HierarchicalDataTemplate.Triggers>
-                        <DataTrigger Binding="{Binding ItemCount}" Value="0">
-                            <Setter TargetName="ItemCount" Property="Visibility" Value="Collapsed"/>
-                            <Setter TargetName="ItemCount" Property="FontWeight" Value="DemiBold"/>
-                        </DataTrigger>
-                    </HierarchicalDataTemplate.Triggers>
-                </HierarchicalDataTemplate>
-            </TreeView.ItemTemplate>
-        </TreeView>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <!-- TreeView -->
+            <TreeView x:Name="ProjectTree" Grid.Row="0"
+                Background="#F7F9FE"
+                ItemsSource="{Binding FilteredItems}" 
+                ScrollViewer.VerticalScrollBarVisibility="Auto"
+                SelectedItemChanged="TreeView_SelectedItemChanged">
+                <TreeView.Resources>
+                    <ContextMenu x:Key="ItemContextMenu">
+                        <MenuItem Header="Debug test" CommandParameter="{Binding}" Click="MenuItem_Click"/>
+                    </ContextMenu>
+                    <Style TargetType="TreeViewItem">
+                        <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}" />
+                        <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
+                    </Style>
+                </TreeView.Resources>
+                <TreeView.ItemTemplate>
+                    <HierarchicalDataTemplate DataType="{x:Type models:TreeItem}" ItemsSource="{Binding}">
+                        <DockPanel>
+                            <!-- Icon -->
+                            <Image Width="16" Height="16" Source="{Binding ImageSource}" DockPanel.Dock="Left" Margin="2" />
+                            <!-- DisplayName -->
+                            <TextBlock x:Name="Label" Margin="2"
+                                   Text="{Binding Label}" VerticalAlignment="Center">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="{Binding LabelColor}"/>
+                                        <Setter Property="FontStyle" Value="Normal"/>
+                                        <Style.Triggers>
+                                            <!-- IsRouteNode=true -->
+                                            <DataTrigger Binding="{Binding IsRouteNode}" Value="True">
+                                                <Setter Property="FontWeight" Value="Bold"/>
+                                            </DataTrigger>
+                                            <!-- GroupNodes without items should be grayied out-->
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding IsRouteNode}" Value="False"/>
+                                                    <Condition Binding="{Binding IsGroupNode}" Value="True"/>
+                                                    <Condition Binding="{Binding ItemCount}" Value="0"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Foreground" Value="Gray"/>
+                                                <Setter Property="FontStyle" Value="Italic"/>
+                                            </MultiDataTrigger>
+                                            <!-- Items without file -->
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding IsRouteNode}" Value="False"/>
+                                                    <Condition Binding="{Binding IsGroupNode}" Value="False"/>
+                                                    <Condition Binding="{Binding Value}" Value=""/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Foreground" Value="Gray"/>
+                                                <Setter Property="FontStyle" Value="Italic"/>
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <!-- Value -->
+                            <TextBlock x:Name="Value" Margin="2"
+                                Text="{Binding Value}" VerticalAlignment="Center">
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="Foreground" Value="{Binding ValueColor, Converter={StaticResource StringToSolidColorBrushConverter}}"/>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <!-- ItemCount -->
+                            <TextBlock VerticalAlignment="Center" x:Name="ItemCount" 
+                                       Text="{Binding ItemCount, StringFormat='({0})'}"
+                                       Foreground="{Binding ItemCountColor, Converter={StaticResource StringToSolidColorBrushConverter}}"/>
+                            <!-- RouteOnly:RouteImage -->
+                            <Image Width="16" Height="16" DockPanel.Dock="Right" Margin="2" 
+                               Source="{Binding RouteImageSource}">
+                                <Image.Style>
+                                    <Style TargetType="Image">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding IsRouteNode}" Value="True"/>
+                                                    <Condition Binding="{Binding IsActiveRoute}" Value="True"/>
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </MultiDataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Image.Style>
+                            </Image>
+                            <!-- DisplayWarning -->
+                            <Image Width="16" Height="16" DockPanel.Dock="Right" Margin="2" 
+                                   Source="{Binding WarningImageSource}"
+                                   Visibility="{Binding DisplayWarning, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <Image.ToolTip>
+                                    <ToolTip Background="#FFFDE7" Foreground="#333" BorderBrush="#FFCC00"
+                                             ToolTipService.InitialShowDelay="0" 
+                                             ToolTipService.ShowDuration="60000">
+                                        <TextBlock Text="{Binding WarningToolTip, FallbackValue='No tooltip text'}" 
+                                                   TextWrapping="Wrap"/>
+                                    </ToolTip>
+                                </Image.ToolTip>
+                            </Image>
+                        </DockPanel>
+                        <!-- Triggers -->
+                        <HierarchicalDataTemplate.Triggers>
+                            <DataTrigger Binding="{Binding ItemCount}" Value="0">
+                                <Setter TargetName="ItemCount" Property="Visibility" Value="Collapsed"/>
+                                <Setter TargetName="ItemCount" Property="FontWeight" Value="DemiBold"/>
+                            </DataTrigger>
+                        </HierarchicalDataTemplate.Triggers>
+                    </HierarchicalDataTemplate>
+                </TreeView.ItemTemplate>
+            </TreeView>
+            <!-- Excel -->
+            <DataGrid x:Name="ItemTable" Grid.Row="1" DockPanel.Dock="Bottom"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          ItemsSource="{Binding Table}"
+                          HeadersVisibility="None"
+                          Visibility="{Binding IsTableTable, Converter={StaticResource BoolToVisibilityConverter}}"
+                          GridLinesVisibility="Vertical">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Label}" Width="*" />
+                    <DataGridTextColumn Binding="{Binding Value}" Width="*" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
     </DockPanel>
 </UserControl>

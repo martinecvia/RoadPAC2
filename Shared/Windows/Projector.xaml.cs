@@ -6,6 +6,8 @@ using System.Runtime.InteropServices;
 using System;
 using System.Windows.Threading;
 using System.Threading;
+using Shared.Controllers.Models.Project;
+
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -83,6 +85,8 @@ namespace Shared.Windows
                     }
                     foreach (TreeItem item in ViewModel.FilteredItems)
                         DeselectAll(item);
+                    ViewModel.IsTableTable = false;
+                    ViewModel.Table = null;
                 }
             }
         }
@@ -112,6 +116,16 @@ namespace Shared.Windows
             }
             if (!treeItem.IsRouteNode)
                 RPApp.Projector.CurrentProjectFile = treeItem.File;
+            // Table handler
+            if (treeItem.File is BaseProjectXml projectFile)
+            {
+                ViewModel.IsTableTable = true;
+                ViewModel.Table = new System.Collections.ObjectModel.ObservableCollection<ProjectorViewModel.GridRows>
+                {
+                    new ProjectorViewModel.GridRows { Label = "Terrain", Value = projectFile.TerrainModelFile ?? "#NaN" },
+                };
+            } 
+            else { ViewModel.IsTableTable = false; }
             if (treeItem.File?.Root != null)
             {
                 // We don't really want to changed current route if it's the same as before

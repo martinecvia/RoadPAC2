@@ -18,6 +18,34 @@ namespace Shared.Windows
     public class ProjectorViewModel : INotifyPropertyChanged
     {
         public ObservableCollection<TreeItem> Items => new ObservableCollection<TreeItem>(BuildProjectTree(RPApp.Projector?.CurrentWorkingDirectory));
+
+        // Table
+        private bool _tableVisible;
+        public bool IsTableTable
+        {
+            get => _tableVisible;
+            set
+            {
+                if (_tableVisible != value)
+                {
+                    _tableVisible = value;
+                    NotifyPropertyChanged(nameof(IsTableTable));
+                }
+            }
+        }
+        private ObservableCollection<GridRows> _rows;
+        public ObservableCollection<GridRows> Table
+        {
+            get => _rows;
+            set { _rows = value; NotifyPropertyChanged(nameof(Table)); }
+        } 
+        public class GridRows
+        {
+            public string Label { get; set; }
+            public string Value { get; set; }
+        }
+
+
         public ICollectionView FilteredItems { get; }
 
         private string _searchText;

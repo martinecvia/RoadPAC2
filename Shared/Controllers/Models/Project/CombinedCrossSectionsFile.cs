@@ -26,7 +26,8 @@ namespace Shared.Controllers.Models.Project
                         Route = reader?.GetAttribute("HlavniTrasa")?.ToUpper();
                         if (Route != null)
                             Root = Route;
-                        TerrainModelFile = reader.GetAttribute("DtmFile");
+                        string _terrain = reader.GetAttribute("DtmFile");
+                        TerrainModelFile = string.IsNullOrEmpty(_terrain) ? null : _terrain;
                     }
                 }
             }
