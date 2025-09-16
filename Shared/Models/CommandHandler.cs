@@ -9,9 +9,9 @@ using System.Runtime.InteropServices;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
-using ZwSoft.ZwCAD.ApplicationServices;
+using AcApp = ZwSoft.ZwCAD.ApplicationServices;
 #else
-using Autodesk.AutoCAD.ApplicationServices;
+using AcApp = Autodesk.AutoCAD.ApplicationServices;
 #endif
 #endregion
 
@@ -78,11 +78,25 @@ namespace Shared.Models
                 };
                 _ = Process.Start(detached);
                 return;
+            } 
+            else
+            {
+                string command = _command;
+                AcApp.Document document = AcApp.Application.DocumentManager.MdiActiveDocument;
+                var (Command, Args) = Win32Args(command);
+                if (string.IsNullOrWhiteSpace(Command) || string.IsNullOrWhiteSpace(Args))
+                {
+                    // Sends the command to AutoCAD for execution in the command line
+                    document?.SendStringToExecute(command + " ", true, false, false);
+                    return;
+                }
+                Args = Args
+                    .Replace("{WorkingDirectory}", RPApp.Projector.CurrentWorkingDirectory ?? string.Empty)
+                    .Replace("{Route}", RPApp.Projector.CurrentRoute ?? string.Empty)
+                    .Replace("{SelectedFile}", RPApp.Projector.CurrentProjectFile?.File ?? string.Empty);
+                Args = Regex.Replace(Args, @"\s+", " ").Trim();
+                document?.SendStringToExecute(command + " ", true, false, true);
             }
-
-            Document document = Application.DocumentManager.MdiActiveDocument;
-            // Sends the command to AutoCAD for execution in the command line
-            document?.SendStringToExecute(_command + " ", true, false, false);
         }
 
         #region WIN32_API

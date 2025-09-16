@@ -12,11 +12,11 @@ using System.Reflection;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
-using ZwSoft.ZwCAD.ApplicationServices;
+using AcApp = ZwSoft.ZwCAD.ApplicationServices;
 using ZwSoft.ZwCAD.EditorInput;
 using ZwSoft.Windows;
 #else
-using Autodesk.AutoCAD.ApplicationServices;
+using AcApp = Autodesk.AutoCAD.ApplicationServices;
 using Autodesk.AutoCAD.EditorInput;
 #if !NET8_0_OR_GREATER
 using Autodesk.Internal.Windows;
@@ -62,7 +62,7 @@ namespace Shared.Controllers
             ContextualRibbonTab tab = CreateContextualTab(tabId);
             tab.IsSelectionTab = true;
             if (_contextualTabConditions.Count == 0)
-                Application.DocumentManager.MdiActiveDocument.ImpliedSelectionChanged += OnSelectionChanged;
+                AcApp.Application.DocumentManager.MdiActiveDocument.ImpliedSelectionChanged += OnSelectionChanged;
             if (!_contextualTabConditions.ContainsKey(tab.Id))
                 _contextualTabConditions.Add(tab.Id, onSelectionMatch);
             return tab;
@@ -215,7 +215,7 @@ namespace Shared.Controllers
             // This protects stack agains multiple instances of Idle event registration
             if (!_hasContextual)
             {
-                Application.Idle += OnApplicationIdle;
+                AcApp.Application.Idle += OnApplicationIdle;
                 _hasContextual = true;
             }
             return tab;
@@ -274,7 +274,7 @@ namespace Shared.Controllers
                                     // and event was fired in the middle of cleaning up databases
                                     // [bug at: Autodesk AutoCAD 2017 #11387]
                 return;
-            Document document = Application.DocumentManager.MdiActiveDocument;
+            AcApp.Document document = AcApp.Application.DocumentManager.MdiActiveDocument;
             PromptSelectionResult result = document.Editor.SelectImplied();
             if (result.Status != PromptStatus.OK || result.Value == null || result.Value.Count == 0)
             {

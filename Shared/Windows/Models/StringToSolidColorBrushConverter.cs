@@ -12,8 +12,8 @@ namespace Shared.Windows.Models
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is string colorName)
-                return new SolidColorBrush((Color) ColorConverter.ConvertFromString(colorName));
-            return Brushes.Black;
+                return new SolidColorBrush((System.Windows.Media.Color)System.Windows.Media.ColorConverter.ConvertFromString(colorName));
+            return System.Windows.Media.Brushes.Black;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

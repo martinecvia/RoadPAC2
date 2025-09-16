@@ -10,7 +10,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Assert.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)Commands\Class1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Commands\Commands.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\Ribbon\PanelTagControllVisibility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\Ribbon\TabTagControllVisibility.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Controllers\Controls\Ribbon\TagControllVisibility.cs" />

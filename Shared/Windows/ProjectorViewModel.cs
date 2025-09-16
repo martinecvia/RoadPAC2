@@ -12,6 +12,7 @@ using System.Windows.Data;
 
 using Shared.Controllers;
 using Shared.Windows.Models;
+using static Shared.Controllers.ProjectController;
 
 namespace Shared.Windows
 {
@@ -111,8 +112,14 @@ namespace Shared.Windows
                     IsRouteNode = true,
                     IsActiveRoute = isCurrent,
                     Image = "./Assets/route.png",
-                    File = route
+                    File = new ProjectController.ProjectFile()
+                    { 
+                        File = route.File, Path = route.Path, Root = route.Root, 
+                        Flag = route.Flag, CreatedAt = route.CreatedAt, UpdatedAt = route.UpdatedAt,
+                        IsRoot = true // This separates node from project files in project context, for now
+                    }
                 };
+
                 routeNode.Add(new TreeItem { Label = $"Směrové řešení:", Value = route.File, File = route, Image = "./Assets/shb.ico" });
                 var related = RPApp.Projector?.GetRoute(lsPath, route.File) ?? new HashSet<ProjectController.ProjectFile>();
                 // Not a great implementaton but it works at least a little

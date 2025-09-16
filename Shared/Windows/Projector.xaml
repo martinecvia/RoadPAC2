@@ -7,7 +7,7 @@
              xmlns:shared="clr-namespace:Shared.Windows"       
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=shared:ProjectorViewModel, IsDesignTimeCreatable=True}"
-             Height="800" MaxHeight="800" Width="350" Background="#FFCCD5F0">
+             MinHeight="800" Height="800" MaxHeight="800" Width="350" Background="#FFCCD5F0">
     <UserControl.Resources>
         <!-- Converters -->
         <models:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
@@ -51,7 +51,7 @@
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <!-- TreeView -->
-            <TreeView x:Name="ProjectTree" Grid.Row="0"
+            <TreeView x:Name="ProjectTree" Grid.Row="0" MinHeight="700" Height="700" MaxHeight="700"
                 Background="#F7F9FE"
                 ItemsSource="{Binding FilteredItems}" 
                 ScrollViewer.VerticalScrollBarVisibility="Auto"
@@ -162,7 +162,7 @@
                 </TreeView.ItemTemplate>
             </TreeView>
             <!-- Excel -->
-            <DataGrid x:Name="ItemTable" Grid.Row="1" DockPanel.Dock="Bottom"
+            <DataGrid x:Name="ItemTable" Grid.Row="1" DockPanel.Dock="Bottom" MinHeight="100" Height="100" MaxHeight="100"
                           AutoGenerateColumns="False"
                           CanUserAddRows="False"
                           ItemsSource="{Binding Table}"

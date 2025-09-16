@@ -6,8 +6,6 @@ using System.Runtime.InteropServices;
 using System;
 using System.Windows.Threading;
 using System.Threading;
-using Shared.Controllers.Models.Project;
-
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -17,13 +15,14 @@ using AcApp = Autodesk.AutoCAD.ApplicationServices;
 #endif
 #endregion
 
+using Shared.Controllers.Models.Project;
 using Shared.Windows.Models;
 
 namespace Shared.Windows
 {
     // https://stackoverflow.com/questions/15681352/transitioning-from-windows-forms-to-wpf/15684569#15684569
     // https://through-the-interface.typepad.com/through_the_interface/2009/08/hosting-wpf-content-inside-an-autocad-palette.html
-    public partial class Projector : UserControl
+    public partial class Projector : System.Windows.Controls.UserControl
     {
         public ProjectorViewModel ViewModel => DataContext as ProjectorViewModel;
         public Projector()
@@ -114,8 +113,8 @@ namespace Shared.Windows
                 RPApp.Projector.CurrentProjectFile = null;
                 return;
             }
-            if (!treeItem.IsRouteNode)
-                RPApp.Projector.CurrentProjectFile = treeItem.File;
+            //if (!treeItem.IsRouteNode)
+            RPApp.Projector.CurrentProjectFile = treeItem.File;
             // Table handler
             if (treeItem.File is BaseProjectXml projectFile)
             {

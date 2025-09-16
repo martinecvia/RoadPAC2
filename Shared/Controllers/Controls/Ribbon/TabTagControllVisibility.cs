@@ -24,8 +24,12 @@ namespace Shared.Controllers.Controls.Ribbon
                     try
                     {
                         Enum.TryParse<ProjectController.FClass>(source.Tag?.ToString(), out var flags);
-                        bool IsVisible = selected?.Flag != null
-                            && selected.Flag.HasFlag(flags);
+                        bool IsVisible;
+                        if (selected == null)
+                            IsVisible = false;
+                        else 
+                            // RootNodes shouldn't open any contextual tab, and if any, close it
+                            IsVisible = selected.IsRoot ? false : selected.Flag.HasFlag(flags);
                         if (target is RibbonController.ContextualRibbonTab _contextualTab)
                         {
                             if (IsVisible)

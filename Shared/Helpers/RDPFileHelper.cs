@@ -37,15 +37,6 @@ namespace Shared.Helpers
                     return _config?.AdresarProjektu;
                 }
             }
-            set
-            {
-                if (string.IsNullOrEmpty(value)) return;
-                lock (_lock)
-                {
-                    if (_config != null)
-                        _config.AdresarProjektu = value;
-                }
-            }
         }
 
         /// <summary>
@@ -68,15 +59,6 @@ namespace Shared.Helpers
                     return _config?.AktivniTrasa;
                 }
             }
-            set
-            {
-                if (string.IsNullOrEmpty(value)) return;
-                lock (_lock)
-                {
-                    if (_config != null)
-                        _config.AktivniTrasa = value;
-                }
-            }
         }
 
         /// <summary>
@@ -91,7 +73,8 @@ namespace Shared.Helpers
         /// Creates an RDP configuration file in the given working directory for the given route.
         /// Returns true on success, false if parameters are invalid or the call fails.
         /// </summary>
-        public bool CreateConfigRDP(string _workingDirectory, string _route)
+        public bool CreateConfigRDP(string _workingDirectory, string _route,
+            string _projectName = "")
         {
             if (string.IsNullOrEmpty(_workingDirectory) || string.IsNullOrEmpty(_route))
                 return false;
@@ -99,7 +82,7 @@ namespace Shared.Helpers
             {
                 if (!_workingDirectory.EndsWith("\\"))
                     _workingDirectory += "\\";
-                new RDPInfoClass().RoadPacUtilita("MAKECFG", "", _workingDirectory, _route);
+                new RDPInfoClass().RoadPacUtilita("MAKECFG", _projectName, _workingDirectory, _route);
                 return true;
             }
             catch { return false; }

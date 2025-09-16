@@ -7,7 +7,7 @@ using System.Windows.Controls.Primitives;
 namespace Shared.Windows.Models
 {
     // https://github.com/xceedsoftware/wpftoolkit/blob/master/ExtendedWPFToolkitSolution/Src/Xceed.Wpf.Toolkit/AutoSelectTextBox/Implementation/AutoSelectTextBox.cs
-    public class AutoSelectTextBox : TextBox
+    public class AutoSelectTextBox : System.Windows.Controls.TextBox
     {
         public static readonly DependencyProperty AutoSelectBehaviorProperty = DependencyProperty.Register(
             "AutoSelectBehavior", 
@@ -39,7 +39,7 @@ namespace Shared.Windows.Models
             set => SetValue(AutoMoveFocusProperty, value);
         }
         #region EVENTS
-        protected override void OnPreviewKeyDown(KeyEventArgs e)
+        protected override void OnPreviewKeyDown(System.Windows.Input.KeyEventArgs e)
         {
             if (!this.AutoMoveFocus)
             {
@@ -96,7 +96,7 @@ namespace Shared.Windows.Models
             {
                 if (this.CanMoveFocus(FocusNavigationDirection.Right, true))
                 {
-                    FocusNavigationDirection direction = (this.FlowDirection == FlowDirection.LeftToRight)
+                    FocusNavigationDirection direction = (this.FlowDirection == System.Windows.FlowDirection.LeftToRight)
                         ? FocusNavigationDirection.Right
                         : FocusNavigationDirection.Left;
                     this.MoveFocus(new TraversalRequest(direction));
@@ -163,7 +163,7 @@ namespace Shared.Windows.Models
         [RPPrivateUseOnly]
         private bool MoveFocusLeft()
         {
-            if (this.FlowDirection == FlowDirection.LeftToRight)
+            if (this.FlowDirection == System.Windows.FlowDirection.LeftToRight)
             {
                 if ((this.CaretIndex == 0) && (this.SelectionLength == 0))
                 {
@@ -201,7 +201,7 @@ namespace Shared.Windows.Models
         [RPPrivateUseOnly]
         private bool MoveFocusRight()
         {
-            if (this.FlowDirection == FlowDirection.LeftToRight)
+            if (this.FlowDirection == System.Windows.FlowDirection.LeftToRight)
             {
                 if ((this.CaretIndex == this.Text.Length) && (this.SelectionLength == 0))
                 {
