@@ -23,9 +23,11 @@ namespace Shared.Controllers.Controls.Ribbon
                 {
                     try
                     {
-                        target.IsVisible = selected?.Flag != null
-                            && Enum.TryParse<ProjectController.FClass>(source.Tag?.ToString(), out var flags)
+                        target.IsVisible = selected != null
+                            && !selected.IsRoot
+                            && Enum.TryParse<ProjectController.FClass>(source.Tag.ToString(), out var flags)
                             && selected.Flag.HasFlag(flags);
+                            
                     }
                     catch
                     {

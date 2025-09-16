@@ -10,7 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Threading; // Keep for .NET 4.6
 using System.Threading.Tasks;
-
+using System.Xml.Serialization;
 using Shared.Controllers.Models.Project;
 using Shared.Helpers;
 
@@ -172,6 +172,7 @@ namespace Shared.Controllers
         {
             public string File { get; internal set; }
             public string Path { get; internal set; }
+
             public string Root { get; internal set; }
             public FClass Flag { get; internal set; } = FClass.None;
             public DateTime CreatedAt { get; internal set; } = DateTime.UtcNow;
@@ -190,6 +191,9 @@ namespace Shared.Controllers
                     }
                 }
             }
+            // Internal marker
+            [XmlIgnore]
+            internal bool IsRoot { get; set; }
             /// <summary>
             /// Base initialization. Does nothing by default.
             /// Derived classes can override to provide async initialization logic.
@@ -200,7 +204,7 @@ namespace Shared.Controllers
             private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
                 => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             public override string ToString()
-                => $"{nameof(ProjectFile)}(File={File}, Path={Path}, Root={Root}, Flag={Flag})";
+                => $"{nameof(ProjectFile)}(File={File}, Path={Path}, Root={Root}::IsRoot={IsRoot}, Flag={Flag})";
         }
 
         [Flags]

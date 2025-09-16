@@ -114,8 +114,8 @@ namespace Shared.Windows
                 RPApp.Projector.CurrentProjectFile = null;
                 return;
             }
-            if (!treeItem.IsRouteNode)
-                RPApp.Projector.CurrentProjectFile = treeItem.File;
+            //if (!treeItem.IsRouteNode)
+            RPApp.Projector.CurrentProjectFile = treeItem.File;
             // Table handler
             if (treeItem.File is BaseProjectXml projectFile)
             {
