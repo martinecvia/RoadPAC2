@@ -7,11 +7,15 @@
   <RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False">
     <RibbonPanelSource>
       <Title><![CDATA[Směrové vedení]]></Title>
-      <RibbonButton Text="Spusť VIAAXI" Size="Large" ShowText="True" Orientation="Vertical"  Image="rp_Align_16" LargeImage="rp_Align_16" CommandHandler="CHANGE_VIAAXIALL"/>
+      <RibbonButton Text="Spusť VIAAXI" Size="Large" ShowText="True" Orientation="Vertical"  Image="rp_Align_16" LargeImage="rp_Align_32" CommandHandler="VIAAXI_T  {WorkingDirectory}{Route}.XHB"/>
+      <!-- CommandHandler="CHANGE_VIAAXIALL" -->
       <RibbonRowPanel>
-        <RibbonButton Text="Protokol" Size="Small" ShowText="True" Orientation="Horizontal" Image="rp_Listing_32" LargeImage="rp_Listing_32" CommandHandler="XX:Wordpad.exe {WorkingDirectory}{Route}.L13" IsVisible="True" Tag="Route" Id="None" />
+        <RibbonButton Text="Protokol" Size="Small" ShowText="True" Orientation="Horizontal" Image="rp_Listing_16" LargeImage="rp_Listing_32" CommandHandler="XX:Wordpad.exe {WorkingDirectory}{Route}.L13" />
+        <!-- IsVisible="False" Tag="Route" Id="TagControllVisibility" />-->
         <RibbonRowBreak />
-        <RibbonButton Text="Kresli&#13;2D osu" ShowText="True" Orientation="Horizontal" Image="rp_Align_16" CommandHandler="testtool RP_SB" IsVisible="True" Tag="Route" Id="None" />
+        <RibbonButton Text="Kresli&#13;2D osu" ShowText="True" Orientation="Horizontal" Image="rp_Align_16" CommandHandler="testtool RP_SB" />
+        <!-- IsVisible="False" Tag="Route" Id="TagControllVisibility" /> -->
+        <!-- IsVisible="False" Tag="Route" Id="TagControllVisibility" />-->
         <RibbonRowBreak />
       </RibbonRowPanel>
     </RibbonPanelSource>

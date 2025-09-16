@@ -8,18 +8,20 @@
     <RibbonPanelSource>
       <Title><![CDATA[Výškové vedení]]></Title>
       rp_veral2_16
-      <RibbonButton Text="Upravit&#13;niveletu" Size="Large" ShowText="True" Orientation="Vertical" ShowImage="True" LargeImage="rp_veral2_16" CommandHandler="XX:NIVW32.exe" />/>
+      <RibbonButton Text="Upravit&#13;niveletu" Size="Large" ShowText="True" Orientation="Vertical" ShowImage="True" LargeImage="rp_veral2_32" CommandHandler="XX:NIVW32.exe" />/>
       <RibbonRowPanel>
-        <RibbonButton Text="Protokol" Size="Small" ShowText="True" Orientation="Horizontal" Image="rp_Listing_32" LargeImage="rp_Listing_32" CommandHandler="XX:Wordpad.exe {WorkingDirectory}{Route}.L32" IsVisible="False" Tag="Profile" Id="TagControllVisibility" />
+        <RibbonButton Text="Protokol" Size="Small" ShowText="True" Orientation="Horizontal" Image="rp_Listing_16" LargeImage="rp_Listing_32" CommandHandler="XX:Wordpad.exe {WorkingDirectory}{Route}.L32" />
+        <!--"False" Tag="Profile" Id="TagControllVisibility" -->
         <RibbonRowBreak />
-        <RibbonButton Text="Kresli&#13;niveletu" ShowText="True" Orientation="Horizontal" Image="rp_LONG_NEW_16" CommandHandler="testtool RP_SB" IsVisible="False" Tag="Profile" Id="TagControllVisibility" />
+        <RibbonButton Text="Kresli&#13;niveletu" ShowText="True" Orientation="Horizontal" Image="rp_LONG_NEW_16" CommandHandler="testtool RP_SB" />
+        <!--"False" Tag="Profile" Id="TagControllVisibility" -->
         <RibbonRowBreak />
         <RibbonButton Text="Tags:[Profile]" Size="Large" ShowText="True" Orientation="Horizontal"
 						  IsVisible="False" Tag="Profile" Id="" />
       </RibbonRowPanel>
     </RibbonPanelSource>
   </RibbonPanel>
-
+  
   <!-- Panel: Další příkazy -->
   <RibbonPanel FloatingOrientation="Vertical" CanToggleOrientation="True" HighlightPanelTitleBar="False">
     <RibbonPanelSource>
