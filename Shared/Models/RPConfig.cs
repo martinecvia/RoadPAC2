@@ -8,5 +8,7 @@ namespace Shared.Models
         public string InstallPath { get; set; } = null;
         [RPInfoOut]
         public string DisplayName { get; set; } = null;
+        [RPInfoOut]
+        public string LastRoute { get; set; } = null;
     }
 }

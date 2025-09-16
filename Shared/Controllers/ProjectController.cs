@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using System.Threading; // Keep for .NET 4.6
 using System.Threading.Tasks;
 using System.Xml.Serialization;
+
 using Shared.Controllers.Models.Project;
 using Shared.Helpers;
 
@@ -225,8 +226,8 @@ namespace Shared.Controllers
             Xml = 1 << 8,
         }
 
-        private Timer _roadPacTimer;
-        private Timer _changesTimer;
+        private System.Threading.Timer _roadPacTimer;
+        private System.Threading.Timer _changesTimer;
 
 
         // We don't really want to expose our contructor,
@@ -247,8 +248,8 @@ namespace Shared.Controllers
                 };
             }
             // This should be reworked to be handled asynchrounously
-            _roadPacTimer = new Timer(_ => _ = ProcessRoadPacInBackground(), null, Timeout.Infinite, Timeout.Infinite);
-            _changesTimer = new Timer(_ => _ = ProcessChangesInBackground(), null, Timeout.Infinite, Timeout.Infinite);
+            _roadPacTimer = new System.Threading.Timer(_ => _ = ProcessRoadPacInBackground(), null, Timeout.Infinite, Timeout.Infinite);
+            _changesTimer = new System.Threading.Timer(_ => _ = ProcessChangesInBackground(), null, Timeout.Infinite, Timeout.Infinite);
         }
 
         [RPInternalUseOnly]

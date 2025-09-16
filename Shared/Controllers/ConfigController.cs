@@ -16,13 +16,13 @@ namespace Shared.Controllers
         private static readonly ConcurrentDictionary<string, object> _cache 
             = new ConcurrentDictionary<string, object>();
 #pragma warning disable CS8604 // Může jít o argument s odkazem null.
-        public static string GetConfigPath(string lsFileName = "ANetRoadPAC2.config.xml")
-            => Path.Combine(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), lsFileName);
+        public static string GetConfigPath(string lsFileName = "ANetRoadPAC2.config.xml", string lsPath = null)
+            => Path.Combine(lsPath ?? Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), lsFileName);
 #pragma warning restore CS8604 // Může jít o argument s odkazem null.
-        public static void SaveConfig<T>(T obj, string lsFileName = "ANetRoadPAC2.config.xml")
+        public static void SaveConfig<T>(T obj, string lsFileName = "ANetRoadPAC2.config.xml", string lsPath = null)
         {
             if (obj == null) throw new ArgumentNullException(nameof(obj));
-            string path = GetConfigPath(lsFileName);
+            string path = lsPath == null ? GetConfigPath(lsFileName) : Path.Combine(lsPath, lsFileName);
             try
             {
                 XmlSerializer serializer = new XmlSerializer(typeof(T));
@@ -35,11 +35,11 @@ namespace Shared.Controllers
             }
         }
 
-        public static T LoadConfig<T>(string lsFileName = "ANetRoadPAC2.config.xml") where T : class, new()
+        public static T LoadConfig<T>(string lsFileName = "ANetRoadPAC2.config.xml", string lsPath = null) where T : class, new()
         {
             if (_cache.TryGetValue(lsFileName, out object cached) && cached is T hwConfig)
                 return hwConfig;
-            string path = GetConfigPath(lsFileName);
+            string path = lsPath == null ? GetConfigPath(lsFileName) : Path.Combine(lsPath, lsFileName);
             if (!File.Exists(path))
                 return new T();
             T obj;

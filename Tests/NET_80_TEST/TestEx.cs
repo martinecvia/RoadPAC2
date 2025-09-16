@@ -16,7 +16,7 @@ namespace NET_80_TEST
         private Projector _projector;
         public void Initialize()
         {
-            RPApp app = new RPApp(Application.DocumentManager);
+            RPApp app = new RPApp(Autodesk.AutoCAD.ApplicationServices.Application.DocumentManager);
             if (RPApp.Projector.CurrentWorkingDirectory == null)
                 RPApp.Projector.CurrentWorkingDirectory = @"C:\TEMP";
         }
