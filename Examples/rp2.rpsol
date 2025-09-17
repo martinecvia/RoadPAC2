@@ -1,6 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <RPConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <InstallPath xsi:nil="true" />
-  <DisplayName xsi:nil="true" />
   <LastRoute xsi:nil="true">TRO</LastRoute>
 </RPConfig>

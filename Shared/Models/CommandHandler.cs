@@ -4,8 +4,8 @@ using System; // Keep for .NET 4.6
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Linq; // Keep for .NET 4.6
-using System.Diagnostics;
 using System.Runtime.InteropServices;
+using System.Diagnostics;
 
 #region O_PROGRAM_DETERMINE_CAD_PLATFORM 
 #if ZWCAD
@@ -19,7 +19,7 @@ namespace Shared.Models
 {
     /// <summary>
     /// A simple implementation of the <see cref="System.Windows.Input.ICommand"/> interface
-    /// that executes a given AutoCAD command string when invoked.
+    /// that executes a given CAD command string when invoked.
     /// </summary>
     public sealed class CommandHandler : System.Windows.Input.ICommand
     {
@@ -27,7 +27,7 @@ namespace Shared.Models
         /// <summary>
         /// Initializes a new instance of the <see cref="CommandHandler"/> class with the specified command string.
         /// </summary>
-        /// <param name="command">The AutoCAD command string to be executed.</param>
+        /// <param name="command">The CAD command string to be executed.</param>
         public CommandHandler(string command) => _command = command; // Keep for .NET 4.6
 
         public string Command => _command;
@@ -44,59 +44,70 @@ namespace Shared.Models
         public bool CanExecute(object _) => true;
 
         /// <summary>
-        /// Executes the stored AutoCAD command by sending it to the active document.
+        /// Executes the stored CAD command by sending it to the active document.
         /// </summary>
         /// <param name="_">Unused parameter.</param>
         public void Execute(object _)
         {
-            if (_command.StartsWith("XX:"))
-            {
-                string command = _command.Substring(3);
-                if (string.IsNullOrWhiteSpace(command))
-                    return;
-                var (Exec, Args) = Win32Args(command);
-                if (string.IsNullOrWhiteSpace(Exec))
-                    return;
-                string InstallPath = RPApp.Config.InstallPath;
-                if (string.IsNullOrWhiteSpace(InstallPath) || !Directory.Exists(InstallPath))
-                    return;
-                Exec = Path.Combine(InstallPath, Exec);
-                if (!File.Exists(Exec))
-                    return;
-                Args = Args
-                    .Replace("{WorkingDirectory}", RPApp.Projector.CurrentWorkingDirectory ?? string.Empty)
-                    .Replace("{Route}", RPApp.Projector.CurrentRoute ?? string.Empty)
-                    .Replace("{SelectedFile}", RPApp.Projector.CurrentProjectFile?.File ?? string.Empty);
-                Args = Regex.Replace(Args, @"\s+", " ").Trim();
-                ProcessStartInfo detached = new ProcessStartInfo
-                {
-                    FileName = Exec,
-                    Arguments = Args,
-                    UseShellExecute = true,
-                    CreateNoWindow = false,
-                    WorkingDirectory = InstallPath,
-                };
-                _ = Process.Start(detached);
+            string command = _command;
+            var shouldDetach = _command.StartsWith("XX:");
+            if (shouldDetach)
+                command = _command.Substring(3);
+            if (string.IsNullOrWhiteSpace(command))
                 return;
-            } 
-            else
+            var (Exec, Args) = Win32Args(command);
+            if (string.IsNullOrWhiteSpace(Exec) || string.IsNullOrEmpty(Exec))
             {
-                string command = _command;
-                AcApp.Document document = AcApp.Application.DocumentManager.MdiActiveDocument;
-                var (Command, Args) = Win32Args(command);
-                if (string.IsNullOrWhiteSpace(Command) || string.IsNullOrWhiteSpace(Args))
-                {
-                    // Sends the command to AutoCAD for execution in the command line
-                    document?.SendStringToExecute(command + " ", true, false, false);
-                    return;
-                }
-                Args = Args
-                    .Replace("{WorkingDirectory}", RPApp.Projector.CurrentWorkingDirectory ?? string.Empty)
-                    .Replace("{Route}", RPApp.Projector.CurrentRoute ?? string.Empty)
-                    .Replace("{SelectedFile}", RPApp.Projector.CurrentProjectFile?.File ?? string.Empty);
-                Args = Regex.Replace(Args, @"\s+", " ").Trim();
-                document?.SendStringToExecute(command + " ", true, false, true);
+                Debug.WriteLine($"[&] {Exec} is not defined");
+                return;
             }
+            Args = ReplacePlaceholders(Args);
+            if (shouldDetach)
+            {
+                try
+                {
+                    string InstallPath = RPApp.Config.InstallPath;
+                    if (string.IsNullOrWhiteSpace(InstallPath) || !Directory.Exists(InstallPath))
+                    {
+                        Debug.WriteLine($"[&] {InstallPath} is invalid");
+                        return;                 
+                    }
+                    Exec = Path.Combine(InstallPath, Exec);
+                    if (!File.Exists(Exec))
+                    {
+                        Debug.WriteLine($"[&] {Exec} is invalid");
+                        return;
+                    }
+                    ProcessStartInfo detached = new ProcessStartInfo
+                    {
+                        FileName = Exec,
+                        Arguments = Args,
+                        UseShellExecute = true,
+                        CreateNoWindow = false,
+                        WorkingDirectory = InstallPath,
+                    };
+                    _ = Process.Start(detached);
+                    Debug.WriteLine($"[&] Attempted {Exec} with parameters: '{Args}'");
+                } catch { }
+                return;
+            }
+            if (!string.IsNullOrEmpty(Args) && !Args.StartsWith(" "))
+                Args = " " + Args;
+            var _document = AcApp.Application.DocumentManager.MdiActiveDocument;
+            if (_document != null)
+                _document.SendStringToExecute($"{Exec}{Args} ", true, false, true);
+            Debug.WriteLine($"[&] Attempted {Exec} with parameters: '{Args}'");
+        }
+
+        [RPPrivateUseOnly]
+        private string ReplacePlaceholders(string _args)
+        {
+            _args = _args
+                .Replace("{WorkingDirectory}", RPApp.Projector.CurrentWorkingDirectory ?? string.Empty)
+                .Replace("{Route}", RPApp.Projector.CurrentRoute ?? string.Empty)
+                .Replace("{SelectedFile}", RPApp.Projector.CurrentProjectFile?.File ?? string.Empty)
+                .Replace("{InstallPath}", RPApp.Config.InstallPath ?? string.Empty);
+            return Regex.Replace(_args, @"\s+", " ").Trim();
         }
 
         #region WIN32_API
@@ -118,16 +129,16 @@ namespace Shared.Models
                 Exec = exec;
                 Args = args;
             }
-
+            public override string ToString() => $"{Exec} {Args}";
             public void Deconstruct(out string exec, out string args)
             {
                 exec = Exec;
                 args = Args;
             }
-
-            public override string ToString() => $"{Exec} {Args}";
         }
-        private static Win32ArgsResult Win32Args(string lpCmdLine)
+
+        [RPPrivateUseOnly]
+        private Win32ArgsResult Win32Args(string lpCmdLine)
         {
             if (string.IsNullOrWhiteSpace(lpCmdLine))
                 return new Win32ArgsResult(string.Empty, string.Empty);

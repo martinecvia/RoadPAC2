@@ -168,6 +168,12 @@ namespace Shared.Controllers
                 .Where(f => f.Root != null && f.Root == Path.GetFileNameWithoutExtension(routeName).ToUpper()));
         }
 
+        public class RPConfig
+        {
+            [RPInfoOut]
+            public string LastRoute { get; set; }
+        }
+
         [RPInternalUseOnly]
         public class ProjectFile : INotifyPropertyChanged
         {
