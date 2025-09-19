@@ -224,19 +224,6 @@ namespace Shared.Controllers
             }
         }
 
-        private static void LogException(Exception exception, string resourceName)
-        {
-            // Log all nested exceptions
-            int currentNest = 1;
-            Exception currentException = exception;
-            while (currentException != null)
-            {
-                Debug.WriteLine($"[&] {currentNest}:LoadResourceRibbon({resourceName}(InvalidOperationException)): {currentException.Message}");
-                currentException = currentException.InnerException;
-                currentNest++;
-            }
-        }
-
         [RPPrivateUseOnly]
         private static bool IsXml(string resourceName)
         {
@@ -248,12 +235,33 @@ namespace Shared.Controllers
                 {
                     // We just check couple of bytes to ensure it contains <,
                     // which in fact is how XML starts, even comments starts with this tag
-                    char[] buffer = new char[5];
-                    int read = reader.Read(buffer, 0, buffer.Length);
-                    return new string(buffer, 0, read).TrimStart().StartsWith("<");
+                    int start;
+                    // We just check couple of bytes to ensure it contains <,
+                    // which in fact is how XML starts, even comments starts with this tag
+                    do
+                    {
+                        start = reader.Read();
+                    }
+                    while (start != -1 && char.IsWhiteSpace((char)start));
+                    return start == '<';
+
                 }
             } catch(Exception) 
             { return false; }
+        }
+
+        [RPPrivateUseOnly]
+        private static void LogException(Exception exception, string resourceName)
+        {
+            // Log all nested exceptions
+            int currentNest = 1;
+            Exception currentException = exception;
+            while (currentException != null)
+            {
+                Debug.WriteLine($"[&] {currentNest}:LoadResourceRibbon({resourceName}(InvalidOperationException)): {currentException.Message}");
+                currentException = currentException.InnerException;
+                currentNest++;
+            }
         }
         #endregion
     }
