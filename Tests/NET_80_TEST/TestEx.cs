@@ -30,6 +30,7 @@ namespace NET_80_TEST
                 _paletteSet = new PaletteSet($"RoadPAC2 / {RPApp.Projector.CurrentWorkingDirectory}")
                 {
                     Size = new Size((int)_projector.Width, (int)_projector.Height),
+                    MinimumSize = new Size((int)_projector.MinWidth, (int)_projector.MinHeight),
                     DockEnabled = DockSides.Left | DockSides.Right,
                     KeepFocus = true
                 };

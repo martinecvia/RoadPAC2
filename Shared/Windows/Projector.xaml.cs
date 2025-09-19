@@ -17,7 +17,6 @@ using AcApp = Autodesk.AutoCAD.ApplicationServices;
 
 using Shared.Controllers.Models.Project;
 using Shared.Windows.Models;
-using System.Diagnostics;
 
 namespace Shared.Windows
 {
@@ -126,6 +125,9 @@ namespace Shared.Windows
                 ViewModel.IsTableVisible = true;
                 ViewModel.Table = new System.Collections.ObjectModel.ObservableCollection<ProjectorViewModel.GridRows>
                 {
+                    new ProjectorViewModel.GridRows { Label = "Terrain", Value = projectFile.TerrainModelFile ?? "#NaN" },
+                    new ProjectorViewModel.GridRows { Label = "Terrain", Value = projectFile.TerrainModelFile ?? "#NaN" },
+                    new ProjectorViewModel.GridRows { Label = "Terrain", Value = projectFile.TerrainModelFile ?? "#NaN" },
                     new ProjectorViewModel.GridRows { Label = "Terrain", Value = projectFile.TerrainModelFile ?? "#NaN" },
                 };
             } 

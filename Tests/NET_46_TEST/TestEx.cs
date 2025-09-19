@@ -33,6 +33,7 @@ namespace NET_46_TEST
                 {
                     Size = new Size((int)_projector.Width, (int)_projector.Height),
                     DockEnabled = DockSides.Left | DockSides.Right,
+                    MinimumSize = new Size((int)_projector.MinWidth, (int)_projector.MinHeight),
                     KeepFocus = true
                 };
 
