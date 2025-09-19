@@ -17,6 +17,7 @@ using AcApp = Autodesk.AutoCAD.ApplicationServices;
 
 using Shared.Controllers.Models.Project;
 using Shared.Windows.Models;
+using System.Diagnostics;
 
 namespace Shared.Windows
 {
@@ -73,6 +74,10 @@ namespace Shared.Windows
                 // This means that user have clicked elsewhere
                 if (RPApp.Projector != null && target?.DataContext == null)
                 {
+                    var tableView = FindAncestor<DataGrid>(Mouse.DirectlyOver as DependencyObject);
+                    // Clicked on item in table
+                    if (tableView?.DataContext != null)
+                        return; // We don't want to do anything in particular here for now
                     RPApp.Projector.CurrentProjectFile = null;
                     // https://stackoverflow.com/questions/491111/how-to-deselect-all-selected-items-in-a-wpf-treeview-when-clicking-on-some-empty
                     void DeselectAll(TreeItem item)
@@ -84,8 +89,8 @@ namespace Shared.Windows
                     }
                     foreach (TreeItem item in ViewModel.FilteredItems)
                         DeselectAll(item);
-                    ViewModel.IsTableTable = false;
                     ViewModel.Table = null;
+                    ViewModel.IsTableVisible = false;
                 }
             }
         }
@@ -118,13 +123,13 @@ namespace Shared.Windows
             // Table handler
             if (treeItem.File is BaseProjectXml projectFile)
             {
-                ViewModel.IsTableTable = true;
+                ViewModel.IsTableVisible = true;
                 ViewModel.Table = new System.Collections.ObjectModel.ObservableCollection<ProjectorViewModel.GridRows>
                 {
                     new ProjectorViewModel.GridRows { Label = "Terrain", Value = projectFile.TerrainModelFile ?? "#NaN" },
                 };
             } 
-            else { ViewModel.IsTableTable = false; }
+            else { ViewModel.IsTableVisible = false; }
             if (treeItem.File?.Root != null)
             {
                 // We don't really want to changed current route if it's the same as before

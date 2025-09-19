@@ -74,6 +74,9 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_img_default_32.ico" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_ProfileFlag.xml" />
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_RouteFlag.xml" />
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\rp_logo_blue_32.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_RoadPAC.xml">
@@ -81,40 +84,40 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\CollapseAll.png">
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\rp_collapse_button.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\dt4.ico">
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\rp_dt4.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\shb.ico">
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\rp_shb.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\v91.ico">
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\rp_v91.ico">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\Zoom.png">
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\rp_zoom_button.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\arrow-right.png">
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\rp_arrow_right.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\list-item.png">
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\rp_group_item.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\survey.png">
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\rp_survey.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\ifc.png">
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\rp_ifc.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\road.png">
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\rp_corridor.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\route.png">
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\rp_route.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\warning.png">
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\rp_warning.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
@@ -149,7 +152,7 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_Geologie_32.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\rp_SearchContract.png" />
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\rp_close_search.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rp_SearchFolderOpened_16.png" />
@@ -205,7 +208,7 @@
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Xml\Ribbons\rp_TestFlags.xml" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\DebugXSLT.png">
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\rp_active_route.png">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
   </ItemGroup>
@@ -232,5 +235,10 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="$(MSBuildThisFileDirectory)Resources\Icons\rpOld\rp_Align_32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="$(MSBuildThisFileDirectory)Windows\Assets\rp_logo_blue_70x43.png">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
 </Project>

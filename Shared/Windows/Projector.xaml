@@ -4,22 +4,28 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="clr-namespace:Shared.Windows.Models"
-             xmlns:shared="clr-namespace:Shared.Windows"       
+             xmlns:shared="clr-namespace:Shared.Windows"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=shared:ProjectorViewModel, IsDesignTimeCreatable=True}"
-             MinHeight="800" Height="800" MaxHeight="800" Width="350" Background="#FFCCD5F0">
+             MinHeight="800" MaxHeight="800"
+             MinWidth="290" MaxWidth="290"
+             Background="#FFCCD5F0"
+             FontFamily="Cascadia Code"
+             FontSize="12">
     <UserControl.Resources>
         <!-- Converters -->
         <models:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
         <models:StringToSolidColorBrushConverter x:Key="StringToSolidColorBrushConverter"/>
     </UserControl.Resources>
-    <DockPanel x:Name="ContentPanel" Background="#F7F9FE">
+
+    <DockPanel x:Name="ContentPanel" Background="LightGoldenrodYellow">
         <Grid x:Name="ContentPanelGrid" DockPanel.Dock="Top" Height="24" Background="#FFCCD5F0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
+
             <!-- SearchBar -->
             <models:WatermarkTextBox x:Name="SearchBar"
                                      Grid.Column="0" 
@@ -27,22 +33,24 @@
                                      KeepWatermarkOnGotFocus="True">
                 <models:WatermarkTextBox.Watermark>
                     <StackPanel Orientation="Horizontal">
-                        <Image Source="./Assets/Zoom.png" Width="16" Height="16"/>
-                        <TextBlock Text="Search in routes ..." Margin="4,0,0,0" />
+                        <Image Source="./Assets/rp_zoom_button.png" Width="16" Height="16"/>
+                        <TextBlock Text="Search in routes ..." Margin="4,0,0,0"/>
                     </StackPanel>
                 </models:WatermarkTextBox.Watermark>
             </models:WatermarkTextBox>
-            <!-- RemoveSearch Button -->
+
+            <!-- Clear Search Button -->
             <Button Grid.Column="1" Width="22" Margin="1,0,1,0"
                     ToolTip="Clear search"
                     Click="ClearSearch_Click">
-                <Image Source="./Assets/rp_SearchContract.png" Width="16" Height="16"/>
+                <Image Source="./Assets/rp_close_search.png" Width="16" Height="16"/>
             </Button>
+
             <!-- Collapse Button -->
             <Button Grid.Column="2" Width="22"
                     ToolTip="Collapse routes"
                     Click="Collapse_Click">
-                <Image Source="./Assets/CollapseAll.png" Width="16" Height="16"/>
+                <Image Source="./Assets/rp_collapse_button.png" Width="16" Height="16"/>
             </Button>
         </Grid>
         <Grid>
@@ -50,29 +58,40 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
+
             <!-- TreeView -->
-            <TreeView x:Name="ProjectTree" Grid.Row="0" MinHeight="700" Height="700" MaxHeight="700"
-                Background="#F7F9FE"
-                ItemsSource="{Binding FilteredItems}" 
-                ScrollViewer.VerticalScrollBarVisibility="Auto"
-                SelectedItemChanged="TreeView_SelectedItemChanged">
+            <TreeView x:Name="ProjectTree"
+                      Grid.Row="0"
+                      MinHeight="400" MaxHeight="400"
+                      Background="#F7F9FE"
+                      ItemsSource="{Binding FilteredItems}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Hidden"
+                      ScrollViewer.VerticalScrollBarVisibility="Auto"
+                      SelectedItemChanged="TreeView_SelectedItemChanged">
+
                 <TreeView.Resources>
                     <ContextMenu x:Key="ItemContextMenu">
-                        <MenuItem Header="Debug test" CommandParameter="{Binding}" Click="MenuItem_Click"/>
+                        <MenuItem Header="TreeView.Debug" CommandParameter="{Binding}" Click="MenuItem_Click"/>
                     </ContextMenu>
+
                     <Style TargetType="TreeViewItem">
                         <Setter Property="ContextMenu" Value="{StaticResource ItemContextMenu}" />
                         <Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}" />
                     </Style>
                 </TreeView.Resources>
+
                 <TreeView.ItemTemplate>
                     <HierarchicalDataTemplate DataType="{x:Type models:TreeItem}" ItemsSource="{Binding}">
                         <DockPanel>
+
                             <!-- Icon -->
-                            <Image Width="16" Height="16" Source="{Binding ImageSource}" DockPanel.Dock="Left" Margin="2" />
+                            <Image Width="16" Height="16"
+                                   Source="{Binding ImageSource}"
+                                   DockPanel.Dock="Left"
+                                   Margin="2" />
+
                             <!-- DisplayName -->
-                            <TextBlock x:Name="Label" Margin="2"
-                                   Text="{Binding Label}" VerticalAlignment="Center">
+                            <TextBlock x:Name="Label" Margin="2" Text="{Binding Label}" VerticalAlignment="Center">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
                                         <Setter Property="Foreground" Value="{Binding LabelColor}"/>
@@ -82,7 +101,8 @@
                                             <DataTrigger Binding="{Binding IsRouteNode}" Value="True">
                                                 <Setter Property="FontWeight" Value="Bold"/>
                                             </DataTrigger>
-                                            <!-- GroupNodes without items should be grayied out-->
+
+                                            <!-- GroupNodes without items should be gray -->
                                             <MultiDataTrigger>
                                                 <MultiDataTrigger.Conditions>
                                                     <Condition Binding="{Binding IsRouteNode}" Value="False"/>
@@ -92,6 +112,7 @@
                                                 <Setter Property="Foreground" Value="Gray"/>
                                                 <Setter Property="FontStyle" Value="Italic"/>
                                             </MultiDataTrigger>
+
                                             <!-- Items without file -->
                                             <MultiDataTrigger>
                                                 <MultiDataTrigger.Conditions>
@@ -106,25 +127,30 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
+
                             <!-- Value -->
-                            <TextBlock x:Name="Value" Margin="2"
-                                Text="{Binding Value}" VerticalAlignment="Center">
+                            <TextBlock x:Name="Value" Margin="2" Text="{Binding Value}" VerticalAlignment="Center">
                                 <TextBlock.Style>
                                     <Style TargetType="TextBlock">
-                                        <Setter Property="Foreground" Value="{Binding ValueColor, Converter={StaticResource StringToSolidColorBrushConverter}}"/>
+                                        <Setter Property="Foreground"
+                                                Value="{Binding ValueColor, Converter={StaticResource StringToSolidColorBrushConverter}}"/>
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
+
                             <!-- ItemCount -->
-                            <TextBlock VerticalAlignment="Center" x:Name="ItemCount" 
+                            <TextBlock x:Name="ItemCount" VerticalAlignment="Center"
                                        Text="{Binding ItemCount, StringFormat='({0})'}"
                                        Foreground="{Binding ItemCountColor, Converter={StaticResource StringToSolidColorBrushConverter}}"/>
-                            <!-- RouteOnly:RouteImage -->
-                            <Image Width="16" Height="16" DockPanel.Dock="Right" Margin="2" 
-                               Source="{Binding RouteImageSource}">
+
+                            <!-- Image -->
+                            <Image Width="16" Height="16"
+                                   DockPanel.Dock="Right"
+                                   Margin="2"
+                                   Source="{Binding RouteImageSource}">
                                 <Image.Style>
                                     <Style TargetType="Image">
-                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Setter Property="Visibility" Value="Collapsed"/>
                                         <Style.Triggers>
                                             <MultiDataTrigger>
                                                 <MultiDataTrigger.Conditions>
@@ -137,20 +163,24 @@
                                     </Style>
                                 </Image.Style>
                             </Image>
-                            <!-- DisplayWarning -->
-                            <Image Width="16" Height="16" DockPanel.Dock="Right" Margin="2" 
+
+                            <!-- Display Warning -->
+                            <Image Width="16" Height="16"
+                                   DockPanel.Dock="Right"
+                                   Margin="2"
                                    Source="{Binding WarningImageSource}"
                                    Visibility="{Binding DisplayWarning, Converter={StaticResource BoolToVisibilityConverter}}">
                                 <Image.ToolTip>
                                     <ToolTip Background="#FFFDE7" Foreground="#333" BorderBrush="#FFCC00"
-                                             ToolTipService.InitialShowDelay="0" 
+                                             ToolTipService.InitialShowDelay="0"
                                              ToolTipService.ShowDuration="60000">
-                                        <TextBlock Text="{Binding WarningToolTip, FallbackValue='No tooltip text'}" 
-                                                   TextWrapping="Wrap"/>
+                                        <TextBlock Text="{Binding WarningToolTip, FallbackValue='No tooltip text'}" TextWrapping="Wrap"/>
                                     </ToolTip>
                                 </Image.ToolTip>
                             </Image>
+
                         </DockPanel>
+
                         <!-- Triggers -->
                         <HierarchicalDataTemplate.Triggers>
                             <DataTrigger Binding="{Binding ItemCount}" Value="0">
@@ -161,19 +191,56 @@
                     </HierarchicalDataTemplate>
                 </TreeView.ItemTemplate>
             </TreeView>
-            <!-- Excel -->
-            <DataGrid x:Name="ItemTable" Grid.Row="1" DockPanel.Dock="Bottom" MinHeight="100" Height="100" MaxHeight="100"
-                          AutoGenerateColumns="False"
-                          CanUserAddRows="False"
-                          ItemsSource="{Binding Table}"
-                          HeadersVisibility="None"
-                          Visibility="{Binding IsTableTable, Converter={StaticResource BoolToVisibilityConverter}}"
-                          GridLinesVisibility="Vertical">
+
+            <!-- Table DataGrid -->
+            <DataGrid x:Name="ItemTable"
+                      Grid.Row="1"
+                      DockPanel.Dock="Bottom"
+                      MinWidth="292" MaxWidth="292"
+                      MinHeight="100" MaxHeight="100"
+                      AutoGenerateColumns="False"
+                      CanUserAddRows="False"
+                      Background="LightGoldenrodYellow"
+                      ItemsSource="{Binding Table, UpdateSourceTrigger=PropertyChanged}"
+                      HeadersVisibility="None"
+                      Visibility="{Binding IsTableVisible, Converter={StaticResource BoolToVisibilityConverter}}"
+                      GridLinesVisibility="Vertical">
+                
+                <!-- DataGrid Style -->
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridCell">
+                        <Setter Property="VerticalContentAlignment" Value="Center" />
+                    </Style>
+                </DataGrid.Resources>
+                
+                <DataGrid.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="DataGrid.Debug" />
+                    </ContextMenu>
+                </DataGrid.ContextMenu>
+                
                 <DataGrid.Columns>
-                    <DataGridTextColumn Binding="{Binding Label}" Width="*" />
-                    <DataGridTextColumn Binding="{Binding Value}" Width="*" />
+                    <!-- Label -->
+                    <DataGridTextColumn Binding="{Binding Label, UpdateSourceTrigger=PropertyChanged}" Header="" Width="*">
+                        <DataGridTextColumn.CellStyle>
+                            <Style TargetType="DataGridCell">
+                                <Setter Property="FontWeight" Value="Bold"/>
+                            </Style>
+                        </DataGridTextColumn.CellStyle>
+                    </DataGridTextColumn>
+                    
+                    <!-- Value -->
+                    <DataGridTextColumn Binding="{Binding Value, UpdateSourceTrigger=PropertyChanged}" Header="" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
+
+            <!-- Overlay image -->
+            <Image Source="./Assets/rp_logo_blue_70x43.png" Opacity="0.2"
+                   HorizontalAlignment="Right"
+                   VerticalAlignment="Bottom"
+                   Margin="0,0,4,4"
+                   Width="70" Height="43"
+                   IsHitTestVisible="True" />
         </Grid>
     </DockPanel>
 </UserControl>

@@ -45,7 +45,7 @@ namespace Shared.Windows.Models
         }
 
         private static readonly BitmapImage DefaultRouteImage =
-            new BitmapImage(new Uri("./Assets/DebugXSLT.png", UriKind.Relative));
+            new BitmapImage(new Uri("./Assets/rp_active_route.png", UriKind.Relative));
         private BitmapImage _routeImage = DefaultRouteImage;
         public string RouteImageSource => _routeImage?.UriSource.ToString();
         public string RouteImage
@@ -113,7 +113,7 @@ namespace Shared.Windows.Models
                 }
             }
         }
-        private string _valueColor = "Black";
+        private string _valueColor = "Gray";
         public string ValueColor
         {
             get => _valueColor;
@@ -129,7 +129,7 @@ namespace Shared.Windows.Models
 
         // Image
         private static readonly BitmapImage DefaultImage =
-            new BitmapImage(new Uri("./Assets/arrow-right.png", UriKind.Relative));
+            new BitmapImage(new Uri("./Assets/rp_group_item.png", UriKind.Relative));
         private BitmapImage _image = DefaultImage;
         public string ImageSource => _image?.UriSource.ToString();
         public string Image
@@ -167,7 +167,6 @@ namespace Shared.Windows.Models
             }
         }
 
-
         // Warning
         public bool DisplayWarning { get; set; } = false;
         private string _warningToolTip = "Soubor je zastaralý !";
@@ -184,7 +183,7 @@ namespace Shared.Windows.Models
             }
         }
         private static readonly BitmapImage DefaultWarningImage =
-            new BitmapImage(new Uri("./Assets/warning.png", UriKind.Relative));
+            new BitmapImage(new Uri("./Assets/rp_warning.png", UriKind.Relative));
         private BitmapImage _warningImage = DefaultWarningImage;
         public string WarningImageSource => _warningImage?.UriSource.ToString();
         public string WarningImage

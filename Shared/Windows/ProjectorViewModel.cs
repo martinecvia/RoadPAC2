@@ -4,7 +4,6 @@ using System; // Keep for .NET 4.6
 using System.Collections.Generic; // Keep for .NET 4.6
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.IO;
 using System.Linq; // Keep for .NET 4.6
 using System.Runtime.CompilerServices;
@@ -12,7 +11,6 @@ using System.Windows.Data;
 
 using Shared.Controllers;
 using Shared.Windows.Models;
-using static Shared.Controllers.ProjectController;
 
 namespace Shared.Windows
 {
@@ -22,7 +20,8 @@ namespace Shared.Windows
 
         // Table
         private bool _tableVisible;
-        public bool IsTableTable
+        private ObservableCollection<GridRows> _rows;
+        public bool IsTableVisible
         {
             get => _tableVisible;
             set
@@ -30,11 +29,10 @@ namespace Shared.Windows
                 if (_tableVisible != value)
                 {
                     _tableVisible = value;
-                    NotifyPropertyChanged(nameof(IsTableTable));
+                    NotifyPropertyChanged(nameof(IsTableVisible));
                 }
             }
         }
-        private ObservableCollection<GridRows> _rows;
         public ObservableCollection<GridRows> Table
         {
             get => _rows;
@@ -45,7 +43,6 @@ namespace Shared.Windows
             public string Label { get; set; }
             public string Value { get; set; }
         }
-
 
         public ICollectionView FilteredItems { get; }
 
@@ -111,7 +108,7 @@ namespace Shared.Windows
                     Label = routeName,
                     IsRouteNode = true,
                     IsActiveRoute = isCurrent,
-                    Image = "./Assets/route.png",
+                    Image = "./Assets/rp_route.png",
                     File = new ProjectController.ProjectFile()
                     { 
                         File = route.File, Path = route.Path, Root = route.Root, 
@@ -120,7 +117,7 @@ namespace Shared.Windows
                     }
                 };
 
-                routeNode.Add(new TreeItem { Label = $"Směrové řešení:", Value = route.File, File = route, Image = "./Assets/shb.ico" });
+                routeNode.Add(new TreeItem { Label = $"Směrové řešení:", Value = route.File, File = route, Image = "./Assets/rp_shb.ico" });
                 var related = RPApp.Projector?.GetRoute(lsPath, route.File) ?? new HashSet<ProjectController.ProjectFile>();
                 // Not a great implementaton but it works at least a little
                 void MarkOutdated(TreeItem node, ProjectController.ProjectFile parent)
@@ -159,9 +156,9 @@ namespace Shared.Windows
                 });
 
                 AddCorridor(routeNode, related);
-                AddGroup(routeNode, related, ProjectController.FClass.Survey, "Vytyčení", "./Assets/survey.png", "./Assets/list-item.png");
-                AddGroup(routeNode, related, ProjectController.FClass.IFC, "Podklady pro IFC", "./Assets/ifc.png", "./Assets/list-item.png");
-                AddGroup(routeNode, related, ProjectController.FClass.CombinedCrossSections, "Kreslení příčných řezů", "./Assets/shb.ico", "./Assets/list-item.png");
+                AddGroup(routeNode, related, ProjectController.FClass.Survey, "Vytyčení", "./Assets/rp_survey.png", "./Assets/rp_group_item.png");
+                AddGroup(routeNode, related, ProjectController.FClass.IFC, "Podklady pro IFC", "./Assets/rp_ifc.png", "./Assets/rp_group_item.png");
+                AddGroup(routeNode, related, ProjectController.FClass.CombinedCrossSections, "Kreslení příčných řezů", "./Assets/rp_shb.ico", "./Assets/rp_group_item.png");
                 MarkOutdated(routeNode, route);
                 tree.Add(routeNode);
             }
@@ -188,11 +185,11 @@ namespace Shared.Windows
         private void AddCorridor(TreeItem parent, IEnumerable<ProjectController.ProjectFile> related)
         {
             var corridor = related.FirstOrDefault(r => r.Flag == ProjectController.FClass.Corridor);
-            var node = new TreeItem { Label = "Koridor", IsGroupNode = true, Image = "./Assets/road.png", 
+            var node = new TreeItem { Label = "Koridor", IsGroupNode = true, Image = "./Assets/rp_corridor.png", 
                 File = new ProjectController.ProjectFile() { Root = parent.File.Root, Flag = ProjectController.FClass.Corridor } };
             if (corridor != null)
             {
-                node.Add(new TreeItem { Label = $"Pokrytí:", Value = corridor.File, Image = "./Assets/list-item.png", File = corridor });
+                node.Add(new TreeItem { Label = $"Pokrytí:", Value = corridor.File, Image = "./Assets/rp_group_item.png", File = corridor });
                 var crossSection = related.FirstOrDefault(r => r.Flag == (ProjectController.FClass.Corridor | ProjectController.FClass.CrossSection));
                 node.Add(new TreeItem
                 {
@@ -202,7 +199,7 @@ namespace Shared.Windows
                     File = crossSection ?? new ProjectController.ProjectFile() // Default put in place just so we can know from ribbon that we have selected this node
                     { Flag = ProjectController.FClass.Corridor | ProjectController.FClass.CrossSection },
                     Value = crossSection?.File,
-                    Image = "./Assets/v91.ico"
+                    Image = "./Assets/rp_v91.ico"
                 });
             }
             parent.Add(node);
